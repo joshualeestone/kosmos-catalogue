@@ -73,3 +73,9 @@ non-colliding names, and the portraits.
 - The throwaway copy removes itself when copying fails.
 - A line that names an Object property ("constructor") is text, not a heading; the portrait check
   compares the six avatar fields, not JSON key order.
+
+## Review iteration 5 (changes)
+- The throwaway copy refuses links: a linked groups.json or team file was copied as a link and a dry
+  run wrote through it, outside the repo, while reporting "nothing written". Now reported as a
+  problem, the disk check is skipped, and --write stays refused (the builder refuses links too).
+- A key repeated inside one packet is reported by name.

@@ -308,3 +308,39 @@ test('a line that names an Object property is text, not a heading', () => {
   assert.deepEqual(s.how, ['a rule.']);
   assert.equal(s.problems.length, 2, s.problems.join('\n'));
 });
+
+test('a link in the repo is reported, and neither a dry run nor --write writes through it', () => {
+  const repo = copyRepo();
+  const outside = fs.mkdtempSync(path.join(os.tmpdir(), 'import-packet-outside-'));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'import-packet-in-'));
+  try {
+    const target = path.join(outside, 'groups.json');
+    fs.copyFileSync(path.join(repo, 'groups.json'), target);
+    const before = fs.readFileSync(target, 'utf8');
+    fs.rmSync(path.join(repo, 'groups.json'));
+    fs.symlinkSync(target, path.join(repo, 'groups.json'));
+    const teamTarget = path.join(outside, 'zzz.json');
+    fs.writeFileSync(teamTarget, 'untouched');
+    fs.symlinkSync(teamTarget, path.join(repo, 'teams', 'zzz.json'));
+    const p = execAsPacket();
+    p.key = 'zzz';
+    const r = importPacket({ teams: [p], roles: [packetRole('grant-writer', FULL)] }, repo);
+    assert.ok(r.problems.some((x) => /is a link/.test(x)), r.problems.join('\n'));
+    assert.equal(fs.readFileSync(target, 'utf8'), before, 'a dry run wrote through the groups.json link');
+    assert.equal(fs.readFileSync(teamTarget, 'utf8'), 'untouched', 'a dry run wrote through a team link');
+    fs.writeFileSync(path.join(dir, 'teams.json'), JSON.stringify([p]));
+    fs.writeFileSync(path.join(dir, 'roles.json'), '[]');
+    const out = { text: '', write(s) { this.text += s; } };
+    assert.equal(main([dir, '--write'], repo, out), 1, out.text);
+    assert.equal(fs.readFileSync(target, 'utf8'), before, '--write wrote through the link');
+    assert.equal(fs.readFileSync(teamTarget, 'utf8'), 'untouched');
+  } finally {
+    for (const d of [repo, outside, dir]) fs.rmSync(d, { recursive: true, force: true });
+  }
+});
+
+test('a key repeated inside one packet is reported by name', () => {
+  const r = importPacket({ teams: [execAsPacket(), execAsPacket()], roles: [packetRole('grant-writer', FULL), packetRole('grant-writer', FULL)] });
+  assert.ok(r.problems.includes('teams.json: exec appears more than once'), r.problems.join('\n'));
+  assert.ok(r.problems.includes('roles.json: grant-writer appears more than once'), r.problems.join('\n'));
+});

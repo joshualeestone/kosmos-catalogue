@@ -109,6 +109,11 @@ function shapeProblems(packet) {
       if (m.reportsTo && m.reportsTo !== 'lead') out.push(`${who}: every member reports to the lead (a deeper hierarchy is not supported)`);
     });
   });
+  for (const [file, list] of [['teams.json', packet.teams], ['roles.json', packet.roles]]) {
+    const keys = list.map((x) => x && x.key).filter((k) => typeof k === 'string');
+    const twice = [...new Set(keys.filter((k, i) => keys.indexOf(k) !== i))];
+    if (twice.length) out.push(`${file}: ${twice.join(', ')} appear${twice.length === 1 ? 's' : ''} more than once`);
+  }
   packet.roles.forEach((r, i) => {
     if (!r || typeof r !== 'object' || !key(r.key)) { out.push(`roles.json: role ${i + 1}: key must be lowercase words joined by hyphens`); return; }
     const f = bad(r, ['name', 'summary', 'category', 'first', 'character']);
@@ -124,7 +129,16 @@ function copyRepo(root) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-import-'));
   try {
     for (const f of ['groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams', 'avatars']) {
-      if (fs.existsSync(path.join(root, f))) fs.cpSync(path.join(root, f), path.join(dir, f), { recursive: true });
+      if (!fs.existsSync(path.join(root, f))) continue;
+      /* A link would be copied as a link, and writing the candidate into the copy would then write
+         through it, outside the copy. The builder refuses links anyway; refuse them here first. */
+      fs.cpSync(path.join(root, f), path.join(dir, f), {
+        recursive: true,
+        filter: (src) => {
+          if (fs.lstatSync(src).isSymbolicLink()) throw Object.assign(new Error(`${path.relative(root, src)}: is a link; the importer does not follow links`), { code: 'IMPORT_LINK' });
+          return true;
+        },
+      });
     }
   } catch (err) {
     fs.rmSync(dir, { recursive: true, force: true });
@@ -180,19 +194,24 @@ function importPacket(packet, root = source.ROOT) {
   problems.push(...build.build({ root, rolesSource, teamsSource }).problems);
   let tmp = null;
   try {
-    tmp = copyRepo(root);
-    source.write(rolesSource, teamsSource, tmp);
-    // A new role that does not parse is reported once; every member using it would repeat it.
-    const unread = new Set(newRoles.map((r) => r.key));
-    const built = build.build({ root: tmp });
-    for (const r of built.catalogue ? built.catalogue.roles || [] : []) unread.delete(r.key);
-    // The same problem from both builds can list its two teams in either order.
-    const norm = (x) => x.split(/\s+/).sort().join(' ');
-    const seen = new Set(problems.map(norm));
-    problems.push(...built.problems.filter((x) => !seen.has(norm(x))).filter((x) => {
-      const m = x.match(/role "([^"]+)" is neither a catalogue role/);
-      return !(m && unread.has(m[1]) && built.problems.some((y) => y.startsWith(`roles/${m[1]}/role.md:`)));
-    }));
+    try { tmp = copyRepo(root); } catch (err) {
+      if (err.code !== 'IMPORT_LINK') throw err;
+      problems.push(err.message);
+    }
+    if (tmp) {
+      source.write(rolesSource, teamsSource, tmp);
+      // A new role that does not parse is reported once; every member using it would repeat it.
+      const unread = new Set(newRoles.map((r) => r.key));
+      const built = build.build({ root: tmp });
+      for (const r of built.catalogue ? built.catalogue.roles || [] : []) unread.delete(r.key);
+      // The same problem from both builds can list its two teams in either order.
+      const norm = (x) => x.split(/\s+/).sort().join(' ');
+      const seen = new Set(problems.map(norm));
+      problems.push(...built.problems.filter((x) => !seen.has(norm(x))).filter((x) => {
+        const m = x.match(/role "([^"]+)" is neither a catalogue role/);
+        return !(m && unread.has(m[1]) && built.problems.some((y) => y.startsWith(`roles/${m[1]}/role.md:`)));
+      }));
+    }
   } finally {
     if (tmp) fs.rmSync(tmp, { recursive: true, force: true });
   }
