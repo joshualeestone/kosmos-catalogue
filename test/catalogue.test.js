@@ -473,13 +473,18 @@ test('published-serial refuses a deployment count that is empty or not a number'
   const { main } = require('../published-serial');
   const w = process.stderr.write;
   const o = process.stdout.write;
+  // A published catalogue answering 200, so the answer does not depend on whether this checkout
+  // holds the committed `published` marker (a 404 does: after the first publish it is an outage).
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-count-'));
+  const f = path.join(dir, 'p.json');
+  fs.writeFileSync(f, JSON.stringify({ serial: 5 }));
   process.stderr.write = () => true;
   process.stdout.write = () => true;
   try {
-    assert.equal(main(['/nonexistent', '404', '']), 1);
-    assert.equal(main(['/nonexistent', '404', 'null']), 1);
-    assert.equal(main(['/nonexistent', '404', '0']), 0, 'CONTROL: a real zero is the first publish');
-  } finally { process.stderr.write = w; process.stdout.write = o; }
+    assert.equal(main([f, '200', '']), 1);
+    assert.equal(main([f, '200', 'null']), 1);
+    assert.equal(main([f, '200', '0']), 0, 'CONTROL: a real count is accepted');
+  } finally { process.stderr.write = w; process.stdout.write = o; fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
 test('invisible and direction-changing characters are refused anywhere in a role, team or group', () => {
