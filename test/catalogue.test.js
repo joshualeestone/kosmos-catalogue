@@ -18,8 +18,16 @@ const source = require('../lib/source');
 
 const REPO = path.join(__dirname, '..');
 const built = () => build.build().catalogue;
-/** The smallest bytes the builder takes as a WebP file: a RIFF container of form type WEBP. */
-const webp = (tail = '') => Buffer.concat([Buffer.from('RIFF\x10\x00\x00\x00WEBPVP8 ', 'latin1'), Buffer.from(tail)]);
+/** Bytes the builder takes as a WebP file: a RIFF container of form type WEBP whose size field
+ *  covers the whole file, with a VP8 chunk first. */
+const webp = (tail = '') => {
+  const body = Buffer.concat([Buffer.from('WEBPVP8 ', 'latin1'), Buffer.alloc(4), Buffer.from(tail)]);
+  const head = Buffer.from('RIFF\0\0\0\0', 'latin1');
+  head.writeUInt32LE(body.length, 4);
+  return Buffer.concat([head, body]);
+};
+// A value exported in the developer's shell must not reach the tests that build.
+delete process.env.CATALOGUE_PREVIOUS_SERIAL;
 
 /** A throwaway copy of the source files, for tests that break one. */
 function copyRepo() {
@@ -188,7 +196,7 @@ test('sign.js refuses a key that is not the committed one, and signs with the on
   const { run, verify } = require('../sign');
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-sign-'));
   try {
-    fs.writeFileSync(path.join(dir, 'catalogue.json'), build.build().text);
+    fs.writeFileSync(path.join(dir, 'catalogue.json'), build.build({ serial: 1759190400 }).text);
     const pair = crypto.generateKeyPairSync('ed25519');
     const pem = pair.privateKey.export({ type: 'pkcs8', format: 'pem' });
     const pubFile = path.join(dir, 'pub.pem');
@@ -649,4 +657,70 @@ test('only the sign job can read the key, and it runs only checkout, download-ar
   const actions = (jobs.sign.match(/uses:\s*(\S+)@/g) || []).map((u) => u.replace(/uses:\s*/, '').replace(/@$/, '')).sort();
   assert.deepEqual(actions, ['actions/checkout', 'actions/download-artifact', 'actions/upload-artifact']);
   assert.doesNotMatch(jobs.sign, /upload-pages-artifact|setup-node/);
+});
+
+test('text that points outside the instructions is refused: web addresses, links, HTML, download commands', () => {
+  for (const bad of ['see https://example.com', 'visit www.example.com', 'a <b>bold</b> word', 'use ![x](y)', 'read [this](that)', 'run curl -s x', 'then | sh it']) {
+    const r = source.read().rolesSource;
+    r.roles[1].how[1] = `Always ${bad} first.`;
+    assert.ok(build.build({ rolesSource: r }).problems.some((p) => /web address, link, HTML/.test(p)), bad);
+    const t = source.read().teamsSource;
+    t.teams[1].purpose = `We ${bad}.`;
+    assert.ok(build.build({ teamsSource: t }).problems.some((p) => /web address, link, HTML/.test(p)), bad);
+  }
+  // CONTROL: ordinary words that merely contain the letters (share, curling) pass.
+  const ok = source.read().rolesSource;
+  ok.roles[1].how[1] = 'Share the curling results with the whole team first.';
+  assert.deepEqual(build.build({ rolesSource: ok }).problems, []);
+});
+
+test('stacked accents and a portrait with bytes after its RIFF size or no image chunk are refused', () => {
+  const r = source.read().rolesSource;
+  r.roles[2].who = r.roles[2].who.replace('You ', 'Yo\u0301\u0301\u0301u ');
+  assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)));
+  const dir = copyRepo();
+  try {
+    const id = build.build().catalogue.teams[0].members[0].avatar.id;
+    fs.mkdirSync(path.join(dir, 'avatars'));
+    const f = path.join(dir, 'avatars', id + '.webp');
+    fs.writeFileSync(f, webp('ok'));
+    assert.deepEqual(build.build({ root: dir }).problems, [], 'CONTROL');
+    fs.writeFileSync(f, Buffer.concat([webp('ok'), Buffer.from('<html>')]));
+    assert.ok(build.build({ root: dir }).problems.some((p) => /is not a WebP image/.test(p)), 'trailing bytes');
+    const noChunk = webp('ok'); noChunk.write('JUNK', 12, 'latin1');
+    fs.writeFileSync(f, noChunk);
+    assert.ok(build.build({ root: dir }).problems.some((p) => /is not a WebP image/.test(p)), 'no image chunk');
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('sign.js signs only a version 2 catalogue with a serial', () => {
+  const crypto = require('node:crypto');
+  const { run } = require('../sign');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-sign2-'));
+  try {
+    const pair = crypto.generateKeyPairSync('ed25519');
+    const pem = pair.privateKey.export({ type: 'pkcs8', format: 'pem' });
+    const pubFile = path.join(dir, 'pub.pem');
+    fs.writeFileSync(pubFile, pair.publicKey.export({ type: 'spki', format: 'pem' }));
+    for (const [text, why] of [['{"trunc', /not JSON/], [build.build().text, /not a version 2 catalogue/], ['{"version": 2, "serial": 5}', /not a version 2 catalogue/]]) {
+      fs.writeFileSync(path.join(dir, 'catalogue.json'), text);
+      const r = run({ pem, dist: dir, publicKeyFile: pubFile });
+      assert.equal(r.ok, false);
+      assert.match(r.message, why);
+      assert.equal(fs.existsSync(path.join(dir, 'catalogue.json.sig')), false);
+    }
+    fs.writeFileSync(path.join(dir, 'catalogue.json'), build.build({ serial: 7 }).text);
+    assert.equal(run({ pem, dist: dir, publicKeyFile: pubFile }).ok, true, 'CONTROL');
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('no job but sign names a secret or the signing environment, and deploy re-checks the hand-off', () => {
+  const text = fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8');
+  const parts = text.slice(text.indexOf('\njobs:\n')).split(/\n {2}(?=[a-z-]+:\n)/).slice(1);
+  const jobs = Object.fromEntries(parts.map((p) => [p.slice(0, p.indexOf(':')), p]));
+  for (const name of ['build', 'deploy']) {
+    assert.doesNotMatch(jobs[name], /secrets\.|catalogue-signing/, name);
+  }
+  assert.match(jobs.deploy, /verify\(bytes, sig/);
+  assert.match(jobs.deploy, /BUILT_SERIAL: \$\{\{ needs\.build\.outputs\.serial \}\}/);
 });

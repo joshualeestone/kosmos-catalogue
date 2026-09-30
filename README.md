@@ -16,7 +16,7 @@ Team screen, so someone who only makes their own agents never downloads any of i
 | `teams/<key>.json` | One team: a lead and 4 or 5 people who report to the lead |
 | `groups.json` | The groups the role picker shows, in order, and the roles in each |
 | `settings.json` | Text every team shares |
-| `kosmos-builtin-roles.json` | The roles Kosmos has built in: a team member may use a menu one, a catalogue role may not reuse any key |
+| `kosmos-builtin-roles.json` (kept by hand; Kosmos's tests compare it with its own roles through `kosmosRoles` once its download ships) | The roles Kosmos has built in: a team member may use a menu one, a catalogue role may not reuse any key |
 | `avatars/<team>-<slot>.webp` | Team members' portraits (fictional, generated people) |
 
 ### A role

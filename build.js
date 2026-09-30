@@ -86,12 +86,23 @@ function markerIn(value, nameAllowed = true) {
  *  so nothing may say more than what a reviewer reads. The fillers named at the end are letters and
  *  symbols to Unicode but show as blank space. */
 const HIDDEN_RE = /[^\p{L}\p{N}\p{P}\p{S}\u0020\u0300-\u036F]|[\u034F\u115F\u1160\u3164\uFFA0\u2800]|[\u0250-\u02AF\u1D00-\u1DBF\u2C60-\u2C7F\uA720-\uA7FF\uAB30-\uAB6F]|[^\p{Script=Latin}\p{Script=Common}\p{Script=Inherited}]/u;
+/** Text that points an agent outside its instructions: a web address, a markdown link or image, an
+ *  HTML tag or any angle bracket, or a download or pipe-to-shell command. Role and team text is
+ *  plain description; none of it needs these, so a change that adds one is refused, not reviewed. */
+const OUTWARD_RE = /https?:\/\/|www\.|[<>]|!\[|\]\(|\b(curl|wget)\b|\|\s*(ba|z)?sh\b/i;
+function outwardIn(value) {
+  const strings = [];
+  (function walk(v) { if (typeof v === 'string') strings.push(v); else if (v && typeof v === 'object') Object.values(v).forEach(walk); })(value);
+  return strings.some((s) => OUTWARD_RE.test(s));
+}
+
 function hiddenIn(value) {
   const strings = [];
   (function walk(v) { if (typeof v === 'string') strings.push(v); else if (v && typeof v === 'object') Object.values(v).forEach(walk); })(value);
   // NFKC folds compatibility lookalikes (mathematical, fullwidth, small-capital letters, Roman
   // numerals) into plain letters; text that changes under it says something other than it shows.
-  return strings.some((s) => HIDDEN_RE.test(s) || s.normalize('NFKC') !== s);
+  // Three or more combining accents in a row stack into a smear that hides the letter under them.
+  return strings.some((s) => HIDDEN_RE.test(s) || s.normalize('NFKC') !== s || /[\u0300-\u036F]{3,}/.test(s));
 }
 
 /** Why Kosmos would refuse this as an agent name (its engine/create.js nameProblem, ported), or null. */
@@ -136,7 +147,7 @@ function build(src = {}) {
   if (typeof ts.AVATAR_STYLE !== 'string' || !ts.AVATAR_STYLE) problems.push('settings.json: avatarStyle is missing');
   // Checked here as well as inside each team: avatarStyle is also published on its own.
   const shared = [ts.TEAM_CAUTION, ts.AVATAR_STYLE];
-  if (emDashIn(shared) || hiddenIn(shared) || markerIn(shared, false)) problems.push('settings.json: plain text only (no em dash, hidden character or template marker)');
+  if (emDashIn(shared) || hiddenIn(shared) || markerIn(shared, false) || outwardIn(shared)) problems.push('settings.json: plain text only (no em dash, hidden character or template marker)');
   // Kosmos's own roles: a team member may name one, and a catalogue role must not reuse a key.
   const kosmos = readBuiltin(root, problems);
   if (!kosmos.all.every((k) => KEY_RE.test(k)) || hiddenIn(kosmos) || emDashIn(kosmos) || markerIn(kosmos)) {
@@ -179,6 +190,7 @@ function build(src = {}) {
     // The source too: the wrapper splits on whitespace, and JavaScript counts U+FEFF as whitespace,
     // so the built text alone would hide one that is in the file.
     if (hiddenIn([r, entry])) problems.push(`${k}: an invisible or direction-changing character`);
+    if (outwardIn([r, entry])) problems.push(`${k}: a web address, link, HTML, angle bracket or download command`);
     roles.push(entry);
   }
   const teams = [];
@@ -249,6 +261,7 @@ function build(src = {}) {
     if (emDashIn(entry)) problems.push(`${t.key}: em dash`);
     if (markerIn(entry, false)) problems.push(`${t.key}: a template marker (even {{NAME}}, which only role instructions fill in), or an HTML comment`);
     if (hiddenIn([t, entry])) problems.push(`${t.key}: an invisible or direction-changing character`);
+    if (outwardIn([t, entry])) problems.push(`${t.key}: a web address, link, HTML, angle bracket or download command`);
     teams.push(entry);
   }
   // A portrait no member names is a misspelt file name (and on a case-insensitive disk it would
@@ -307,8 +320,10 @@ function portrait(root, id, problems) {
   if (!st.isFile()) { problems.push(`${rel}: must be a regular file, not a link or a folder`); return null; }
   if (st.size > MAX_PORTRAIT_BYTES) { problems.push(`${rel}: larger than ${MAX_PORTRAIT_BYTES} bytes`); return null; }
   const bytes = fs.readFileSync(path.join(root, rel));
-  // A WebP file is a RIFF container whose form type is WEBP.
-  if (bytes.subarray(0, 4).toString('latin1') !== 'RIFF' || bytes.subarray(8, 12).toString('latin1') !== 'WEBP') {
+  // A WebP file is a RIFF container whose form type is WEBP, whose size field accounts for the whole
+  // file (nothing hidden after it), and whose first chunk is one of WebP's three image chunks.
+  if (bytes.length < 20 || bytes.subarray(0, 4).toString('latin1') !== 'RIFF' || bytes.subarray(8, 12).toString('latin1') !== 'WEBP'
+    || bytes.readUInt32LE(4) + 8 !== bytes.length || !['VP8 ', 'VP8L', 'VP8X'].includes(bytes.subarray(12, 16).toString('latin1'))) {
     problems.push(`${rel}: is not a WebP image`);
     return null;
   }

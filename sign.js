@@ -43,6 +43,12 @@ function run({ pem, dist = DIST, publicKeyFile = PUBLIC_KEY } = {}) {
     crypto.createPublicKey(publicPem);
   } catch (e) { return { ok: false, message: `refused: signing-key.pub.pem cannot be read as a public key (${e.code || 'bad key'})` }; }
   const bytes = fs.readFileSync(file);
+  // Sign only a catalogue: a truncated or wrong artifact must not leave this job with a signature.
+  let c;
+  try { c = JSON.parse(bytes.toString('utf8')); } catch { return { ok: false, message: 'refused: dist/catalogue.json is not JSON' }; }
+  if (!c || c.version !== 2 || !Number.isSafeInteger(c.serial) || c.serial < 1 || !Array.isArray(c.roles) || !Array.isArray(c.teams)) {
+    return { ok: false, message: 'refused: dist/catalogue.json is not a version 2 catalogue with a serial' };
+  }
   let sig;
   try { sig = sign(bytes, pem); } catch (e) { return { ok: false, message: `refused: the signing key could not be used (${e.code || 'bad key'})` }; }
   if (!verify(bytes, sig, publicPem)) {

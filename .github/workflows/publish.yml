@@ -23,6 +23,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      serial: ${{ steps.built.outputs.serial }}
     permissions:
       contents: read
       deployments: read
@@ -65,7 +67,10 @@ jobs:
           prev=$(node published-serial.js "$RUNNER_TEMP/published.json" "$code" "$earlier")
           echo "published serial: $prev"
           echo "CATALOGUE_PREVIOUS_SERIAL=$prev" >> "$GITHUB_ENV"
-      - run: node build.js
+      - id: built
+        run: |
+          node build.js
+          echo "serial=$(node -e 'process.stdout.write(String(require("./dist/catalogue.json").serial))')" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: unsigned
@@ -97,7 +102,7 @@ jobs:
           if-no-files-found: error
 
   deploy:
-    needs: sign
+    needs: [build, sign]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -111,8 +116,27 @@ jobs:
         with:
           name: signed
           path: dist/
-      - name: Refuse to deploy without a signature
-        run: test -s dist/catalogue.json && test -s dist/catalogue.json.sig
+      # Code and the public key from this commit (no token kept), to check the hand-off below.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          path: repo
+      # What arrives from the sign job is checked, not trusted: the signature against the committed
+      # public key, and the serial against the one the build job made.
+      - name: Refuse to deploy anything but the signed build
+        run: |
+          node -e '
+            const fs = require("fs");
+            const { verify } = require("./repo/sign.js");
+            const bytes = fs.readFileSync("dist/catalogue.json");
+            const sig = fs.readFileSync("dist/catalogue.json.sig", "utf8").trim();
+            if (!verify(bytes, sig, fs.readFileSync("repo/signing-key.pub.pem", "utf8"))) { console.error("refused: the signature does not verify"); process.exit(1); }
+            const serial = String(JSON.parse(bytes).serial);
+            if (serial !== process.env.BUILT_SERIAL) { console.error(`refused: serial ${serial} is not the built ${process.env.BUILT_SERIAL}`); process.exit(1); }
+            console.log(`deploying serial ${serial}, signature verified`);
+          '
+        env:
+          BUILT_SERIAL: ${{ needs.build.outputs.serial }}
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
