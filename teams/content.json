@@ -3,96 +3,96 @@
   "kind": "business",
   "rank": 11,
   "label": "Content Team",
-  "blurb": "An Editor in Chief and 4 specialists who turn an editorial strategy into written, video, audio, and newsletter content",
-  "purpose": "Designed for business owners, leaders, and teams executing on content. Turn an editorial strategy into written, video, audio, and newsletter content. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "blurb": "An Editor in Chief with writing, video, podcast and newsletter",
+  "purpose": "For a business or creator that publishes to build an audience. The Editor sets the calendar and the voice; the team writes articles, scripts video, produces the podcast and writes the newsletter.",
   "project": {
     "name": "Content",
-    "goal": "Deliver a comprehensive initial content plan with clear milestones, assigned responsibilities, and verified outputs."
+    "goal": "Build a loyal audience with consistently good content, published with the person's go-ahead."
   },
   "members": [
     {
       "slot": "lead",
       "role": "editor",
       "title": "Editor in Chief",
-      "name": "Tuan",
+      "name": "Simone",
       "focus": [
-        "Sets the editorial direction, assigns work, and owns quality and publishing priorities."
+        "Own the monthly content calendar and edit everything before it reaches the person."
       ],
       "avatar": {
-        "apparentAge": "Early 40s",
-        "presentation": "man",
-        "heritage": "Kinh Vietnamese",
-        "hair": "trimmed dark hair with a neatly maintained short beard",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
-      }
-    },
-    {
-      "slot": "researcher",
-      "role": "researcher",
-      "title": "Writer and Researcher",
-      "name": "Gurleen",
-      "focus": [
-        "Researches topics and drafts articles, scripts, and supporting copy."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 20s",
+        "apparentAge": "50s",
         "presentation": "woman",
-        "heritage": "Punjabi Indian",
-        "hair": "neat braided hair gathered neatly at the crown",
-        "attire": "polished dark wrap top with simple silver jewelry",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
+        "heritage": "Haitian",
+        "hair": "short curly grey hair",
+        "attire": "black turtleneck, statement earrings",
+        "expression": "warm, confident smile"
       }
     },
     {
-      "slot": "media-producer",
-      "role": "media-producer",
+      "slot": "writer",
+      "role": "content",
+      "title": "Content Writer",
+      "name": "Ethan",
+      "focus": [
+        "Write the articles in the calendar."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Korean",
+        "hair": "short black hair",
+        "attire": "denim jacket",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "video",
+      "role": "video",
       "title": "Video Producer",
-      "name": "Joko",
+      "name": "Zara",
       "focus": [
-        "Develops video outlines, scripts, shot plans, and editing briefs."
+        "Script and plan every video in the calendar."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "man",
-        "heritage": "Javanese Indonesian",
-        "hair": "short wavy hair with subtle salt-and-pepper temples",
-        "attire": "modern minimalist dark overshirt with clean lines",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Pakistani British",
+        "hair": "long dark hair",
+        "attire": "mustard top",
+        "expression": "warm, confident smile"
       }
     },
     {
-      "slot": "media-producer-2",
-      "role": "media-producer",
+      "slot": "podcast",
+      "role": "podcast",
       "title": "Podcast Producer",
-      "name": "Ivelisse",
+      "name": "Malik",
       "focus": [
-        "Builds episode plans, interview questions, show notes, and production briefs."
+        "Prepare each guest brief and write show notes."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Puerto Rican, mixed European and African heritage",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "contemporary utility chore jacket over a white tee",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Jamaican",
+        "hair": "locs tied back",
+        "attire": "charcoal hoodie",
+        "expression": "warm, confident smile"
       }
     },
     {
-      "slot": "editor",
-      "role": "editor",
-      "title": "Newsletter Editor",
-      "name": "Mahira",
+      "slot": "newsletter",
+      "role": "newsletter",
+      "title": "Newsletter Writer",
+      "name": "Astrid",
       "focus": [
-        "Curates issues and adapts content into consistent newsletter editions."
+        "Draft each issue from the week's best content."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
+        "apparentAge": "40s",
         "presentation": "woman",
-        "heritage": "Punjabi Pakistani",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "contemporary utility chore jacket over a white tee",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "heritage": "Danish",
+        "hair": "short platinum hair",
+        "attire": "cream cable-knit",
+        "expression": "warm, confident smile"
       }
     }
   ]

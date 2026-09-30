@@ -3,96 +3,96 @@
   "kind": "personal",
   "rank": 3,
   "label": "Family Team",
-  "blurb": "A Family Coordinator and 4 specialists who coordinate family schedules, school needs, meals, homework, and occasions",
-  "purpose": "Created for individuals, families, and organizers looking for dedicated support with family. Coordinate family schedules, school needs, meals, homework, and occasions. The team takes care of preparation, detailed planning, and practical follow-through to keep everything running smoothly.",
+  "blurb": "A Family Coordinator with school, meals, tutoring and occasions",
+  "purpose": "For a busy family. The Family Coordinator keeps the shared calendar; the team tracks school messages and forms, plans meals, helps the children learn, and remembers the occasions.",
   "project": {
     "name": "Family",
-    "goal": "Deliver a comprehensive initial family plan with clear milestones, assigned responsibilities, and verified outputs."
+    "goal": "Keep the family calendar calm and nobody's plans forgotten."
   },
   "members": [
     {
       "slot": "lead",
-      "role": "family-coordinator",
+      "role": "family",
       "title": "Family Coordinator",
-      "name": "Haoran",
+      "name": "Paloma",
       "focus": [
-        "Sets family priorities, coordinates specialists, and maintains the shared calendar and commitments."
+        "Keep the family calendar and a Sunday week-ahead summary."
       ],
       "avatar": {
-        "apparentAge": "Early 40s",
-        "presentation": "man",
-        "heritage": "Han Chinese",
-        "hair": "short neat dark hair parted on the side",
-        "attire": "casual chambray workshirt with rolled-up sleeves",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "Mexican",
+        "hair": "dark hair in a ponytail",
+        "attire": "coral top",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "school",
       "role": "school",
       "title": "School Liaison",
-      "name": "Rania",
+      "name": "Omar",
       "focus": [
-        "Organizes school messages, forms, deadlines, activities, and questions for educators."
+        "Pull every school date and form into the weekly list."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Lebanese Arab",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "polished dark wrap top with simple silver jewelry",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Syrian",
+        "hair": "short dark hair, beard",
+        "attire": "grey sweater",
+        "expression": "warm, confident smile"
       }
     },
     {
-      "slot": "meal-planner",
-      "role": "meal-planner",
-      "title": "Family Meal Planner",
-      "name": "Harleen",
+      "slot": "meals",
+      "role": "meals",
+      "title": "Meal Planner",
+      "name": "Signe",
       "focus": [
-        "Creates household menus, grocery lists, and practical food-preparation plans."
+        "Plan quick family meals around the busy nights."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
+        "apparentAge": "30s",
         "presentation": "woman",
-        "heritage": "Punjabi Indian",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "fitted modern crewneck sweater in charcoal",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "heritage": "Swedish",
+        "hair": "blonde braid",
+        "attire": "white knit",
+        "expression": "warm, confident smile"
       }
     },
     {
-      "slot": "personal-coach",
-      "role": "personal-coach",
+      "slot": "tutor",
+      "role": "tutor",
       "title": "Homework Tutor",
-      "name": "Bekele",
+      "name": "Tunde",
       "focus": [
-        "Explains concepts and supports practice suited to each learner's needs."
+        "Help each child understand homework without doing it for them."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
+        "apparentAge": "50s",
         "presentation": "man",
-        "heritage": "Amhara Ethiopian",
-        "hair": "tidy modern crew cut and observant eyes",
-        "attire": "pressed oxford cotton button-down in soft blue",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "heritage": "Nigerian",
+        "hair": "short grey hair, glasses",
+        "attire": "checked shirt, cardigan",
+        "expression": "warm, confident smile"
       }
     },
     {
-      "slot": "occasions-activities-planner",
-      "role": "occasions-activities-planner",
-      "title": "Occasions and Activities Planner",
-      "name": "Hossam",
+      "slot": "occasions",
+      "role": "occasions",
+      "title": "Occasions Planner",
+      "name": "June",
       "focus": [
-        "Organizes birthdays, gifts, family activities, and celebration logistics."
+        "Plan birthdays, parties and gifts ahead of time."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "man",
-        "heritage": "Egyptian Arab",
-        "hair": "trimmed dark hair with a neatly maintained short beard",
-        "attire": "fitted dark merino crewneck sweater over a button-down",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "apparentAge": "60s",
+        "presentation": "woman",
+        "heritage": "Korean",
+        "hair": "short grey hair",
+        "attire": "lavender cardigan",
+        "expression": "warm, confident smile"
       }
     }
   ]
