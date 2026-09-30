@@ -56,7 +56,7 @@ description. `rank` orders teams within `business` or `personal`.
 
 ## Building and checking
 
-Needs Node 26 or later. Nothing to install.
+Needs Node 26 or later and a git clone (the build's serial is the commit time). Nothing to install.
 
 ```sh
 node build.js --check   # check everything, write nothing
@@ -99,8 +99,8 @@ What the signed file carries, and what Kosmos will check once its download ships
 
 The file and its signature are two downloads, and each cache between here and Kosmos can hold
 either one a little longer than the other just after a publish. A mismatch then looks like a bad
-signature, so Kosmos retries once before refusing, and a refusal leaves it on the catalogue it
-already had.
+signature, so Kosmos will retry once before refusing, and a refusal will leave it on the catalogue
+it already had.
 
 **Who can change what Kosmos trusts:** anyone who can merge to `main`, because `main` is what gets
 signed. The key is a secret of the `github-pages` environment, which only `main` may deploy to, so

@@ -30,6 +30,12 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 26
+      # A re-run of an old publish checks out its old commit; published now, it would carry a higher
+      # serial and roll every Kosmos back. Only the current tip of main is published.
+      - name: Refuse anything but the tip of main
+        run: |
+          tip=$(git ls-remote origin refs/heads/main | cut -f1)
+          if [ "$tip" != "$GITHUB_SHA" ]; then echo "refused: $GITHUB_SHA is not the tip of main ($tip); push a new commit instead of re-running"; exit 1; fi
       - run: node build.js --check
       - run: node --test test/
       # The new serial must exceed the published one (build.js takes the larger of the commit time
@@ -40,7 +46,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           earlier=$(gh api "repos/${{ github.repository }}/actions/workflows/publish.yml/runs?status=success&per_page=1" --jq .total_count)
-          code=$(curl -sS --max-time 30 --retry 3 --retry-all-errors -H 'Cache-Control: no-cache' \
+          code=$(curl -sSL --max-time 30 --retry 3 --retry-all-errors -H 'Cache-Control: no-cache' \
             -o "$RUNNER_TEMP/published.json" -w '%{http_code}' \
             "https://joshualeestone.github.io/kosmos-catalogue/catalogue.json?run=${{ github.run_id }}") || code=000
           prev=$(node published-serial.js "$RUNNER_TEMP/published.json" "$code" "$earlier")

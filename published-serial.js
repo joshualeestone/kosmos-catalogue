@@ -23,13 +23,13 @@ function publishedSerial(file, status, earlier) {
 }
 
 function main([file, status, earlier]) {
-  const n = Number(earlier);
-  if (!Number.isInteger(n) || n < 0) { process.stderr.write(`refused: earlier deployments ${JSON.stringify(earlier)} is not a count\n`); return 1; }
+  const n = /^\d+$/.test(String(earlier)) ? Number(earlier) : NaN;
+  if (!Number.isInteger(n)) { process.stderr.write(`refused: earlier deployments ${JSON.stringify(earlier)} is not a count\n`); return 1; }
   const r = publishedSerial(file, String(status), n);
   if (!r.ok) { process.stderr.write(`refused: ${r.because}\n`); return 1; }
   process.stdout.write(String(r.serial));
   return 0;
 }
 
-module.exports = { publishedSerial };
+module.exports = { publishedSerial, main };
 if (require.main === module) process.exitCode = main(process.argv.slice(2));

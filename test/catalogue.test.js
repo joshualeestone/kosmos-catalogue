@@ -387,3 +387,81 @@ test('main refuses a published serial that is not a whole number', () => {
   process.stderr.write = () => true;
   try { assert.equal(build.main(['--check'], { previousSerial: 'abc' }), 1); } finally { process.stderr.write = w; }
 });
+
+test('text Kosmos would read as a marker is refused: a template other than {{NAME}}, or an HTML comment', () => {
+  for (const bad of ['{{TEAM}}', '<!-- kosmos:colleagues:start -->', '{{ NAME }}']) {
+    const r = source.read().rolesSource;
+    r.roles[1].how[0] = `Say ${bad} at the start.`;
+    assert.ok(build.build({ rolesSource: r }).problems.some((p) => /template marker/.test(p)), bad);
+    const t = source.read().teamsSource;
+    t.teams[1].members[2].focus = [`Keep ${bad} here.`];
+    assert.ok(build.build({ teamsSource: t }).problems.some((p) => /template marker/.test(p)), bad);
+  }
+  // CONTROL: {{NAME}} itself, which every role opens with, passes.
+  assert.ok(built().roles.every((r) => r.instructions[0].includes('{{NAME}}')));
+  assert.deepEqual(build.build().problems, []);
+});
+
+test('suggested names follow Kosmos\'s name rules and are unique by machine name', () => {
+  assert.equal(build.nameProblem('Maya'), null, 'CONTROL');
+  assert.equal(build.nameProblem('Dr. Maya Okafor'), null, 'CONTROL: a title and spaces are fine');
+  for (const bad of ['M', ' Maya', 'Ma\tya', 'Maya!', 'x'.repeat(33), 'Kosmos Connect', 'Angel Discord', '.Net']) {
+    assert.ok(build.nameProblem(bad), JSON.stringify(bad));
+  }
+  const t = source.read().teamsSource;
+  t.teams[0].members[1].name = 'Mary Jo';
+  t.teams[1].members[1].name = 'mary.jo';
+  assert.ok(build.build({ teamsSource: t }).problems.some((p) => /suggested name mary\.jo is used by/.test(p)));
+  const u = source.read().teamsSource;
+  u.teams[0].members[1].name = 'Z!';
+  assert.ok(build.build({ teamsSource: u }).problems.some((p) => /Kosmos would refuse the name "Z!"/.test(p)));
+});
+
+test('the groups Kosmos\'s built-in roles sit in must stay in groups.json', () => {
+  const r = source.read().rolesSource;
+  r.GROUP_ORDER = r.GROUP_ORDER.filter((g) => g !== 'Building software');
+  assert.ok(build.build({ rolesSource: r }).problems.some((p) => /group "Building software", so it must stay/.test(p)));
+});
+
+test('a role folder, role.md or team file that is a link is refused', () => {
+  const dir = copyRepo();
+  try {
+    const cos = path.join(dir, 'roles', 'cos', 'role.md');
+    fs.rmSync(cos);
+    fs.symlinkSync(path.join(REPO, 'roles', 'cos', 'role.md'), cos);
+    const team = fs.readdirSync(path.join(dir, 'teams'))[0];
+    fs.rmSync(path.join(dir, 'teams', team));
+    fs.symlinkSync(path.join(REPO, 'teams', team), path.join(dir, 'teams', team));
+    const p = build.build({ root: dir }).problems.join('\n');
+    assert.match(p, /roles\/cos: must be a folder holding a regular role\.md, not a link/);
+    assert.match(p, new RegExp(`teams/${team.replace('.', '\\.')}: must be a regular file, not a link`));
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('front matter without a value and an empty rule are refused', () => {
+  const base = fs.readFileSync(path.join(REPO, 'roles', 'cos', 'role.md'), 'utf8');
+  assert.ok(source.parseRole('cos', base.replace(/^caution: .*$/m, 'caution')).problems.some((p) => /has no "name: value"/.test(p)));
+  assert.ok(source.parseRole('cos', base.replace(/^- Start each week.*$/m, '- ')).problems.some((p) => /empty rule/.test(p)));
+});
+
+test('a portrait no member names is reported', () => {
+  const dir = copyRepo();
+  try {
+    fs.mkdirSync(path.join(dir, 'avatars'));
+    fs.writeFileSync(path.join(dir, 'avatars', 'marketing-Lead.webp'), webp());
+    assert.ok(build.build({ root: dir }).problems.some((p) => /avatars\/marketing-Lead\.webp: no team member has the id/.test(p)));
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('published-serial refuses a deployment count that is empty or not a number', () => {
+  const { main } = require('../published-serial');
+  const w = process.stderr.write;
+  const o = process.stdout.write;
+  process.stderr.write = () => true;
+  process.stdout.write = () => true;
+  try {
+    assert.equal(main(['/nonexistent', '404', '']), 1);
+    assert.equal(main(['/nonexistent', '404', 'null']), 1);
+    assert.equal(main(['/nonexistent', '404', '0']), 0, 'CONTROL: a real zero is the first publish');
+  } finally { process.stderr.write = w; process.stdout.write = o; }
+});

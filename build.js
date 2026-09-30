@@ -64,7 +64,31 @@ function instructions(r) {
   return lines;
 }
 
-/** Any of the five spellings anywhere in the value. JSON.stringify keeps the character itself and
+/** Text Kosmos would read as something other than words: a template marker other than {{NAME}}
+ *  (the one create fills in), or an HTML comment, which is how Kosmos marks the blocks it manages
+ *  inside an instruction file. */
+function markerIn(value) {
+  const blob = JSON.stringify(value);
+  return /<!--/.test(blob) || /\{\{(?!NAME\}\})/.test(blob);
+}
+
+/** Why Kosmos would refuse this as an agent name (its engine/create.js nameProblem, ported), or null. */
+function nameProblem(raw) {
+  const name = String(raw);
+  if (name !== name.trim() || /[^\S ]/.test(name)) return 'use single plain spaces, with nothing before or after';
+  const slug = slugFor(name);
+  if (slug.length < 2 || slug.length > 32) return 'use 2 to 32 characters';
+  if (!/^[a-z0-9][a-z0-9_-]{1,31}$/.test(slug)) return 'use letters, numbers, hyphens and underscores, starting with a letter or number';
+  if (/-discord$/.test(slug)) return 'names cannot end in -discord';
+  if (slug === 'kosmos-connect') return 'that name is reserved';
+  return null;
+}
+
+/** The machine name Kosmos makes from a name (engine/create.js slugFor): two names with the same
+ *  one would be the same agent. */
+function slugFor(raw) { return String(raw).trim().toLowerCase().replace(/[\s.]+/g, '-'); }
+
+/** Any of the seven spellings anywhere in the value. JSON.stringify keeps the character itself and
  *  writes a typed backslash-u escape as \\u2014, which still contains the escape spelling. */
 function emDashIn(value) {
   const blob = JSON.stringify(value);
@@ -93,6 +117,9 @@ function build(src = {}) {
   const pickable = new Set(kosmos.menu);      // a team member may use one (never own or setup)
   const groups = rs.GROUP_ORDER;
   if (emDashIn(groups)) problems.push('groups.json: em dash in a group name');
+  for (const g of kosmos.groups) {
+    if (!groups.includes(g)) problems.push(`groups.json: Kosmos's built-in roles sit in the group ${JSON.stringify(g)}, so it must stay (even with no catalogue role in it)`);
+  }
   const roles = [];
   const seen = new Set();
   for (const r of rs.roles) {
@@ -113,6 +140,7 @@ function build(src = {}) {
     // whose wrap would split one (an odd count of backticks on a line) rather than ship it broken.
     if (entry.instructions.some((l) => (l.match(/`/g) || []).length % 2)) problems.push(`${k}: a code span is split across lines`);
     if (emDashIn(entry)) problems.push(`${k}: em dash`);
+    if (markerIn(entry)) problems.push(`${k}: a template marker other than {{NAME}}, or an HTML comment`);
     roles.push(entry);
   }
   const teams = [];
@@ -139,9 +167,12 @@ function build(src = {}) {
       avatarIds.set(id, t.key);
     }
     for (const m of t.members) {
-      const lower = m.name.toLowerCase();
-      if (seenNames.has(lower)) problems.push(`suggested name ${m.name} is used by ${seenNames.get(lower)} and ${t.key}`);
-      seenNames.set(lower, t.key);
+      const bad = nameProblem(m.name);
+      if (bad) problems.push(`${t.key}/${m.slot}: Kosmos would refuse the name ${JSON.stringify(m.name)}: ${bad}`);
+      // Compared as Kosmos compares agents: by machine name, so "Mary Jo" and "mary.jo" collide.
+      const slug = slugFor(m.name);
+      if (seenNames.has(slug)) problems.push(`suggested name ${m.name} is used by ${seenNames.get(slug)} and ${t.key}`);
+      seenNames.set(slug, t.key);
     }
     if (!['business', 'personal'].includes(t.kind)) problems.push(`${t.key}: kind must be business or personal`);
     if (!Number.isInteger(t.rank) || t.rank < 1) problems.push(`${t.key}: rank must be a whole number from 1`);
@@ -176,10 +207,20 @@ function build(src = {}) {
       purpose: t.purpose, caution: ts.TEAM_CAUTION, project: t.project, members };
     // Team text is what the Team screen shows (#4556, #4557), so it gets the same guard.
     if (emDashIn(entry)) problems.push(`${t.key}: em dash`);
+    if (markerIn(entry)) problems.push(`${t.key}: a template marker, or an HTML comment`);
     teams.push(entry);
   }
   // serial: which build this is, inside the signed bytes, so Kosmos can refuse an older catalogue
   // than the one it already holds (a replayed old file carries a valid signature too).
+  // A portrait no member names is a misspelt file name (and on a case-insensitive disk it would
+  // match locally and not in CI), so it is reported rather than quietly left out.
+  try {
+    if (fs.lstatSync(path.join(root, 'avatars')).isDirectory()) {
+      for (const f of fs.readdirSync(path.join(root, 'avatars'))) {
+        if (f.endsWith('.webp') && !avatarIds.has(f.slice(0, -5))) problems.push(`avatars/${f}: no team member has the id ${f.slice(0, -5)}`);
+      }
+    }
+  } catch { /* no avatars folder: nothing to match */ }
   // kosmosRoles: the built-in keys this catalogue was checked against, so Kosmos's own tests can
   // tell when its roles and this list have drifted apart.
   const catalogue = { generated: NOTE, version: 2, serial: src.serial || 0, kosmosRoles: kosmos.all.slice().sort(),
@@ -200,10 +241,10 @@ function readBuiltin(root, problems) {
   try {
     const b = JSON.parse(fs.readFileSync(path.join(root, 'kosmos-builtin-roles.json'), 'utf8'));
     const ok = (l) => Array.isArray(l) && l.every((k) => typeof k === 'string');
-    if (ok(b.roles) && ok(b.hidden)) return { menu: b.roles, all: b.roles.concat(b.hidden) };
+    if (ok(b.roles) && ok(b.hidden) && ok(b.groups)) return { menu: b.roles, all: b.roles.concat(b.hidden), groups: b.groups };
   } catch { /* reported below */ }
-  problems.push('kosmos-builtin-roles.json: must hold "roles" (menu) and "hidden" lists of role keys');
-  return { menu: [], all: [] };
+  problems.push('kosmos-builtin-roles.json: must hold "roles" (menu), "hidden" and "groups" lists');
+  return { menu: [], all: [], groups: [] };
 }
 
 /**
@@ -230,11 +271,20 @@ function portrait(root, id, problems) {
   return { path: rel, sha256: sha256(bytes) };
 }
 
+/** The environment without GIT_DIR and GIT_WORK_TREE, which a git hook exports: they would point
+ *  git at the hook's repo instead of the one named with -C. */
+function withoutGitDir() {
+  const env = { ...process.env };
+  delete env.GIT_DIR;
+  delete env.GIT_WORK_TREE;
+  return env;
+}
+
 /** The commit time of HEAD in seconds. Not guaranteed to grow (a commit made on a slow clock),
  *  so main() also keeps the serial above the one already published. */
 function commitTime(root) {
   try {
-    const out = require('node:child_process').execFileSync('git', ['-C', root, 'log', '-1', '--format=%ct', 'HEAD'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+    const out = require('node:child_process').execFileSync('git', ['-C', root, 'log', '-1', '--format=%ct', 'HEAD'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], env: withoutGitDir() });
     const n = Number(out.trim());
     return Number.isInteger(n) && n > 0 ? n : 0;
   } catch { return 0; }
@@ -289,5 +339,5 @@ function main(argv, opts = {}) {
   return 0;
 }
 
-module.exports = { build, main, sha256, serialProblem, EM_DASHES };
+module.exports = { build, main, sha256, serialProblem, nameProblem, slugFor, EM_DASHES };
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
