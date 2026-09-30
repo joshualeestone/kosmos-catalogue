@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 21,
   "label": "Home Selling Team",
-  "blurb": "A Home Sale Coordinator and 4 specialists who coordinate home preparation, market research, listing materials, and sale tasks",
+  "blurb": "A Home Sale Coordinator and 3 specialists who coordinate home preparation, market research, listing materials, and sale tasks",
   "purpose": "For anyone who wants to coordinate home preparation, market research, listing materials, and sale tasks.",
   "project": {
     "name": "Home Selling",
@@ -76,23 +76,6 @@
         "hair": "straight hair cut into a polished modern bob",
         "attire": "fitted modern crewneck sweater in charcoal",
         "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
-      }
-    },
-    {
-      "slot": "copy",
-      "role": "copy",
-      "title": "Listing Copywriter",
-      "name": "Giorgio",
-      "focus": [
-        "Writes the listing description and captions that show the home at its best, accurately."
-      ],
-      "avatar": {
-        "apparentAge": "Early 40s",
-        "presentation": "man",
-        "heritage": "Italian",
-        "hair": "short wavy hair with subtle salt-and-pepper temples",
-        "attire": "graphite utility jacket over a classic heather-grey tee",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }
   ]

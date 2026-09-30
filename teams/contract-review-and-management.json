@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 39,
   "label": "Contract Review and Management Team",
-  "blurb": "A Contract Operations Lead and 4 specialists who organize agreements, compare terms, and track contractual obligations",
+  "blurb": "A Contract Operations Lead and 3 specialists who organize agreements, compare terms, and track contractual obligations",
   "purpose": "For a business that wants to organize agreements, compare terms, and track contractual obligations.",
   "project": {
     "name": "Contract Review and Management",
@@ -76,23 +76,6 @@
         "hair": "sleek dark hair tied in a professional ponytail",
         "attire": "fitted modern crewneck sweater in charcoal",
         "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
-      }
-    },
-    {
-      "slot": "document-review-coordinator",
-      "role": "document-review-coordinator",
-      "title": "Contract Review Coordinator",
-      "name": "Otavio",
-      "focus": [
-        "Tracks who reviews each contract and which version is current, and drafts reminders for open items before deadlines."
-      ],
-      "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "man",
-        "heritage": "Afro-Brazilian",
-        "hair": "neatly combed hair and a tidy trimmed beard",
-        "attire": "casual chambray workshirt with rolled-up sleeves",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     }
   ]

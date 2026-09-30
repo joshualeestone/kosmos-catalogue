@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 20,
   "label": "Home Buying Team",
-  "blurb": "A Home Buying Coordinator and 4 specialists who organize home research, ownership-cost comparisons, and purchase milestones",
+  "blurb": "A Home Buying Coordinator and 3 specialists who organize home research, ownership-cost comparisons, and purchase milestones",
   "purpose": "For anyone who wants to organize home research, ownership-cost comparisons, and purchase milestones.",
   "project": {
     "name": "Home Buying",
@@ -76,23 +76,6 @@
         "hair": "close-cropped textured hair and a clean-shaven face",
         "attire": "pressed oxford cotton button-down in soft blue",
         "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
-      }
-    },
-    {
-      "slot": "budget",
-      "role": "budget",
-      "title": "Mortgage and Budget Planner",
-      "name": "Shelly",
-      "focus": [
-        "Works out what the household can afford, and compares loan options for the lender conversation."
-      ],
-      "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "woman",
-        "heritage": "Afro-Jamaican",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "fitted modern crewneck sweater in charcoal",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     }
   ]

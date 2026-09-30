@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 18,
   "label": "Competitive Intelligence Team",
-  "blurb": "A Competitive Intelligence Lead and 4 specialists who track competitors and explain changes that matter to the business",
+  "blurb": "A Competitive Intelligence Lead and 3 specialists who track competitors and explain changes that matter to the business",
   "purpose": "For a business that wants to track competitors and explain changes that matter to the business.",
   "project": {
     "name": "Competitive Intelligence",
@@ -75,23 +75,6 @@
         "heritage": "Sinhalese Sri Lankan",
         "hair": "sleek dark hair tied in a professional ponytail",
         "attire": "fitted modern crewneck sweater in charcoal",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
-      }
-    },
-    {
-      "slot": "market-analyst",
-      "role": "market-analyst",
-      "title": "Market Signals Analyst",
-      "name": "Kabir",
-      "focus": [
-        "Watches pricing, hiring, and product signals across the market and flags shifts early."
-      ],
-      "avatar": {
-        "apparentAge": "Late 30s",
-        "presentation": "man",
-        "heritage": "Punjabi Indian",
-        "hair": "neatly combed hair and a tidy trimmed beard",
-        "attire": "graphite utility jacket over a classic heather-grey tee",
         "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }

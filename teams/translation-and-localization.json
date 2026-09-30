@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 48,
   "label": "Translation and Localization Team",
-  "blurb": "A Localization Lead and 4 specialists who adapt content and product materials for target languages and markets",
+  "blurb": "A Localization Lead and 3 specialists who adapt content and product materials for target languages and markets",
   "purpose": "For a business that wants to adapt content and product materials for target languages and markets.",
   "project": {
     "name": "Translation and Localization",
@@ -76,23 +76,6 @@
         "hair": "trimmed dark hair with a neatly maintained short beard",
         "attire": "modern minimalist dark overshirt with clean lines",
         "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
-      }
-    },
-    {
-      "slot": "writer",
-      "role": "writer",
-      "title": "Terminology and Style Specialist",
-      "name": "Guoqiang",
-      "focus": [
-        "Keeps the glossary and style guide for each language, so terms stay consistent."
-      ],
-      "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "man",
-        "heritage": "Han Chinese",
-        "hair": "tidy modern crew cut and observant eyes",
-        "attire": "pressed oxford cotton button-down in soft blue",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     }
   ]

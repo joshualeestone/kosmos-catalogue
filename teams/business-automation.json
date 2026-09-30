@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 43,
   "label": "Business Automation Team",
-  "blurb": "An Automation Lead and 4 specialists who identify repetitive tasks and design, implement, and verify automated workflows",
+  "blurb": "An Automation Lead and 3 specialists who identify repetitive tasks and design, implement, and verify automated workflows",
   "purpose": "For a business that wants to identify repetitive tasks and design, implement, and verify automated workflows.",
   "project": {
     "name": "Business Automation",
@@ -76,23 +76,6 @@
         "hair": "neatly combed hair and a tidy trimmed beard",
         "attire": "fitted dark merino crewneck sweater over a button-down",
         "expression": "focused, welcoming, and attentive, looking directly at the camera"
-      }
-    },
-    {
-      "slot": "kb",
-      "role": "kb",
-      "title": "Automation Documentation Writer",
-      "name": "Rowena",
-      "focus": [
-        "Documents each automation, who owns it, and what to do when it fails."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 40s",
-        "presentation": "woman",
-        "heritage": "Tagalog Filipino",
-        "hair": "shoulder-length textured hair with subtle highlights",
-        "attire": "polished dark wrap top with simple silver jewelry",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     }
   ]

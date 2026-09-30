@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 34,
   "label": "Tech Support Team",
-  "blurb": "A Technical Support Lead and 4 specialists who diagnose technical issues and guide users toward workable solutions",
+  "blurb": "A Technical Support Lead and 3 specialists who diagnose technical issues and guide users toward workable solutions",
   "purpose": "For a business that wants to diagnose technical issues and guide users toward workable solutions.",
   "project": {
     "name": "Tech Support",
@@ -75,23 +75,6 @@
         "heritage": "Colombian Mestizo",
         "hair": "close-cropped textured hair and a clean-shaven face",
         "attire": "graphite utility jacket over a classic heather-grey tee",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
-      }
-    },
-    {
-      "slot": "tech-support-3",
-      "role": "tech-support",
-      "title": "Device and Account Setup Specialist",
-      "name": "Seoyeon",
-      "focus": [
-        "Walks users through setting up new devices and accounts safely, step by step."
-      ],
-      "avatar": {
-        "apparentAge": "Early 40s",
-        "presentation": "woman",
-        "heritage": "Korean",
-        "hair": "straight hair cut into a polished modern bob",
-        "attire": "tailored dark blazer over a minimalist silk top",
         "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     }

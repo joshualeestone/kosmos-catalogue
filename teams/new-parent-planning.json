@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 27,
   "label": "New Parent Planning Team",
-  "blurb": "A New Parent Planning Lead and 4 specialists who coordinate practical preparation for a new child and family support",
+  "blurb": "A New Parent Planning Lead and 3 specialists who coordinate practical preparation for a new child and family support",
   "purpose": "For anyone who wants to coordinate practical preparation for a new child and family support.",
   "project": {
     "name": "New Parent Planning",
@@ -76,23 +76,6 @@
         "hair": "straight hair cut into a polished modern bob",
         "attire": "contemporary utility chore jacket over a white tee",
         "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
-      }
-    },
-    {
-      "slot": "budget",
-      "role": "budget",
-      "title": "Family Budget Planner",
-      "name": "Mauricio",
-      "focus": [
-        "Plans the costs of a new child, from leave to childcare, and fits them into the budget."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 40s",
-        "presentation": "man",
-        "heritage": "Colombian Mestizo",
-        "hair": "tidy modern crew cut and observant eyes",
-        "attire": "pressed oxford cotton button-down in soft blue",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     }
   ]

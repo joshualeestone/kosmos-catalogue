@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 16,
   "label": "Business Strategy Team",
-  "blurb": "A Chief Strategy Officer and 4 specialists who turn business goals into a prioritized strategy and execution roadmap",
+  "blurb": "A Chief Strategy Officer and 3 specialists who turn business goals into a prioritized strategy and execution roadmap",
   "purpose": "For a business that wants to turn business goals into a prioritized strategy and execution roadmap.",
   "project": {
     "name": "Business Strategy",
@@ -75,23 +75,6 @@
         "heritage": "Turkish",
         "hair": "tidy modern crew cut and observant eyes",
         "attire": "casual chambray workshirt with rolled-up sleeves",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
-      }
-    },
-    {
-      "slot": "finance",
-      "role": "finance",
-      "title": "Strategy Finance Analyst",
-      "name": "Nour",
-      "focus": [
-        "Models the financial effect of each strategic option, so choices are compared on the numbers."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 30s",
-        "presentation": "woman",
-        "heritage": "Lebanese Arab",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "contemporary utility chore jacket over a white tee",
         "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     }

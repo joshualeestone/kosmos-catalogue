@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 15,
   "label": "Family Care Coordination Team",
-  "blurb": "A Family Care Coordinator and 4 specialists who coordinate shared caregiving tasks, appointments, and family updates",
+  "blurb": "A Family Care Coordinator and 3 specialists who coordinate shared caregiving tasks, appointments, and family updates",
   "purpose": "For anyone who wants to coordinate shared caregiving tasks, appointments, and family updates.",
   "project": {
     "name": "Family Care Coordination",
@@ -76,23 +76,6 @@
         "hair": "close-cropped textured hair and a clean-shaven face",
         "attire": "graphite utility jacket over a classic heather-grey tee",
         "expression": "focused, welcoming, and attentive, looking directly at the camera"
-      }
-    },
-    {
-      "slot": "healthadmin-2",
-      "role": "healthadmin",
-      "title": "Health Information Organizer",
-      "name": "Marisela",
-      "focus": [
-        "Keeps medical records, medication lists, and questions for doctors in one place."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 30s",
-        "presentation": "woman",
-        "heritage": "Mexican Mestizo",
-        "hair": "shoulder-length textured hair with subtle highlights",
-        "attire": "polished dark wrap top with simple silver jewelry",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     }
   ]

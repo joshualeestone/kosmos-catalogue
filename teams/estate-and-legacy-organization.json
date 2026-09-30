@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 26,
   "label": "Estate and Legacy Organization Team",
-  "blurb": "An Estate Organization Lead and 4 specialists who organize estate information, personal wishes, and questions for professional planning",
+  "blurb": "An Estate Organization Lead and 3 specialists who organize estate information, personal wishes, and questions for professional planning",
   "purpose": "For anyone who wants to organize estate information, personal wishes, and questions for professional planning.",
   "project": {
     "name": "Estate and Legacy Organization",
@@ -76,23 +76,6 @@
         "hair": "close-cropped textured hair and a clean-shaven face",
         "attire": "pressed oxford cotton button-down in soft blue",
         "expression": "focused, welcoming, and attentive, looking directly at the camera"
-      }
-    },
-    {
-      "slot": "personal-finance-organizer",
-      "role": "personal-finance-organizer",
-      "title": "Digital Accounts Organizer",
-      "name": "Kenta",
-      "focus": [
-        "Lists online accounts and subscriptions, and notes what the person wants to happen to each."
-      ],
-      "avatar": {
-        "apparentAge": "Early 40s",
-        "presentation": "man",
-        "heritage": "Japanese",
-        "hair": "tidy modern crew cut and observant eyes",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     }
   ]

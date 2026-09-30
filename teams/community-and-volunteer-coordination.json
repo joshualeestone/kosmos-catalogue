@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 12,
   "label": "Community and Volunteer Coordination Team",
-  "blurb": "A Community Program Lead and 4 specialists who organize community activities and volunteer participation",
+  "blurb": "A Community Program Lead and 3 specialists who organize community activities and volunteer participation",
   "purpose": "For anyone who wants to organize community activities and volunteer participation.",
   "project": {
     "name": "Community and Volunteer Coordination",
@@ -76,23 +76,6 @@
         "hair": "soft wavy hair worn neatly around the shoulders",
         "attire": "fitted modern crewneck sweater in charcoal",
         "expression": "warm, confident, and approachable, eye level with the viewer"
-      }
-    },
-    {
-      "slot": "newsletter",
-      "role": "newsletter",
-      "title": "Community Newsletter Writer",
-      "name": "Mwangi",
-      "focus": [
-        "Writes the regular update that tells members and volunteers what is coming up and what their work achieved."
-      ],
-      "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "man",
-        "heritage": "Kikuyu Kenyan",
-        "hair": "trimmed dark hair with a neatly maintained short beard",
-        "attire": "modern minimalist dark overshirt with clean lines",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     }
   ]

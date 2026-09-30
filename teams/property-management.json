@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 46,
   "label": "Property Management Team",
-  "blurb": "A Property Operations Manager and 4 specialists who coordinate property administration, maintenance, tenant requests, and lease milestones",
+  "blurb": "A Property Operations Manager and 3 specialists who coordinate property administration, maintenance, tenant requests, and lease milestones",
   "purpose": "For a business that wants to coordinate property administration, maintenance, tenant requests, and lease milestones.",
   "project": {
     "name": "Property Management",
@@ -76,23 +76,6 @@
         "hair": "neatly styled natural coiled hair in an elegant low bun",
         "attire": "fitted modern crewneck sweater in charcoal",
         "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
-      }
-    },
-    {
-      "slot": "books",
-      "role": "books",
-      "title": "Rent and Expense Bookkeeper",
-      "name": "Muthoni",
-      "focus": [
-        "Records rent, deposits, and repair costs by property, and reconciles them monthly."
-      ],
-      "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Kikuyu Kenyan",
-        "hair": "neat braided hair gathered neatly at the crown",
-        "attire": "tailored dark blazer over a minimalist silk top",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     }
   ]

@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 28,
   "label": "Pet Care Coordination Team",
-  "blurb": "A Pet Care Coordinator and 4 specialists who organize pet-care routines, appointments, sitters, and travel logistics",
+  "blurb": "A Pet Care Coordinator and 2 specialists who organize pet-care routines, appointments, sitters, and travel logistics",
   "purpose": "For anyone who wants to organize pet-care routines, appointments, sitters, and travel logistics.",
   "project": {
     "name": "Pet Care Coordination",
@@ -59,40 +59,6 @@
         "hair": "sleek dark hair tied in a professional ponytail",
         "attire": "tailored dark blazer over a minimalist silk top",
         "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
-      }
-    },
-    {
-      "slot": "budget",
-      "role": "budget",
-      "title": "Pet Budget and Insurance Organizer",
-      "name": "Angus",
-      "focus": [
-        "Tracks food, vet, and insurance costs, and plans for bigger bills ahead."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 30s",
-        "presentation": "man",
-        "heritage": "Scottish",
-        "hair": "close-cropped textured hair and a clean-shaven face",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
-      }
-    },
-    {
-      "slot": "pet-care-coordinator-2",
-      "role": "pet-care-coordinator",
-      "title": "Pet Training and Enrichment Planner",
-      "name": "Malee",
-      "focus": [
-        "Plans training, exercise, and enrichment that fit the pet and the household routine."
-      ],
-      "avatar": {
-        "apparentAge": "Late 30s",
-        "presentation": "woman",
-        "heritage": "Thai",
-        "hair": "neat braided hair gathered neatly at the crown",
-        "attire": "contemporary utility chore jacket over a white tee",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }
   ]

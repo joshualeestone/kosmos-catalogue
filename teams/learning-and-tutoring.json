@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 16,
   "label": "Learning and Tutoring Team",
-  "blurb": "A Learning Coach and 4 specialists who create a learning path with explanations, practice, and feedback",
+  "blurb": "A Learning Coach and 2 specialists who create a learning path with explanations, practice, and feedback",
   "purpose": "For anyone who wants to create a learning path with explanations, practice, and feedback.",
   "project": {
     "name": "Learning and Tutoring",
@@ -58,40 +58,6 @@
         "heritage": "African American",
         "hair": "neatly styled natural coiled hair in an elegant low bun",
         "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
-      }
-    },
-    {
-      "slot": "personal-coach",
-      "role": "personal-coach",
-      "title": "Study Schedule Planner",
-      "name": "Sherif",
-      "focus": [
-        "Builds a realistic study schedule and adjusts it around progress and busy weeks."
-      ],
-      "avatar": {
-        "apparentAge": "Late 30s",
-        "presentation": "man",
-        "heritage": "Egyptian Arab",
-        "hair": "short wavy hair with subtle salt-and-pepper temples",
-        "attire": "modern minimalist dark overshirt with clean lines",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
-      }
-    },
-    {
-      "slot": "researcher",
-      "role": "researcher",
-      "title": "Learning Resources Researcher",
-      "name": "Siobhan",
-      "focus": [
-        "Finds good books, courses, and exercises for each topic, matched to the learner's level."
-      ],
-      "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Irish",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "tailored dark blazer over a minimalist silk top",
         "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }

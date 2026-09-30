@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 22,
   "label": "Pricing and Packaging Team",
-  "blurb": "A Pricing Strategy Lead and 4 specialists who design pricing and packages and plan how to evaluate them",
+  "blurb": "A Pricing Strategy Lead and 3 specialists who design pricing and packages and plan how to evaluate them",
   "purpose": "For a business that wants to design pricing and packages and plan how to evaluate them.",
   "project": {
     "name": "Pricing and Packaging",
@@ -76,23 +76,6 @@
         "hair": "shoulder-length textured hair with subtle highlights",
         "attire": "contemporary utility chore jacket over a white tee",
         "expression": "focused, welcoming, and attentive, looking directly at the camera"
-      }
-    },
-    {
-      "slot": "data",
-      "role": "data",
-      "title": "Pricing Data Analyst",
-      "name": "Zhiwei",
-      "focus": [
-        "Analyzes sales and discount data to show how customers respond to price."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "man",
-        "heritage": "Han Chinese",
-        "hair": "tidy modern crew cut and observant eyes",
-        "attire": "pressed oxford cotton button-down in soft blue",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     }
   ]

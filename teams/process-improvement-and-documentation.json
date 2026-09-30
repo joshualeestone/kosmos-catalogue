@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 36,
   "label": "Process Improvement and Documentation Team",
-  "blurb": "A Process Improvement Lead and 4 specialists who improve repeatable workflows and document how they should run",
+  "blurb": "A Process Improvement Lead and 3 specialists who improve repeatable workflows and document how they should run",
   "purpose": "For a business that wants to improve repeatable workflows and document how they should run.",
   "project": {
     "name": "Process Improvement and Documentation",
@@ -75,23 +75,6 @@
         "heritage": "Afro-Jamaican",
         "hair": "straight hair cut into a polished modern bob",
         "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
-      }
-    },
-    {
-      "slot": "data",
-      "role": "data",
-      "title": "Process Metrics Analyst",
-      "name": "Henrik",
-      "focus": [
-        "Measures cycle times and error rates before and after each change."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 40s",
-        "presentation": "man",
-        "heritage": "Swedish",
-        "hair": "close-cropped textured hair and a clean-shaven face",
-        "attire": "casual chambray workshirt with rolled-up sleeves",
         "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }

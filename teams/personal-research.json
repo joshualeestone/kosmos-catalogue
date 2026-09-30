@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 29,
   "label": "Personal Research Team",
-  "blurb": "A Research Lead and 4 specialists who investigate a question and produce a clear, sourced explanation",
+  "blurb": "A Research Lead and 2 specialists who investigate a question and produce a clear, sourced explanation",
   "purpose": "For anyone who wants to investigate a question and produce a clear, sourced explanation.",
   "project": {
     "name": "Personal Research",
@@ -59,40 +59,6 @@
         "hair": "sleek dark hair tied in a professional ponytail",
         "attire": "polished dark wrap top with simple silver jewelry",
         "expression": "focused, welcoming, and attentive, looking directly at the camera"
-      }
-    },
-    {
-      "slot": "data",
-      "role": "data",
-      "title": "Data and Statistics Analyst",
-      "name": "Halyna",
-      "focus": [
-        "Finds the relevant numbers and explains what they do and do not show."
-      ],
-      "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Ukrainian",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "fitted modern crewneck sweater in charcoal",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
-      }
-    },
-    {
-      "slot": "intelligence-brief-writer",
-      "role": "intelligence-brief-writer",
-      "title": "Research Brief Writer",
-      "name": "Efua",
-      "focus": [
-        "Turns the findings into a short, sourced brief the person can read in minutes."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "woman",
-        "heritage": "Akan Ghanaian",
-        "hair": "shoulder-length textured hair with subtle highlights",
-        "attire": "smart knit cardigan over a crisp collared blouse",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     }
   ]

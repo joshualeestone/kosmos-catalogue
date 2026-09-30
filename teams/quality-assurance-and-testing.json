@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 42,
   "label": "Quality Assurance and Testing Team",
-  "blurb": "A QA Lead and 4 specialists who independently test a product or website and document verified defects",
+  "blurb": "A QA Lead and 3 specialists who independently test a product or website and document verified defects",
   "purpose": "For a business that wants to independently test a product or website and document verified defects.",
   "project": {
     "name": "Quality Assurance and Testing",
@@ -76,23 +76,6 @@
         "hair": "soft wavy hair worn neatly around the shoulders",
         "attire": "fitted modern crewneck sweater in charcoal",
         "expression": "focused, welcoming, and attentive, looking directly at the camera"
-      }
-    },
-    {
-      "slot": "security",
-      "role": "security",
-      "title": "Security Test Specialist",
-      "name": "Golnaz",
-      "focus": [
-        "Checks the product for common security weaknesses and reports them with clear steps."
-      ],
-      "avatar": {
-        "apparentAge": "Early 40s",
-        "presentation": "woman",
-        "heritage": "Persian Iranian",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "polished dark wrap top with simple silver jewelry",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     }
   ]

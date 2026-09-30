@@ -59,7 +59,7 @@ test('every role opens with the line the board reads, and keys are lowercase wor
   }
 });
 
-test('teams: unique keys and ranks, a lead plus 4 or 5 reports, every member complete', () => {
+test('teams: unique keys and ranks, a lead plus 1 to 5 reports, every member complete', () => {
   const c = built();
   assert.equal(new Set(c.teams.map((t) => t.key)).size, c.teams.length, 'two teams share a key');
   for (const kind of ['business', 'personal']) {
@@ -73,7 +73,7 @@ test('teams: unique keys and ranks, a lead plus 4 or 5 reports, every member com
     assert.equal(leads.length, 1, `${t.key} has ${leads.length} leads`);
     assert.equal(leads[0].slot, 'lead');
     const reports = t.members.filter((m) => m.reportsTo !== null);
-    assert.ok(reports.length >= 4 && reports.length <= 5, `${t.key} has ${reports.length} reports`);
+    assert.ok(reports.length >= 1 && reports.length <= 5, `${t.key} has ${reports.length} reports`);
     assert.ok(reports.every((m) => m.reportsTo === 'lead'));
     assert.equal(new Set(t.members.map((m) => m.slot)).size, t.members.length, `${t.key} repeats a slot`);
     for (const m of t.members) {
@@ -114,8 +114,14 @@ test('no em dash in any spelling anywhere in the catalogue, and the builder refu
 test('the builder refuses a broken team', () => {
   const noLead = source.read().teamsSource; noLead.teams[0].members[0].slot = 'chief';
   assert.ok(build.build({ teamsSource: noLead }).problems.some((p) => /exactly one lead/.test(p)));
-  const tooFew = source.read().teamsSource; tooFew.teams[0].members = tooFew.teams[0].members.slice(0, 4);
-  assert.ok(build.build({ teamsSource: tooFew }).problems.some((p) => /4 or 5 reports/.test(p)));
+  const tooFew = source.read().teamsSource; tooFew.teams[0].members = tooFew.teams[0].members.slice(0, 1);
+  assert.ok(build.build({ teamsSource: tooFew }).problems.some((p) => /needs 1 to 5 reports, has 0/.test(p)));
+  // Josh 09-30 17:27: a lead and one report (2 people) is a team; a lead and 6 reports is not.
+  const small = source.read().teamsSource; small.teams[0].members = small.teams[0].members.slice(0, 2);
+  assert.ok(!build.build({ teamsSource: small }).problems.some((p) => /reports, has/.test(p)), 'a lead and one report was refused');
+  const big = source.read().teamsSource; const extra = big.teams[1].members.filter((m) => m.slot !== 'lead').map((m, i) => ({ ...m, slot: `extra-${i}`, name: `Extra${'abcdefghij'[i]}` }));
+  big.teams[0].members = big.teams[0].members.concat(extra).slice(0, 7);
+  assert.ok(build.build({ teamsSource: big }).problems.some((p) => /needs 1 to 5 reports, has 6/.test(p)));
   const twin = source.read().teamsSource; twin.teams[1].members[1].name = twin.teams[0].members[0].name.toUpperCase();
   assert.ok(build.build({ teamsSource: twin }).problems.some((p) => /suggested name/.test(p)));
 });

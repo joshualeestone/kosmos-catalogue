@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 24,
   "label": "Tax Preparation Organization Team",
-  "blurb": "A Tax Organization Lead and 4 specialists who prepare organized records and questions for your tax preparer",
+  "blurb": "A Tax Organization Lead and 2 specialists who prepare organized records and questions for your tax preparer",
   "purpose": "For anyone who wants to prepare organized records and questions for their tax preparer.",
   "project": {
     "name": "Tax Preparation Organization",
@@ -58,40 +58,6 @@
         "heritage": "Yoruba Nigerian",
         "hair": "trimmed dark hair with a neatly maintained short beard",
         "attire": "fitted dark merino crewneck sweater over a button-down",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
-      }
-    },
-    {
-      "slot": "books",
-      "role": "books",
-      "title": "Income and Expense Organizer",
-      "name": "Eunji",
-      "focus": [
-        "Sorts the year's income and deductible expenses into the categories the preparer needs."
-      ],
-      "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Korean",
-        "hair": "neat braided hair gathered neatly at the crown",
-        "attire": "contemporary utility chore jacket over a white tee",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
-      }
-    },
-    {
-      "slot": "deadline-documents-coordinator",
-      "role": "deadline-documents-coordinator",
-      "title": "Tax Deadlines Coordinator",
-      "name": "Ebba",
-      "focus": [
-        "Keeps the calendar of tax deadlines and estimated payments, with reminders well ahead."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "woman",
-        "heritage": "Swedish",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "fitted modern crewneck sweater in charcoal",
         "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }

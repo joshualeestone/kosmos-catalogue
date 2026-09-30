@@ -295,7 +295,8 @@ function build(src = {}) {
     const leads = t.members.filter((m) => m.slot === 'lead').length;
     if (leads !== 1) problems.push(`${t.key}: needs exactly one lead slot, has ${leads}`);
     const reports = t.members.length - leads;
-    if (reports < 4 || reports > 5) problems.push(`${t.key}: needs 4 or 5 reports, has ${reports}`);
+    // Josh, 09-30 17:27: a team is 2 to 6 people, some small on purpose (kosmos#4555).
+    if (reports < 1 || reports > 5) problems.push(`${t.key}: needs 1 to 5 reports, has ${reports}`);
     if (new Set(t.members.map((m) => m.slot)).size !== t.members.length) problems.push(`${t.key}: a slot repeats`);
     for (const m of t.members) {
       if (!seen.has(m.role) && !pickable.has(m.role)) problems.push(`${t.key}/${m.slot}: role ${JSON.stringify(m.role)} is neither a catalogue role nor one Kosmos has built in`);

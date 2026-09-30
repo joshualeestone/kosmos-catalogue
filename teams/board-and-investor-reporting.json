@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 44,
   "label": "Board and Investor Reporting Team",
-  "blurb": "A Reporting Director and 4 specialists who assemble consistent board and investor materials from business updates and metrics",
+  "blurb": "A Reporting Director and 3 specialists who assemble consistent board and investor materials from business updates and metrics",
   "purpose": "For a business that wants to assemble consistent board and investor materials from business updates and metrics.",
   "project": {
     "name": "Board and Investor Reporting",
@@ -76,23 +76,6 @@
         "hair": "short wavy hair with subtle salt-and-pepper temples",
         "attire": "modern minimalist dark overshirt with clean lines",
         "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
-      }
-    },
-    {
-      "slot": "investor",
-      "role": "investor",
-      "title": "Investor Relations Coordinator",
-      "name": "Aoife",
-      "focus": [
-        "Tracks investor questions and commitments, and prepares the materials each meeting needs."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 30s",
-        "presentation": "woman",
-        "heritage": "Irish",
-        "hair": "sleek dark hair tied in a professional ponytail",
-        "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }
   ]

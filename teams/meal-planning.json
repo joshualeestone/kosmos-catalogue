@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 13,
   "label": "Meal Planning Team",
-  "blurb": "A Meal Planning Lead and 4 specialists who create practical menus, grocery lists, and preparation plans",
+  "blurb": "A Meal Planning Lead and 2 specialists who create practical menus, grocery lists, and preparation plans",
   "purpose": "For anyone who wants to create practical menus, grocery lists, and preparation plans.",
   "project": {
     "name": "Meal Planning",
@@ -59,40 +59,6 @@
         "hair": "tidy modern crew cut and observant eyes",
         "attire": "tailored unstructured navy blazer over a crisp linen shirt",
         "expression": "bright, genuine, and reliable, facing forward with a slight smile"
-      }
-    },
-    {
-      "slot": "budget",
-      "role": "budget",
-      "title": "Food Budget Organizer",
-      "name": "Maha",
-      "focus": [
-        "Keeps the weekly grocery spend on budget and finds savings in the meal plan."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "woman",
-        "heritage": "Lebanese Arab",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
-      }
-    },
-    {
-      "slot": "nutrition",
-      "role": "nutrition",
-      "title": "Dietary Needs Planner",
-      "name": "Natsuki",
-      "focus": [
-        "Plans meals around allergies and diets, and flags ingredients to avoid."
-      ],
-      "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "woman",
-        "heritage": "Japanese",
-        "hair": "straight hair cut into a polished modern bob",
-        "attire": "tailored dark blazer over a minimalist silk top",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }
   ]

@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 19,
   "label": "Customer Insights Team",
-  "blurb": "A Customer Insights Lead and 4 specialists who turn customer feedback into clear needs and improvement priorities",
+  "blurb": "A Customer Insights Lead and 3 specialists who turn customer feedback into clear needs and improvement priorities",
   "purpose": "For a business that wants to turn customer feedback into clear needs and improvement priorities.",
   "project": {
     "name": "Customer Insights",
@@ -76,23 +76,6 @@
         "hair": "shoulder-length textured hair with subtle highlights",
         "attire": "tailored dark blazer over a minimalist silk top",
         "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
-      }
-    },
-    {
-      "slot": "data",
-      "role": "data",
-      "title": "Customer Data Analyst",
-      "name": "Katarzyna",
-      "focus": [
-        "Analyzes usage and purchase data to test what interviews and surveys suggest."
-      ],
-      "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Polish",
-        "hair": "sleek dark hair tied in a professional ponytail",
-        "attire": "polished dark wrap top with simple silver jewelry",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     }
   ]

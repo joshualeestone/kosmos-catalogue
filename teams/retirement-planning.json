@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 25,
   "label": "Retirement Planning Team",
-  "blurb": "A Retirement Planning Coordinator and 4 specialists who organize goals and model retirement scenarios for informed discussions",
+  "blurb": "A Retirement Planning Coordinator and 3 specialists who organize goals and model retirement scenarios for informed discussions",
   "purpose": "For anyone who wants to organize goals and model retirement scenarios for informed discussions.",
   "project": {
     "name": "Retirement Planning",
@@ -76,23 +76,6 @@
         "hair": "trimmed dark hair with a neatly maintained short beard",
         "attire": "graphite utility jacket over a classic heather-grey tee",
         "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
-      }
-    },
-    {
-      "slot": "coverage-comparison-analyst",
-      "role": "coverage-comparison-analyst",
-      "title": "Retirement Health Cover Analyst",
-      "name": "Luana",
-      "focus": [
-        "Compares health cover options for retirement and lists the questions to ask about each."
-      ],
-      "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "woman",
-        "heritage": "Afro-Brazilian",
-        "hair": "sleek dark hair tied in a professional ponytail",
-        "attire": "smart knit cardigan over a crisp collared blouse",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     }
   ]

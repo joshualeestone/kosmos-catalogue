@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 23,
   "label": "Healthcare Administration Team",
-  "blurb": "A Healthcare Administration Lead and 4 specialists who organize healthcare appointments, records, referrals, and billing follow-through",
+  "blurb": "A Healthcare Administration Lead and 3 specialists who organize healthcare appointments, records, referrals, and billing follow-through",
   "purpose": "For anyone who wants to organize healthcare appointments, records, referrals, and billing follow-through.",
   "project": {
     "name": "Healthcare Administration",
@@ -75,23 +75,6 @@
         "heritage": "Afro-Jamaican",
         "hair": "sleek dark hair tied in a professional ponytail",
         "attire": "polished dark wrap top with simple silver jewelry",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
-      }
-    },
-    {
-      "slot": "claims-documentation-coordinator",
-      "role": "claims-documentation-coordinator",
-      "title": "Insurance and Benefits Coordinator",
-      "name": "Rajesh",
-      "focus": [
-        "Checks what insurance covers before appointments, and prepares claim and billing follow-ups for the person to send."
-      ],
-      "avatar": {
-        "apparentAge": "Late 30s",
-        "presentation": "man",
-        "heritage": "Punjabi Indian",
-        "hair": "trimmed dark hair with a neatly maintained short beard",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
         "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     }

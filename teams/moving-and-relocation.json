@@ -3,7 +3,7 @@
   "kind": "personal",
   "rank": 10,
   "label": "Moving and Relocation Team",
-  "blurb": "A Relocation Manager and 4 specialists who coordinate the research, preparation, and practical tasks of a move",
+  "blurb": "A Relocation Manager and 3 specialists who coordinate the research, preparation, and practical tasks of a move",
   "purpose": "For anyone who wants to coordinate the research, preparation, and practical tasks of a move.",
   "project": {
     "name": "Moving and Relocation",
@@ -76,23 +76,6 @@
         "hair": "shoulder-length textured hair with subtle highlights",
         "attire": "fitted modern crewneck sweater in charcoal",
         "expression": "bright, genuine, and reliable, facing forward with a slight smile"
-      }
-    },
-    {
-      "slot": "budget",
-      "role": "budget",
-      "title": "Moving Budget Organizer",
-      "name": "Tomasz",
-      "focus": [
-        "Builds the moving budget and tracks quotes, deposits, and costs against it."
-      ],
-      "avatar": {
-        "apparentAge": "Late 30s",
-        "presentation": "man",
-        "heritage": "Polish",
-        "hair": "short wavy hair with subtle salt-and-pepper temples",
-        "attire": "graphite utility jacket over a classic heather-grey tee",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     }
   ]

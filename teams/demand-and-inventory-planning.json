@@ -3,7 +3,7 @@
   "kind": "business",
   "rank": 47,
   "label": "Demand and Inventory Planning Team",
-  "blurb": "An Inventory Planning Lead and 4 specialists who translate demand signals into stock and replenishment recommendations",
+  "blurb": "An Inventory Planning Lead and 3 specialists who translate demand signals into stock and replenishment recommendations",
   "purpose": "For a business that wants to translate demand signals into stock and replenishment recommendations.",
   "project": {
     "name": "Demand and Inventory Planning",
@@ -76,23 +76,6 @@
         "hair": "short wavy hair with subtle salt-and-pepper temples",
         "attire": "casual chambray workshirt with rolled-up sleeves",
         "expression": "warm, confident, and approachable, eye level with the viewer"
-      }
-    },
-    {
-      "slot": "data",
-      "role": "data",
-      "title": "Sales Data Analyst",
-      "name": "Takumi",
-      "focus": [
-        "Cleans and analyzes sales history, so forecasts start from reliable numbers."
-      ],
-      "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "man",
-        "heritage": "Japanese",
-        "hair": "close-cropped textured hair and a clean-shaven face",
-        "attire": "fitted dark merino crewneck sweater over a button-down",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     }
   ]

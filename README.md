@@ -13,7 +13,7 @@ Team screen, so someone who only makes their own agents never downloads any of i
 | Path | What it is |
 |---|---|
 | `roles/<key>/role.md` | One role: its job description and working rules |
-| `teams/<key>.json` | One team: a lead and 4 or 5 people who report to the lead |
+| `teams/<key>.json` | One team: a lead and 1 to 5 people who report to the lead (2 to 6 people) |
 | `groups.json` | The groups the role picker shows, in order, and the roles in each |
 | `settings.json` | Text every team shares |
 | `kosmos-builtin-roles.json` | The roles and groups Kosmos has built in: a team member may use a menu role, a catalogue role may not reuse any key. Kept by hand; Kosmos's tests will compare it with its own roles through `kosmosRoles` |
@@ -76,7 +76,7 @@ node build.js           # write dist/catalogue.json and copy the portraits into 
 ```
 
 The builder refuses to write anything while a single problem remains: a duplicate key or first
-name, a team without exactly one lead and 4 or 5 reports, a role whose rules are not three, an
+name, a team without exactly one lead and 1 to 5 reports, a role whose rules are not three, an
 em dash in any spelling, a team member on a role that exists neither here nor in Kosmos, and more
 (see `build.js`).
 
