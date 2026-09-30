@@ -1,0 +1,116 @@
+{
+  "key": "email-marketing",
+  "kind": "business",
+  "rank": 24,
+  "label": "Email Marketing Team",
+  "blurb": "An Email Marketing Lead and 5 specialists who create coordinated email campaigns and improve their results",
+  "purpose": "For a business that wants to create coordinated email campaigns and improve their results.",
+  "project": {
+    "name": "Email Marketing",
+    "goal": "A clear first plan for email marketing, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "emailmkt",
+      "title": "Email Marketing Lead",
+      "name": "Shabnam",
+      "focus": [
+        "Owns the campaign plan, coordinates production, and reviews launch readiness and results."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "woman",
+        "heritage": "Bengali Bangladeshi",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "audience-lifecycle-strategist",
+      "role": "audience-lifecycle-strategist",
+      "title": "Audience and Lifecycle Strategist",
+      "name": "Joao",
+      "focus": [
+        "Defines segments, customer journeys, and campaign triggers."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Afro-Brazilian",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "copy",
+      "role": "copy",
+      "title": "Email Copywriter",
+      "name": "Themba",
+      "focus": [
+        "Writes subject lines, message bodies, calls to action, and variants."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Zulu South African",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "modern minimalist dark overshirt with clean lines",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "design",
+      "role": "design",
+      "title": "Email Designer and Builder",
+      "name": "Janelle",
+      "focus": [
+        "Creates layouts and assembles responsive email templates."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Afro-Jamaican",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "qa",
+      "role": "qa",
+      "title": "Deliverability and QA Specialist",
+      "name": "Amr",
+      "focus": [
+        "Checks rendering, links, list hygiene, and sending configuration."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Egyptian Arab",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "modern minimalist dark overshirt with clean lines",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "performance-analyst",
+      "role": "performance-analyst",
+      "title": "Performance Analyst",
+      "name": "Yetunde",
+      "focus": [
+        "Reports campaign outcomes and recommends the next experiments."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Yoruba Nigerian",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    }
+  ]
+}

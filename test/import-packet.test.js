@@ -31,8 +31,8 @@ function execAsPacket() {
 /** A new role in the packet's shape; `extra` adds the fields the packet does not carry yet. */
 function packetRole(key, extra = {}) {
   return {
-    key, name: 'Grant Writer', category: 'Writing', caution: null, summary: 'Drafts grant applications you can send',
-    instructions: ['You are the **Grant Writer**.', '', 'You draft grant applications from what the person tells you.', '',
+    key, name: 'Grant Application Writer', category: 'Writing', caution: null, summary: 'Drafts grant applications you can send',
+    instructions: ['You are the **Grant Application Writer**.', '', 'You draft grant applications from what the person tells you.', '',
       '## How you work', '', '- Read the funder\'s rules first.', '- Draft in the funder\'s own order.', '- You never submit anything yourself; the person sends it.',
       '', '## What you ask the person before doing', '', '- Which grant, and by when.', '', '## What you never do on your own', '', '- Never submit an application.'],
     ...extra,

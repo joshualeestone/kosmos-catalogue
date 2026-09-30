@@ -1,0 +1,703 @@
+{
+ "rename": {
+  "market-research/Aiko": "Mayumi",
+  "due-diligence/Beatrice": "Graziella",
+  "branding-and-design/Sipho": "Lwazi",
+  "project-management/Mei": "Lihua",
+  "moving-and-relocation/Leilani": "Malia",
+  "community-and-volunteer-coordination/Valentina": "Mariana",
+  "household-management/Eleanor": "Harriet",
+  "meal-planning/Kofi": "Kwabena",
+  "learning-and-tutoring/Imani": "Tanisha",
+  "creative-projects/Kwame": "Yaw",
+  "side-business/Mateo": "Rodolfo",
+  "quality-assurance-and-testing/Desmond": "Delroy",
+  "demand-and-inventory-planning/Aaliyah": "Keisha",
+  "website/George": "Rupert"
+ },
+ "add": {
+  "business-strategy": [
+   [
+    "financial-analyst",
+    "Strategy Finance Analyst",
+    "Nour",
+    "woman",
+    "Lebanese Arab",
+    "Models the financial effect of each strategic option, so choices are compared on the numbers."
+   ]
+  ],
+  "competitive-intelligence": [
+   [
+    "market-analyst",
+    "Market Signals Analyst",
+    "Kabir",
+    "man",
+    "Punjabi Indian",
+    "Watches pricing, hiring, and product signals across the market and flags shifts early."
+   ]
+  ],
+  "customer-insights": [
+   [
+    "data-analyst",
+    "Customer Data Analyst",
+    "Katarzyna",
+    "woman",
+    "Polish",
+    "Analyzes usage and purchase data to test what interviews and surveys suggest."
+   ]
+  ],
+  "pricing-and-packaging": [
+   [
+    "data-analyst",
+    "Pricing Data Analyst",
+    "Zhiwei",
+    "man",
+    "Han Chinese",
+    "Analyzes sales and discount data to show how customers respond to price."
+   ]
+  ],
+  "public-relations": [
+   [
+    "social-media-manager",
+    "Social Communications Specialist",
+    "Thu",
+    "woman",
+    "Kinh Vietnamese",
+    "Adapts press stories for social channels and tracks the conversation around them."
+   ]
+  ],
+  "tech-support": [
+   [
+    "tech-support",
+    "Device and Account Setup Specialist",
+    "Seoyeon",
+    "woman",
+    "Korean",
+    "Walks users through setting up new devices and accounts safely, step by step."
+   ]
+  ],
+  "process-improvement-and-documentation": [
+   [
+    "data-analyst",
+    "Process Metrics Analyst",
+    "Henrik",
+    "man",
+    "Swedish",
+    "Measures cycle times and error rates before and after each change."
+   ]
+  ],
+  "procurement-and-vendor-management": [
+   [
+    "legal-analyst",
+    "Supplier Contract Analyst",
+    "Funmilayo",
+    "woman",
+    "Yoruba Nigerian",
+    "Reviews supplier contracts and flags terms, renewals, and obligations to negotiate."
+   ]
+  ],
+  "moving-and-relocation": [
+   [
+    "budget-organizer",
+    "Moving Budget Organizer",
+    "Tomasz",
+    "man",
+    "Polish",
+    "Builds the moving budget and tracks quotes, deposits, and costs against it."
+   ]
+  ],
+  "community-and-volunteer-coordination": [
+   [
+    "newsletter",
+    "Community Newsletter Writer",
+    "Mwangi",
+    "man",
+    "Kikuyu Kenyan",
+    "Writes the regular update that tells members and volunteers what is coming up and what their work achieved."
+   ]
+  ],
+  "meal-planning": [
+   [
+    "budget-organizer",
+    "Food Budget Organizer",
+    "Maha",
+    "woman",
+    "Lebanese Arab",
+    "Keeps the weekly grocery spend on budget and finds savings in the meal plan."
+   ],
+   [
+    "meal-planner",
+    "Dietary Needs Planner",
+    "Natsuki",
+    "woman",
+    "Japanese",
+    "Plans meals around allergies and diets, and flags ingredients to avoid."
+   ]
+  ],
+  "shopping-and-product-research": [
+   [
+    "price-purchase-analyst",
+    "Deals and Timing Analyst",
+    "Thiago",
+    "man",
+    "Afro-Brazilian",
+    "Tracks prices over time and suggests when to buy to get a fair price."
+   ],
+   [
+    "researcher",
+    "Reviews and Reliability Researcher",
+    "Callum",
+    "man",
+    "Scottish",
+    "Reads independent reviews and reliability reports, and summarizes what owners report."
+   ]
+  ],
+  "family-care-coordination": [
+   [
+    "health-coordinator",
+    "Health Information Organizer",
+    "Marisela",
+    "woman",
+    "Mexican Mestizo",
+    "Keeps medical records, medication lists, and questions for doctors in one place."
+   ]
+  ],
+  "learning-and-tutoring": [
+   [
+    "personal-coach",
+    "Study Schedule Planner",
+    "Sherif",
+    "man",
+    "Egyptian Arab",
+    "Builds a realistic study schedule and adjusts it around progress and busy weeks."
+   ],
+   [
+    "researcher",
+    "Learning Resources Researcher",
+    "Siobhan",
+    "woman",
+    "Irish",
+    "Finds good books, courses, and exercises for each topic, matched to the learner's level."
+   ]
+  ],
+  "side-business": [
+   [
+    "bookkeeper",
+    "Side Business Bookkeeper",
+    "Minho",
+    "man",
+    "Korean",
+    "Tracks income, expenses, and receipts for the side business from day one."
+   ]
+  ],
+  "contract-review-and-management": [
+   [
+    "document-review-coordinator",
+    "Contract Review Coordinator",
+    "Otavio",
+    "man",
+    "Afro-Brazilian",
+    "Tracks who reviews each contract and which version is current, and drafts reminders for open items before deadlines."
+   ]
+  ],
+  "quality-assurance-and-testing": [
+   [
+    "security-engineer",
+    "Security Test Specialist",
+    "Golnaz",
+    "woman",
+    "Persian Iranian",
+    "Checks the product for common security weaknesses and reports them with clear steps."
+   ]
+  ],
+  "business-automation": [
+   [
+    "documentation-specialist",
+    "Automation Documentation Writer",
+    "Rowena",
+    "woman",
+    "Tagalog Filipino",
+    "Documents each automation, who owns it, and what to do when it fails."
+   ]
+  ],
+  "board-and-investor-reporting": [
+   [
+    "investor-relations",
+    "Investor Relations Coordinator",
+    "Aoife",
+    "woman",
+    "Irish",
+    "Tracks investor questions and commitments, and prepares the materials each meeting needs."
+   ]
+  ],
+  "real-estate-investment-research": [
+   [
+    "ownership-cost-analyst",
+    "Operating Cost Analyst",
+    "Sungmin",
+    "man",
+    "Korean",
+    "Estimates taxes, insurance, repairs, and vacancy for each property under review."
+   ]
+  ],
+  "property-management": [
+   [
+    "bookkeeper",
+    "Rent and Expense Bookkeeper",
+    "Muthoni",
+    "woman",
+    "Kikuyu Kenyan",
+    "Records rent, deposits, and repair costs by property, and reconciles them monthly."
+   ]
+  ],
+  "demand-and-inventory-planning": [
+   [
+    "data-analyst",
+    "Sales Data Analyst",
+    "Takumi",
+    "man",
+    "Japanese",
+    "Cleans and analyzes sales history, so forecasts start from reliable numbers."
+   ]
+  ],
+  "home-buying": [
+   [
+    "budget",
+    "Mortgage and Budget Planner",
+    "Shelly",
+    "woman",
+    "Afro-Jamaican",
+    "Works out what the household can afford, and compares loan options for the lender conversation."
+   ]
+  ],
+  "home-selling": [
+   [
+    "copywriter",
+    "Listing Copywriter",
+    "Giorgio",
+    "man",
+    "Italian",
+    "Writes the listing description and captions that show the home at its best, accurately."
+   ]
+  ],
+  "insurance-comparison-and-claims": [
+   [
+    "personal-finance-organizer",
+    "Premium and Budget Organizer",
+    "Chinedu",
+    "man",
+    "Igbo Nigerian",
+    "Tracks premiums, renewal dates, and excesses, and shows what cover costs each year."
+   ],
+   [
+    "asset-document-organizer",
+    "Policy Records Organizer",
+    "Xiulan",
+    "woman",
+    "Han Chinese",
+    "Keeps every policy, schedule, and renewal letter organized and easy to find."
+   ]
+  ],
+  "healthcare-administration": [
+   [
+    "claims-documentation-coordinator",
+    "Insurance and Benefits Coordinator",
+    "Rajesh",
+    "man",
+    "Punjabi Indian",
+    "Checks what insurance covers before appointments, and prepares claim and billing follow-ups for the person to send."
+   ]
+  ],
+  "tax-preparation-organization": [
+   [
+    "bookkeeper",
+    "Income and Expense Organizer",
+    "Eunji",
+    "woman",
+    "Korean",
+    "Sorts the year's income and deductible expenses into the categories the preparer needs."
+   ],
+   [
+    "deadline-documents-coordinator",
+    "Tax Deadlines Coordinator",
+    "Ebba",
+    "woman",
+    "Swedish",
+    "Keeps the calendar of tax deadlines and estimated payments, with reminders well ahead."
+   ]
+  ],
+  "retirement-planning": [
+   [
+    "coverage-comparison-analyst",
+    "Retirement Health Cover Analyst",
+    "Luana",
+    "woman",
+    "Afro-Brazilian",
+    "Compares health cover options for retirement and lists the questions to ask about each."
+   ]
+  ],
+  "estate-and-legacy-organization": [
+   [
+    "personal-finance-organizer",
+    "Digital Accounts Organizer",
+    "Kenta",
+    "man",
+    "Japanese",
+    "Lists online accounts and subscriptions, and notes what the person wants to happen to each."
+   ]
+  ],
+  "new-parent-planning": [
+   [
+    "budget-organizer",
+    "Family Budget Planner",
+    "Mauricio",
+    "man",
+    "Colombian Mestizo",
+    "Plans the costs of a new child, from leave to childcare, and fits them into the budget."
+   ]
+  ],
+  "pet-care-coordination": [
+   [
+    "budget-organizer",
+    "Pet Budget and Insurance Organizer",
+    "Angus",
+    "man",
+    "Scottish",
+    "Tracks food, vet, and insurance costs, and plans for bigger bills ahead."
+   ],
+   [
+    "pet-care-coordinator",
+    "Pet Training and Enrichment Planner",
+    "Malee",
+    "woman",
+    "Thai",
+    "Plans training, exercise, and enrichment that fit the pet and the household routine."
+   ]
+  ],
+  "personal-research": [
+   [
+    "data-analyst",
+    "Data and Statistics Analyst",
+    "Halyna",
+    "woman",
+    "Ukrainian",
+    "Finds the relevant numbers and explains what they do and do not show."
+   ],
+   [
+    "intelligence-brief-writer",
+    "Research Brief Writer",
+    "Efua",
+    "woman",
+    "Akan Ghanaian",
+    "Turns the findings into a short, sourced brief the person can read in minutes."
+   ]
+  ],
+  "translation-and-localization": [
+   [
+    "writer",
+    "Terminology and Style Specialist",
+    "Guoqiang",
+    "man",
+    "Han Chinese",
+    "Keeps the glossary and style guide for each language, so terms stay consistent."
+   ]
+  ]
+ },
+ "sameAs": {
+  "booking-coordinator": "booking",
+  "customer-success": "csm",
+  "development-director": "devdir",
+  "job-scout": "jobscout",
+  "office-manager": "officemgr",
+  "payroll-coordinator": "payroll",
+  "personal-finance-manager": "pcfo",
+  "proposal-writer": "proposals",
+  "school-liaison": "school",
+  "website-lead": "webdir",
+  "project-manager": "pm",
+  "executive-assistant": "ea",
+  "operations-manager": "ops",
+  "copywriter": "copy",
+  "social-media-manager": "social",
+  "seo-specialist": "seo",
+  "account-manager": "accounts",
+  "e-commerce-manager": "ecom",
+  "data-analyst": "data",
+  "financial-analyst": "finance",
+  "bookkeeper": "books",
+  "product-manager": "product",
+  "product-director": "productdir",
+  "software-engineer": "engineer",
+  "vendor-manager": "vendors",
+  "household-manager": "household",
+  "family-coordinator": "family",
+  "travel-planner": "travel",
+  "meal-planner": "meals",
+  "orders-returns-coordinator": "orders",
+  "pr-specialist": "pr",
+  "investor-relations": "investor",
+  "grant-pitch-writer": "grants",
+  "resume-application-writer": "resume",
+  "reviews-specialist": "reviews",
+  "maintenance-coordinator": "maintenance",
+  "newsletter-impact-writer": "newsletter",
+  "email-marketer": "emailmkt",
+  "pricing-strategist": "pricing",
+  "tax-specialist": "taxprep",
+  "feedback-analyst": "voc",
+  "errands-coordinator": "shopper",
+  "qa-engineer": "qa",
+  "security-engineer": "security",
+  "legal-analyst": "legal",
+  "recruiter": "recruiting",
+  "customer-support": "support",
+  "sales-rep": "sdr",
+  "event-planner": "events",
+  "paid-media-specialist": "ppc",
+  "community-coordinator": "community",
+  "health-coordinator": "healthadmin",
+  "investment-research-analyst": "investing",
+  "product-listings-specialist": "listings",
+  "budget-organizer": "budget",
+  "adoption-training-specialist": "training",
+  "meeting-coordinator": "meet",
+  "inbox-coordinator": "email",
+  "personal-brand-specialist": "brand",
+  "occasions-activities-planner": "occasions",
+  "partnership-coordinator": "partnerships",
+  "media-producer": "video",
+  "documentation-specialist": "kb",
+  "evidence-reviewer-explainer": "evidence-reviewer",
+  "transport-specialist": "transport-planner",
+  "customer-messages-specialist": "support",
+  "inbox-calendar-assistant": "personal",
+  "customer-insights-analyst": "voc",
+  "appointments-referrals-coordinator": "healthadmin",
+  "creator-partnerships-specialist": "partnerships",
+  "product-designer": "design",
+  "stock-replenishment-analyst": "inventory",
+  "price-purchase-analyst": "shopper",
+  "reputation-analyst": "reviews",
+  "procedure-writer": "process",
+  "packaging-experiment-specialist": "pricing",
+  "knowledge-escalation-specialist": "kb",
+  "renewal-growth-coordinator": "csm",
+  "appointments-records-organizer": "healthadmin",
+  "commercial-analyst": "proposal-cost-analyst"
+ },
+ "seat": {
+  "wedding-planning/Budget and Booking Coordinator": "events",
+  "email-marketing/Email Designer and Builder": "design",
+  "social-media/Social Designer": "design",
+  "branding-and-design/Visual Identity Designer": "design",
+  "paid-advertising/Ad Creative Designer": "design",
+  "wedding-planning/Wedding Design Specialist": "design",
+  "process-improvement-and-documentation/Training Designer": "training",
+  "learning-and-tutoring/Practice and Assessment Designer": "tutor",
+  "home-renovation/Design and Materials Researcher": "researcher",
+  "business-planning-and-startup/Business Model Designer": "business-model-analyst",
+  "procurement-and-vendor-management/Procurement Manager": "vendors",
+  "e-commerce-operations/Inventory Specialist": "inventory",
+  "event-planning/Venue and Logistics Planner": "events",
+  "travel-and-vacation-planning/Itinerary and Trip Logistics Specialist": "travel",
+  "moving-and-relocation/Moving Logistics Coordinator": "relocation-coordinator",
+  "community-and-volunteer-coordination/Activities and Logistics Planner": "events",
+  "demand-and-inventory-planning/Inventory Planning Lead": "inventory",
+  "demand-and-inventory-planning/Supplier Planning Coordinator": "vendors",
+  "hr-and-people/Learning and Development Specialist": "training",
+  "career-and-job-search/Career Coach": "career",
+  "career-and-job-search/Interview Coach": "interview",
+  "learning-and-tutoring/Subject Tutor": "tutor",
+  "health-and-wellness/Wellness Coach": "wellness",
+  "health-and-wellness/Fitness Planner": "fitness",
+  "health-and-wellness/Sleep and Habit Coach": "habits",
+  "customer-support/Head of Customer Experience": "cxlead",
+  "customer-success-and-onboarding/Account Health Analyst": "data",
+  "social-media/Head of Social": "sociallead",
+  "executive-assistant/Chief of Staff": "cos",
+  "hr-and-people/Head of People": "hrlead",
+  "accounting-and-bookkeeping/Controller": "controller",
+  "customer-support/Help Center Writer": "kb",
+  "hr-and-people/Employee Onboarding Specialist": "onboarding",
+  "hr-and-people/People Policy Specialist": "policy",
+  "customer-success-and-onboarding/Onboarding Specialist": "csm",
+  "accounting-and-bookkeeping/Bills and Invoices Specialist": "payables",
+  "personal-finance/Subscriptions Auditor": "subscriptions",
+  "project-management/Communications Coordinator": "writer",
+  "property-management/Tenant Communications Coordinator": "property-manager",
+  "event-planning/Attendee Communications Specialist": "guest-experience-coordinator",
+  "logistics/Documentation Specialist": "project-documentation-coordinator",
+  "business-development/Head of Business Development": "partnerships",
+  "compliance-and-audit-preparation/Requirements Researcher": "researcher",
+  "proposal-and-rfp/Requirements Analyst": "researcher",
+  "process-improvement-and-documentation/Process Analyst": "process",
+  "health-and-wellness/Nutrition and Meal Planning Specialist": "nutrition",
+  "meal-planning/Dietary Needs Planner": "nutrition",
+  "campaign-and-product-launch/Campaign Producer": "marketing",
+  "real-estate-investment-research/Property Diligence Coordinator": "purchase-diligence-organizer",
+  "personal-assistant/Personal Chief of Staff": "cos",
+  "fundraising-and-grants/Donor and Investor Relations Specialist": "donors",
+  "side-business/Side Business Coach": "startup-planning-lead",
+  "cybersecurity/Security Awareness Writer": "training",
+  "translation-and-localization/Localization QA Specialist": "translator",
+  "college-and-scholarship-applications/Application Writing Coach": "tutor",
+  "personal-assistant/Travel and Errands Planner": "travel",
+  "business-automation/Workflow Analyst": "process",
+  "creative-projects/Editor and Quality Reviewer": "content",
+  "community-and-volunteer-coordination/Community Program Lead": "director",
+  "community-and-volunteer-coordination/Volunteer Coordinator": "onboarding",
+  "home-selling/Market Comparison Researcher": "real-estate-specialist",
+  "real-estate-investment-research/Market and Property Researcher": "real-estate-specialist",
+  "procurement-and-vendor-management/Proposal and Cost Analyst": "vendors",
+  "compliance-and-audit-preparation/Compliance Program Lead": "control-review-analyst",
+  "logistics/Carrier and Supplier Coordinator": "vendors",
+  "logistics/Shipment Tracking Specialist": "orders"
+ },
+ "positional": [
+  "content",
+  "sales",
+  "marketing",
+  "website",
+  "operations",
+  "finance",
+  "family"
+ ],
+ "rekey": {
+  "customer-support": "support",
+  "social-media": "social",
+  "executive-assistant": "exec",
+  "hr-and-people": "hr",
+  "front-office": "frontdesk",
+  "health-and-wellness": "health",
+  "accounting-and-bookkeeping": "accounting",
+  "e-commerce-operations": "ecommerce",
+  "software-development": "software",
+  "fundraising-and-grants": "fundraising",
+  "household-management": "home",
+  "personal-finance": "money",
+  "career-and-job-search": "career",
+  "personal-assistant": "life"
+ },
+ "group": {
+  "cso": "Strategy",
+  "market-analyst": "Strategy",
+  "business-model-analyst": "Strategy",
+  "execution-planner": "Strategy",
+  "competitive-intel": "Strategy",
+  "intelligence-brief-writer": "Strategy",
+  "startup-planning-lead": "Strategy",
+  "evidence-reviewer": "Words and research",
+  "survey-quantitative-analyst": "Words and research",
+  "data-preparation-specialist": "Words and research",
+  "visualization-specialist": "Words and research",
+  "analysis-reviewer": "Words and research",
+  "concept-research-specialist": "Words and research",
+  "writer-story-developer": "Words and research",
+  "presentation-narrative-writer": "Words and research",
+  "localization-lead": "Words and research",
+  "cultural-adaptation-specialist": "Words and research",
+  "audience-lifecycle-strategist": "Marketing and growth",
+  "performance-analyst": "Marketing and growth",
+  "search-conversion-lead": "Marketing and growth",
+  "content-optimization-specialist": "Marketing and growth",
+  "conversion-analyst": "Marketing and growth",
+  "brand-director": "Marketing and growth",
+  "brand-strategist": "Marketing and growth",
+  "brand-guidelines-specialist": "Marketing and growth",
+  "audience-media-planner": "Marketing and growth",
+  "measurement-specialist": "Marketing and growth",
+  "launch-director": "Marketing and growth",
+  "launch-strategist": "Marketing and growth",
+  "channel-coordinator": "Marketing and growth",
+  "launch-analyst": "Marketing and growth",
+  "creative-director": "Content and media",
+  "production-planner": "Content and media",
+  "partnership-proposal-writer": "Customers and revenue",
+  "proposal-manager": "Customers and revenue",
+  "solution-writer": "Customers and revenue",
+  "commercial-analyst": "Customers and revenue",
+  "proposal-reviewer": "Customers and revenue",
+  "proposal-cost-analyst": "Customers and revenue",
+  "reporting-director": "Numbers",
+  "financial-reporting-analyst": "Numbers",
+  "demand-forecast-analyst": "Numbers",
+  "product-analyst": "Building software",
+  "tech-support": "Building software",
+  "automation-lead": "Building software",
+  "identity-access-specialist": "Building software",
+  "terms-obligations-analyst": "Contracts, hiring and suppliers",
+  "evidence-coordinator": "Contracts, hiring and suppliers",
+  "control-review-analyst": "Contracts, hiring and suppliers",
+  "remediation-planner": "Contracts, hiring and suppliers",
+  "logistics-manager": "Contracts, hiring and suppliers",
+  "transport-planner": "Contracts, hiring and suppliers",
+  "document-review-coordinator": "Running the work",
+  "scope-planning-specialist": "Running the work",
+  "schedule-dependency-coordinator": "Running the work",
+  "risk-progress-analyst": "Running the work",
+  "project-documentation-coordinator": "Running the work",
+  "property-manager": "Running the work",
+  "guest-experience-coordinator": "Fundraising and events",
+  "program-production-specialist": "Fundraising and events",
+  "wedding-planner": "Fundraising and events",
+  "appointments-records-organizer": "Health and wellbeing",
+  "care-schedule-planner": "Health and wellbeing",
+  "personal-finance-organizer": "Money and career",
+  "ownership-cost-analyst": "Money and career",
+  "coverage-comparison-analyst": "Money and career",
+  "claims-documentation-coordinator": "Money and career",
+  "retirement-planning-coordinator": "Money and career",
+  "retirement-cash-flow-analyst": "Money and career",
+  "retirement-lifestyle-planner": "Money and career",
+  "college-planning-lead": "Money and career",
+  "deadline-documents-coordinator": "Money and career",
+  "real-estate-specialist": "Money and career",
+  "purchase-diligence-organizer": "Money and career",
+  "home-sale-coordinator": "Money and career",
+  "home-preparation-planner": "Money and career",
+  "listing-transaction-organizer": "Money and career",
+  "personal-coach": "Personal and family",
+  "relocation-coordinator": "Personal and family",
+  "move-administration-specialist": "Personal and family",
+  "renovation-planner": "Personal and family",
+  "estate-organization-lead": "Personal and family",
+  "asset-document-organizer": "Personal and family",
+  "wishes-legacy-writer": "Personal and family",
+  "planning-questions-coordinator": "Personal and family",
+  "home-baby-supplies-planner": "Personal and family",
+  "pet-care-coordinator": "Personal and family"
+ },
+ "roleName": {
+  "personal-finance-organizer": "Bills and Paperwork Organizer"
+ },
+ "publishedBlurbExcept": [
+  "life"
+ ],
+ "teamText": {
+  "life": {
+   "purpose": "For keeping your own life organised. The Chief of Staff runs your week; the team handles your inbox and calendar, health admin, bills and paperwork, and travel and errands."
+  },
+  "side-business": {
+   "goal": "A clear first plan for a side business, with milestones, an owner for each, and what done looks like."
+  },
+  "proposal-and-rfp": {
+   "goal": "A clear first plan for the proposal or RFP, with milestones, an owner for each, and what done looks like."
+  }
+ },
+ "retitle": {
+  "procurement-and-vendor-management/Proposal and Cost Analyst": "Bid and Cost Analyst",
+  "fundraising-and-grants/Grant and Pitch Writer": "Grant Writer",
+  "fundraising-and-grants/Donor and Investor Relations Specialist": "Donor Relations Specialist",
+  "personal-assistant/Personal Finance Organizer": "Bills and Paperwork Organizer"
+ },
+ "focus": {
+  "fundraising-and-grants/Development Director": "Sets fundraising goals, coordinates the work, and adapts the plan to the organization's needs.",
+  "fundraising-and-grants/Funding Researcher": "Finds suitable grants and donors, and summarizes eligibility and fit.",
+  "fundraising-and-grants/Grant and Pitch Writer": "Drafts grant narratives using documented organizational evidence.",
+  "business-automation/Integration Builder": "Configures tool connections and builds data movement and automation logic, and leaves switching on anything that sends, pays, or deletes to the person.",
+  "insurance-comparison-and-claims/Claims Documentation Coordinator": "Organizes incident records, receipts, and correspondence, and prepares claim-status follow-ups for the person to send.",
+  "compliance-and-audit-preparation/Evidence Coordinator": "Lists the evidence still owed, drafts requests for the person to send, and organizes and indexes what comes back.",
+  "home-buying/Purchase Diligence Organizer": "Tracks showings, inspection questions, and documents, and drafts follow-ups to the person's professionals for them to send.",
+  "translation-and-localization/Localization Lead": "Defines languages, scope, terminology standards, and review priorities, and coordinates delivery."
+ }
+}

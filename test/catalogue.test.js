@@ -120,6 +120,20 @@ test('the builder refuses a broken team', () => {
   assert.ok(build.build({ teamsSource: twin }).problems.some((p) => /suggested name/.test(p)));
 });
 
+test('two roles with one name are refused, whatever the case (#4555)', () => {
+  const r = source.read().rolesSource;
+  assert.deepEqual(build.build({ rolesSource: r }).problems.filter((p) => /is already the role/.test(p)), [], 'CONTROL: the sources have no two roles with one name');
+  const twin = { ...r.roles[1], key: 'twin-of-one', label: r.roles[0].label.toUpperCase() };
+  r.roles.push(twin);
+  assert.ok(build.build({ rolesSource: r }).problems.some((p) => p === `twin-of-one: the name ${JSON.stringify(twin.label)} is already the role ${r.roles[0].key}`));
+  // A built-in role's name counts too: Kosmos lists its own roles in the same picker.
+  const b = JSON.parse(fs.readFileSync(path.join(REPO, 'kosmos-builtin-roles.json'), 'utf8'));
+  assert.equal(b.names.pm, 'Project Manager', 'premise: the built-in list carries the names');
+  const r2 = source.read().rolesSource;
+  r2.roles.push({ ...r2.roles[1], key: 'pm-twin', label: 'project manager' });
+  assert.ok(build.build({ rolesSource: r2 }).problems.includes('pm-twin: the name "project manager" is already the role pm (built into Kosmos)'));
+});
+
 test('the builder refuses role text whose wrap would split a code span', () => {
   // 66 characters of words, then a span: "`kosmos" still fits the 76-column line and "msg" does not.
   const prefix = 'word '.repeat(13) + 'w';
@@ -620,6 +634,47 @@ test('kosmos-builtin-roles.json without its three lists is reported', () => {
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
+test('a menu role with no name in kosmos-builtin-roles.json is reported, so the name check cannot miss it (#4555)', () => {
+  const dir = copyRepo();
+  try {
+    const file = path.join(dir, 'kosmos-builtin-roles.json');
+    const b = JSON.parse(fs.readFileSync(file, 'utf8'));
+    assert.ok(!build.build({ root: dir }).problems.some((p) => /"names" must name every menu role/.test(p)), 'CONTROL: the real file names every menu role');
+    delete b.names.pm;
+    fs.writeFileSync(file, JSON.stringify(b));
+    assert.ok(build.build({ root: dir }).problems.some((p) => /"names" must name every menu role/.test(p)));
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('a role written for a team lead is refused in a seat that reports to the lead (#4555)', () => {
+  const t = source.read().teamsSource;
+  assert.deepEqual(build.build({ teamsSource: t }).problems.filter((p) => /written for a team's lead/.test(p)), [], 'CONTROL: no report sits on a lead role');
+  const leadRoles = build.build({}).catalogue.roles.filter((r) => r.instructions.join(' ').replace(/\s+/g, ' ').includes('Your team is the agents'));
+  assert.ok(leadRoles.length > 0, 'premise: some role is written for a lead');
+  const leadRole = leadRoles[0].key;
+  const seat = t.teams[0].members.find((m) => m.slot !== 'lead');
+  seat.role = leadRole;
+  assert.ok(build.build({ teamsSource: t }).problems.some((p) => p.startsWith(`${t.teams[0].key}/${seat.slot}: role ${leadRole} is written for a team's lead`)),
+    `premise or check: a report on the lead role ${leadRole} was not refused`);
+});
+
+test('a built-in role written for a lead (pm) is refused on a report seat too (#4555)', () => {
+  const b = JSON.parse(fs.readFileSync(path.join(REPO, 'kosmos-builtin-roles.json'), 'utf8'));
+  assert.ok(b.leadOnly.includes('pm'), 'premise: pm is listed as lead-only');
+  const t = source.read().teamsSource;
+  assert.deepEqual(build.build({ teamsSource: t }).problems.filter((p) => /role pm is written/.test(p)), [], 'CONTROL: no report sits on pm');
+  const seat = t.teams[0].members.find((m) => m.slot !== 'lead');
+  seat.role = 'pm';
+  assert.ok(build.build({ teamsSource: t }).problems.includes(`${t.teams[0].key}/${seat.slot}: role pm is written for a team's lead, and this seat reports to the lead`));
+});
+
+test('two teams with one name are refused, whatever the case (#4555)', () => {
+  const t = source.read().teamsSource;
+  assert.deepEqual(build.build({ teamsSource: t }).problems.filter((p) => /is already the team/.test(p)), [], 'CONTROL: no two published teams share a name');
+  t.teams[1].label = t.teams[0].label.toUpperCase();
+  assert.ok(build.build({ teamsSource: t }).problems.includes(`${t.teams[1].key}: the team name ${JSON.stringify(t.teams[1].label)} is already the team ${t.teams[0].key}`));
+});
+
 test('every action in the workflows is pinned to a commit, and checkout keeps no token', () => {
   for (const f of fs.readdirSync(path.join(REPO, '.github', 'workflows'))) {
     const text = fs.readFileSync(path.join(REPO, '.github', 'workflows', f), 'utf8');
@@ -804,6 +859,9 @@ test('check-deploy passes exactly the signed build and refuses every other tree'
     const make = (edit = () => {}) => {
       const dist = fs.mkdtempSync(path.join(root, 'd-'));
       const c = build.build({ serial: 42 }).catalogue;
+      // One portrait of the test's own, whatever the repo's avatars/ holds: the real portraits
+      // (kosmos#4555) would otherwise be names this throwaway dist does not carry.
+      for (const t of c.teams) for (const x of t.members) { delete x.avatar.image; delete x.avatar.imageSha256; }
       const m = c.teams[0].members[0];
       fs.mkdirSync(path.join(dist, 'avatars'));
       fs.writeFileSync(path.join(dist, 'avatars', m.avatar.id + '.webp'), webp('face'));

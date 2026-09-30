@@ -196,10 +196,18 @@ function build(src = {}) {
   }
   const roles = [];
   const seen = new Set();
+  // The picker lists roles by name, Kosmos's built-in ones beside these, so two keys with one name
+  // read as the same role twice (#4555).
+  const labels = new Map(Object.entries(kosmos.names).map(([bk, n]) => [n.trim().toLowerCase(), `${bk} (built into Kosmos)`]));
   for (const r of rs.roles) {
     const k = r.key;
     if (!KEY_RE.test(String(k))) problems.push(`role key ${JSON.stringify(k)} must be lowercase words joined by hyphens`);
     if (seen.has(k)) problems.push('duplicate role key ' + k);
+    if (isText(r.label)) {
+      const label = r.label.trim().toLowerCase();
+      if (labels.has(label)) problems.push(`${k}: the name ${JSON.stringify(r.label)} is already the role ${labels.get(label)}`);
+      else labels.set(label, k);
+    }
     if (builtin.has(k)) problems.push(`${k}: Kosmos already has a built-in role with this key`);
     seen.add(k);
     if (!groups.includes(r.group)) problems.push(`${k}: unknown group ${r.group}`);
@@ -239,8 +247,11 @@ function build(src = {}) {
     roles.push(entry);
   }
   const teams = [];
+  // Joined, because the instructions are wrapped and the sentence can fall across two lines.
+  const leadOnly = new Set([...kosmos.leadOnly, ...roles.filter((r) => r.instructions.join(' ').replace(/\s+/g, ' ').includes(LEAD_LINE)).map((r) => r.key)]);
   const seenNames = new Map();
   const seenRanks = new Map();
+  const teamLabels = new Map();
   const avatarIds = new Map();
   for (const t of ts.teams) {
     // Keys and slots name files (avatars/<key>-<slot>.webp), so they are checked before any use.
@@ -275,6 +286,12 @@ function build(src = {}) {
     const rk = t.kind + '#' + t.rank;
     if (seenRanks.has(rk)) problems.push(`${seenRanks.get(rk)} and ${t.key} share ${t.kind} rank ${t.rank}`);
     seenRanks.set(rk, t.key);
+    // The team picker lists teams by name: two with one name read as the same team twice (#4555).
+    if (isText(t.label)) {
+      const tl = t.label.trim().toLowerCase();
+      if (teamLabels.has(tl)) problems.push(`${t.key}: the team name ${JSON.stringify(t.label)} is already the team ${teamLabels.get(tl)}`);
+      else teamLabels.set(tl, t.key);
+    }
     const leads = t.members.filter((m) => m.slot === 'lead').length;
     if (leads !== 1) problems.push(`${t.key}: needs exactly one lead slot, has ${leads}`);
     const reports = t.members.length - leads;
@@ -282,6 +299,9 @@ function build(src = {}) {
     if (new Set(t.members.map((m) => m.slot)).size !== t.members.length) problems.push(`${t.key}: a slot repeats`);
     for (const m of t.members) {
       if (!seen.has(m.role) && !pickable.has(m.role)) problems.push(`${t.key}/${m.slot}: role ${JSON.stringify(m.role)} is neither a catalogue role nor one Kosmos has built in`);
+      // A role written for a team's lead tells its agent the team is the agents under On this team; a
+      // report is also told it reports to the lead, so it would read as leading and reporting (#4555).
+      if (m.slot !== 'lead' && leadOnly.has(m.role)) problems.push(`${t.key}/${m.slot}: role ${m.role} is written for a team's lead, and this seat reports to the lead`);
     }
     const members = t.members.map((m) => {
       const id = `${t.key}-${m.slot}`;
@@ -335,6 +355,8 @@ const isText = (v) => typeof v === 'string' && v.trim().length > 0;
 // A commit time this far past the clock is a wrong clock, not a build: signed as the serial, it
 // would make Kosmos refuse every real catalogue until the clock caught up.
 const FUTURE_SKEW_S = 3600;
+/** The sentence that marks a role written for a team's lead (#4555). */
+const LEAD_LINE = 'Your team is the agents';
 const MAX_PORTRAIT_BYTES = 512 * 1024;
 
 function sha256(bytes) { return crypto.createHash('sha256').update(bytes).digest('hex'); }
@@ -343,10 +365,19 @@ function readBuiltin(root, problems) {
   try {
     const b = JSON.parse(fs.readFileSync(path.join(root, 'kosmos-builtin-roles.json'), 'utf8'));
     const ok = (l) => Array.isArray(l) && l.every((k) => typeof k === 'string');
-    if (ok(b.roles) && ok(b.hidden) && ok(b.groups)) return { menu: b.roles, all: b.roles.concat(b.hidden), groups: b.groups };
+    // names: each menu role's name, so a catalogue role cannot take a built-in's name (#4555).
+    const names = b.names;
+    // Every menu role is named, so a role Kosmos adds cannot be missed by the name check (review 3).
+    const namesOk = names && typeof names === 'object' && !Array.isArray(names)
+      && Object.entries(names).every(([k, v]) => b.roles.includes(k) && typeof v === 'string' && v.trim())
+      && ok(b.roles) && b.roles.every((k) => typeof names[k] === 'string');
+    // leadOnly: menu roles written for a team's lead (pm briefs the team and makes agents), refused on a report's seat.
+    const leadOnly = b.leadOnly === undefined ? [] : b.leadOnly;
+    const leadOk = ok(leadOnly) && leadOnly.every((k) => b.roles.includes(k));
+    if (ok(b.roles) && ok(b.hidden) && ok(b.groups) && namesOk && leadOk) return { menu: b.roles, all: b.roles.concat(b.hidden), groups: b.groups, names, leadOnly };
   } catch { /* reported below */ }
-  problems.push('kosmos-builtin-roles.json: must hold "roles" (menu), "hidden" and "groups" lists');
-  return { menu: [], all: [], groups: [] };
+  problems.push('kosmos-builtin-roles.json: must hold "roles" (menu), "hidden" and "groups" lists, "names" must name every menu role and nothing else, and "leadOnly" (if any) must list menu roles');
+  return { menu: [], all: [], groups: [], names: {}, leadOnly: [] };
 }
 
 /**
