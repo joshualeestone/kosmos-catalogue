@@ -70,7 +70,7 @@ test('a presentation the portrait prompt cannot read is reported', () => {
 test('a new role with no first action or character is reported; with them it goes in', () => {
   const bare = importPacket({ teams: [], roles: [packetRole('grant-writer')] });
   assert.ok(bare.problems.some((x) => /grant-writer.*first/.test(x)), bare.problems.join('\n'));
-  assert.ok(bare.problems.some((x) => /grant-writer: character is 0 sentences/.test(x)), bare.problems.join('\n'));
+  assert.ok(bare.problems.some((x) => /grant-writer: needs a Who you are paragraph or an archetype/.test(x)), bare.problems.join('\n'));
   // CONTROL: the same role with the two fields the packet does not carry yet.
   const full = importPacket({ teams: [], roles: [packetRole('grant-writer', {
     first: 'Tell me which grant you are applying for and I will draft it.',
@@ -343,4 +343,14 @@ test('a key repeated inside one packet is reported by name', () => {
   const r = importPacket({ teams: [execAsPacket(), execAsPacket()], roles: [packetRole('grant-writer', FULL), packetRole('grant-writer', FULL)] });
   assert.ok(r.problems.includes('teams.json: exec appears more than once'), r.problems.join('\n'));
   assert.ok(r.problems.includes('roles.json: grant-writer appears more than once'), r.problems.join('\n'));
+});
+
+test('a packet role with an archetype and the ask-first and never-alone sections goes in with them', () => {
+  const role = packetRole('grant-writer', { first: FULL.first, archetype: 'patient, deadline-minded writer' });
+  const r = importPacket({ teams: [], roles: [role] });
+  assert.deepEqual(r.problems, []);
+  const got = r.rolesSource.roles.find((x) => x.key === 'grant-writer');
+  assert.equal(got.who, undefined);
+  assert.equal(got.archetype, 'patient, deadline-minded writer');
+  assert.deepEqual([got.ask, got.never], [['Which grant, and by when.'], ['Never submit an application.']]);
 });

@@ -46,7 +46,13 @@ function sections(lines) {
 /** The packet role as a catalogue role (the fields the current role format has). */
 function roleFrom(p) {
   const s = sections(p.instructions);
-  const r = { key: p.key, group: p.category, label: p.name, blurb: p.summary, first: p.first || '', desc: s.desc, who: p.character || '', how: s.how };
+  const r = { key: p.key, group: p.category, label: p.name, blurb: p.summary, first: p.first || '', desc: s.desc, how: s.how };
+  // The brief gives an archetype per role, which stands in for Who you are when there is no paragraph.
+  // One or the other (the format refuses both): a written paragraph says more than the phrase.
+  if (p.character) r.who = p.character;
+  else if (p.archetype) r.archetype = p.archetype;
+  if (s.ask.length) r.ask = s.ask;
+  if (s.never.length) r.never = s.never;
   if (p.caution) r.caution = p.caution;
   return { role: r, problems: s.problems.map((x) => `${p.key}: ${x}`) };
 }
@@ -116,7 +122,7 @@ function shapeProblems(packet) {
   }
   packet.roles.forEach((r, i) => {
     if (!r || typeof r !== 'object' || !key(r.key)) { out.push(`roles.json: role ${i + 1}: key must be lowercase words joined by hyphens`); return; }
-    const f = bad(r, ['name', 'summary', 'category', 'first', 'character']);
+    const f = bad(r, ['name', 'summary', 'category', 'first', 'character', 'archetype']);
     if (!(r.caution === null || text(r.caution))) f.push('caution');
     if (f.length) out.push(`roles.json: ${r.key}: ${f.join(', ')} must be text`);
     if (!Array.isArray(r.instructions) || !r.instructions.every((l) => typeof l === 'string')) out.push(`roles.json: ${r.key}: instructions must be a list of lines`);

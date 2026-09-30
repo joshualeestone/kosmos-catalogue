@@ -40,6 +40,14 @@ function articleFor(phrase) {
   return 'aeiou'.includes(first[0].toLowerCase()) ? 'an' : 'a';
 }
 
+/** The article before an archetype, which is free text: by sound where the first letter misleads
+ *  (a silent h takes "an"; a "you" or "w" sound takes "a"). Labels keep articleFor, unchanged. */
+function archetypeArticle(phrase) {
+  if (/^(honest|honou?r|hour|heir)/i.test(phrase)) return 'an';
+  if (/^(u[bcfklrst][aeiou]|use|usu|uniq|univ|unif|unit|union|ure|one|once|eu|ewe)/i.test(phrase)) return 'a';
+  return articleFor(phrase);
+}
+
 /** Greedy wrap at 76 columns, breaking only at spaces. */
 function wrap(text, first = '', rest = '') {
   const out = [];
@@ -61,8 +69,16 @@ function sentences(text) {
 function instructions(r) {
   const noun = lowerLabel(r.label);
   const lines = [`You are **{{NAME}}**, ${articleFor(noun)} ${noun}.`, ''];
-  lines.push(...wrap(r.desc), '', '## Who you are', '', ...wrap(r.who), '', '## How you work', '');
-  for (const b of r.how) lines.push(...wrap(b, '- ', '  '));
+  // With no Who you are paragraph, the archetype stands in for it (the brief's per-role temperament).
+  // Neither is reported as a problem where the role is checked; compose nothing from the hole.
+  const who = r.who !== undefined ? r.who : typeof r.archetype === 'string' ? `You are ${archetypeArticle(r.archetype)} ${r.archetype}.` : '';
+  lines.push(...wrap(r.desc), '', '## Who you are', '', ...wrap(who), '', '## How you work', '');
+  for (const b of Array.isArray(r.how) ? r.how : []) lines.push(...wrap(b, '- ', '  '));
+  for (const [head, list] of [['What you ask the person before doing', r.ask], ['What you never do on your own', r.never]]) {
+    if (!Array.isArray(list)) continue;   // a wrong shape is reported where the role is checked
+    lines.push('', `## ${head}`, '');
+    for (const b of list) lines.push(...wrap(b, '- ', '  '));
+  }
   return lines;
 }
 
@@ -187,8 +203,21 @@ function build(src = {}) {
     if (builtin.has(k)) problems.push(`${k}: Kosmos already has a built-in role with this key`);
     seen.add(k);
     if (!groups.includes(r.group)) problems.push(`${k}: unknown group ${r.group}`);
-    const n = sentences(r.who);
-    if (n < 3 || n > 6) problems.push(`${k}: character is ${n} sentences, three to six is the rule`);
+    if (r.who !== undefined) {
+      const n = sentences(r.who);
+      if (n < 3 || n > 6) problems.push(`${k}: character is ${n} sentences, three to six is the rule`);
+      if (r.archetype !== undefined) problems.push(`${k}: has both a Who you are paragraph and an archetype; keep one`);
+    } else if (!r.archetype) problems.push(`${k}: needs a Who you are paragraph or an archetype`);
+    // An archetype is a short phrase ("calm, exacting bookkeeper"), rendered as "You are a <archetype>."
+    if (r.archetype !== undefined && (typeof r.archetype !== 'string' || !/^(?!(a|an|the)\s)[a-z][^.!?]{2,79}$/.test(r.archetype) || /\s$|\s\s/.test(r.archetype))) {
+      problems.push(`${k}: archetype must be a short lowercase phrase with no leading a, an or the, no full stop and no extra spaces, 80 characters at most`);
+    }
+    for (const [label, list] of [['What you ask the person before doing', r.ask], ['What you never do on your own', r.never]]) {
+      if (list !== undefined && (!Array.isArray(list) || list.length < 1 || list.length > 4)) problems.push(`${k}: ${label} needs one to four items`);
+    }
+    for (const [label, list] of [['How you work', r.how], ['What you ask the person before doing', r.ask], ['What you never do on your own', r.never]]) {
+      if (Array.isArray(list) && list.some((x) => typeof x !== 'string' || !x.trim())) problems.push(`${k}: ${label} has an empty item or one that is not text`);
+    }
     if (!Array.isArray(r.how) || r.how.length !== 3) problems.push(`${k}: How you work needs exactly three bullets`);
     if (!r.first || r.first.length <= 10) problems.push(`${k}: first action too short`);
     const entry = { key: k, group: r.group, label: r.label, blurb: r.blurb, firstAction: r.first };
@@ -197,11 +226,12 @@ function build(src = {}) {
     // The product's wrapper keeps a `code span` on one line; this one does not, so refuse text
     // whose wrap would split one (an odd count of backticks on a line) rather than ship it broken.
     if (entry.instructions.some((l) => (l.match(/`/g) || []).length % 2)) problems.push(`${k}: a code span is split across lines`);
-    if (emDashIn(entry)) problems.push(`${k}: em dash`);
+    // The source too, so a field the built entry does not carry cannot hide one.
+    if (emDashIn([r, entry])) problems.push(`${k}: em dash`);
     // {{NAME}} is filled in only in a role's instructions (Kosmos's roles.instructionsFor), so it
     // is allowed there and nowhere else.
     const { instructions: text, ...shown } = entry;
-    if (markerIn(text) || markerIn(shown, false)) problems.push(`${k}: a template marker other than {{NAME}} in its instructions, or an HTML comment`);
+    if (markerIn(text) || markerIn(shown, false) || markerIn({ ...r, desc: '', who: '', how: [], ask: [], never: [] }, false)) problems.push(`${k}: a template marker other than {{NAME}} in its instructions, or an HTML comment`);
     // The source too: the wrapper splits on whitespace, and JavaScript counts U+FEFF as whitespace,
     // so the built text alone would hide one that is in the file.
     if (hiddenIn([r, entry])) problems.push(`${k}: an invisible or direction-changing character`);
