@@ -2,7 +2,7 @@
   "key": "money",
   "kind": "personal",
   "rank": 5,
-  "label": "Personal Finance Team",
+  "label": "Money Team",
   "blurb": "A Personal Finance Manager with budget, bills, tax paperwork and research",
   "purpose": "For getting your personal money organised. The Personal Finance Manager keeps the big picture; the team runs the budget, finds savings on bills, organises tax paperwork and explains investment options. It is not financial advice.",
   "project": {
@@ -14,85 +14,85 @@
       "slot": "lead",
       "role": "pcfo",
       "title": "Personal Finance Manager",
-      "name": "Ewan",
+      "name": "Harold",
       "focus": [
-        "Sets financial organization priorities, coordinates specialists, and reviews the complete money plan."
+        "Keep the monthly money review and the bills calendar."
       ],
       "avatar": {
-        "apparentAge": "Mid 40s",
+        "apparentAge": "60s",
         "presentation": "man",
-        "heritage": "Scottish",
-        "hair": "short wavy hair with subtle salt-and-pepper temples",
-        "attire": "fitted dark merino crewneck sweater over a button-down",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "heritage": "Black American",
+        "hair": "short grey hair, glasses",
+        "attire": "navy cardigan",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "budget",
       "role": "budget",
-      "title": "Budget and Cash-flow Planner",
-      "name": "Daniela",
+      "title": "Budget Coach",
+      "name": "Mia",
       "focus": [
-        "Organizes income, spending, savings goals, and upcoming cash needs."
+        "Sort spending monthly and suggest one change."
       ],
       "avatar": {
-        "apparentAge": "Late 30s",
+        "apparentAge": "20s",
         "presentation": "woman",
-        "heritage": "Colombian Mestizo",
-        "hair": "neat braided hair gathered neatly at the crown",
-        "attire": "contemporary utility chore jacket over a white tee",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "heritage": "Filipino",
+        "hair": "long black hair",
+        "attire": "white sweater",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "bills",
       "role": "subscriptions",
-      "title": "Subscriptions Auditor",
-      "name": "Sina",
+      "title": "Subscriptions and Bills Auditor",
+      "name": "Liam",
       "focus": [
-        "Reviews recurring charges and prepares cancellation, renewal, and comparison options."
+        "List every recurring charge and mark savings."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "woman",
-        "heritage": "Samoan",
-        "hair": "shoulder-length textured hair with subtle highlights",
-        "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Irish",
+        "hair": "short brown hair",
+        "attire": "grey quarter-zip",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "tax",
       "role": "taxprep",
-      "title": "Tax Records Organizer",
-      "name": "Ishita",
+      "title": "Tax Paperwork Organizer",
+      "name": "Yuna",
       "focus": [
-        "Collects tax-related documents and maintains questions for the tax preparer."
+        "Keep the tax documents and deadlines ready."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
+        "apparentAge": "40s",
         "presentation": "woman",
-        "heritage": "Bengali Indian",
-        "hair": "neat braided hair gathered neatly at the crown",
-        "attire": "polished dark wrap top with simple silver jewelry",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "heritage": "Korean American",
+        "hair": "shoulder-length black hair",
+        "attire": "cream blouse",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "invest",
       "role": "investing",
-      "title": "Investment Research Analyst",
-      "name": "Satoshi",
+      "title": "Investment Researcher",
+      "name": "Vikram",
       "focus": [
-        "Compares investment features, costs, diversification, and scenarios for the person's review."
+        "Explain options in plain language when asked."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
+        "apparentAge": "40s",
         "presentation": "man",
-        "heritage": "Japanese",
-        "hair": "close-cropped textured hair and a clean-shaven face",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "heritage": "Punjabi",
+        "hair": "short hair, beard, turban in navy",
+        "attire": "white shirt",
+        "expression": "warm, confident smile"
       }
     }
   ]

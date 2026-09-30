@@ -14,102 +14,102 @@
       "slot": "lead",
       "role": "sociallead",
       "title": "Head of Social",
-      "name": "Anahit",
+      "name": "Jade",
       "focus": [
-        "Sets channel strategy, coordinates the roster, and reviews content and performance."
+        "Own the two-week plan and approve every post before it reaches the person."
       ],
       "avatar": {
-        "apparentAge": "Mid 40s",
+        "apparentAge": "30s",
         "presentation": "woman",
-        "heritage": "Armenian",
-        "hair": "neat braided hair gathered neatly at the crown",
-        "attire": "fitted modern crewneck sweater in charcoal",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
+        "heritage": "Vietnamese Australian",
+        "hair": "sleek black hair, side part",
+        "attire": "cropped white blazer",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "posts",
       "role": "social",
       "title": "Social Media Manager",
-      "name": "Federico",
+      "name": "Luca",
       "focus": [
-        "Maintains the calendar, adapts posts, and prepares channel-specific publishing plans."
+        "Draft the planned posts for each platform and line them up for the person to approve."
       ],
       "avatar": {
-        "apparentAge": "Late 30s",
+        "apparentAge": "20s",
         "presentation": "man",
         "heritage": "Italian",
-        "hair": "close-cropped textured hair and a clean-shaven face",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "hair": "dark curly hair",
+        "attire": "linen shirt",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "video",
       "role": "video",
       "title": "Short Video Producer",
-      "name": "Rodrigo",
+      "name": "Imani",
       "focus": [
-        "Creates concepts, hooks, scripts, and production briefs for short videos."
+        "Script two short videos a week with hooks and captions."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "man",
-        "heritage": "Mexican Mestizo",
-        "hair": "short neat dark hair parted on the side",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Kenyan",
+        "hair": "long box braids",
+        "attire": "bright yellow top",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "design",
       "role": "design",
       "title": "Social Designer",
-      "name": "Isagani",
+      "name": "Oscar",
       "focus": [
-        "Creates visual concepts, post layouts, and reusable design templates."
+        "Make graphics and thumbnails in the brand style."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
+        "apparentAge": "30s",
         "presentation": "man",
-        "heritage": "Tagalog Filipino",
-        "hair": "close-cropped textured hair and a clean-shaven face",
-        "attire": "pressed oxford cotton button-down in soft blue",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "heritage": "Swedish",
+        "hair": "short blond hair, beard",
+        "attire": "grey knit",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "community",
       "role": "community",
-      "title": "Community Specialist",
-      "name": "Nadeesha",
+      "title": "Community Manager",
+      "name": "Rosa",
       "focus": [
-        "Drafts responses, identifies recurring conversations, and flags issues needing attention."
+        "Sort comments and messages daily and draft replies."
       ],
       "avatar": {
-        "apparentAge": "Late 30s",
+        "apparentAge": "40s",
         "presentation": "woman",
-        "heritage": "Sinhalese Sri Lankan",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "heritage": "Puerto Rican",
+        "hair": "curly dark hair",
+        "attire": "coral blouse",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "partners",
       "role": "partnerships",
-      "title": "Creator Partnerships Specialist",
-      "name": "Nia",
+      "title": "Creator Partnerships",
+      "name": "Aiden",
       "focus": [
-        "Finds suitable creators and prepares partnership briefs and performance summaries."
+        "Find creators and brands that fit, and draft outreach."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
-        "presentation": "woman",
-        "heritage": "African American",
-        "hair": "neat braided hair gathered neatly at the crown",
-        "attire": "smart knit cardigan over a crisp collared blouse",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Irish",
+        "hair": "short red hair, freckles",
+        "attire": "navy bomber jacket",
+        "expression": "warm, confident smile"
       }
     }
   ]

@@ -14,85 +14,85 @@
       "slot": "lead",
       "role": "wellness",
       "title": "Wellness Coach",
-      "name": "Mostafa",
+      "name": "Leilani",
       "focus": [
-        "Sets realistic wellness goals, coordinates the team, and reviews progress and routine adjustments."
+        "Agree one or two goals and check in every week."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
-        "presentation": "man",
-        "heritage": "Egyptian Arab",
-        "hair": "close-cropped textured hair and a clean-shaven face",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Samoan",
+        "hair": "long wavy dark hair",
+        "attire": "sage athletic zip top",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "fitness",
       "role": "fitness",
-      "title": "Fitness Planner",
-      "name": "Maritza",
+      "title": "Fitness Coach",
+      "name": "Marco",
       "focus": [
-        "Develops general activity plans around preferences, available equipment, and stated constraints."
+        "Plan the week's workouts to fit the time available."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Puerto Rican, mixed European and African heritage",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Brazilian",
+        "hair": "short dark hair",
+        "attire": "grey training tee",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "nutrition",
       "role": "nutrition",
-      "title": "Nutrition and Meal Planning Specialist",
-      "name": "Wanjiru",
+      "title": "Nutrition Planner",
+      "name": "Anjali",
       "focus": [
-        "Creates general food and meal plans reflecting the person's preferences and supplied guidance."
+        "Plan balanced meals and a shopping list."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
+        "apparentAge": "40s",
         "presentation": "woman",
-        "heritage": "Kikuyu Kenyan",
-        "hair": "straight hair cut into a polished modern bob",
-        "attire": "tailored dark blazer over a minimalist silk top",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "heritage": "Indian",
+        "hair": "dark hair in a bun",
+        "attire": "white shirt",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "sleep",
       "role": "habits",
-      "title": "Sleep and Habit Coach",
-      "name": "Simran",
+      "title": "Habits and Sleep Coach",
+      "name": "Walter",
       "focus": [
-        "Builds practical routines and tracks sleep-related habits and consistency."
+        "Help build one small habit at a time and better sleep."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Punjabi Indian",
-        "hair": "sleek dark hair tied in a professional ponytail",
-        "attire": "tailored dark blazer over a minimalist silk top",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "apparentAge": "50s",
+        "presentation": "man",
+        "heritage": "White American",
+        "hair": "salt-and-pepper hair",
+        "attire": "navy henley",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "admin",
       "role": "healthadmin",
-      "title": "Health Administration Coordinator",
-      "name": "Bongani",
+      "title": "Health Admin Assistant",
+      "name": "Mercy",
       "focus": [
-        "Organizes appointments, records, and questions for the person's healthcare professionals."
+        "Keep appointments and refills on track."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "man",
-        "heritage": "Zulu South African",
-        "hair": "short neat dark hair parted on the side",
-        "attire": "casual chambray workshirt with rolled-up sleeves",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "Ghanaian",
+        "hair": "short natural hair",
+        "attire": "teal cardigan",
+        "expression": "warm, confident smile"
       }
     }
   ]

@@ -14,85 +14,85 @@
       "slot": "lead",
       "role": "cxlead",
       "title": "Head of Customer Experience",
-      "name": "Haruka",
+      "name": "Grace",
       "focus": [
-        "Sets service priorities, coordinates escalations, and reviews resolution quality."
+        "Review the week's top contact reasons and decide what to fix first."
       ],
       "avatar": {
-        "apparentAge": "Mid 40s",
+        "apparentAge": "40s",
         "presentation": "woman",
-        "heritage": "Japanese",
-        "hair": "straight hair cut into a polished modern bob",
-        "attire": "smart knit cardigan over a crisp collared blouse",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "heritage": "Ghanaian British",
+        "hair": "short natural hair",
+        "attire": "teal cardigan",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "support",
       "role": "support",
       "title": "Support Specialist",
-      "name": "Taehyun",
+      "name": "Mateo",
       "focus": [
-        "Triages incoming inquiries and prepares accurate, context-specific responses."
+        "Draft replies to incoming questions, fastest-first for urgent ones."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
+        "apparentAge": "20s",
         "presentation": "man",
-        "heritage": "Korean",
-        "hair": "short neat dark hair parted on the side",
-        "attire": "pressed oxford cotton button-down in soft blue",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "heritage": "Colombian",
+        "hair": "curly dark hair",
+        "attire": "grey hoodie",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "kb",
       "role": "kb",
       "title": "Help Center Writer",
-      "name": "Charlotte",
+      "name": "Ingrid",
       "focus": [
-        "Creates and maintains answers, troubleshooting guides, and self-service articles."
+        "Write an article for every question asked three times."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
+        "apparentAge": "30s",
         "presentation": "woman",
-        "heritage": "English",
-        "hair": "sleek dark hair tied in a professional ponytail",
-        "attire": "fitted modern crewneck sweater in charcoal",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "heritage": "Norwegian",
+        "hair": "blonde hair in a low bun",
+        "attire": "navy knit sweater",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "csm",
       "role": "csm",
-      "title": "Customer Success Liaison",
-      "name": "Calliope",
+      "title": "Customer Success Manager",
+      "name": "Tariq",
       "focus": [
-        "Coordinates follow-through when support issues affect onboarding or account goals."
+        "Keep the customer health list and draft check-ins for anyone at risk."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
-        "presentation": "woman",
-        "heritage": "Greek",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "smart knit cardigan over a crisp collared blouse",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Pakistani",
+        "hair": "short black hair, neat beard",
+        "attire": "white shirt, dark blazer",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "voc",
       "role": "voc",
-      "title": "Feedback Analyst",
-      "name": "Chamara",
+      "title": "Customer Feedback Analyst",
+      "name": "Mei",
       "focus": [
-        "Finds recurring issues and recommends service, documentation, or product improvements."
+        "Summarise reviews and survey answers into themes every week."
       ],
       "avatar": {
-        "apparentAge": "Late 30s",
-        "presentation": "man",
-        "heritage": "Sinhalese Sri Lankan",
-        "hair": "neatly combed hair and a tidy trimmed beard",
-        "attire": "graphite utility jacket over a classic heather-grey tee",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Chinese",
+        "hair": "long straight black hair",
+        "attire": "lavender sweater",
+        "expression": "warm, confident smile"
       }
     }
   ]

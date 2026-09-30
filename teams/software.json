@@ -2,7 +2,7 @@
   "key": "software",
   "kind": "business",
   "rank": 14,
-  "label": "Software Development Team",
+  "label": "Software Team",
   "blurb": "A Product Director with product, engineering, testing, security and design",
   "purpose": "For a business building an app or software product. The Product Director owns the roadmap; the team writes specs, builds, tests, reviews security and designs the screens.",
   "project": {
@@ -14,102 +14,102 @@
       "slot": "lead",
       "role": "productdir",
       "title": "Product Director",
-      "name": "Oksana",
+      "name": "Alicia",
       "focus": [
-        "Sets scope and priorities, coordinates delivery, and reviews release readiness."
+        "Own the roadmap and the two-week plan."
       ],
       "avatar": {
-        "apparentAge": "Mid 40s",
+        "apparentAge": "40s",
         "presentation": "woman",
-        "heritage": "Ukrainian",
-        "hair": "neat braided hair gathered neatly at the crown",
-        "attire": "smart knit cardigan over a crisp collared blouse",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "heritage": "Mexican American",
+        "hair": "dark hair, shoulder length",
+        "attire": "black blazer",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "pm",
       "role": "product",
       "title": "Product Manager",
-      "name": "Debashish",
+      "name": "Ibrahim",
       "focus": [
-        "Develops requirements, user stories, acceptance criteria, and release notes."
+        "Write a clear spec for each item in the plan."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
+        "apparentAge": "30s",
         "presentation": "man",
-        "heritage": "Bengali Indian",
-        "hair": "short neat dark hair parted on the side",
-        "attire": "fitted dark merino crewneck sweater over a button-down",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
+        "heritage": "Sudanese",
+        "hair": "short hair",
+        "attire": "blue shirt",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "engineer",
       "role": "engineer",
       "title": "Software Engineer",
-      "name": "Orlando",
+      "name": "Kai",
       "focus": [
-        "Implements features, integrations, and technical documentation."
+        "Build the specs in small, reviewed changes."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "man",
-        "heritage": "Puerto Rican, mixed European and African heritage",
-        "hair": "neatly combed hair and a tidy trimmed beard",
-        "attire": "casual chambray workshirt with rolled-up sleeves",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "apparentAge": "20s",
+        "presentation": "nonbinary person",
+        "heritage": "Native Hawaiian",
+        "hair": "long dark hair tied back",
+        "attire": "grey hoodie",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "qa",
       "role": "qa",
-      "title": "QA Engineer",
-      "name": "Ligaya",
+      "title": "QA Tester",
+      "name": "Nina",
       "focus": [
-        "Designs and executes tests, reproduces defects, and verifies fixes."
+        "Test every change before it ships."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
+        "apparentAge": "30s",
         "presentation": "woman",
-        "heritage": "Tagalog Filipino",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "smart knit cardigan over a crisp collared blouse",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "heritage": "Ukrainian",
+        "hair": "blonde hair in a bun",
+        "attire": "white tee",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "security",
       "role": "security",
-      "title": "Security Engineer",
-      "name": "Bjorn",
+      "title": "Security Reviewer",
+      "name": "Rafael",
       "focus": [
-        "Reviews changes for security weaknesses and proposes practical mitigations."
+        "Review every change that touches sign-in, payments or personal data."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
+        "apparentAge": "40s",
         "presentation": "man",
-        "heritage": "Swedish",
-        "hair": "trimmed dark hair with a neatly maintained short beard",
-        "attire": "graphite utility jacket over a classic heather-grey tee",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "heritage": "Filipino",
+        "hair": "short hair, glasses",
+        "attire": "dark polo",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "design",
       "role": "design",
       "title": "Product Designer",
-      "name": "Ximena",
+      "name": "Yara",
       "focus": [
-        "Designs user flows, interfaces, and interaction details."
+        "Design the screens for each spec."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
+        "apparentAge": "20s",
         "presentation": "woman",
-        "heritage": "Mexican Mestizo",
-        "hair": "sleek dark hair tied in a professional ponytail",
-        "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "heritage": "Palestinian",
+        "hair": "long curly hair",
+        "attire": "olive shirt",
+        "expression": "warm, confident smile"
       }
     }
   ]
