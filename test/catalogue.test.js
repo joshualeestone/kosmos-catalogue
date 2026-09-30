@@ -99,7 +99,7 @@ test('no em dash in any spelling anywhere in the catalogue, and the builder refu
     assert.ok(build.build({ teamsSource }).problems.some((p) => /em dash/.test(p)), `${JSON.stringify(s)} got through`);
   }
   const { teamsSource } = source.read();
-  teamsSource.teams[1].members[1].focus = ['Keep &#08212; the list.'];
+  teamsSource.teams[1].members[1].focus = ['Keep &#0' + '8212; the list.'];   // built here, so this file carries no entity
   assert.ok(build.build({ teamsSource }).problems.some((p) => /em dash/.test(p)), 'a zero-padded entity got through');
 });
 
@@ -551,4 +551,34 @@ test('the combining grapheme joiner is refused like the other blank characters',
   const r = source.read().rolesSource;
   r.roles[2].who = r.roles[2].who.replace('You ', 'You\u034F ');
   assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)));
+});
+
+test('letters from another script are refused: a right-to-left letter or a lookalike spells something else', () => {
+  for (const ch of ['א', 'ا', 'а', 'ο']) {
+    const r = source.read().rolesSource;
+    r.roles[2].who = r.roles[2].who.replace('You ', `Y${ch}u `);
+    assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)), JSON.stringify(ch));
+  }
+});
+
+test('{{NAME}} is allowed only in role instructions, where Kosmos fills it in', () => {
+  const t = source.read().teamsSource;
+  t.teams[0].members[1].focus = ['Say hi to {{NAME}} daily.'];
+  assert.ok(build.build({ teamsSource: t }).problems.some((p) => /even \{\{NAME\}\}/.test(p)));
+  const r = source.read().rolesSource;
+  r.roles[0].blurb = 'Helps {{NAME}} plan';
+  assert.ok(build.build({ rolesSource: r }).problems.some((p) => /template marker other than \{\{NAME\}\} in its instructions/.test(p)));
+});
+
+test('a role key in groups.json that is not text is reported, and a linked avatars folder is reported once', () => {
+  const dir = copyRepo();
+  try {
+    const groups = JSON.parse(fs.readFileSync(path.join(dir, 'groups.json'), 'utf8'));
+    groups[0].roles.push(1);
+    fs.writeFileSync(path.join(dir, 'groups.json'), JSON.stringify(groups));
+    assert.ok(build.build({ root: dir }).problems.some((p) => /role key 1 must be/.test(p)));
+    fs.writeFileSync(path.join(dir, 'groups.json'), fs.readFileSync(path.join(REPO, 'groups.json')));
+    fs.symlinkSync(os.tmpdir(), path.join(dir, 'avatars'));
+    assert.equal(build.build({ root: dir }).problems.filter((p) => /avatars\/: must be a folder/.test(p)).length, 1);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });

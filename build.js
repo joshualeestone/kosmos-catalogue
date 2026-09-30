@@ -68,18 +68,20 @@ function instructions(r) {
 /** Text Kosmos would read as something other than words: a template marker other than {{NAME}}
  *  (the one create fills in), or an HTML comment, which is how Kosmos marks the blocks it manages
  *  inside an instruction file. */
-function markerIn(value) {
+function markerIn(value, nameAllowed = true) {
   const blob = JSON.stringify(value);
-  return /<!--/.test(blob) || /\{\{(?!NAME\}\})/.test(blob);
+  return /<!--/.test(blob) || (nameAllowed ? /\{\{(?!NAME\}\})/ : /\{\{/).test(blob);
 }
 
 /** Any character outside what this catalogue's text is made of: letters, digits, punctuation,
- *  symbols, the plain space and combining accents. An allowlist, not a list of bad characters, so a
+ *  symbols, the plain space and combining accents, in the Latin script (and the script-neutral
+ *  characters every script shares). Another script's letters are refused too: a right-to-left
+ *  letter reorders what a diff shows, and a Cyrillic or Greek lookalike spells a different word. An allowlist, not a list of bad characters, so a
  *  new invisible one (a variation selector, a bidi mark, a filler that renders as nothing) is refused
  *  without anyone having to know its name. Text here becomes instructions for agents with tools,
  *  so nothing may say more than what a reviewer reads. The fillers named at the end are letters and
  *  symbols to Unicode but show as blank space. */
-const HIDDEN_RE = /[^\p{L}\p{N}\p{P}\p{S}\u0020\u0300-\u036F]|[\u034F\u115F\u1160\u3164\uFFA0\u2800]/u;
+const HIDDEN_RE = /[^\p{L}\p{N}\p{P}\p{S}\u0020\u0300-\u036F]|[\u034F\u115F\u1160\u3164\uFFA0\u2800]|[^\p{Script=Latin}\p{Script=Common}\p{Script=Inherited}]/u;
 function hiddenIn(value) {
   const strings = [];
   (function walk(v) { if (typeof v === 'string') strings.push(v); else if (v && typeof v === 'object') Object.values(v).forEach(walk); })(value);
@@ -135,7 +137,7 @@ function build(src = {}) {
   const groups = rs.GROUP_ORDER;
   if (emDashIn(groups)) problems.push('groups.json: em dash in a group name');
   if (hiddenIn(groups)) problems.push('groups.json: an invisible or direction-changing character in a group name');
-  if (markerIn(groups)) problems.push('groups.json: a template marker or an HTML comment in a group name');
+  if (markerIn(groups, false)) problems.push('groups.json: a template marker or an HTML comment in a group name');
   if (new Set(groups).size !== groups.length || !groups.every(isText)) problems.push('groups.json: every group needs a name, once');
   for (const g of kosmos.groups) {
     if (!groups.includes(g)) problems.push(`groups.json: Kosmos's built-in roles sit in the group ${JSON.stringify(g)}, so it must stay (even with no catalogue role in it)`);
@@ -160,7 +162,10 @@ function build(src = {}) {
     // whose wrap would split one (an odd count of backticks on a line) rather than ship it broken.
     if (entry.instructions.some((l) => (l.match(/`/g) || []).length % 2)) problems.push(`${k}: a code span is split across lines`);
     if (emDashIn(entry)) problems.push(`${k}: em dash`);
-    if (markerIn(entry)) problems.push(`${k}: a template marker other than {{NAME}}, or an HTML comment`);
+    // {{NAME}} is filled in only in a role's instructions (Kosmos's roles.instructionsFor), so it
+    // is allowed there and nowhere else.
+    const { instructions: text, ...shown } = entry;
+    if (markerIn(text) || markerIn(shown, false)) problems.push(`${k}: a template marker other than {{NAME}} in its instructions, or an HTML comment`);
     // The source too: the wrapper splits on whitespace, and JavaScript counts U+FEFF as whitespace,
     // so the built text alone would hide one that is in the file.
     if (hiddenIn([r, entry])) problems.push(`${k}: an invisible or direction-changing character`);
@@ -232,16 +237,17 @@ function build(src = {}) {
       purpose: t.purpose, caution: ts.TEAM_CAUTION, project: t.project, members };
     // Team text is what the Team screen shows (#4556, #4557), so it gets the same guard.
     if (emDashIn(entry)) problems.push(`${t.key}: em dash`);
-    if (markerIn(entry)) problems.push(`${t.key}: a template marker, or an HTML comment`);
+    if (markerIn(entry, false)) problems.push(`${t.key}: a template marker (even {{NAME}}, which only role instructions fill in), or an HTML comment`);
     if (hiddenIn([t, entry])) problems.push(`${t.key}: an invisible or direction-changing character`);
     teams.push(entry);
   }
   // A portrait no member names is a misspelt file name (and on a case-insensitive disk it would
   // match locally and not in CI), so it is reported rather than quietly left out.
   try {
-    if (fs.lstatSync(path.join(root, 'avatars')).isDirectory()) {
+    if (!fs.lstatSync(path.join(root, 'avatars')).isDirectory()) problems.push('avatars/: must be a folder in this repo, not a link');
+    else {
       for (const f of fs.readdirSync(path.join(root, 'avatars'))) {
-        if (f === 'README.md') continue;
+        if (f === 'README.md' || f.startsWith('.')) continue;
         if (!f.endsWith('.webp')) problems.push(`avatars/${f}: only <member id>.webp portraits belong here`);
         else if (!avatarIds.has(f.slice(0, -5))) problems.push(`avatars/${f}: no team member has the id ${f.slice(0, -5)}`);
       }
@@ -285,7 +291,7 @@ function portrait(root, id, problems) {
   const rel = `avatars/${id}.webp`;
   let dir;
   try { dir = fs.lstatSync(path.join(root, 'avatars')); } catch { return null; }
-  if (!dir.isDirectory()) { problems.push('avatars/: must be a folder in this repo, not a link'); return null; }
+  if (!dir.isDirectory()) return null;          // reported once, in build()
   let st;
   try { st = fs.lstatSync(path.join(root, rel)); } catch { return null; }
   if (!st.isFile()) { problems.push(`${rel}: must be a regular file, not a link or a folder`); return null; }
