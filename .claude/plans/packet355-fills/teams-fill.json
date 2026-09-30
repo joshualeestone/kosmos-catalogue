@@ -1,67 +1,421 @@
 {
-"rename": {
- "market-research/Aiko": "Mayumi",
- "due-diligence/Beatrice": "Graziella",
- "branding-and-design/Sipho": "Lwazi",
- "project-management/Mei": "Lihua",
- "moving-and-relocation/Leilani": "Malia",
- "community-and-volunteer-coordination/Valentina": "Mariana",
- "household-management/Eleanor": "Harriet",
- "meal-planning/Kofi": "Kwabena",
- "learning-and-tutoring/Imani": "Tanisha",
- "creative-projects/Kwame": "Yaw",
- "side-business/Mateo": "Rodolfo",
- "quality-assurance-and-testing/Desmond": "Delroy",
- "demand-and-inventory-planning/Aaliyah": "Keisha",
- "website/George": "Rupert"
-},
-"add": {
- "business-strategy": [["financial-analyst", "Strategy Finance Analyst", "Nour", "woman", "Lebanese Arab", "Models the financial effect of each strategic option, so choices are compared on the numbers."]],
- "competitive-intelligence": [["market-analyst", "Market Signals Analyst", "Kabir", "man", "Punjabi Indian", "Watches pricing, hiring, and product signals across the market and flags shifts early."]],
- "customer-insights": [["data-analyst", "Customer Data Analyst", "Katarzyna", "woman", "Polish", "Analyzes usage and purchase data to test what interviews and surveys suggest."]],
- "pricing-and-packaging": [["data-analyst", "Pricing Data Analyst", "Zhiwei", "man", "Han Chinese", "Analyzes sales and discount data to show how customers respond to price."]],
- "public-relations": [["social-media-manager", "Social Communications Specialist", "Thu", "woman", "Kinh Vietnamese", "Adapts press stories for social channels and tracks the conversation around them."]],
- "tech-support": [["documentation-specialist", "Help Documentation Writer", "Seoyeon", "woman", "Korean", "Turns solved problems into clear help articles, so users can fix common issues themselves."]],
- "process-improvement-and-documentation": [["data-analyst", "Process Metrics Analyst", "Henrik", "man", "Swedish", "Measures cycle times and error rates before and after each change."]],
- "procurement-and-vendor-management": [["legal-analyst", "Supplier Contract Analyst", "Funmilayo", "woman", "Yoruba Nigerian", "Reviews supplier contracts and flags terms, renewals, and obligations to negotiate."]],
- "moving-and-relocation": [["budget-organizer", "Moving Budget Organizer", "Tomasz", "man", "Polish", "Builds the moving budget and tracks quotes, deposits, and costs against it."]],
- "community-and-volunteer-coordination": [["event-planner", "Community Events Planner", "Mwangi", "man", "Kikuyu Kenyan", "Plans community events, from venue and schedule to supplies and volunteers."]],
- "meal-planning": [
-  ["budget-organizer", "Food Budget Organizer", "Maha", "woman", "Lebanese Arab", "Keeps the weekly grocery spend on budget and finds savings in the meal plan."],
-  ["meal-planner", "Dietary Needs Planner", "Natsuki", "woman", "Japanese", "Plans meals around allergies and diets, and flags ingredients to avoid."]],
- "shopping-and-product-research": [
-  ["price-purchase-analyst", "Deals and Timing Analyst", "Thiago", "man", "Afro-Brazilian", "Tracks prices over time and suggests when to buy to get a fair price."],
-  ["researcher", "Reviews and Reliability Researcher", "Callum", "man", "Scottish", "Reads independent reviews and reliability reports, and summarizes what owners report."]],
- "family-care-coordination": [["health-coordinator", "Health Information Organizer", "Marisela", "woman", "Mexican Mestizo", "Keeps medical records, medication lists, and questions for doctors in one place."]],
- "learning-and-tutoring": [
-  ["personal-coach", "Study Schedule Planner", "Sherif", "man", "Egyptian Arab", "Builds a realistic study schedule and adjusts it around progress and busy weeks."],
-  ["researcher", "Learning Resources Researcher", "Siobhan", "woman", "Irish", "Finds good books, courses, and exercises for each topic, matched to the learner's level."]],
- "side-business": [["bookkeeper", "Side Business Bookkeeper", "Minho", "man", "Korean", "Tracks income, expenses, and receipts for the side business from day one."]],
- "contract-review-and-management": [["document-review-coordinator", "Contract Review Coordinator", "Otavio", "man", "Afro-Brazilian", "Routes contracts to reviewers, tracks versions, and chases open items before deadlines."]],
- "quality-assurance-and-testing": [["security-engineer", "Security Test Specialist", "Golnaz", "woman", "Persian Iranian", "Checks the product for common security weaknesses and reports them with clear steps."]],
- "business-automation": [["documentation-specialist", "Automation Documentation Writer", "Rowena", "woman", "Tagalog Filipino", "Documents each automation, who owns it, and what to do when it fails."]],
- "board-and-investor-reporting": [["investor-relations", "Investor Relations Coordinator", "Aoife", "woman", "Irish", "Tracks investor questions and commitments, and prepares the materials each meeting needs."]],
- "real-estate-investment-research": [["ownership-cost-analyst", "Operating Cost Analyst", "Sungmin", "man", "Korean", "Estimates taxes, insurance, repairs, and vacancy for each property under review."]],
- "property-management": [["bookkeeper", "Rent and Expense Bookkeeper", "Muthoni", "woman", "Kikuyu Kenyan", "Records rent, deposits, and repair costs by property, and reconciles them monthly."]],
- "demand-and-inventory-planning": [["data-analyst", "Sales Data Analyst", "Takumi", "man", "Japanese", "Cleans and analyzes sales history, so forecasts start from reliable numbers."]],
- "home-buying": [["personal-finance-manager", "Mortgage and Budget Planner", "Shelly", "woman", "Afro-Jamaican", "Works out what the household can afford, and compares loan options for the lender conversation."]],
- "home-selling": [["copywriter", "Listing Copywriter", "Giorgio", "man", "Italian", "Writes the listing description and captions that show the home at its best, accurately."]],
- "insurance-comparison-and-claims": [
-  ["personal-finance-organizer", "Premium and Budget Organizer", "Chinedu", "man", "Igbo Nigerian", "Tracks premiums, renewal dates, and excesses, and shows what cover costs each year."],
-  ["asset-document-organizer", "Policy Records Organizer", "Xiulan", "woman", "Han Chinese", "Keeps every policy, schedule, and renewal letter organized and easy to find."]],
- "healthcare-administration": [["claims-documentation-coordinator", "Insurance and Benefits Coordinator", "Rajesh", "man", "Punjabi Indian", "Checks what insurance covers before appointments and follows up on claims and bills."]],
- "tax-preparation-organization": [
-  ["bookkeeper", "Income and Expense Organizer", "Eunji", "woman", "Korean", "Sorts the year's income and deductible expenses into the categories the preparer needs."],
-  ["deadline-documents-coordinator", "Tax Deadlines Coordinator", "Ebba", "woman", "Swedish", "Keeps the calendar of tax deadlines and estimated payments, with reminders well ahead."]],
- "retirement-planning": [["coverage-comparison-analyst", "Retirement Health Cover Analyst", "Luana", "woman", "Afro-Brazilian", "Compares health cover options for retirement and lists the questions to ask about each."]],
- "estate-and-legacy-organization": [["personal-finance-organizer", "Accounts and Beneficiaries Organizer", "Kenta", "man", "Japanese", "Lists accounts, policies, and named beneficiaries, and flags any that need updating."]],
- "new-parent-planning": [["budget-organizer", "Family Budget Planner", "Mauricio", "man", "Colombian Mestizo", "Plans the costs of a new child, from leave to childcare, and fits them into the budget."]],
- "pet-care-coordination": [
-  ["budget-organizer", "Pet Budget and Insurance Organizer", "Angus", "man", "Scottish", "Tracks food, vet, and insurance costs, and plans for bigger bills ahead."],
-  ["booking-coordinator", "Sitter and Boarding Coordinator", "Malee", "woman", "Thai", "Compares sitters and boarding options and keeps care instructions ready for each stay."]],
- "personal-research": [
-  ["data-analyst", "Data and Statistics Analyst", "Halyna", "woman", "Ukrainian", "Finds the relevant numbers and explains what they do and do not show."],
-  ["intelligence-brief-writer", "Research Brief Writer", "Efua", "woman", "Akan Ghanaian", "Turns the findings into a short, sourced brief the person can read in minutes."]],
- "translation-and-localization": [["editor", "Terminology and Style Specialist", "Guoqiang", "man", "Han Chinese", "Keeps the glossary and style guide for each language, so terms stay consistent."]]
-}
+ "rename": {
+  "market-research/Aiko": "Mayumi",
+  "due-diligence/Beatrice": "Graziella",
+  "branding-and-design/Sipho": "Lwazi",
+  "project-management/Mei": "Lihua",
+  "moving-and-relocation/Leilani": "Malia",
+  "community-and-volunteer-coordination/Valentina": "Mariana",
+  "household-management/Eleanor": "Harriet",
+  "meal-planning/Kofi": "Kwabena",
+  "learning-and-tutoring/Imani": "Tanisha",
+  "creative-projects/Kwame": "Yaw",
+  "side-business/Mateo": "Rodolfo",
+  "quality-assurance-and-testing/Desmond": "Delroy",
+  "demand-and-inventory-planning/Aaliyah": "Keisha",
+  "website/George": "Rupert"
+ },
+ "add": {
+  "business-strategy": [
+   [
+    "financial-analyst",
+    "Strategy Finance Analyst",
+    "Nour",
+    "woman",
+    "Lebanese Arab",
+    "Models the financial effect of each strategic option, so choices are compared on the numbers."
+   ]
+  ],
+  "competitive-intelligence": [
+   [
+    "market-analyst",
+    "Market Signals Analyst",
+    "Kabir",
+    "man",
+    "Punjabi Indian",
+    "Watches pricing, hiring, and product signals across the market and flags shifts early."
+   ]
+  ],
+  "customer-insights": [
+   [
+    "data-analyst",
+    "Customer Data Analyst",
+    "Katarzyna",
+    "woman",
+    "Polish",
+    "Analyzes usage and purchase data to test what interviews and surveys suggest."
+   ]
+  ],
+  "pricing-and-packaging": [
+   [
+    "data-analyst",
+    "Pricing Data Analyst",
+    "Zhiwei",
+    "man",
+    "Han Chinese",
+    "Analyzes sales and discount data to show how customers respond to price."
+   ]
+  ],
+  "public-relations": [
+   [
+    "social-media-manager",
+    "Social Communications Specialist",
+    "Thu",
+    "woman",
+    "Kinh Vietnamese",
+    "Adapts press stories for social channels and tracks the conversation around them."
+   ]
+  ],
+  "tech-support": [
+   [
+    "documentation-specialist",
+    "Help Documentation Writer",
+    "Seoyeon",
+    "woman",
+    "Korean",
+    "Turns solved problems into clear help articles, so users can fix common issues themselves."
+   ]
+  ],
+  "process-improvement-and-documentation": [
+   [
+    "data-analyst",
+    "Process Metrics Analyst",
+    "Henrik",
+    "man",
+    "Swedish",
+    "Measures cycle times and error rates before and after each change."
+   ]
+  ],
+  "procurement-and-vendor-management": [
+   [
+    "legal-analyst",
+    "Supplier Contract Analyst",
+    "Funmilayo",
+    "woman",
+    "Yoruba Nigerian",
+    "Reviews supplier contracts and flags terms, renewals, and obligations to negotiate."
+   ]
+  ],
+  "moving-and-relocation": [
+   [
+    "budget-organizer",
+    "Moving Budget Organizer",
+    "Tomasz",
+    "man",
+    "Polish",
+    "Builds the moving budget and tracks quotes, deposits, and costs against it."
+   ]
+  ],
+  "community-and-volunteer-coordination": [
+   [
+    "event-planner",
+    "Community Events Planner",
+    "Mwangi",
+    "man",
+    "Kikuyu Kenyan",
+    "Plans community events, from venue and schedule to supplies and volunteers."
+   ]
+  ],
+  "meal-planning": [
+   [
+    "budget-organizer",
+    "Food Budget Organizer",
+    "Maha",
+    "woman",
+    "Lebanese Arab",
+    "Keeps the weekly grocery spend on budget and finds savings in the meal plan."
+   ],
+   [
+    "meal-planner",
+    "Dietary Needs Planner",
+    "Natsuki",
+    "woman",
+    "Japanese",
+    "Plans meals around allergies and diets, and flags ingredients to avoid."
+   ]
+  ],
+  "shopping-and-product-research": [
+   [
+    "price-purchase-analyst",
+    "Deals and Timing Analyst",
+    "Thiago",
+    "man",
+    "Afro-Brazilian",
+    "Tracks prices over time and suggests when to buy to get a fair price."
+   ],
+   [
+    "researcher",
+    "Reviews and Reliability Researcher",
+    "Callum",
+    "man",
+    "Scottish",
+    "Reads independent reviews and reliability reports, and summarizes what owners report."
+   ]
+  ],
+  "family-care-coordination": [
+   [
+    "health-coordinator",
+    "Health Information Organizer",
+    "Marisela",
+    "woman",
+    "Mexican Mestizo",
+    "Keeps medical records, medication lists, and questions for doctors in one place."
+   ]
+  ],
+  "learning-and-tutoring": [
+   [
+    "personal-coach",
+    "Study Schedule Planner",
+    "Sherif",
+    "man",
+    "Egyptian Arab",
+    "Builds a realistic study schedule and adjusts it around progress and busy weeks."
+   ],
+   [
+    "researcher",
+    "Learning Resources Researcher",
+    "Siobhan",
+    "woman",
+    "Irish",
+    "Finds good books, courses, and exercises for each topic, matched to the learner's level."
+   ]
+  ],
+  "side-business": [
+   [
+    "bookkeeper",
+    "Side Business Bookkeeper",
+    "Minho",
+    "man",
+    "Korean",
+    "Tracks income, expenses, and receipts for the side business from day one."
+   ]
+  ],
+  "contract-review-and-management": [
+   [
+    "document-review-coordinator",
+    "Contract Review Coordinator",
+    "Otavio",
+    "man",
+    "Afro-Brazilian",
+    "Routes contracts to reviewers, tracks versions, and chases open items before deadlines."
+   ]
+  ],
+  "quality-assurance-and-testing": [
+   [
+    "security-engineer",
+    "Security Test Specialist",
+    "Golnaz",
+    "woman",
+    "Persian Iranian",
+    "Checks the product for common security weaknesses and reports them with clear steps."
+   ]
+  ],
+  "business-automation": [
+   [
+    "documentation-specialist",
+    "Automation Documentation Writer",
+    "Rowena",
+    "woman",
+    "Tagalog Filipino",
+    "Documents each automation, who owns it, and what to do when it fails."
+   ]
+  ],
+  "board-and-investor-reporting": [
+   [
+    "investor-relations",
+    "Investor Relations Coordinator",
+    "Aoife",
+    "woman",
+    "Irish",
+    "Tracks investor questions and commitments, and prepares the materials each meeting needs."
+   ]
+  ],
+  "real-estate-investment-research": [
+   [
+    "ownership-cost-analyst",
+    "Operating Cost Analyst",
+    "Sungmin",
+    "man",
+    "Korean",
+    "Estimates taxes, insurance, repairs, and vacancy for each property under review."
+   ]
+  ],
+  "property-management": [
+   [
+    "bookkeeper",
+    "Rent and Expense Bookkeeper",
+    "Muthoni",
+    "woman",
+    "Kikuyu Kenyan",
+    "Records rent, deposits, and repair costs by property, and reconciles them monthly."
+   ]
+  ],
+  "demand-and-inventory-planning": [
+   [
+    "data-analyst",
+    "Sales Data Analyst",
+    "Takumi",
+    "man",
+    "Japanese",
+    "Cleans and analyzes sales history, so forecasts start from reliable numbers."
+   ]
+  ],
+  "home-buying": [
+   [
+    "pcfo",
+    "Mortgage and Budget Planner",
+    "Shelly",
+    "woman",
+    "Afro-Jamaican",
+    "Works out what the household can afford, and compares loan options for the lender conversation."
+   ]
+  ],
+  "home-selling": [
+   [
+    "copywriter",
+    "Listing Copywriter",
+    "Giorgio",
+    "man",
+    "Italian",
+    "Writes the listing description and captions that show the home at its best, accurately."
+   ]
+  ],
+  "insurance-comparison-and-claims": [
+   [
+    "personal-finance-organizer",
+    "Premium and Budget Organizer",
+    "Chinedu",
+    "man",
+    "Igbo Nigerian",
+    "Tracks premiums, renewal dates, and excesses, and shows what cover costs each year."
+   ],
+   [
+    "asset-document-organizer",
+    "Policy Records Organizer",
+    "Xiulan",
+    "woman",
+    "Han Chinese",
+    "Keeps every policy, schedule, and renewal letter organized and easy to find."
+   ]
+  ],
+  "healthcare-administration": [
+   [
+    "claims-documentation-coordinator",
+    "Insurance and Benefits Coordinator",
+    "Rajesh",
+    "man",
+    "Punjabi Indian",
+    "Checks what insurance covers before appointments and follows up on claims and bills."
+   ]
+  ],
+  "tax-preparation-organization": [
+   [
+    "bookkeeper",
+    "Income and Expense Organizer",
+    "Eunji",
+    "woman",
+    "Korean",
+    "Sorts the year's income and deductible expenses into the categories the preparer needs."
+   ],
+   [
+    "deadline-documents-coordinator",
+    "Tax Deadlines Coordinator",
+    "Ebba",
+    "woman",
+    "Swedish",
+    "Keeps the calendar of tax deadlines and estimated payments, with reminders well ahead."
+   ]
+  ],
+  "retirement-planning": [
+   [
+    "coverage-comparison-analyst",
+    "Retirement Health Cover Analyst",
+    "Luana",
+    "woman",
+    "Afro-Brazilian",
+    "Compares health cover options for retirement and lists the questions to ask about each."
+   ]
+  ],
+  "estate-and-legacy-organization": [
+   [
+    "personal-finance-organizer",
+    "Accounts and Beneficiaries Organizer",
+    "Kenta",
+    "man",
+    "Japanese",
+    "Lists accounts, policies, and named beneficiaries, and flags any that need updating."
+   ]
+  ],
+  "new-parent-planning": [
+   [
+    "budget-organizer",
+    "Family Budget Planner",
+    "Mauricio",
+    "man",
+    "Colombian Mestizo",
+    "Plans the costs of a new child, from leave to childcare, and fits them into the budget."
+   ]
+  ],
+  "pet-care-coordination": [
+   [
+    "budget-organizer",
+    "Pet Budget and Insurance Organizer",
+    "Angus",
+    "man",
+    "Scottish",
+    "Tracks food, vet, and insurance costs, and plans for bigger bills ahead."
+   ],
+   [
+    "pet-care-coordinator",
+    "Sitter and Boarding Coordinator",
+    "Malee",
+    "woman",
+    "Thai",
+    "Compares sitters and boarding options and keeps care instructions ready for each stay."
+   ]
+  ],
+  "personal-research": [
+   [
+    "data-analyst",
+    "Data and Statistics Analyst",
+    "Halyna",
+    "woman",
+    "Ukrainian",
+    "Finds the relevant numbers and explains what they do and do not show."
+   ],
+   [
+    "intelligence-brief-writer",
+    "Research Brief Writer",
+    "Efua",
+    "woman",
+    "Akan Ghanaian",
+    "Turns the findings into a short, sourced brief the person can read in minutes."
+   ]
+  ],
+  "translation-and-localization": [
+   [
+    "editor",
+    "Terminology and Style Specialist",
+    "Guoqiang",
+    "man",
+    "Han Chinese",
+    "Keeps the glossary and style guide for each language, so terms stay consistent."
+   ]
+  ]
+ },
+ "sameAs": {
+  "booking-coordinator": "booking",
+  "customer-success": "csm",
+  "development-director": "devdir",
+  "job-scout": "jobscout",
+  "office-manager": "officemgr",
+  "payroll-coordinator": "payroll",
+  "personal-finance-manager": "pcfo",
+  "proposal-writer": "proposals",
+  "school-liaison": "school",
+  "website-lead": "webdir"
+ },
+ "seat": {
+  "wedding-planning/Budget and Booking Coordinator": "event-planner"
+ }
 }

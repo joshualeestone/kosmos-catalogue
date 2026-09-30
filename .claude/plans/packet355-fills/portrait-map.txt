@@ -82,7 +82,7 @@ business-development-partnership-proposal-writer.png -> business-development-par
 business-development-partnership-coordinator.png -> business-development-partnership-coordinator
 sales-head-of-sales.png -> sales-lead
 sales-sales-development-representative.png -> sales-sales-rep
-sales-proposal-writer.png -> sales-proposal-writer
+sales-proposal-writer.png -> sales-proposals
 sales-account-manager.png -> sales-account-manager
 sales-crm-and-revenue-operations-specialist.png -> sales-operations-manager
 proposal-and-rfp-proposal-manager.png -> proposal-and-rfp-lead
@@ -98,7 +98,7 @@ customer-success-and-onboarding-renewal-and-growth-coordinator.png -> customer-s
 customer-support-head-of-customer-experience.png -> customer-support-lead
 customer-support-support-specialist.png -> customer-support-customer-support
 customer-support-help-center-writer.png -> customer-support-customer-support-2
-customer-support-customer-success-liaison.png -> customer-support-customer-success
+customer-support-customer-success-liaison.png -> customer-support-csm
 customer-support-feedback-analyst.png -> customer-support-feedback-analyst
 fundraising-and-grants-development-director.png -> fundraising-and-grants-lead
 fundraising-and-grants-funding-researcher.png -> fundraising-and-grants-researcher
@@ -138,7 +138,7 @@ hr-and-people-learning-and-development-specialist.png -> hr-and-people-personal-
 accounting-and-bookkeeping-controller.png -> accounting-and-bookkeeping-lead
 accounting-and-bookkeeping-bookkeeper.png -> accounting-and-bookkeeping-bookkeeper
 accounting-and-bookkeeping-bills-and-invoices-specialist.png -> accounting-and-bookkeeping-budget-organizer
-accounting-and-bookkeeping-payroll-coordinator.png -> accounting-and-bookkeeping-payroll-coordinator
+accounting-and-bookkeeping-payroll-coordinator.png -> accounting-and-bookkeeping-payroll
 accounting-and-bookkeeping-tax-paperwork-specialist.png -> accounting-and-bookkeeping-tax-specialist
 procurement-and-vendor-management-procurement-manager.png -> procurement-and-vendor-management-lead
 procurement-and-vendor-management-supplier-researcher.png -> procurement-and-vendor-management-researcher
@@ -158,7 +158,7 @@ e-commerce-operations-e-commerce-advertising-specialist.png -> e-commerce-operat
 e-commerce-operations-customer-support-specialist.png -> e-commerce-operations-customer-support
 wedding-planning-wedding-planning-director.png -> wedding-planning-lead
 wedding-planning-venue-and-vendor-researcher.png -> wedding-planning-researcher
-wedding-planning-budget-and-booking-coordinator.png -> wedding-planning-budget-organizer
+wedding-planning-budget-and-booking-coordinator.png -> wedding-planning-event-planner
 wedding-planning-guest-experience-coordinator.png -> wedding-planning-guest-experience-coordinator
 wedding-planning-wedding-design-specialist.png -> wedding-planning-product-designer
 wedding-planning-wedding-timeline-coordinator.png -> wedding-planning-wedding-planner
@@ -212,7 +212,7 @@ personal-finance-tax-records-organizer.png -> personal-finance-tax-specialist
 personal-finance-investment-research-analyst.png -> personal-finance-investment-research-analyst
 career-and-job-search-career-coach.png -> career-and-job-search-lead
 career-and-job-search-resume-and-application-writer.png -> career-and-job-search-resume-application-writer
-career-and-job-search-job-scout.png -> career-and-job-search-job-scout
+career-and-job-search-job-scout.png -> career-and-job-search-jobscout
 career-and-job-search-interview-coach.png -> career-and-job-search-personal-coach
 career-and-job-search-personal-brand-specialist.png -> career-and-job-search-personal-brand-specialist
 learning-and-tutoring-learning-coach.png -> learning-and-tutoring-lead
@@ -340,12 +340,12 @@ finance-pricing-and-unit-economics-analyst.png -> finance-business-model-analyst
 finance-bookkeeping-liaison.png -> finance-bookkeeper
 finance-investor-relations-specialist.png -> finance-investor-relations
 front-office-office-manager.png -> front-office-lead
-front-office-booking-coordinator.png -> front-office-booking-coordinator
+front-office-booking-coordinator.png -> front-office-booking
 front-office-reviews-specialist.png -> front-office-reviews-specialist
 front-office-customer-messages-specialist.png -> front-office-customer-messages-specialist
 front-office-office-bookkeeper.png -> front-office-bookkeeper
 family-family-coordinator.png -> family-lead
-family-school-liaison.png -> family-school-liaison
+family-school-liaison.png -> family-school
 family-family-meal-planner.png -> family-meal-planner
 family-homework-tutor.png -> family-personal-coach
 family-occasions-and-activities-planner.png -> family-occasions-activities-planner

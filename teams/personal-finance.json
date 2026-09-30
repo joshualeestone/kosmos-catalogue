@@ -1,0 +1,99 @@
+{
+  "key": "personal-finance",
+  "kind": "personal",
+  "rank": 18,
+  "label": "Personal Finance Team",
+  "blurb": "A Personal Finance Manager and 4 specialists who organize budgets, recurring spending, financial records, and research",
+  "purpose": "Created for individuals, families, and organizers looking for dedicated support with personal finance. Organize budgets, recurring spending, financial records, and research. The team takes care of preparation, detailed planning, and practical follow-through to keep everything running smoothly.",
+  "project": {
+    "name": "Personal Finance",
+    "goal": "Deliver a comprehensive initial personal finance plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "pcfo",
+      "title": "Personal Finance Manager",
+      "name": "Ewan",
+      "focus": [
+        "Sets financial organization priorities, coordinates specialists, and reviews the complete money plan."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "man",
+        "heritage": "Scottish",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "budget-organizer",
+      "role": "budget-organizer",
+      "title": "Budget and Cash-flow Planner",
+      "name": "Daniela",
+      "focus": [
+        "Organizes income, spending, savings goals, and upcoming cash needs."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Colombian Mestizo",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "budget-organizer-2",
+      "role": "budget-organizer",
+      "title": "Subscriptions Auditor",
+      "name": "Sina",
+      "focus": [
+        "Reviews recurring charges and prepares cancellation, renewal, and comparison options."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Samoan",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "tax-specialist",
+      "role": "tax-specialist",
+      "title": "Tax Records Organizer",
+      "name": "Ishita",
+      "focus": [
+        "Collects tax-related documents and maintains questions for the tax preparer."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Bengali Indian",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "investment-research-analyst",
+      "role": "investment-research-analyst",
+      "title": "Investment Research Analyst",
+      "name": "Satoshi",
+      "focus": [
+        "Compares investment features, costs, diversification, and scenarios for the user's review."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Japanese",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    }
+  ]
+}

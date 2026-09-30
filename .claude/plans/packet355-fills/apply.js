@@ -27,7 +27,11 @@ for (const r of roles) {
 // member is in exactly one; 24 of 24 sampled portraits agree). The set is how the person presents.
 const W_HAIR = /ponytail|soft wavy hair worn|coiled hair|braided hair|bob|shoulder-length/;
 const M_HAIR = /beard|parted on the side|salt-and-pepper|crew cut|close-cropped/;
-const presentationOf = (hair) => (W_HAIR.test(hair) ? 'woman' : M_HAIR.test(hair) ? 'man' : null);
+const presentationOf = (hair) => {
+  const w = W_HAIR.test(hair), m = M_HAIR.test(hair);
+  if (w && m) problems.push(`hair in both sets: ${hair}`);
+  return w && !m ? 'woman' : m && !w ? 'man' : null;
+};
 const pools = { woman: { hair: new Set(), attire: new Set() }, man: { hair: new Set(), attire: new Set() } };
 const ages = [], exprs = [];
 for (const t of teams) for (const m of t.members) {
@@ -42,8 +46,19 @@ for (const k of ['hair', 'attire']) for (const v of pools.woman[k]) if (pools.ma
 for (const p of ['woman', 'man']) for (const k of ['hair', 'attire']) pools[p][k] = [...pools[p][k]].sort();
 
 // Names: first names in the published catalogue (teams the packet does not replace), the packet,
-// and the four real outside people kosmos's no-name-refs-3071 guard forbids.
+// and the names kosmos's no-name-refs-3071 guard forbids (spelled in parts, as that guard does).
 const fixed = JSON.parse(fs.readFileSync(path.join(F, 'teams-fill.json'), 'utf8'));
+
+// A packet role that is a published role under another key (same name) is not taken: its seats use
+// the published role (review round 1: ten names appeared twice in the picker).
+for (const t of teams) for (const m of t.members) if (fixed.sameAs[m.role]) m.role = fixed.sameAs[m.role];
+for (let i = roles.length - 1; i >= 0; i--) if (fixed.sameAs[roles[i].key]) roles.splice(i, 1);
+// Seats whose packet role does not fit the team (review round 1).
+for (const [who, role] of Object.entries(fixed.seat)) {
+  const [tk, title] = who.split('/');
+  const m = (teams.find((t) => t.key === tk) || { members: [] }).members.find((x) => x.title === title);
+  if (!m) problems.push(`seat: no ${who}`); else m.role = role;
+}
 const replaced = new Set(teams.map((t) => t.key));
 const published = [];
 for (const f of fs.readdirSync(path.join(CAT, 'teams'))) {

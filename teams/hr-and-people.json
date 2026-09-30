@@ -1,0 +1,99 @@
+{
+  "key": "hr-and-people",
+  "kind": "business",
+  "rank": 41,
+  "label": "HR and People Team",
+  "blurb": "A Head of People and 4 specialists who coordinate recruiting, onboarding, people policies, and employee development",
+  "purpose": "Designed for business owners, leaders, and teams executing on hr and people. Coordinate recruiting, onboarding, people policies, and employee development. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "HR and People",
+    "goal": "Deliver a comprehensive initial hr and people plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "recruiter",
+      "title": "Head of People",
+      "name": "Bayu",
+      "focus": [
+        "Sets people-work priorities, coordinates the team, and reviews employee-facing materials."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "man",
+        "heritage": "Javanese Indonesian",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "recruiter",
+      "role": "recruiter",
+      "title": "Recruiting Coordinator",
+      "name": "Narine",
+      "focus": [
+        "Drafts role descriptions, structures interview plans, and organizes candidate information."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Armenian",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "recruiter-2",
+      "role": "recruiter",
+      "title": "Employee Onboarding Specialist",
+      "name": "Aroha",
+      "focus": [
+        "Creates onboarding schedules, checklists, and first-month guidance."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Maori",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "recruiter-3",
+      "role": "recruiter",
+      "title": "People Policy Specialist",
+      "name": "Haruto",
+      "focus": [
+        "Organizes policy drafts and tracks questions for the employer's HR or legal advisers."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Japanese",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "personal-coach",
+      "role": "personal-coach",
+      "title": "Learning and Development Specialist",
+      "name": "Ridwan",
+      "focus": [
+        "Builds training plans, learning resources, and development follow-ups."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Malay Malaysian",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "key": "product-strategy-and-management",
+  "kind": "business",
+  "rank": 21,
+  "label": "Product Strategy and Management Team",
+  "blurb": "A Head of Product and 4 specialists who convert customer needs and business goals into a practical product roadmap",
+  "purpose": "Designed for business owners, leaders, and teams executing on product strategy and management. Convert customer needs and business goals into a practical product roadmap. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Product Strategy and Management",
+    "goal": "Deliver a comprehensive initial product strategy and management plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "product-director",
+      "title": "Head of Product",
+      "name": "Seojun",
+      "focus": [
+        "Sets priorities, resolves tradeoffs, and owns the roadmap and product decisions."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Korean",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Product Researcher",
+      "name": "Solomiya",
+      "focus": [
+        "Studies users, competitors, and evidence supporting potential features."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Ukrainian",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "product-manager",
+      "role": "product-manager",
+      "title": "Requirements Specialist",
+      "name": "Nadine",
+      "focus": [
+        "Writes user stories, acceptance criteria, and implementation-ready specifications."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Lebanese Arab",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "product-analyst",
+      "role": "product-analyst",
+      "title": "Product Analyst",
+      "name": "Oluwaseun",
+      "focus": [
+        "Defines success metrics and evaluates usage and experiment results."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Yoruba Nigerian",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "execution-planner",
+      "role": "execution-planner",
+      "title": "Roadmap Coordinator",
+      "name": "Manpreet",
+      "focus": [
+        "Tracks dependencies, release scope, and stakeholder updates."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Punjabi Indian",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    }
+  ]
+}

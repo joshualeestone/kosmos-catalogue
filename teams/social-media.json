@@ -1,0 +1,116 @@
+{
+  "key": "social-media",
+  "kind": "business",
+  "rank": 25,
+  "label": "Social Media Team",
+  "blurb": "A Head of Social and 5 specialists who create and coordinate social content, community activity, and creator partnerships",
+  "purpose": "Designed for business owners, leaders, and teams executing on social media. Create and coordinate social content, community activity, and creator partnerships. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Social Media",
+    "goal": "Deliver a comprehensive initial social media plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "social-media-manager",
+      "title": "Head of Social",
+      "name": "Anahit",
+      "focus": [
+        "Sets channel strategy, coordinates the roster, and reviews content and performance."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "woman",
+        "heritage": "Armenian",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "social-media-manager",
+      "role": "social-media-manager",
+      "title": "Social Media Manager",
+      "name": "Federico",
+      "focus": [
+        "Maintains the calendar, adapts posts, and prepares channel-specific publishing plans."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Italian",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "media-producer",
+      "role": "media-producer",
+      "title": "Short Video Producer",
+      "name": "Rodrigo",
+      "focus": [
+        "Creates concepts, hooks, scripts, and production briefs for short videos."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Mexican Mestizo",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "product-designer",
+      "role": "product-designer",
+      "title": "Social Designer",
+      "name": "Isagani",
+      "focus": [
+        "Creates visual concepts, post layouts, and reusable design templates."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Tagalog Filipino",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "community-coordinator",
+      "role": "community-coordinator",
+      "title": "Community Specialist",
+      "name": "Nadeesha",
+      "focus": [
+        "Drafts responses, identifies recurring conversations, and flags issues needing attention."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Sinhalese Sri Lankan",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "creator-partnerships-specialist",
+      "role": "creator-partnerships-specialist",
+      "title": "Creator Partnerships Specialist",
+      "name": "Nia",
+      "focus": [
+        "Finds suitable creators and prepares partnership briefs and performance summaries."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "African American",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    }
+  ]
+}

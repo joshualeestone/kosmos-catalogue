@@ -135,5 +135,225 @@
       "occasions",
       "school"
     ]
+  },
+  {
+    "group": "Strategy",
+    "roles": [
+      "cso",
+      "market-analyst",
+      "business-model-analyst",
+      "execution-planner",
+      "customer-insights-analyst",
+      "competitive-intel",
+      "pricing-strategist",
+      "data-analyst"
+    ]
+  },
+  {
+    "group": "General",
+    "roles": [
+      "evidence-reviewer",
+      "intelligence-brief-writer",
+      "survey-quantitative-analyst",
+      "data-preparation-specialist",
+      "visualization-specialist",
+      "analysis-reviewer",
+      "product-analyst",
+      "packaging-experiment-specialist",
+      "document-review-coordinator",
+      "audience-lifecycle-strategist",
+      "performance-analyst",
+      "creator-partnerships-specialist",
+      "search-conversion-lead",
+      "content-optimization-specialist",
+      "conversion-analyst",
+      "brand-director",
+      "brand-strategist",
+      "brand-guidelines-specialist",
+      "audience-media-planner",
+      "measurement-specialist",
+      "launch-director",
+      "launch-strategist",
+      "channel-coordinator",
+      "launch-analyst",
+      "reputation-analyst",
+      "partnership-proposal-writer",
+      "partnership-coordinator",
+      "account-manager",
+      "proposal-manager",
+      "solution-writer",
+      "commercial-analyst",
+      "proposal-reviewer",
+      "adoption-training-specialist",
+      "renewal-growth-coordinator",
+      "feedback-analyst",
+      "grant-pitch-writer",
+      "newsletter-impact-writer",
+      "transport-planner",
+      "documentation-specialist",
+      "knowledge-escalation-specialist",
+      "project-manager",
+      "scope-planning-specialist",
+      "schedule-dependency-coordinator",
+      "risk-progress-analyst",
+      "inbox-coordinator",
+      "meeting-coordinator",
+      "procedure-writer",
+      "proposal-cost-analyst",
+      "e-commerce-manager",
+      "product-listings-specialist",
+      "orders-returns-coordinator",
+      "guest-experience-coordinator",
+      "program-production-specialist",
+      "transport-specialist",
+      "move-administration-specialist",
+      "project-documentation-coordinator",
+      "inbox-calendar-assistant",
+      "personal-finance-organizer",
+      "price-purchase-analyst",
+      "appointments-records-organizer",
+      "care-schedule-planner",
+      "investment-research-analyst",
+      "resume-application-writer",
+      "personal-brand-specialist",
+      "college-planning-lead",
+      "deadline-documents-coordinator",
+      "creative-director",
+      "concept-research-specialist",
+      "writer-story-developer",
+      "production-planner",
+      "startup-planning-lead",
+      "terms-obligations-analyst",
+      "evidence-coordinator",
+      "control-review-analyst",
+      "remediation-planner",
+      "identity-access-specialist",
+      "automation-lead",
+      "reporting-director",
+      "financial-reporting-analyst",
+      "presentation-narrative-writer",
+      "demand-forecast-analyst",
+      "stock-replenishment-analyst",
+      "ownership-cost-analyst",
+      "purchase-diligence-organizer",
+      "home-sale-coordinator",
+      "home-preparation-planner",
+      "listing-transaction-organizer",
+      "coverage-comparison-analyst",
+      "claims-documentation-coordinator",
+      "appointments-referrals-coordinator",
+      "retirement-planning-coordinator",
+      "retirement-cash-flow-analyst",
+      "retirement-lifestyle-planner",
+      "estate-organization-lead",
+      "asset-document-organizer",
+      "wishes-legacy-writer",
+      "planning-questions-coordinator",
+      "home-baby-supplies-planner",
+      "evidence-reviewer-explainer",
+      "reviews-specialist",
+      "customer-messages-specialist",
+      "occasions-activities-planner",
+      "localization-lead",
+      "cultural-adaptation-specialist"
+    ]
+  },
+  {
+    "group": "Technology",
+    "roles": [
+      "product-director",
+      "product-manager",
+      "product-designer",
+      "qa-engineer",
+      "tech-support",
+      "software-engineer",
+      "security-engineer"
+    ]
+  },
+  {
+    "group": "Finance",
+    "roles": [
+      "legal-analyst",
+      "financial-analyst",
+      "investor-relations",
+      "bookkeeper",
+      "tax-specialist"
+    ]
+  },
+  {
+    "group": "Operations",
+    "roles": [
+      "operations-manager",
+      "recruiter",
+      "logistics-manager",
+      "executive-assistant",
+      "vendor-manager"
+    ]
+  },
+  {
+    "group": "Marketing",
+    "roles": [
+      "email-marketer",
+      "copywriter",
+      "media-producer",
+      "social-media-manager",
+      "seo-specialist",
+      "paid-media-specialist",
+      "pr-specialist"
+    ]
+  },
+  {
+    "group": "Personal",
+    "roles": [
+      "community-coordinator",
+      "health-coordinator",
+      "personal-coach"
+    ]
+  },
+  {
+    "group": "Sales",
+    "roles": [
+      "sales-rep"
+    ]
+  },
+  {
+    "group": "Support",
+    "roles": [
+      "customer-support"
+    ]
+  },
+  {
+    "group": "Events",
+    "roles": [
+      "event-planner",
+      "wedding-planner"
+    ]
+  },
+  {
+    "group": "Travel",
+    "roles": [
+      "travel-planner",
+      "relocation-coordinator"
+    ]
+  },
+  {
+    "group": "Home",
+    "roles": [
+      "budget-organizer",
+      "errands-coordinator",
+      "household-manager",
+      "maintenance-coordinator",
+      "meal-planner",
+      "family-coordinator",
+      "pet-care-coordinator"
+    ]
+  },
+  {
+    "group": "Property",
+    "roles": [
+      "renovation-planner",
+      "property-manager",
+      "real-estate-specialist"
+    ]
   }
 ]

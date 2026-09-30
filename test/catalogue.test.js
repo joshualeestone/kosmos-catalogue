@@ -120,6 +120,14 @@ test('the builder refuses a broken team', () => {
   assert.ok(build.build({ teamsSource: twin }).problems.some((p) => /suggested name/.test(p)));
 });
 
+test('two roles with one name are refused, whatever the case (#4555)', () => {
+  const r = source.read().rolesSource;
+  assert.deepEqual(build.build({ rolesSource: r }).problems.filter((p) => /is already the role/.test(p)), [], 'CONTROL: the sources have no two roles with one name');
+  const twin = { ...r.roles[1], key: 'twin-of-one', label: r.roles[0].label.toUpperCase() };
+  r.roles.push(twin);
+  assert.ok(build.build({ rolesSource: r }).problems.some((p) => p === `twin-of-one: the name ${JSON.stringify(twin.label)} is already the role ${r.roles[0].key}`));
+});
+
 test('the builder refuses role text whose wrap would split a code span', () => {
   // 66 characters of words, then a span: "`kosmos" still fits the 76-column line and "msg" does not.
   const prefix = 'word '.repeat(13) + 'w';

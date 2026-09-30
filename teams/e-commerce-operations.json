@@ -1,0 +1,116 @@
+{
+  "key": "e-commerce-operations",
+  "kind": "business",
+  "rank": 45,
+  "label": "E-commerce Operations Team",
+  "blurb": "An E-commerce Manager and 5 specialists who coordinate storefront merchandising, orders, stock, advertising, and service",
+  "purpose": "Designed for business owners, leaders, and teams executing on e-commerce operations. Coordinate storefront merchandising, orders, stock, advertising, and service. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "E-commerce Operations",
+    "goal": "Deliver a comprehensive initial e-commerce operations plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "e-commerce-manager",
+      "title": "E-commerce Manager",
+      "name": "Jun",
+      "focus": [
+        "Sets store priorities, coordinates work, and reviews performance and operational issues."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "man",
+        "heritage": "Han Chinese",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "product-listings-specialist",
+      "role": "product-listings-specialist",
+      "title": "Product Listings Specialist",
+      "name": "Siriporn",
+      "focus": [
+        "Creates product descriptions, attributes, image briefs, and merchandising updates."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Thai",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "orders-returns-coordinator",
+      "role": "orders-returns-coordinator",
+      "title": "Orders and Returns Coordinator",
+      "name": "Mehedi",
+      "focus": [
+        "Tracks order exceptions, returns, and fulfillment follow-through."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Bengali Bangladeshi",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "logistics-manager",
+      "role": "logistics-manager",
+      "title": "Inventory Specialist",
+      "name": "Moana",
+      "focus": [
+        "Monitors stock records, availability, and replenishment needs."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Samoan",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "paid-media-specialist",
+      "role": "paid-media-specialist",
+      "title": "E-commerce Advertising Specialist",
+      "name": "Meena",
+      "focus": [
+        "Plans promotional campaigns and analyzes store advertising performance."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Tamil Indian",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "customer-support",
+      "role": "customer-support",
+      "title": "Customer Support Specialist",
+      "name": "Adnan",
+      "focus": [
+        "Drafts responses to product, order, delivery, and return inquiries."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Punjabi Pakistani",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    }
+  ]
+}

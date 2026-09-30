@@ -1,0 +1,99 @@
+{
+  "key": "household-management",
+  "kind": "personal",
+  "rank": 14,
+  "label": "Household Management Team",
+  "blurb": "A Household Manager and 4 specialists who coordinate household upkeep, meals, errands, and shared responsibilities",
+  "purpose": "Created for individuals, families, and organizers looking for dedicated support with household management. Coordinate household upkeep, meals, errands, and shared responsibilities. The team takes care of preparation, detailed planning, and practical follow-through to keep everything running smoothly.",
+  "project": {
+    "name": "Household Management",
+    "goal": "Deliver a comprehensive initial household management plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "household-manager",
+      "title": "Household Manager",
+      "name": "Lorenzo",
+      "focus": [
+        "Sets household priorities, coordinates the roster, and maintains the shared plan."
+      ],
+      "avatar": {
+        "apparentAge": "Early 40s",
+        "presentation": "man",
+        "heritage": "Italian",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "maintenance-coordinator",
+      "role": "maintenance-coordinator",
+      "title": "Maintenance Coordinator",
+      "name": "Harriet",
+      "focus": [
+        "Organizes upkeep schedules, service-provider research, and repair follow-ups."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "English",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "meal-planner",
+      "role": "meal-planner",
+      "title": "Meal and Grocery Planner",
+      "name": "Cem",
+      "focus": [
+        "Builds meal plans, grocery lists, and food-preparation schedules."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Turkish",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "budget-organizer",
+      "role": "budget-organizer",
+      "title": "Household Budget Organizer",
+      "name": "Hiwot",
+      "focus": [
+        "Tracks household costs, subscriptions, and upcoming expenses."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Amhara Ethiopian",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "errands-coordinator",
+      "role": "errands-coordinator",
+      "title": "Errands and Chores Coordinator",
+      "name": "Zanele",
+      "focus": [
+        "Organizes shopping, chores, recurring tasks, and shared assignments."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Zulu South African",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

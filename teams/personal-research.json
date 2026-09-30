@@ -1,0 +1,99 @@
+{
+  "key": "personal-research",
+  "kind": "personal",
+  "rank": 34,
+  "label": "Personal Research Team",
+  "blurb": "A Research Lead and 4 specialists who investigate a question and produce a clear, sourced explanation",
+  "purpose": "Created for individuals, families, and organizers looking for dedicated support with personal research. Investigate a question and produce a clear, sourced explanation. The team takes care of preparation, detailed planning, and practical follow-through to keep everything running smoothly.",
+  "project": {
+    "name": "Personal Research",
+    "goal": "Deliver a comprehensive initial personal research plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "researcher",
+      "title": "Research Lead",
+      "name": "Tavita",
+      "focus": [
+        "Defines the question, assigns research, and owns the final synthesis and uncertainty assessment."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Samoan",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Source Researcher",
+      "name": "Sibusiso",
+      "focus": [
+        "Finds relevant primary sources and records evidence and disagreements."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Zulu South African",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "modern minimalist dark overshirt with clean lines",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "evidence-reviewer-explainer",
+      "role": "evidence-reviewer-explainer",
+      "title": "Evidence Reviewer and Explainer",
+      "name": "Lilit",
+      "focus": [
+        "Checks claims and citations and turns findings into an accessible explanation."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Armenian",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "data-analyst",
+      "role": "data-analyst",
+      "title": "Data and Statistics Analyst",
+      "name": "Halyna",
+      "focus": [
+        "Finds the relevant numbers and explains what they do and do not show."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Ukrainian",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "intelligence-brief-writer",
+      "role": "intelligence-brief-writer",
+      "title": "Research Brief Writer",
+      "name": "Efua",
+      "focus": [
+        "Turns the findings into a short, sourced brief the person can read in minutes."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Akan Ghanaian",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

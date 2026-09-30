@@ -1,0 +1,99 @@
+{
+  "key": "market-research",
+  "kind": "business",
+  "rank": 17,
+  "label": "Market Research Team",
+  "blurb": "A Research Director and 4 specialists who build an evidence-based view of a market and its opportunities",
+  "purpose": "Designed for business owners, leaders, and teams executing on market research. Build an evidence-based view of a market and its opportunities. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Market Research",
+    "goal": "Deliver a comprehensive initial market research plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "researcher",
+      "title": "Research Director",
+      "name": "Bilal",
+      "focus": [
+        "Defines the research questions, assigns work, and reviews the final findings."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Punjabi Pakistani",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Industry Researcher",
+      "name": "Mayumi",
+      "focus": [
+        "Maps market structure, trends, suppliers, and relevant public sources."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Japanese",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "customer-insights-analyst",
+      "role": "customer-insights-analyst",
+      "title": "Customer Researcher",
+      "name": "Aisyah",
+      "focus": [
+        "Develops interview and survey guides and synthesizes customer needs."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Malay Malaysian",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "market-analyst",
+      "role": "market-analyst",
+      "title": "Market Sizing Analyst",
+      "name": "Erik",
+      "focus": [
+        "Estimates market size and segment potential with explicit assumptions."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Swedish",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "evidence-reviewer",
+      "role": "evidence-reviewer",
+      "title": "Evidence Reviewer",
+      "name": "Michal",
+      "focus": [
+        "Checks source quality, dates, calculations, and unsupported claims."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Polish",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    }
+  ]
+}

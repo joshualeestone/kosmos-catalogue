@@ -196,10 +196,15 @@ function build(src = {}) {
   }
   const roles = [];
   const seen = new Set();
+  // The picker lists roles by name, so two keys with one name read as the same role twice (#4555).
+  const labels = new Map();
   for (const r of rs.roles) {
     const k = r.key;
     if (!KEY_RE.test(String(k))) problems.push(`role key ${JSON.stringify(k)} must be lowercase words joined by hyphens`);
     if (seen.has(k)) problems.push('duplicate role key ' + k);
+    const label = String(r.label).trim().toLowerCase();
+    if (labels.has(label)) problems.push(`${k}: the name ${JSON.stringify(r.label)} is already the role ${labels.get(label)}`);
+    else labels.set(label, k);
     if (builtin.has(k)) problems.push(`${k}: Kosmos already has a built-in role with this key`);
     seen.add(k);
     if (!groups.includes(r.group)) problems.push(`${k}: unknown group ${r.group}`);

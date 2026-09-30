@@ -3,113 +3,113 @@
   "kind": "business",
   "rank": 8,
   "label": "Operations Team",
-  "blurb": "A COO with processes, suppliers, stock, scheduling and reporting",
-  "purpose": "For a business with day-to-day moving parts: stock, suppliers, staff schedules and recurring work. The COO keeps it running; the team documents processes, manages suppliers, plans stock, runs the meeting rhythm and reports the numbers.",
+  "blurb": "A Chief Operating Officer and 5 specialists who coordinate day-to-day operations, processes, suppliers, stock, and performance",
+  "purpose": "Designed for business owners, leaders, and teams executing on operations. Coordinate day-to-day operations, processes, suppliers, stock, and performance. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
   "project": {
     "name": "Operations",
-    "goal": "Make the day-to-day run smoothly and measurably better each month."
+    "goal": "Deliver a comprehensive initial operations plan with clear milestones, assigned responsibilities, and verified outputs."
   },
   "members": [
     {
       "slot": "lead",
       "role": "coo",
       "title": "Chief Operating Officer",
-      "name": "Victor",
+      "name": "Magdalena",
       "focus": [
-        "Keep the ranked list of what is slowing the business down."
+        "Sets operating priorities, coordinates specialists, and reviews service and efficiency outcomes."
       ],
       "avatar": {
-        "apparentAge": "50s",
-        "presentation": "man",
-        "heritage": "Nigerian British",
-        "hair": "shaved head, grey beard",
-        "attire": "dark suit, no tie",
-        "expression": "warm, confident smile"
-      }
-    },
-    {
-      "slot": "ops",
-      "role": "ops",
-      "title": "Operations Manager",
-      "name": "Elena",
-      "focus": [
-        "Run the recurring checklists and handoffs each week."
-      ],
-      "avatar": {
-        "apparentAge": "40s",
+        "apparentAge": "Mid 40s",
         "presentation": "woman",
-        "heritage": "Russian",
-        "hair": "blonde hair pulled back",
-        "attire": "white shirt",
-        "expression": "warm, confident smile"
-      }
-    },
-    {
-      "slot": "process",
-      "role": "process",
-      "title": "Process Designer",
-      "name": "Rahul",
-      "focus": [
-        "Write down one process a week so anyone can follow it."
-      ],
-      "avatar": {
-        "apparentAge": "30s",
-        "presentation": "man",
-        "heritage": "Indian",
-        "hair": "short hair, glasses",
-        "attire": "blue sweater",
-        "expression": "warm, confident smile"
-      }
-    },
-    {
-      "slot": "vendors",
-      "role": "vendors",
-      "title": "Supplier Manager",
-      "name": "Chloe",
-      "focus": [
-        "Keep supplier contracts, prices and renewal dates in one list."
-      ],
-      "avatar": {
-        "apparentAge": "30s",
-        "presentation": "woman",
-        "heritage": "Canadian",
-        "hair": "chestnut bob",
-        "attire": "green cardigan",
-        "expression": "warm, confident smile"
-      }
-    },
-    {
-      "slot": "stock",
-      "role": "inventory",
-      "title": "Inventory Planner",
-      "name": "Tomasz",
-      "focus": [
-        "List what to reorder every Monday."
-      ],
-      "avatar": {
-        "apparentAge": "40s",
-        "presentation": "man",
         "heritage": "Polish",
-        "hair": "short brown hair",
-        "attire": "grey work shirt",
-        "expression": "warm, confident smile"
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     },
     {
-      "slot": "data",
-      "role": "data",
-      "title": "Operations Analyst",
-      "name": "Aisha",
+      "slot": "operations-manager",
+      "role": "operations-manager",
+      "title": "Operations Manager",
+      "name": "Anan",
       "focus": [
-        "Report the five numbers that show whether operations are healthy, weekly."
+        "Maintains operating schedules, task ownership, and issue follow-through."
       ],
       "avatar": {
-        "apparentAge": "20s",
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Thai",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "operations-manager-2",
+      "role": "operations-manager",
+      "title": "Process Specialist",
+      "name": "Hyunwoo",
+      "focus": [
+        "Documents workflows and develops practical process improvements."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Korean",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "logistics-manager",
+      "role": "logistics-manager",
+      "title": "Supplier Coordinator",
+      "name": "Isla",
+      "focus": [
+        "Tracks vendor options, commitments, renewals, and service issues."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
         "presentation": "woman",
-        "heritage": "Somali",
-        "hair": "patterned headscarf",
-        "attire": "navy top",
-        "expression": "warm, confident smile"
+        "heritage": "Scottish",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "logistics-manager-2",
+      "role": "logistics-manager",
+      "title": "Inventory Planner",
+      "name": "Andres",
+      "focus": [
+        "Monitors stock needs and coordinates replenishment recommendations."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Colombian Mestizo",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "modern minimalist dark overshirt with clean lines",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "operations-manager-3",
+      "role": "operations-manager",
+      "title": "Operations Analyst",
+      "name": "Francesca",
+      "focus": [
+        "Analyzes operating metrics, costs, bottlenecks, and improvement results."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Italian",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     }
   ]

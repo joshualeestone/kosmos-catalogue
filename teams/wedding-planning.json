@@ -1,0 +1,116 @@
+{
+  "key": "wedding-planning",
+  "kind": "personal",
+  "rank": 7,
+  "label": "Wedding Planning Team",
+  "blurb": "A Wedding Planning Director and 5 specialists who coordinate a wedding’s budget, vendors, guests, design, and schedule",
+  "purpose": "Created for individuals, families, and organizers looking for dedicated support with wedding planning. Coordinate a wedding’s budget, vendors, guests, design, and schedule. The team takes care of preparation, detailed planning, and practical follow-through to keep everything running smoothly.",
+  "project": {
+    "name": "Wedding Planning",
+    "goal": "Deliver a comprehensive initial wedding planning plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "wedding-planner",
+      "title": "Wedding Planning Director",
+      "name": "Bruna",
+      "focus": [
+        "Owns the couple's brief, coordinates the team, and resolves budget and scheduling tradeoffs."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "woman",
+        "heritage": "Afro-Brazilian",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Venue and Vendor Researcher",
+      "name": "Piotr",
+      "focus": [
+        "Finds and compares venues, catering, photography, and other service providers."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Polish",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "event-planner",
+      "role": "event-planner",
+      "title": "Budget and Booking Coordinator",
+      "name": "Khoa",
+      "focus": [
+        "Maintains cost scenarios, deposits, payment dates, and booking records."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Kinh Vietnamese",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "guest-experience-coordinator",
+      "role": "guest-experience-coordinator",
+      "title": "Guest Experience Coordinator",
+      "name": "Abena",
+      "focus": [
+        "Organizes guest lists, invitations, seating requirements, and travel information."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Akan Ghanaian",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "product-designer",
+      "role": "product-designer",
+      "title": "Wedding Design Specialist",
+      "name": "Dilan",
+      "focus": [
+        "Develops decor, stationery, styling, and ceremony concepts."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Sinhalese Sri Lankan",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "wedding-planner",
+      "role": "wedding-planner",
+      "title": "Wedding Timeline Coordinator",
+      "name": "Indah",
+      "focus": [
+        "Builds planning milestones and the event-day schedule and handoff notes."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Javanese Indonesian",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    }
+  ]
+}

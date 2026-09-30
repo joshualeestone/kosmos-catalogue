@@ -3,96 +3,96 @@
   "kind": "business",
   "rank": 2,
   "label": "Sales Team",
-  "blurb": "A Head of Sales with prospecting, proposals, accounts and CRM",
-  "purpose": "For a business that sells to other businesses or high-value customers. The Head of Sales keeps the pipeline honest; the team finds prospects, writes proposals, looks after existing accounts and keeps the records clean.",
+  "blurb": "A Head of Sales and 4 specialists who organize prospecting, sales materials, account development, and deal follow-through",
+  "purpose": "Designed for business owners, leaders, and teams executing on sales. Organize prospecting, sales materials, account development, and deal follow-through. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
   "project": {
     "name": "Sales",
-    "goal": "Build a steady, honest pipeline and close more of it."
+    "goal": "Deliver a comprehensive initial sales plan with clear milestones, assigned responsibilities, and verified outputs."
   },
   "members": [
     {
       "slot": "lead",
-      "role": "salesdir",
+      "role": "sales-rep",
       "title": "Head of Sales",
-      "name": "Marcus",
+      "name": "Pranav",
       "focus": [
-        "Run the weekly pipeline review and set each agent's priorities."
+        "Sets sales priorities, coaches the workflow, and reviews pipeline progress and deal strategy."
       ],
       "avatar": {
-        "apparentAge": "40s",
+        "apparentAge": "Early 40s",
         "presentation": "man",
-        "heritage": "African American",
-        "hair": "close-cropped hair, trimmed beard",
-        "attire": "light blue shirt, open collar",
-        "expression": "warm, confident smile"
+        "heritage": "Tamil Indian",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     },
     {
-      "slot": "sdr",
-      "role": "sdr",
-      "title": "Sales Development Rep",
-      "name": "Priya",
+      "slot": "sales-rep",
+      "role": "sales-rep",
+      "title": "Sales Development Representative",
+      "name": "Sekar",
       "focus": [
-        "Find ten new fitting prospects a week and draft first messages."
+        "Researches prospects and prepares personalized outreach and qualification notes."
       ],
       "avatar": {
-        "apparentAge": "20s",
+        "apparentAge": "Mid 20s",
         "presentation": "woman",
-        "heritage": "Indian",
-        "hair": "long braid over one shoulder",
-        "attire": "burgundy blouse",
-        "expression": "warm, confident smile"
+        "heritage": "Javanese Indonesian",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     },
     {
       "slot": "proposals",
       "role": "proposals",
       "title": "Proposal Writer",
-      "name": "Owen",
+      "name": "Mairi",
       "focus": [
-        "Turn every qualified conversation into a clear proposal within two days."
+        "Develops tailored proposals, solution summaries, and responses to buyer requirements."
       ],
       "avatar": {
-        "apparentAge": "50s",
-        "presentation": "man",
-        "heritage": "Welsh",
-        "hair": "grey hair, glasses",
-        "attire": "tweed jacket",
-        "expression": "warm, confident smile"
-      }
-    },
-    {
-      "slot": "accounts",
-      "role": "accounts",
-      "title": "Account Manager",
-      "name": "Leila",
-      "focus": [
-        "Keep existing customers happy and spot chances to grow them."
-      ],
-      "avatar": {
-        "apparentAge": "30s",
+        "apparentAge": "Late 20s",
         "presentation": "woman",
-        "heritage": "Lebanese",
-        "hair": "wavy brown shoulder-length hair",
-        "attire": "cream silk blouse",
-        "expression": "warm, confident smile"
+        "heritage": "Scottish",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     },
     {
-      "slot": "crm",
-      "role": "crm",
-      "title": "CRM Specialist",
-      "name": "Kenji",
+      "slot": "account-manager",
+      "role": "account-manager",
+      "title": "Account Manager",
+      "name": "Walid",
       "focus": [
-        "Keep every deal and contact current, and list follow-ups due each Monday."
+        "Prepares account plans, discovery questions, meeting briefs, and follow-up drafts."
       ],
       "avatar": {
-        "apparentAge": "30s",
+        "apparentAge": "Mid 20s",
         "presentation": "man",
-        "heritage": "Japanese Brazilian",
-        "hair": "short black hair, clean-shaven",
-        "attire": "dark green polo",
-        "expression": "warm, confident smile"
+        "heritage": "Lebanese Arab",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "operations-manager",
+      "role": "operations-manager",
+      "title": "CRM and Revenue Operations Specialist",
+      "name": "Hine",
+      "focus": [
+        "Maintains deal records, pipeline hygiene, reporting, and next-step tracking."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Maori",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }
   ]

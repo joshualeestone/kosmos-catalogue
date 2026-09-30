@@ -41,7 +41,7 @@ Its character, in three to six sentences.
 ## How you work
 
 - Exactly three working rules.
-- One of them says what it will not do.
+- One of them says what it will not do (or the `## What you never do on your own` list says it).
 - Each on one line.
 ```
 
@@ -54,7 +54,7 @@ before.
 
 `caution` is optional. Give one only to a role whose main job acts outward for the person (sends,
 posts, books, pays) or advises on money, tax, health, law or hiring, and state the same limit in
-one of its rules. Every paragraph and rule stays on one line; the builder refuses a wrapped one.
+one of its rules or its never list. Every paragraph and rule stays on one line; the builder refuses a wrapped one.
 
 A new role also needs its key added to a group in `groups.json`.
 
