@@ -649,7 +649,7 @@ test('only the sign job can read the key, and it runs only checkout, download-ar
     const m = /^ {2}([a-z-]+):$/.exec(line);
     if (m) { current = m[1]; jobs[current] = ''; } else if (current) jobs[current] += line + '\n';
   }
-  assert.deepEqual(Object.keys(jobs), ['build', 'sign', 'deploy']);
+  assert.deepEqual(Object.keys(jobs), ['build', 'sign', 'deploy', 'confirm']);
   for (const [name, body] of Object.entries(jobs)) {
     assert.equal(body.includes('CATALOGUE_SIGNING_KEY'), name === 'sign', `${name}: the key`);
   }
@@ -718,7 +718,7 @@ test('no job but sign names a secret or the signing environment, and deploy re-c
   const text = fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8');
   const parts = text.slice(text.indexOf('\njobs:\n')).split(/\n {2}(?=[a-z-]+:\n)/).slice(1);
   const jobs = Object.fromEntries(parts.map((p) => [p.slice(0, p.indexOf(':')), p]));
-  for (const name of ['build', 'deploy']) {
+  for (const name of ['build', 'deploy', 'confirm']) {
     assert.doesNotMatch(jobs[name], /secrets\.|catalogue-signing/, name);
   }
   assert.match(jobs.deploy, /node repo\/check-deploy\.js dist/);
@@ -745,7 +745,9 @@ test('the sign job runs exactly these commits, re-checks the tip, and signs only
   assert.match(jobs.deploy, /check-deploy\.js/);
 });
 
-test('the rebuild the sign job makes is byte-identical to the build job\'s for the same serial', () => {
+// Same node, so this proves the build is deterministic for one serial; the cross-version guarantee
+// is the sign job's own diff against the build job's artifact.
+test('a rebuild with the serial handed down (previous = serial - 1) is byte-identical', () => {
   const { execFileSync } = require('node:child_process');
   const dir = copyRepo();
   const a = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-a-'));

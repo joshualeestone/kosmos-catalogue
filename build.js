@@ -80,13 +80,13 @@ function markerIn(value, nameAllowed = true) {
  *  letter reorders what a diff shows, and a Cyrillic or Greek lookalike spells a different word.
  *  The IPA, phonetic and extended Latin letter blocks are refused as well (small capitals and other
  *  letters no plain text needs), as are the object-replacement character and the bars that draw
- *  like an em dash (U+2015, U+2E3A, U+2E3B), and hiddenIn() also refuses text that Unicode compatibility folding
+ *  like an em dash (U+2015, U+2E3A, U+2E3B, box drawing, U+23AF, U+30FC, U+2796), and hiddenIn() also refuses text that Unicode compatibility folding
  *  (NFKC) would change, which catches mathematical and fullwidth letters and Roman numerals. An allowlist, not a list of bad characters, so a
  *  new invisible one (a variation selector, a bidi mark, a filler that renders as nothing) is refused
  *  without anyone having to know its name. Text here becomes instructions for agents with tools,
  *  so nothing may say more than what a reviewer reads. The fillers named at the end are letters and
  *  symbols to Unicode but show as blank space. */
-const HIDDEN_RE = /[^\p{L}\p{N}\p{P}\p{S}\u0020\u0300-\u036F]|[\u034F\u115F\u1160\u3164\uFFA0\u2800\uFFFC\u2015\u2E3A\u2E3B]|[\u0250-\u02AF\u1D00-\u1DBF\u2C60-\u2C7F\uA720-\uA7FF\uAB30-\uAB6F]|[^\p{Script=Latin}\p{Script=Common}\p{Script=Inherited}]/u;
+const HIDDEN_RE = /[^\p{L}\p{N}\p{P}\p{S}\u0020\u0300-\u036F]|[\u034F\u115F\u1160\u3164\uFFA0\u2800\uFFFC\u2015\u2E3A\u2E3B\u2500-\u257F\u23AF\u30FC\u2796]|[\u0250-\u02AF\u1D00-\u1DBF\u2C60-\u2C7F\uA720-\uA7FF\uAB30-\uAB6F]|[^\p{Script=Latin}\p{Script=Common}\p{Script=Inherited}]/u;
 /** Text that points an agent outside its instructions: a web address (any scheme, www., or a name
  *  ending in a common domain or file ending), a markdown link or image, an HTML tag or any angle
  *  bracket, or a download or run command (shell or PowerShell). Role and team text is plain

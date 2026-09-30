@@ -56,7 +56,8 @@ description. `rank` orders teams within `business` or `personal`.
 
 ## Building and checking
 
-Needs Node 26 or later and a git clone (the build's serial is the commit time). Nothing to install.
+Needs Node 26 or later (the publish workflow's signing job rebuilds on the runner's own node, 20 or
+later, and compares) and a git clone (the build's serial is the commit time). Nothing to install.
 
 ```sh
 node build.js --check   # check everything, write nothing
