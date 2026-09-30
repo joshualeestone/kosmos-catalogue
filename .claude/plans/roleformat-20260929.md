@@ -26,3 +26,12 @@ format predates the brief, so the catalogue changes, not the packet).
   real paragraph; a later copy pass can change the template without touching data).
 - Member personality (the packet's per-member block) is not in this change: it needs Kosmos to
   write it into the member's instruction file, after #4632's Kosmos branch merges.
+
+## Review iteration 1 (changes)
+- A role with both a Who you are paragraph and an archetype is refused (parser and builder); the
+  importer keeps the paragraph when a packet role has both. The em-dash and marker checks now scan
+  the source role as well as the built entry, so no field can hide one.
+- Tests put an em dash, escaped em dash, web address, marker, HTML comment and hidden character
+  into the new fields, each refused, with the clean role as control.
+- "an" before a silent h (honest, honour, hour, heir). Output for the 69 roles is still identical
+  (catalogue and text).

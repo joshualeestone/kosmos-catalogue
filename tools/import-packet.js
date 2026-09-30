@@ -48,8 +48,9 @@ function roleFrom(p) {
   const s = sections(p.instructions);
   const r = { key: p.key, group: p.category, label: p.name, blurb: p.summary, first: p.first || '', desc: s.desc, how: s.how };
   // The brief gives an archetype per role, which stands in for Who you are when there is no paragraph.
+  // One or the other (the format refuses both): a written paragraph says more than the phrase.
   if (p.character) r.who = p.character;
-  if (p.archetype) r.archetype = p.archetype;
+  else if (p.archetype) r.archetype = p.archetype;
   if (s.ask.length) r.ask = s.ask;
   if (s.never.length) r.never = s.never;
   if (p.caution) r.caution = p.caution;

@@ -70,3 +70,33 @@ test('sections out of order, an archetype that is not a short phrase, and too ma
   // CONTROL: the unchanged brief-shaped role builds clean.
   assert.deepEqual(buildWith(BRIEF).problems, []);
 });
+
+test('the new fields get every text check the old ones do', () => {
+  const cases = [
+    ['an em dash in a never item', BRIEF.replace('Never accept a meeting', 'Never — accept a meeting'), /em dash/],
+    ['an escaped em dash in the archetype', BRIEF.replace('calm, far-sighted planner', 'calm &mdash; planner'), /em dash/],
+    ['a web address in an ask item', BRIEF.replace('Which three things', 'Check example.com for which three things'), /web address/],
+    ['a template marker in a never item', BRIEF.replace('Never send anything', 'Never send {{X}} anything'), /template marker/],
+    ['an HTML comment in an ask item', BRIEF.replace('Which three things', 'Which <!-- x --> three things'), /template marker|angle bracket/],
+    ['a hidden character in the archetype', BRIEF.replace('calm, far-sighted', 'calm,​ far-sighted'), /invisible/],
+  ];
+  for (const [what, text, re] of cases) {
+    assert.notEqual(text, BRIEF, `premise: ${what} changed the text`);
+    assert.match(buildWith(text).problems.join('\n'), re, what);
+  }
+  assert.deepEqual(buildWith(BRIEF).problems, [], 'CONTROL');
+});
+
+test('a role with both a Who you are paragraph and an archetype is refused', () => {
+  const both = COS.replace(/^first: .*$/m, (l) => `${l}\narchetype: calm planner`);
+  assert.match(source.parseRole('cos', both).problems.join('\n'), /has both/);
+  const read = source.read();
+  const roles = read.rolesSource.roles.map((r) => (r.key === 'cos' ? { ...r, archetype: 'calm planner' } : r));
+  assert.match(build.build({ rolesSource: { ...read.rolesSource, roles } }).problems.join('\n'), /cos: has both/);
+});
+
+test('an archetype starting with a silent h takes "an"', () => {
+  const b = buildWith(BRIEF.replace('calm, far-sighted planner', 'honest, careful planner'));
+  assert.deepEqual(b.problems, []);
+  assert.match(b.catalogue.roles.find((r) => r.key === 'cos').instructions.join('\n'), /You are an honest, careful planner\./);
+});

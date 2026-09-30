@@ -37,6 +37,7 @@ function lowerLabel(label) {
 function articleFor(phrase) {
   const first = phrase.split(/\s+/)[0];
   if (ACRONYMS.has(first)) return 'AEFHILMNORSX'.includes(first[0]) ? 'an' : 'a';
+  if (/^(honest|honou?r|hour|heir)/i.test(first)) return 'an';   // a silent h
   return 'aeiou'.includes(first[0].toLowerCase()) ? 'an' : 'a';
 }
 
@@ -198,6 +199,7 @@ function build(src = {}) {
     if (r.who !== undefined) {
       const n = sentences(r.who);
       if (n < 3 || n > 6) problems.push(`${k}: character is ${n} sentences, three to six is the rule`);
+      if (r.archetype !== undefined) problems.push(`${k}: has both a Who you are paragraph and an archetype; keep one`);
     } else if (!r.archetype) problems.push(`${k}: needs a Who you are paragraph or an archetype`);
     // An archetype is a short phrase ("calm, exacting bookkeeper"), rendered as "You are a <archetype>."
     if (r.archetype !== undefined && (typeof r.archetype !== 'string' || !/^[a-z][^.!?]{2,79}$/.test(r.archetype))) {
@@ -214,11 +216,12 @@ function build(src = {}) {
     // The product's wrapper keeps a `code span` on one line; this one does not, so refuse text
     // whose wrap would split one (an odd count of backticks on a line) rather than ship it broken.
     if (entry.instructions.some((l) => (l.match(/`/g) || []).length % 2)) problems.push(`${k}: a code span is split across lines`);
-    if (emDashIn(entry)) problems.push(`${k}: em dash`);
+    // The source too, so a field the built entry does not carry cannot hide one.
+    if (emDashIn([r, entry])) problems.push(`${k}: em dash`);
     // {{NAME}} is filled in only in a role's instructions (Kosmos's roles.instructionsFor), so it
     // is allowed there and nowhere else.
     const { instructions: text, ...shown } = entry;
-    if (markerIn(text) || markerIn(shown, false)) problems.push(`${k}: a template marker other than {{NAME}} in its instructions, or an HTML comment`);
+    if (markerIn(text) || markerIn(shown, false) || markerIn({ ...r, desc: '', who: '', how: [], ask: [], never: [] }, false)) problems.push(`${k}: a template marker other than {{NAME}} in its instructions, or an HTML comment`);
     // The source too: the wrapper splits on whitespace, and JavaScript counts U+FEFF as whitespace,
     // so the built text alone would hide one that is in the file.
     if (hiddenIn([r, entry])) problems.push(`${k}: an invisible or direction-changing character`);
