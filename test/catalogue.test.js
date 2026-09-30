@@ -874,3 +874,9 @@ test('the outward refusal names the fragment that tripped it', () => {
   r.roles[1].how[1] = 'Always check example.com first.';
   assert.ok(build.build({ rolesSource: r }).problems.some((p) => p.includes('("example.com")')));
 });
+
+test('published-serial looks for the marker at the top of this repo, where the workflow checks it', () => {
+  // The other marker tests pass their own path; this pins the default main() and the workflow use.
+  assert.equal(require('../published-serial').MARKER, path.join(REPO, 'published'));
+  assert.match(fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8'), /\[ ! -e published \]/);
+});

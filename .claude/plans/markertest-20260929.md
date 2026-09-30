@@ -11,4 +11,8 @@ The test now uses a 200 answer with a real file, so it checks the deployment-cou
 gives the same result with or without the marker. The marker behaviour itself is covered by the
 tests that pass an explicit marker path to publishedSerial().
 
-Measured: 63/63 pass in a checkout that holds the marker (the CI condition).
+Measured: 63/63 pass in a checkout that holds the marker (the CI condition), and in one without it.
+
+## Review iteration 1
+- A test pins published-serial's default marker path (the one main() and the workflow use) to the
+  repo root, since every other marker test passes its own path.
