@@ -110,7 +110,8 @@ a workflow on another branch cannot read it.
 **The key shares a job with as little code as possible.** `publish.yml` builds in one job, signs in
 a second and deploys in a third; only the signing job can read the key, and it runs just three
 actions (checkout, download-artifact and upload-artifact), each pinned to a commit, plus the builder
-and `sign.js`. It builds the catalogue again from its own checkout and signs only if that matches
+and `sign.js`, on the runner's own node (20 or later; the build was measured byte-identical on 22
+and 26, and a mismatch fails closed). It builds the catalogue again from its own checkout and signs only if that matches
 what the build job made, byte for byte, so nothing that runs in the build job chooses what is signed.
 Every job re-checks that it is running for the tip of `main`, and the deploy job re-verifies the
 signature and publishes exactly the catalogue, its signature and the portraits it names.

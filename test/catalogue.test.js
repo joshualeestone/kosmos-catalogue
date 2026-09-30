@@ -721,7 +721,7 @@ test('no job but sign names a secret or the signing environment, and deploy re-c
   for (const name of ['build', 'deploy']) {
     assert.doesNotMatch(jobs[name], /secrets\.|catalogue-signing/, name);
   }
-  assert.match(jobs.deploy, /verify\(bytes, sig/);
+  assert.match(jobs.deploy, /node repo\/check-deploy\.js dist/);
   assert.match(jobs.deploy, /BUILT_SERIAL: \$\{\{ needs\.build\.outputs\.serial \}\}/);
 });
 
@@ -742,7 +742,7 @@ test('the sign job runs exactly these commits, re-checks the tip, and signs only
   for (const name of ['build', 'sign', 'deploy']) assert.match(jobs[name], /Refuse anything but the tip of main/, name);
   assert.match(jobs.sign, /CATALOGUE_PREVIOUS_SERIAL=\$\(\(BUILT_SERIAL - 1\)\) node build\.js\n\s+diff -r unsigned dist/);
   assert.ok(jobs.sign.indexOf('diff -r unsigned dist') < jobs.sign.indexOf('node sign.js'), 'compare before signing');
-  assert.match(jobs.deploy, /unexpected files/);
+  assert.match(jobs.deploy, /check-deploy\.js/);
 });
 
 test('the rebuild the sign job makes is byte-identical to the build job\'s for the same serial', () => {
@@ -773,4 +773,48 @@ test('the outward tripwire also catches PowerShell downloads, bare domains and o
   const g = source.read().rolesSource;
   g.GROUP_ORDER[g.GROUP_ORDER.length - 1] += ' at example.com';
   assert.ok(build.build({ rolesSource: g }).problems.some((p) => /groups\.json: a web address/.test(p)));
+});
+
+test('check-deploy passes exactly the signed build and refuses every other tree', () => {
+  const crypto = require('node:crypto');
+  const { checkDeploy } = require('../check-deploy');
+  const { sign } = require('../sign');
+  const pair = crypto.generateKeyPairSync('ed25519');
+  const priv = pair.privateKey.export({ type: 'pkcs8', format: 'pem' });
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-deploy-'));
+  try {
+    const pubFile = path.join(root, 'pub.pem');
+    fs.writeFileSync(pubFile, pair.publicKey.export({ type: 'spki', format: 'pem' }));
+    const make = (edit = () => {}) => {
+      const dist = fs.mkdtempSync(path.join(root, 'd-'));
+      const c = build.build({ serial: 42 }).catalogue;
+      const m = c.teams[0].members[0];
+      fs.mkdirSync(path.join(dist, 'avatars'));
+      fs.writeFileSync(path.join(dist, 'avatars', m.avatar.id + '.webp'), webp('face'));
+      m.avatar.image = `avatars/${m.avatar.id}.webp`;
+      m.avatar.imageSha256 = build.sha256(webp('face'));
+      const text = JSON.stringify(c, null, 2) + '\n';
+      fs.writeFileSync(path.join(dist, 'catalogue.json'), text);
+      fs.writeFileSync(path.join(dist, 'catalogue.json.sig'), sign(Buffer.from(text), priv) + '\n');
+      edit(dist, m);
+      return dist;
+    };
+    const run = (dist, builtSerial = '42') => checkDeploy({ dist, builtSerial, publicKeyFile: pubFile });
+    assert.equal(run(make()).ok, true, 'CONTROL: the signed build passes');
+    assert.match(run(make(), '41').message, /serial 42 is not the built 41/);
+    assert.match(run(make(), '').message, /gave no serial/);
+    assert.match(run(make((d) => fs.writeFileSync(path.join(d, 'index.html'), 'x'))).message, /unexpected files \["index\.html"\]/);
+    assert.match(run(make((d, m) => fs.writeFileSync(path.join(d, 'avatars', m.avatar.id + '.webp'), webp('other')))).message, /does not match its hash/);
+    assert.match(run(make((d, m) => fs.rmSync(path.join(d, 'avatars', m.avatar.id + '.webp')))).message, /is missing or does not match/);
+    assert.match(run(make((d) => fs.appendFileSync(path.join(d, 'catalogue.json'), ' '))).message, /signature does not verify/);
+    assert.match(run(make((d) => fs.rmSync(path.join(d, 'catalogue.json.sig')))).message, /signature is missing/);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
+});
+
+test('the bars that draw like an em dash and the object-replacement character are refused', () => {
+  for (const ch of ['\u2015', '\u2E3A', '\u2E3B', '\uFFFC']) {
+    const r = source.read().rolesSource;
+    r.roles[2].who = r.roles[2].who.replace('You ', `You ${ch} `);
+    assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)), JSON.stringify(ch));
+  }
 });

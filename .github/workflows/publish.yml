@@ -107,6 +107,10 @@ jobs:
         env:
           BUILT_SERIAL: ${{ needs.build.outputs.serial }}
         run: |
+          case "$BUILT_SERIAL" in ''|*[!0-9]*) echo "refused: the build job gave no serial"; exit 1 ;; esac
+          # The runner's node must be one the builder was measured on: Unicode data changes between
+          # versions, and a different answer here would fail the comparison below.
+          node -e 'const m = Number(process.versions.node.split(".")[0]); if (m < 20) { console.error("refused: node " + process.version + " is older than 20"); process.exit(1); }'
           CATALOGUE_PREVIOUS_SERIAL=$((BUILT_SERIAL - 1)) node build.js
           diff -r unsigned dist
       - run: node sign.js
@@ -147,31 +151,7 @@ jobs:
       # What arrives from the sign job is checked, not trusted: the signature against the committed
       # public key, and the serial against the one the build job made.
       - name: Refuse to deploy anything but the signed build
-        run: |
-          node -e '
-            const fs = require("fs");
-            const { verify } = require("./repo/sign.js");
-            const bytes = fs.readFileSync("dist/catalogue.json");
-            const sig = fs.readFileSync("dist/catalogue.json.sig", "utf8").trim();
-            if (!verify(bytes, sig, fs.readFileSync("repo/signing-key.pub.pem", "utf8"))) { console.error("refused: the signature does not verify"); process.exit(1); }
-            const c = JSON.parse(bytes);
-            const serial = String(c.serial);
-            if (serial !== process.env.BUILT_SERIAL) { console.error(`refused: serial ${serial} is not the built ${process.env.BUILT_SERIAL}`); process.exit(1); }
-            // Exactly the catalogue, its signature and the portraits it names (each matching its
-            // signed hash): no other file reaches Pages, and through it installkosmos.com.
-            const crypto = require("crypto");
-            const want = new Set(["catalogue.json", "catalogue.json.sig"]);
-            for (const t of c.teams) for (const m of t.members) if (m.avatar.image) {
-              want.add(m.avatar.image);
-              const h = crypto.createHash("sha256").update(fs.readFileSync("dist/" + m.avatar.image)).digest("hex");
-              if (h !== m.avatar.imageSha256) { console.error(`refused: ${m.avatar.image} does not match its hash`); process.exit(1); }
-            }
-            const have = fs.readdirSync("dist", { recursive: true }).filter((f) => fs.statSync("dist/" + f).isFile());
-            const extra = have.filter((f) => !want.has(f));
-            const missing = [...want].filter((f) => !have.includes(f));
-            if (extra.length || missing.length) { console.error(`refused: unexpected files ${JSON.stringify(extra)}, missing ${JSON.stringify(missing)}`); process.exit(1); }
-            console.log(`deploying serial ${serial}, signature verified`);
-          '
+        run: node repo/check-deploy.js dist
         env:
           BUILT_SERIAL: ${{ needs.build.outputs.serial }}
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
