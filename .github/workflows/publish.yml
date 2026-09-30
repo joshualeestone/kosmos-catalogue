@@ -1,11 +1,15 @@
-# Publish the catalogue on every push to main: check, build, sign, and deploy to GitHub Pages.
+# Publish the catalogue on every push to main: check and build, sign, then deploy to GitHub Pages.
 # Kosmos will read it at https://installkosmos.com/catalogue/, which the site will pass through to
 # the Pages address (a rewrite in chaoskosmos-site's vercel.json, kosmos#4632), so the address
 # Kosmos knows is ours and the host behind it can change without a Kosmos release.
 #
-# The signing key is a secret of the github-pages ENVIRONMENT, which only main may deploy to, so a
-# workflow on any other branch cannot read it. Every action is pinned to a commit, because this is
-# the job that holds the key.
+# Three jobs, so the signing key shares a job with as little code as possible:
+#   build   runs the tests and the builder; no key, read-only permissions.
+#   sign    the only job that can read CATALOGUE_SIGNING_KEY (a secret of the catalogue-signing
+#           environment, which only main may use). It runs three actions, each a plain node
+#           action pinned to a commit (checkout, download-artifact, upload-artifact), and sign.js.
+#   deploy  hands the signed files to Pages. No key. upload-pages-artifact is a composite action
+#           that calls another action by tag, which is why it lives here and not beside the key.
 name: publish
 on:
   push:
@@ -13,18 +17,15 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  deployments: read
-  pages: write
-  id-token: write
 concurrency:
   group: pages
   cancel-in-progress: false
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+    permissions:
+      contents: read
+      deployments: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -32,32 +33,32 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 26
-      # A re-run of an old publish checks out its old commit; published now, it would carry a higher
-      # serial and roll every Kosmos back. Only the current tip of main is published.
+      # A re-run of an old publish checks out its old commit; published now, it would re-ship old
+      # content. Only the current tip of main is published. A run queued behind a deploy while a
+      # newer commit landed also stops here; that is expected, and the newer commit's run publishes.
       - name: Refuse anything but the tip of main
         run: |
           tip=$(git ls-remote origin refs/heads/main | cut -f1)
-          # A run queued behind a deploy while a newer commit landed also stops here; that is expected,
-          # and the newer commit's own run publishes.
           if [ "$tip" != "$GITHUB_SHA" ]; then echo "refused: $GITHUB_SHA is not the tip of main ($tip); the tip's own run publishes (to publish again, push a new commit, never re-run an old one)"; exit 1; fi
       - run: node build.js --check
       - run: node --test test/
       # The new serial must exceed the published one (build.js takes the larger of the commit time
       # and this plus one). published-serial.js decides what each answer means: a 404 counts as
-      # "nothing published yet" only before the first successful publish.
+      # "nothing published yet" only before the first publish.
       - name: Read the published serial
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # Earlier deployments that reached Pages (a deployment status of success), not runs that
-          # finished green: a run can deploy and still fail a later step.
-          # Captured first, so a failed request stops the step (a failure inside `for ... in $(...)`
-          # would not). Newest first, 100 at most: a lower bound, which is all the 404 rule needs.
-          urls=$(gh api "repos/${{ github.repository }}/deployments?environment=github-pages&per_page=100" --jq '.[].statuses_url') || { echo "could not list earlier deployments"; exit 1; }
           earlier=0
-          for u in $urls; do
-            if [ "$(gh api "$u" --jq '[.[]|select(.state=="success")]|length')" != 0 ]; then earlier=$((earlier + 1)); fi
-          done
+          if [ ! -e published ]; then
+            # Before the marker is committed: were there earlier Pages deployments whose deploy job
+            # succeeded? One is enough. Captured first, so a failed request stops the step (a
+            # failure inside `for ... in $(...)` would not).
+            urls=$(gh api "repos/${{ github.repository }}/deployments?environment=github-pages&per_page=100" --jq '.[].statuses_url') || { echo "could not list earlier deployments"; exit 1; }
+            for u in $urls; do
+              if [ "$(gh api "$u" --jq '[.[]|select(.state=="success")]|length')" != 0 ]; then earlier=1; break; fi
+            done
+          fi
           code=$(curl -sSL --max-time 30 --retry 3 --retry-all-errors -H 'Cache-Control: no-cache' \
             -o "$RUNNER_TEMP/published.json" -w '%{http_code}' \
             "https://joshualeestone.github.io/kosmos-catalogue/catalogue.json?run=${{ github.run_id }}") || code=000
@@ -65,9 +66,53 @@ jobs:
           echo "published serial: $prev"
           echo "CATALOGUE_PREVIOUS_SERIAL=$prev" >> "$GITHUB_ENV"
       - run: node build.js
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: unsigned
+          path: dist/
+          if-no-files-found: error
+
+  sign:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: catalogue-signing
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: unsigned
+          path: dist/
+      # The runner's own node: sign.js needs only node:crypto, so no setup action runs beside the key.
       - run: node sign.js
         env:
           CATALOGUE_SIGNING_KEY: ${{ secrets.CATALOGUE_SIGNING_KEY }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: signed
+          path: dist/
+          if-no-files-found: error
+
+  deploy:
+    needs: sign
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: signed
+          path: dist/
+      - name: Refuse to deploy without a signature
+        run: test -s dist/catalogue.json && test -s dist/catalogue.json.sig
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
@@ -75,10 +120,10 @@ jobs:
       - id: deploy
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
       # The next publish reads the serial from Pages. Wait here until Pages serves this one, so the
-      # next run (queued behind this job by the concurrency group) never reads a stale, lower serial.
+      # next run (queued behind this one by the concurrency group) never reads a stale, lower serial.
       - name: Confirm Pages serves this serial
         run: |
-          want=$(node -e 'process.stdout.write(String(require("./dist/catalogue.json").serial))')
+          want=$(node -e 'process.stdout.write(String(JSON.parse(require("fs").readFileSync("dist/catalogue.json", "utf8")).serial))')
           for i in $(seq 1 60); do
             # A failed request is "not yet": the step runs under bash -e -o pipefail, so it must not end the loop.
             got=$( (curl -sSL --max-time 30 -H 'Cache-Control: no-cache' "https://joshualeestone.github.io/kosmos-catalogue/catalogue.json?check=${{ github.run_id }}-$i" || true) | node -e 'let s="";process.stdin.on("data",(d)=>s+=d).on("end",()=>{try{process.stdout.write(String(JSON.parse(s).serial))}catch{}})' || true)

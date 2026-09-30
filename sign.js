@@ -10,7 +10,7 @@
  * public key, so a wrong or rotated secret fails the publish instead of shipping a file every
  * copy of Kosmos would refuse.
  *
- * The private key lives only in the github-pages environment secret CATALOGUE_SIGNING_KEY. Rotating it
+ * The private key lives only in the catalogue-signing environment secret CATALOGUE_SIGNING_KEY. Rotating it
  * means a new key pair, a new signing-key.pub.pem, and a Kosmos release carrying the new public key.
  */
 const crypto = require('node:crypto');

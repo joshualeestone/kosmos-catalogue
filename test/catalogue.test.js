@@ -631,3 +631,22 @@ test('settings text gets the same checks as the rest, and write() is the inverse
     assert.deepEqual(again.teamsSource, teamsSource);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
+
+test('only the sign job can read the key, and it runs only checkout, download-artifact and upload-artifact', () => {
+  const text = fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8');
+  // Split into jobs at their two-space-indented names under `jobs:`.
+  const jobs = {};
+  let current = null;
+  for (const line of text.slice(text.indexOf('\njobs:\n')).split('\n').slice(2)) {
+    const m = /^ {2}([a-z-]+):$/.exec(line);
+    if (m) { current = m[1]; jobs[current] = ''; } else if (current) jobs[current] += line + '\n';
+  }
+  assert.deepEqual(Object.keys(jobs), ['build', 'sign', 'deploy']);
+  for (const [name, body] of Object.entries(jobs)) {
+    assert.equal(body.includes('CATALOGUE_SIGNING_KEY'), name === 'sign', `${name}: the key`);
+  }
+  assert.match(jobs.sign, /environment: catalogue-signing/);
+  const actions = (jobs.sign.match(/uses:\s*(\S+)@/g) || []).map((u) => u.replace(/uses:\s*/, '').replace(/@$/, '')).sort();
+  assert.deepEqual(actions, ['actions/checkout', 'actions/download-artifact', 'actions/upload-artifact']);
+  assert.doesNotMatch(jobs.sign, /upload-pages-artifact|setup-node/);
+});
