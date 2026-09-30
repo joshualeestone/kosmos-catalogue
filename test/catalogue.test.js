@@ -22,7 +22,7 @@ const built = () => build.build().catalogue;
 /** A throwaway copy of the source files, for tests that break one. */
 function copyRepo() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-copy-'));
-  for (const f of ['groups.json', 'settings.json', 'roles', 'teams']) fs.cpSync(path.join(REPO, f), path.join(dir, f), { recursive: true });
+  for (const f of ['groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams']) fs.cpSync(path.join(REPO, f), path.join(dir, f), { recursive: true });
   return dir;
 }
 
@@ -177,4 +177,64 @@ test('the committed public key is an Ed25519 key', () => {
   const crypto = require('node:crypto');
   const key = crypto.createPublicKey(fs.readFileSync(path.join(REPO, 'signing-key.pub.pem'), 'utf8'));
   assert.equal(key.asymmetricKeyType, 'ed25519');
+});
+
+test('sign.js refuses a key that is not the committed one, and signs with the one that is', () => {
+  const crypto = require('node:crypto');
+  const { run, verify } = require('../sign');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-sign-'));
+  try {
+    fs.writeFileSync(path.join(dir, 'catalogue.json'), build.build().text);
+    const pair = crypto.generateKeyPairSync('ed25519');
+    const pem = pair.privateKey.export({ type: 'pkcs8', format: 'pem' });
+    const pubFile = path.join(dir, 'pub.pem');
+    fs.writeFileSync(pubFile, pair.publicKey.export({ type: 'spki', format: 'pem' }));
+    // Against the committed public key, a fresh key is the wrong secret.
+    const wrong = run({ pem, dist: dir });
+    assert.equal(wrong.ok, false);
+    assert.match(wrong.message, /does not verify against signing-key\.pub\.pem/);
+    assert.equal(fs.existsSync(path.join(dir, 'catalogue.json.sig')), false, 'a .sig was written for the wrong key');
+    assert.match(run({ dist: dir, publicKeyFile: pubFile }).message, /CATALOGUE_SIGNING_KEY is not set/);
+    assert.match(run({ pem, dist: path.join(dir, 'none'), publicKeyFile: pubFile }).message, /does not exist/);
+    fs.writeFileSync(path.join(dir, 'bad.pem'), 'not a key');
+    assert.match(run({ pem, dist: dir, publicKeyFile: path.join(dir, 'bad.pem') }).message, /cannot be read as a public key/);
+    // CONTROL: the matching public key signs, and the signature verifies over the exact file.
+    const good = run({ pem, dist: dir, publicKeyFile: pubFile });
+    assert.equal(good.ok, true, good.message);
+    const sig = fs.readFileSync(path.join(dir, 'catalogue.json.sig'), 'utf8').trim();
+    assert.equal(verify(fs.readFileSync(path.join(dir, 'catalogue.json')), sig, fs.readFileSync(pubFile, 'utf8')), true);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('a member role must exist in the catalogue or in Kosmos, and a catalogue role may not reuse a built-in key', () => {
+  const t = source.read().teamsSource;
+  t.teams[0].members[1].role = 'no-such-role';
+  assert.ok(build.build({ teamsSource: t }).problems.some((p) => /role "no-such-role" is neither/.test(p)));
+  const r = source.read().rolesSource;
+  r.roles[0].key = 'pm';
+  assert.ok(build.build({ rolesSource: r }).problems.some((p) => /pm: Kosmos already has a built-in role/.test(p)));
+  // CONTROL: a member on a built-in role (the accounting team's books) passes as it is.
+  const members = source.read().teamsSource.teams.flatMap((x) => x.members);
+  assert.ok(members.some((m) => m.role === 'books'), 'premise: some member uses a built-in role');
+  assert.deepEqual(build.build().problems, []);
+});
+
+test('a portrait is published with its sha256 inside the signed catalogue, and a linked one is refused', () => {
+  const dir = copyRepo();
+  try {
+    const id = build.build().catalogue.teams[0].members[0].avatar.id;
+    fs.mkdirSync(path.join(dir, 'avatars'));
+    fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), 'image bytes');
+    const a = build.build({ root: dir }).catalogue.teams.flatMap((t) => t.members).find((m) => m.avatar.id === id).avatar;
+    assert.equal(a.image, `avatars/${id}.webp`);
+    assert.equal(a.imageSha256, build.sha256('image bytes'));
+    fs.rmSync(path.join(dir, 'avatars', id + '.webp'));
+    fs.symlinkSync(path.join(REPO, 'README.md'), path.join(dir, 'avatars', id + '.webp'));
+    assert.ok(build.build({ root: dir }).problems.some((p) => /must be a regular file/.test(p)));
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('the serial is written into the catalogue as given', () => {
+  assert.equal(build.build({ serial: 1759190400 }).catalogue.serial, 1759190400);
+  assert.equal(build.build().catalogue.serial, 0);
 });

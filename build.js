@@ -5,7 +5,7 @@
  * (joshualeestone/kosmos#4632); the roles and teams it writes are the shape Kosmos's
  * engine/catalogue.js reads.
  *
- *     node build.js            check everything, then write dist/catalogue.json and its .sha256
+ *     node build.js            check everything, then write dist/catalogue.json and the portraits
  *     node build.js --check    check everything, write nothing (exit 1 on any problem)
  *
  * It refuses to write anything while a single problem remains. test/catalogue.test.js checks the
@@ -74,8 +74,9 @@ function emDashIn(value) {
 
 /**
  * Compose the catalogue from the sources.
- * @param {{root?: string, rolesSource?: object, teamsSource?: object}} [src] a repo copy to read,
- *   or source objects to use instead of reading one (a test passes an edited copy)
+ * @param {{root?: string, rolesSource?: object, teamsSource?: object, serial?: number}} [src] a
+ *   repo copy to read, or source objects to use instead of reading one (a test passes an edited
+ *   copy); serial is written into the catalogue (0 when not given; main() passes the commit time)
  * @returns {{catalogue: object, text: string, problems: string[]}}
  */
 function build(src = {}) {
@@ -86,12 +87,15 @@ function build(src = {}) {
   const problems = read.problems.slice();
   if (typeof ts.TEAM_CAUTION !== 'string' || !ts.TEAM_CAUTION) problems.push('settings.json: teamCaution is missing');
   if (typeof ts.AVATAR_STYLE !== 'string' || !ts.AVATAR_STYLE) problems.push('settings.json: avatarStyle is missing');
+  // Kosmos's own roles: a team member may name one, and a catalogue role must not reuse a key.
+  const builtin = new Set(readBuiltin(root, problems));
   const groups = rs.GROUP_ORDER;
   const roles = [];
   const seen = new Set();
   for (const r of rs.roles) {
     const k = r.key;
     if (seen.has(k)) problems.push('duplicate role key ' + k);
+    if (builtin.has(k)) problems.push(`${k}: Kosmos already has a built-in role with this key`);
     seen.add(k);
     if (!groups.includes(r.group)) problems.push(`${k}: unknown group ${r.group}`);
     const n = sentences(r.who);
@@ -126,12 +130,15 @@ function build(src = {}) {
     const reports = t.members.length - leads;
     if (reports < 4 || reports > 5) problems.push(`${t.key}: needs 4 or 5 reports, has ${reports}`);
     if (new Set(t.members.map((m) => m.slot)).size !== t.members.length) problems.push(`${t.key}: a slot repeats`);
-    for (const m of t.members) if (!Array.isArray(m.focus)) problems.push(`${t.key}/${m.slot}: focus must be a list`);
+    for (const m of t.members) {
+      if (!Array.isArray(m.focus)) problems.push(`${t.key}/${m.slot}: focus must be a list`);
+      if (!seen.has(m.role) && !builtin.has(m.role)) problems.push(`${t.key}/${m.slot}: role ${JSON.stringify(m.role)} is neither a catalogue role nor one Kosmos has built in`);
+    }
     const members = t.members.map((m) => {
       const id = `${t.key}-${m.slot}`;
       // The portrait, when one has been made: avatars/<id>.webp, published beside catalogue.json.
-      const image = fs.existsSync(path.join(root, 'avatars', id + '.webp')) ? `avatars/${id}.webp` : null;
-      const a = { ...m.avatar, id, image };
+      const image = portrait(root, id, problems);
+      const a = { ...m.avatar, id, image: image && image.path, imageSha256: image && image.sha256 };
       const title = lowerLabel(m.title);
       const pronoun = { woman: 'her', man: 'his' }[a.presentation] || 'their';
       a.prompt = `${ts.AVATAR_STYLE} Subject: ${articleFor(a.presentation)} ${a.presentation} in ${pronoun} ${a.apparentAge}, `
@@ -146,14 +153,50 @@ function build(src = {}) {
     if (emDashIn(entry)) problems.push(`${t.key}: em dash`);
     teams.push(entry);
   }
-  const catalogue = { generated: NOTE, version: 1, groups, roles, avatarStyle: ts.AVATAR_STYLE, teams };
+  // serial: which build this is, inside the signed bytes, so Kosmos can refuse an older catalogue
+  // than the one it already holds (a replayed old file carries a valid signature too).
+  const catalogue = { generated: NOTE, version: 1, serial: src.serial || 0, groups, roles, avatarStyle: ts.AVATAR_STYLE, teams };
   return { catalogue, text: JSON.stringify(catalogue, null, 2) + '\n', problems };
 }
 
-function sha256(text) { return crypto.createHash('sha256').update(text).digest('hex'); }
+function sha256(bytes) { return crypto.createHash('sha256').update(bytes).digest('hex'); }
+
+function readBuiltin(root, problems) {
+  try {
+    const list = JSON.parse(fs.readFileSync(path.join(root, 'kosmos-builtin-roles.json'), 'utf8')).roles;
+    if (Array.isArray(list) && list.every((k) => typeof k === 'string')) return list;
+  } catch { /* reported below */ }
+  problems.push('kosmos-builtin-roles.json: must hold a "roles" list of role keys');
+  return [];
+}
+
+/**
+ * The portrait for one member, when one has been made: avatars/<id>.webp, a regular file (a
+ * symlink is refused, so nothing outside the repo is published). Its sha256 goes into the signed
+ * catalogue, so Kosmos can check the image it downloads beside it.
+ * @returns {{path: string, sha256: string}|null}
+ */
+function portrait(root, id, problems) {
+  const rel = `avatars/${id}.webp`;
+  let st;
+  try { st = fs.lstatSync(path.join(root, rel)); } catch { return null; }
+  if (!st.isFile()) { problems.push(`${rel}: must be a regular file, not a link or a folder`); return null; }
+  return { path: rel, sha256: sha256(fs.readFileSync(path.join(root, rel))) };
+}
+
+/** The commit time of HEAD in seconds, which only grows as main moves: the catalogue's serial. */
+function commitTime(root) {
+  try {
+    const out = require('node:child_process').execFileSync('git', ['-C', root, 'log', '-1', '--format=%ct', 'HEAD'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+    const n = Number(out.trim());
+    return Number.isInteger(n) && n > 0 ? n : 0;
+  } catch { return 0; }
+}
 
 function main(argv) {
-  const { catalogue, text, problems } = build();
+  const serial = commitTime(source.ROOT);
+  const { catalogue, text, problems } = build({ serial });
+  if (!serial) problems.push('no serial: build.js must run in a git checkout with a commit');
   if (problems.length) {
     process.stderr.write('refused:\n  ' + problems.join('\n  ') + '\n');
     return 1;
@@ -163,7 +206,6 @@ function main(argv) {
   if (argv.includes('--check')) { process.stdout.write(`ok: ${summary}\n`); return 0; }
   fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, 'catalogue.json'), text);
-  fs.writeFileSync(path.join(OUT, 'catalogue.json.sha256'), sha256(text) + '  catalogue.json\n');
   // The portraits the catalogue names, published beside it under the same relative paths.
   const images = catalogue.teams.flatMap((t) => t.members.map((m) => m.avatar.image)).filter(Boolean);
   for (const rel of images) {

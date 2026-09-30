@@ -1,0 +1,4 @@
+{
+  "note": "The role keys Kosmos has built in (engine/roles.js), which a team member may use and a catalogue role must not reuse. Update it when Kosmos adds or removes a built-in role.",
+  "roles": ["pm", "director", "ea", "email", "ops", "meet", "process", "researcher", "writer", "copy", "marketing", "social", "seo", "design", "sales", "accounts", "support", "ecom", "data", "finance", "books", "product", "productdir", "engineer", "qa", "security", "legal", "recruiting", "vendors", "household", "family", "personal", "travel"]
+}
