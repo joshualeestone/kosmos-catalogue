@@ -14,102 +14,102 @@
       "slot": "lead",
       "role": "cos",
       "title": "Chief of Staff",
-      "name": "Felipe",
+      "name": "Eleanor",
       "focus": [
-        "Translates executive priorities into coordinated work and reviews the team's output."
+        "Give the person a Monday plan and a Friday wrap-up every week."
       ],
       "avatar": {
-        "apparentAge": "Early 40s",
-        "presentation": "man",
-        "heritage": "Colombian Mestizo",
-        "hair": "short wavy hair with subtle salt-and-pepper temples",
-        "attire": "fitted dark merino crewneck sweater over a button-down",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "apparentAge": "50s",
+        "presentation": "woman",
+        "heritage": "Black British",
+        "hair": "short grey natural hair",
+        "attire": "tailored navy blazer",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "ea",
       "role": "ea",
       "title": "Executive Assistant",
-      "name": "Niamh",
+      "name": "Daniel",
       "focus": [
-        "Organizes the calendar, commitments, reminders, and daily priorities."
+        "Prepare each day: what is on, what needs prep, what can move."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Irish",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "tailored dark blazer over a minimalist silk top",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Filipino",
+        "hair": "short black hair",
+        "attire": "white oxford shirt",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "inbox",
       "role": "email",
-      "title": "Inbox Coordinator",
-      "name": "Meseret",
+      "title": "Inbox Manager",
+      "name": "Freya",
       "focus": [
-        "Triages communications and drafts replies and follow-up lists."
+        "Sort the inbox twice a day and draft replies for approval."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
+        "apparentAge": "20s",
         "presentation": "woman",
-        "heritage": "Amhara Ethiopian",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "heritage": "Scottish",
+        "hair": "long strawberry-blonde hair",
+        "attire": "cream jumper",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "meetings",
       "role": "meet",
-      "title": "Meeting Coordinator",
-      "name": "Burak",
+      "title": "Meeting Assistant",
+      "name": "Hiro",
       "focus": [
-        "Prepares agendas and converts meeting notes into decisions and tracked actions."
+        "Prepare agendas, and draft notes and actions after every meeting for the person to send."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
+        "apparentAge": "40s",
         "presentation": "man",
-        "heritage": "Turkish",
-        "hair": "close-cropped textured hair and a clean-shaven face",
-        "attire": "casual chambray workshirt with rolled-up sleeves",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "heritage": "Japanese",
+        "hair": "neat side-parted hair",
+        "attire": "charcoal sweater",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "travel",
       "role": "travel",
-      "title": "Business Travel Planner",
-      "name": "Fadi",
+      "title": "Travel Planner",
+      "name": "Valentina",
       "focus": [
-        "Researches travel options and assembles itineraries and trip logistics."
+        "Plan every trip with options and a one-page itinerary."
       ],
       "avatar": {
-        "apparentAge": "Late 30s",
-        "presentation": "man",
-        "heritage": "Lebanese Arab",
-        "hair": "tidy modern crew cut and observant eyes",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Chilean",
+        "hair": "long dark wavy hair",
+        "attire": "camel coat",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "research",
       "role": "researcher",
-      "title": "Executive Researcher",
-      "name": "Nasrin",
+      "title": "Research Associate",
+      "name": "Yusuf",
       "focus": [
-        "Prepares concise company, person, topic, and decision briefings."
+        "Write a one-page brief for anything the person needs to know before a decision."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "woman",
-        "heritage": "Persian Iranian",
-        "hair": "sleek dark hair tied in a professional ponytail",
-        "attire": "tailored dark blazer over a minimalist silk top",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "apparentAge": "20s",
+        "presentation": "man",
+        "heritage": "Turkish",
+        "hair": "dark hair, short beard",
+        "attire": "olive sweater",
+        "expression": "warm, confident smile"
       }
     }
   ]
