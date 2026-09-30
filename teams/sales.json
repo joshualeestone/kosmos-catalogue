@@ -14,85 +14,85 @@
       "slot": "lead",
       "role": "salesdir",
       "title": "Head of Sales",
-      "name": "Pranav",
+      "name": "Marcus",
       "focus": [
-        "Sets sales priorities, coaches the workflow, and reviews pipeline progress and deal strategy."
+        "Run the weekly pipeline review and set each agent's priorities."
       ],
       "avatar": {
-        "apparentAge": "Early 40s",
+        "apparentAge": "40s",
         "presentation": "man",
-        "heritage": "Tamil Indian",
-        "hair": "neatly combed hair and a tidy trimmed beard",
-        "attire": "graphite utility jacket over a classic heather-grey tee",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "heritage": "African American",
+        "hair": "close-cropped hair, trimmed beard",
+        "attire": "light blue shirt, open collar",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "sdr",
       "role": "sdr",
-      "title": "Sales Development Representative",
-      "name": "Sekar",
+      "title": "Sales Development Rep",
+      "name": "Priya",
       "focus": [
-        "Researches prospects and prepares personalized outreach and qualification notes."
+        "Find ten new fitting prospects a week and draft first messages."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
+        "apparentAge": "20s",
         "presentation": "woman",
-        "heritage": "Javanese Indonesian",
-        "hair": "straight hair cut into a polished modern bob",
-        "attire": "fitted modern crewneck sweater in charcoal",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "heritage": "Indian",
+        "hair": "long braid over one shoulder",
+        "attire": "burgundy blouse",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "proposals",
       "role": "proposals",
       "title": "Proposal Writer",
-      "name": "Mairi",
+      "name": "Owen",
       "focus": [
-        "Develops tailored proposals, solution summaries, and responses to buyer requirements."
+        "Turn every qualified conversation into a clear proposal within two days."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Scottish",
-        "hair": "straight hair cut into a polished modern bob",
-        "attire": "polished dark wrap top with simple silver jewelry",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "apparentAge": "50s",
+        "presentation": "man",
+        "heritage": "Welsh",
+        "hair": "grey hair, glasses",
+        "attire": "tweed jacket",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "accounts",
       "role": "accounts",
       "title": "Account Manager",
-      "name": "Walid",
+      "name": "Leila",
       "focus": [
-        "Prepares account plans, discovery questions, meeting briefs, and follow-up drafts."
+        "Keep existing customers happy and spot chances to grow them."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "man",
-        "heritage": "Lebanese Arab",
-        "hair": "trimmed dark hair with a neatly maintained short beard",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Lebanese",
+        "hair": "wavy brown shoulder-length hair",
+        "attire": "cream silk blouse",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "crm",
       "role": "crm",
-      "title": "CRM and Revenue Operations Specialist",
-      "name": "Hine",
+      "title": "CRM Specialist",
+      "name": "Kenji",
       "focus": [
-        "Maintains deal records, pipeline hygiene, reporting, and next-step tracking."
+        "Keep every deal and contact current, and list follow-ups due each Monday."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "woman",
-        "heritage": "Maori",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Japanese Brazilian",
+        "hair": "short black hair, clean-shaven",
+        "attire": "dark green polo",
+        "expression": "warm, confident smile"
       }
     }
   ]

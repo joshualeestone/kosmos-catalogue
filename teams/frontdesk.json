@@ -14,85 +14,85 @@
       "slot": "lead",
       "role": "officemgr",
       "title": "Office Manager",
-      "name": "Afia",
+      "name": "Patricia",
       "focus": [
-        "Sets service priorities, coordinates the front-office workflow, and reviews unresolved issues."
+        "Keep the daily list: bookings, messages and anything running low."
       ],
       "avatar": {
-        "apparentAge": "Late 30s",
+        "apparentAge": "50s",
         "presentation": "woman",
-        "heritage": "Akan Ghanaian",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "polished dark wrap top with simple silver jewelry",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
+        "heritage": "Filipino American",
+        "hair": "short dark bob",
+        "attire": "lilac cardigan",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "booking",
       "role": "booking",
       "title": "Booking Coordinator",
-      "name": "Kenji",
+      "name": "Andre",
       "focus": [
-        "Organizes appointments, availability, reminders, and scheduling-change options."
+        "Keep the diary clear and draft reminders and reschedules."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
+        "apparentAge": "20s",
         "presentation": "man",
-        "heritage": "Japanese",
-        "hair": "short wavy hair with subtle salt-and-pepper temples",
-        "attire": "casual chambray workshirt with rolled-up sleeves",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "heritage": "Afro-Brazilian",
+        "hair": "short curly hair",
+        "attire": "white polo",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "reviews",
       "role": "reviews",
-      "title": "Reviews Specialist",
-      "name": "Nikos",
+      "title": "Reviews and Reputation",
+      "name": "Olivia",
       "focus": [
-        "Tracks feedback and drafts review responses and service-improvement summaries."
+        "Draft replies to every new review."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "man",
-        "heritage": "Greek",
-        "hair": "short neat dark hair parted on the side",
-        "attire": "graphite utility jacket over a classic heather-grey tee",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "English",
+        "hair": "light brown hair in a ponytail",
+        "attire": "sage green top",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "support",
       "role": "support",
-      "title": "Customer Messages Specialist",
-      "name": "Subhajit",
+      "title": "Customer Messages",
+      "name": "Hamza",
       "focus": [
-        "Triages inquiries and prepares replies about services, bookings, and routine requests."
+        "Draft replies to calls and messages that need an answer."
       ],
       "avatar": {
-        "apparentAge": "Late 30s",
+        "apparentAge": "30s",
         "presentation": "man",
-        "heritage": "Bengali Indian",
-        "hair": "close-cropped textured hair and a clean-shaven face",
-        "attire": "modern minimalist dark overshirt with clean lines",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "heritage": "Algerian",
+        "hair": "short dark hair, stubble",
+        "attire": "grey sweater",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "books",
       "role": "books",
-      "title": "Office Bookkeeper",
-      "name": "Linh",
+      "title": "Bookkeeper",
+      "name": "Wendy",
       "focus": [
-        "Organizes receipts, invoice drafts, payment records, and billing follow-ups."
+        "Record takings and costs weekly."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
+        "apparentAge": "60s",
         "presentation": "woman",
-        "heritage": "Kinh Vietnamese",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "heritage": "Chinese Canadian",
+        "hair": "short grey hair",
+        "attire": "navy cardigan",
+        "expression": "warm, confident smile"
       }
     }
   ]

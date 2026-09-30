@@ -14,102 +14,102 @@
       "slot": "lead",
       "role": "webdir",
       "title": "Website Lead",
-      "name": "Rupert",
+      "name": "Nadia",
       "focus": [
-        "Defines the site brief, coordinates specialists, and reviews delivery and maintenance priorities."
+        "Own the site plan and the launch checklist."
       ],
       "avatar": {
-        "apparentAge": "Mid 40s",
-        "presentation": "man",
-        "heritage": "English",
-        "hair": "short wavy hair with subtle salt-and-pepper temples",
-        "attire": "pressed oxford cotton button-down in soft blue",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Egyptian",
+        "hair": "dark hair, loose waves",
+        "attire": "rust-coloured blazer",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "design",
       "role": "webdesign",
       "title": "Web Designer",
-      "name": "Waimarie",
+      "name": "Felix",
       "focus": [
-        "Creates site structure, layouts, visual design, and interaction specifications."
+        "Design each page mobile-first from the site plan."
       ],
       "avatar": {
-        "apparentAge": "Late 30s",
-        "presentation": "woman",
-        "heritage": "Maori",
-        "hair": "neat braided hair gathered neatly at the crown",
-        "attire": "tailored dark blazer over a minimalist silk top",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "apparentAge": "20s",
+        "presentation": "man",
+        "heritage": "German",
+        "hair": "messy blond hair",
+        "attire": "black tee",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "copy",
       "role": "copy",
-      "title": "Website Copywriter",
-      "name": "Errol",
+      "title": "Web Copywriter",
+      "name": "Zoe",
       "focus": [
-        "Writes page copy, navigation labels, and calls to action."
+        "Write every page's words, headline first."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "man",
-        "heritage": "Afro-Jamaican",
-        "hair": "short wavy hair with subtle salt-and-pepper temples",
-        "attire": "graphite utility jacket over a classic heather-grey tee",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Australian",
+        "hair": "wavy red hair",
+        "attire": "denim shirt",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "dev",
       "role": "webdev",
       "title": "Web Developer",
-      "name": "Xiaoyu",
+      "name": "Arjun",
       "focus": [
-        "Implements pages, functionality, integrations, and technical maintenance."
+        "Build the pages on a staging copy and fix what testing finds."
       ],
       "avatar": {
-        "apparentAge": "Late 30s",
-        "presentation": "woman",
-        "heritage": "Han Chinese",
-        "hair": "sleek dark hair tied in a professional ponytail",
-        "attire": "tailored dark blazer over a minimalist silk top",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Tamil",
+        "hair": "short black hair, glasses",
+        "attire": "dark hoodie",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "seo",
       "role": "seo",
-      "title": "Website SEO Specialist",
-      "name": "Omolara",
+      "title": "SEO Specialist",
+      "name": "Lucia",
       "focus": [
-        "Plans search-focused architecture, metadata, and on-page optimization."
+        "Set each page's search terms, titles and descriptions."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
+        "apparentAge": "40s",
         "presentation": "woman",
-        "heritage": "Yoruba Nigerian",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "tailored dark blazer over a minimalist silk top",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
+        "heritage": "Argentinian",
+        "hair": "long brown hair",
+        "attire": "soft white sweater",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "qa",
       "role": "qa",
       "title": "Website Tester",
-      "name": "DeAndre",
+      "name": "Wei",
       "focus": [
-        "Checks functionality, responsive layouts, accessibility, and release readiness."
+        "Test every page on phone and desktop before launch and after every change."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
+        "apparentAge": "50s",
         "presentation": "man",
-        "heritage": "African American",
-        "hair": "trimmed dark hair with a neatly maintained short beard",
-        "attire": "fitted dark merino crewneck sweater over a button-down",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "heritage": "Chinese Malaysian",
+        "hair": "short grey hair",
+        "attire": "checked shirt",
+        "expression": "warm, confident smile"
       }
     }
   ]

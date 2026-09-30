@@ -14,85 +14,85 @@
       "slot": "lead",
       "role": "hrlead",
       "title": "Head of People",
-      "name": "Bayu",
+      "name": "Naomi",
       "focus": [
-        "Sets people-work priorities, coordinates the team, and reviews employee-facing materials."
+        "Keep the people priorities list and review every draft before it reaches the person."
       ],
       "avatar": {
-        "apparentAge": "Mid 40s",
-        "presentation": "man",
-        "heritage": "Javanese Indonesian",
-        "hair": "tidy modern crew cut and observant eyes",
-        "attire": "graphite utility jacket over a classic heather-grey tee",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "Ethiopian",
+        "hair": "natural hair in a low bun",
+        "attire": "soft blue blouse",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "recruiting",
       "role": "recruiting",
       "title": "Recruiting Coordinator",
-      "name": "Narine",
+      "name": "Jamal",
       "focus": [
-        "Drafts role descriptions, structures interview plans, and organizes candidate information."
+        "Write job posts, screen applications, and propose interview times for the person to confirm."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "woman",
-        "heritage": "Armenian",
-        "hair": "neat braided hair gathered neatly at the crown",
-        "attire": "smart knit cardigan over a crisp collared blouse",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Moroccan",
+        "hair": "short dark hair, beard",
+        "attire": "grey blazer",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "onboarding",
       "role": "onboarding",
-      "title": "Employee Onboarding Specialist",
-      "name": "Aroha",
+      "title": "Onboarding Coordinator",
+      "name": "Lily",
       "focus": [
-        "Creates onboarding schedules, checklists, and first-month guidance."
+        "Prepare the first two weeks for every new starter."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
+        "apparentAge": "20s",
         "presentation": "woman",
-        "heritage": "Maori",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "contemporary utility chore jacket over a white tee",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "heritage": "Taiwanese",
+        "hair": "long hair with bangs",
+        "attire": "white knit",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "policy",
       "role": "policy",
-      "title": "People Policy Specialist",
-      "name": "Haruto",
+      "title": "HR Policy Writer",
+      "name": "George",
       "focus": [
-        "Organizes policy drafts and tracks questions for the employer's HR or legal advisers."
+        "Draft the handbook and policies, flagged for a lawyer's check."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
+        "apparentAge": "60s",
         "presentation": "man",
-        "heritage": "Japanese",
-        "hair": "close-cropped textured hair and a clean-shaven face",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "heritage": "White American",
+        "hair": "white hair, glasses",
+        "attire": "navy cardigan",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "training",
       "role": "training",
-      "title": "Learning and Development Specialist",
-      "name": "Ridwan",
+      "title": "Training Coordinator",
+      "name": "Carmen",
       "focus": [
-        "Builds training plans, learning resources, and development follow-ups."
+        "Build a short training plan for each role."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "man",
-        "heritage": "Malay Malaysian",
-        "hair": "neatly combed hair and a tidy trimmed beard",
-        "attire": "pressed oxford cotton button-down in soft blue",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Spanish",
+        "hair": "dark wavy hair",
+        "attire": "red sweater",
+        "expression": "warm, confident smile"
       }
     }
   ]
