@@ -74,21 +74,22 @@ function markerIn(value, nameAllowed = true) {
   return /<!--/.test(blob) || (nameAllowed ? /\{\{(?!NAME\}\})/ : /\{\{/).test(blob);
 }
 
-/** Any character outside what this catalogue's text is made of: letters, digits, punctuation,
- *  symbols, the plain space and combining accents (only ones with no precomposed letter survive the
- *  NFKC check below; type é, not e plus an accent), in the Latin script (and the script-neutral
- *  characters every script shares). Another script's letters are refused too: a right-to-left
- *  letter reorders what a diff shows, and a Cyrillic or Greek lookalike spells a different word.
- *  The IPA, phonetic and extended Latin letter blocks are refused as well (small capitals and other
- *  letters no plain text needs), as are the object-replacement character and the bars that draw
- *  like an em dash (U+2015, U+2E3A, U+2E3B, box drawing, U+23AF, U+30FC, U+2796), the stops and
- *  slashes that pass for "." and "/" in an address (U+3002, U+2044, U+2215, U+29F8, U+29F9), and hiddenIn() also refuses text that Unicode compatibility folding
- *  (NFKC) would change, which catches mathematical and fullwidth letters and Roman numerals. An allowlist, not a list of bad characters, so a
- *  new invisible one (a variation selector, a bidi mark, a filler that renders as nothing) is refused
- *  without anyone having to know its name. Text here becomes instructions for agents with tools,
- *  so nothing may say more than what a reviewer reads. The fillers named at the end are letters and
- *  symbols to Unicode but show as blank space. */
-const HIDDEN_RE = /[^\p{L}\p{N}\p{P}\p{S}\u0020\u0300-\u036F]|[\u034F\u115F\u1160\u3164\uFFA0\u2800\uFFFC\u2015\u2E3A\u2E3B\u2500-\u257F\u23AF\u30FC\u2796\u3002\u2044\u2215\u29F8\u29F9]|[\u0250-\u02AF\u1D00-\u1DBF\u2C60-\u2C7F\uA720-\uA7FF\uAB30-\uAB6F]|[^\p{Script=Latin}\p{Script=Common}\p{Script=Inherited}]/u;
+/** The characters catalogue text may use, as explicit code-point ranges rather than Unicode
+ *  properties, so the answer is the same on every version of node:
+ *
+ *    U+0020-007E   printable ASCII
+ *    U+00A3 U+00B0 U+20AC   pound sign, degree sign, euro sign
+ *    U+00C0-017F   accented Latin letters (Latin-1 and Latin Extended-A, less the multiply and
+ *                  divide signs)
+ *    U+2013 U+2018 U+2019 U+201C U+201D   en dash and curly quotes
+ *
+ *  Everything else is refused: other scripts (a right-to-left letter or mark reorders what a diff
+ *  shows; a Cyrillic or Greek letter can pass for a Latin one), invisible, control and formatting
+ *  characters, lookalike dashes, stops and slashes, and combining accents (type the accented letter).
+ *  Text here becomes instructions for agents with tools, so nothing may say more than a reviewer
+ *  reads. Widening this list is a deliberate edit, with a test. */
+const HIDDEN_RE = /[^\u0020-\u007E\u00A3\u00B0\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u017F\u2013\u2018\u2019\u201C\u201D\u20AC]/u;
+
 /** Text that points an agent outside its instructions: a web address (any scheme, www., or a name
  *  ending in a common domain or file ending), a markdown link or image, an HTML tag or any angle
  *  bracket, or a download or run command (shell or PowerShell). Role and team text is plain
@@ -100,22 +101,25 @@ const OUTWARD_RE = new RegExp([
   '\\|\\s*(ba|z)?sh\\b',
   '\\b[a-z0-9-]+\\.(com|net|org|io|sh|dev|app|ai|co|xyz|me|info|biz|ru|cn|ly|gg|tv|us|uk|ps1|exe|bat|cmd)\\b',
 ].join('|'), 'i');
+/** The first fragment that trips OUTWARD_RE, or null, so the problem can name it. */
 function outwardIn(value) {
   const strings = [];
   (function walk(v) { if (typeof v === 'string') strings.push(v); else if (v && typeof v === 'object') Object.values(v).forEach(walk); })(value);
-  return strings.some((s) => OUTWARD_RE.test(s));
+  for (const s of strings) { const m = OUTWARD_RE.exec(s); if (m) return m[0]; }
+  return null;
 }
 
 function hiddenIn(value) {
   const strings = [];
   (function walk(v) { if (typeof v === 'string') strings.push(v); else if (v && typeof v === 'object') Object.values(v).forEach(walk); })(value);
-  // NFKC folds compatibility lookalikes (mathematical, fullwidth, small-capital letters, Roman
-  // numerals) into plain letters; text that changes under it says something other than it shows.
-  // Three or more combining accents in a row stack into a smear that hides the letter under them.
-  return strings.some((s) => HIDDEN_RE.test(s) || s.normalize('NFKC') !== s || /[\u0300-\u036F]{3,}/.test(s));
+  // NFKC: a second line of defence, should the list above ever be widened to a character that folds.
+  return strings.some((s) => HIDDEN_RE.test(s) || s.normalize('NFKC') !== s);
 }
 
-/** Why Kosmos would refuse this as an agent name (its engine/create.js nameProblem, ported), or null. */
+/** Why Kosmos would refuse this as an agent name, or null: a port of nameProblem and slugFor in
+ *  Kosmos's engine/create.js (#740, #2605), stricter on spaces (Kosmos trims first). If Kosmos's
+ *  rules change, a catalogue name it refuses is still caught there: its memberProblem runs
+ *  create.nameProblem on every seat before a team is made, and says which name and why. */
 function nameProblem(raw) {
   const name = String(raw);
   if (name !== name.trim() || /[^\S ]/.test(name)) return 'use single plain spaces, with nothing before or after';
@@ -201,7 +205,7 @@ function build(src = {}) {
     // The source too: the wrapper splits on whitespace, and JavaScript counts U+FEFF as whitespace,
     // so the built text alone would hide one that is in the file.
     if (hiddenIn([r, entry])) problems.push(`${k}: an invisible or direction-changing character`);
-    if (outwardIn([r, entry])) problems.push(`${k}: a web address, link, HTML, angle bracket or download command`);
+    { const hit = outwardIn([r, entry]); if (hit) problems.push(`${k}: a web address, link, HTML, angle bracket or download command (${JSON.stringify(hit)})`); }
     roles.push(entry);
   }
   const teams = [];
@@ -272,7 +276,7 @@ function build(src = {}) {
     if (emDashIn(entry)) problems.push(`${t.key}: em dash`);
     if (markerIn(entry, false)) problems.push(`${t.key}: a template marker (even {{NAME}}, which only role instructions fill in), or an HTML comment`);
     if (hiddenIn([t, entry])) problems.push(`${t.key}: an invisible or direction-changing character`);
-    if (outwardIn([t, entry])) problems.push(`${t.key}: a web address, link, HTML, angle bracket or download command`);
+    { const hit = outwardIn([t, entry]); if (hit) problems.push(`${t.key}: a web address, link, HTML, angle bracket or download command (${JSON.stringify(hit)})`); }
     teams.push(entry);
   }
   // A portrait no member names is a misspelt file name (and on a case-insensitive disk it would

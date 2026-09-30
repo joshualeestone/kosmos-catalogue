@@ -75,7 +75,10 @@ em dash in any spelling, a team member on a role that exists neither here nor in
 
 ## House rules for text
 
-- Plain, everyday English. No em dashes.
+- Plain, everyday English. No em dashes. The builder accepts printable ASCII, accented Latin
+  letters, curly quotes, the en dash and the pound, euro and degree signs, and nothing else (see
+  `HIDDEN_RE` in `build.js`).
+- No web addresses, links, HTML or commands in role or team text: the builder refuses them.
 - Every person is fictional. Personality comes from the job, never from age, gender or heritage.
 - Nothing here names a real person, a real customer, or anyone's computer or account: this
   repository is public.

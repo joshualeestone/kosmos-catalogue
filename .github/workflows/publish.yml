@@ -121,9 +121,10 @@ jobs:
           BUILT_SERIAL: ${{ needs.build.outputs.serial }}
         run: |
           case "$BUILT_SERIAL" in ''|*[!0-9]*) echo "refused: the build job gave no serial"; exit 1 ;; esac
-          # The runner's own node, 20 or later (the build was measured byte-identical on 22 and 26).
-          # Unicode data changes between versions; a different answer fails the comparison below.
+          # The runner's own node, 20 or later (the build was measured byte-identical on 22 and 26; its
+          # character check is plain code-point ranges, so no Unicode tables can make them disagree).
           node -e 'const m = Number(process.versions.node.split(".")[0]); if (m < 20) { console.error("refused: node " + process.version + " is older than 20"); process.exit(1); }'
+          echo "rebuilding on node $(node --version)"
           CATALOGUE_PREVIOUS_SERIAL=$((BUILT_SERIAL - 1)) node build.js
           diff -r unsigned dist
       - run: node sign.js

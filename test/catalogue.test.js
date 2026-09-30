@@ -838,3 +838,34 @@ test('the publish workflow names bash for every step, so pipefail applies', () =
   const text = fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8');
   assert.match(text, /\ndefaults:\n {2}run:\n {4}shell: bash\n/);
 });
+
+test('right-to-left punctuation in the shared script is refused too, and the allowed accents pass', () => {
+  for (const ch of ['\u061F', '\u061B', '\u060C', '\u0640', '\u00AD', '\u00D7', '\u0301']) {
+    const r = source.read().rolesSource;
+    r.roles[2].who = r.roles[2].who.replace('You ', `You${ch} `);
+    assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)), JSON.stringify(ch));
+  }
+  const ok = source.read().rolesSource;
+  ok.roles[2].who = ok.roles[2].who.replace('You ', 'You (Zo\u00EB\u2019s \u201Cnaïve\u201D café, \u00A35 \u2013 \u20AC6, 20\u00B0) ');
+  assert.deepEqual(build.build({ rolesSource: ok }).problems, [], 'CONTROL: the allowed characters pass');
+});
+
+test('the sign job runs exactly its four known steps, and the key reaches only node sign.js', () => {
+  const text = fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8');
+  const parts = text.slice(text.indexOf('\njobs:\n')).split(/\n {2}(?=[a-z-]+:\n)/).slice(1);
+  const sign = Object.fromEntries(parts.map((p) => [p.slice(0, p.indexOf(':')), p])).sign;
+  const steps = sign.slice(sign.indexOf('    steps:\n')).split(/\n {6}- /).slice(1);
+  const runs = steps.filter((s) => /(^|\n)\s*run:/.test(s) || /^run:/.test(s));
+  assert.equal(runs.length, 3, 'tip check, rebuild-and-compare, sign');
+  assert.match(runs[0], /Refuse anything but the tip of main/);
+  assert.match(runs[1], /Rebuild and compare/);
+  assert.match(runs[2], /^run: node sign\.js\n\s+env:\n\s+CATALOGUE_SIGNING_KEY: \$\{\{ secrets\.CATALOGUE_SIGNING_KEY \}\}\s*$/);
+  assert.equal((sign.match(/secrets\./g) || []).length, 1, 'the key is named once, on the sign step');
+  assert.doesNotMatch(sign, /\bnpx\b|\bnpm\b|\byarn\b|curl|wget|secrets: inherit/);
+});
+
+test('the outward refusal names the fragment that tripped it', () => {
+  const r = source.read().rolesSource;
+  r.roles[1].how[1] = 'Always check example.com first.';
+  assert.ok(build.build({ rolesSource: r }).problems.some((p) => p.includes('("example.com")')));
+});

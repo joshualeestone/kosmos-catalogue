@@ -28,7 +28,7 @@ function publishedSerial(file, status, earlier, marker = MARKER) {
   if (status !== '200') return { ok: false, because: `could not read the published catalogue (HTTP ${status})` };
   let c;
   try { c = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return { ok: false, because: 'the published catalogue is not JSON' }; }
-  if (!Number.isSafeInteger(c.serial) || c.serial < 0) return { ok: false, because: 'the published catalogue has no serial' };
+  if (!c || !Number.isSafeInteger(c.serial) || c.serial < 0) return { ok: false, because: 'the published catalogue has no serial' };
   return { ok: true, serial: c.serial };
 }
 
