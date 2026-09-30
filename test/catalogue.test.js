@@ -469,17 +469,26 @@ test('a portrait no member names is reported', () => {
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
-test('published-serial refuses a deployment count that is empty or not a number', () => {
+test('published-serial refuses a deployment count that is not a count', () => {
   const { main } = require('../published-serial');
   const w = process.stderr.write;
   const o = process.stdout.write;
-  process.stderr.write = () => true;
-  process.stdout.write = () => true;
+  // A published catalogue answering 200, so the answer does not depend on whether this checkout
+  // holds the committed `published` marker (a 404 does: after the first publish it is an outage).
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-count-'));
+  const f = path.join(dir, 'p.json');
+  let said = '';
+  let out = '';
+  process.stderr.write = (t) => { said += t; return true; };
+  process.stdout.write = (t) => { out += t; return true; };
   try {
-    assert.equal(main(['/nonexistent', '404', '']), 1);
-    assert.equal(main(['/nonexistent', '404', 'null']), 1);
-    assert.equal(main(['/nonexistent', '404', '0']), 0, 'CONTROL: a real zero is the first publish');
-  } finally { process.stderr.write = w; process.stdout.write = o; }
+    fs.writeFileSync(f, JSON.stringify({ serial: 5 }));
+    const bad = ['', 'null', '-1', '1.5', ' 1'];
+    for (const n of bad) assert.equal(main([f, '200', n]), 1, JSON.stringify(n));
+    assert.equal((said.match(/is not a count/g) || []).length, bad.length, 'refused for the count, not for another reason');
+    assert.equal(main([f, '200', '0']), 0, 'CONTROL: a real count is accepted');
+    assert.equal(out, '5', 'CONTROL: and the published serial is what it prints');
+  } finally { process.stderr.write = w; process.stdout.write = o; fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
 test('invisible and direction-changing characters are refused anywhere in a role, team or group', () => {
@@ -868,4 +877,45 @@ test('the outward refusal names the fragment that tripped it', () => {
   const r = source.read().rolesSource;
   r.roles[1].how[1] = 'Always check example.com first.';
   assert.ok(build.build({ rolesSource: r }).problems.some((p) => p.includes('("example.com")')));
+});
+
+test('published-serial\'s marker is the file named `published` at the top of this repo, the name publish.yml tests', () => {
+  // The other marker tests pass their own path; this pins the default main() and the workflow use.
+  // It checks the path, not that the file exists: no test's outcome may depend on the marker being
+  // committed (that dependence is what failed a publish once). The workflow runs from the repo root.
+  assert.equal(require('../published-serial').MARKER, path.join(REPO, 'published'));
+  // In the step that reads the published serial, not merely somewhere in the file (a comment).
+  const yml = fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8');
+  const start = yml.indexOf('- name: Read the published serial');
+  assert.ok(start >= 0, 'publish.yml has no step named "Read the published serial"');
+  const step = yml.slice(start);
+  const end = step.indexOf('\n      - ', 1);
+  assert.ok(end > 0, 'premise: another step follows it, so its run block has an end');
+  const body = step.slice(0, end);
+  assert.match(body, /\n\s+if \[ ! -e published \]; then\n/, 'the serial step no longer tests for the marker by this name at the repo root');
+  assert.match(body, /node published-serial\.js /, 'premise: this is the step that runs published-serial.js');
+});
+
+test('main() uses the marker beside the script: a 404 is the first publish without it, an outage with it', () => {
+  // A copy of the script in a folder of its own, so the answer does not depend on this checkout.
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-mainmarker-'));
+  const w = process.stderr.write;
+  const o = process.stdout.write;
+  try {
+    fs.copyFileSync(path.join(REPO, 'published-serial.js'), path.join(dir, 'published-serial.js'));
+    const run = () => { delete require.cache[path.join(dir, 'published-serial.js')]; return require(path.join(dir, 'published-serial.js')).main([path.join(dir, 'absent.json'), '404', '0']); };
+    let said = '';
+    let out = '';
+    process.stderr.write = (t) => { said += t; return true; };
+    process.stdout.write = (t) => { out += t; return true; };
+    assert.equal(run(), 0, 'no marker: a 404 is the first publish');
+    assert.equal(out, '0', 'and it prints the serial floor the workflow passes on: 0');
+    fs.writeFileSync(path.join(dir, 'published'), '');
+    assert.equal(run(), 1, 'marker committed: a 404 is an outage');
+    assert.match(said, /missing \(404\)/, 'refused for the missing catalogue, not for another reason');
+  } finally {
+    process.stderr.write = w; process.stdout.write = o;
+    delete require.cache[path.join(dir, 'published-serial.js')];
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
