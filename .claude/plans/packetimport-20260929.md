@@ -35,3 +35,13 @@ posted on the card 2026-09-29 22:27 and 22:28 CDT.
 ## Needs from the packet (asked on the card)
 Team sizes, real summaries, a first action per role, `presentation` as how the person presents,
 non-colliding names, and the portraits.
+
+## Review iteration 1 (changes)
+- The candidate is written to a throwaway copy and built from disk as well as in memory, so --write
+  can no longer write a role file the next build refuses (a missing summary passed in memory).
+- A heading the importer does not know, or loose text inside a section, is reported, not merged.
+- Replacing a published team keeps its rank and, for a member with the same role, its slot; a kept
+  slot whose person changed while a portrait exists is reported.
+- A packet of the wrong shape (no members, a deeper hierarchy, no packet at all) is reported, not a
+  crash. Tests cover --write round trip, the disk-only refusal, unknown headings and shape; the two
+  MAJOR tests each fail with their fix removed.

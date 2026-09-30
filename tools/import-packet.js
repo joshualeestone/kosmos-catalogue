@@ -15,6 +15,7 @@
  *   teams of the same kind, in packet order.
  */
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 const build = require('../build');
 const source = require('../lib/source');
@@ -22,83 +23,157 @@ const source = require('../lib/source');
 /** The presentations the published teams use, which the portrait prompt is written for. */
 const PRESENTATIONS = ['woman', 'man', 'nonbinary person'];
 
-/** The packet's role instructions, split into the description and the three sections. */
+const HEADS = { '## How you work': 'how', '## What you ask the person before doing': 'ask', '## What you never do on your own': 'never' };
+
+/** The packet's role instructions, split into the description and the three sections. Anything
+ *  else (another heading, text inside a section that is not a list item) is reported, not guessed. */
 function sections(lines) {
-  const out = { desc: '', how: [], ask: [], never: [] };
-  const heads = { '## How you work': 'how', '## What you ask the person before doing': 'ask', '## What you never do on your own': 'never' };
+  const out = { desc: '', how: [], ask: [], never: [], problems: [] };
   let at = null;
   for (const l of lines) {
-    if (heads[l]) { at = heads[l]; continue; }
+    if (HEADS[l]) { at = HEADS[l]; continue; }
     if (!l.trim()) continue;
-    if (at && l.startsWith('- ')) out[at].push(l.slice(2));
-    else if (!at && !/^You are the \*\*/.test(l)) out.desc = out.desc ? `${out.desc} ${l}` : l;
+    if (/^#/.test(l)) out.problems.push(`a heading this importer does not know: ${JSON.stringify(l)}`);
+    else if (at && l.startsWith('- ')) out[at].push(l.slice(2));
+    else if (at) out.problems.push(`text inside ${JSON.stringify(Object.keys(HEADS).find((h) => HEADS[h] === at))} that is not a "- " item: ${JSON.stringify(l)}`);
+    else if (!/^You are the \*\*/.test(l)) out.desc = out.desc ? `${out.desc} ${l}` : l;
   }
   return out;
 }
 
 /** The packet role as a catalogue role (the fields the current role format has). */
 function roleFrom(p) {
-  const s = sections(p.instructions || []);
+  const s = sections(p.instructions);
   const r = { key: p.key, group: p.category, label: p.name, blurb: p.summary, first: p.first || '', desc: s.desc, who: p.character || '', how: s.how };
   if (p.caution) r.caution = p.caution;
-  return r;
+  return { role: r, problems: s.problems.map((x) => `${p.key}: ${x}`) };
 }
 
-/** The packet team as a catalogue team. */
-function teamFrom(p, rank, roleKey) {
+/** The packet team as a catalogue team. Replacing a published team keeps its rank and, for a
+ *  member whose role the published team also had, that member's slot. */
+function teamFrom(p, rank, published) {
   const used = new Map();
+  const taken = new Set(['lead']);
+  const old = published ? published.members.filter((m) => m.slot !== 'lead') : [];
   const members = p.members.map((m) => {
-    const role = roleKey(m.role);
     let slot = 'lead';
     if (m.reportsTo) {
-      const n = (used.get(role) || 0) + 1;
-      used.set(role, n);
-      slot = n === 1 ? role : `${role}-${n}`;
+      const same = old.find((o) => o.role === m.role && !taken.has(o.slot));
+      if (same) slot = same.slot;
+      else {
+        let n = used.get(m.role) || 0;
+        do { n += 1; slot = n === 1 ? m.role : `${m.role}-${n}`; } while (taken.has(slot) || old.some((o) => o.slot === slot));
+        used.set(m.role, n);
+      }
+      taken.add(slot);
     }
     const a = m.avatar || {};
     return {
-      slot, role, title: m.title, name: m.name, focus: [m.focus].flat().filter(Boolean),
+      slot, role: m.role, title: m.title, name: m.name, focus: [m.focus].flat().filter(Boolean),
       avatar: { apparentAge: a.apparentAge, presentation: a.presentation, heritage: a.heritage, hair: a.hair, attire: a.attire, expression: a.expression },
     };
   });
   return {
-    key: p.key, kind: p.kind, rank, label: p.label, blurb: p.blurb, purpose: p.purpose,
+    key: p.key, kind: p.kind, rank: published ? published.rank : rank, label: p.label, blurb: p.blurb, purpose: p.purpose,
     project: { name: String(p.label).replace(/ Team$/, ''), goal: p.goal },
     members,
   };
 }
 
+/** What would make the importer read a packet wrong: its shape, before any mapping. */
+function shapeProblems(packet) {
+  const out = [];
+  if (!Array.isArray(packet.teams)) return ['teams.json: must be a list of teams'];
+  if (!Array.isArray(packet.roles)) return ['roles.json: must be a list of roles'];
+  packet.teams.forEach((t, i) => {
+    const name = t && typeof t.key === 'string' ? t.key : `team ${i + 1}`;
+    if (!t || typeof t !== 'object' || typeof t.key !== 'string') out.push(`teams.json: ${name} has no key`);
+    else if (!Array.isArray(t.members) || !t.members.every((m) => m && typeof m === 'object' && typeof m.role === 'string')) out.push(`teams.json: ${name}: members must be a list of people, each with a role`);
+    else if (t.members.some((m) => m.reportsTo && m.reportsTo !== 'lead')) out.push(`teams.json: ${name}: every member reports to the lead (a deeper hierarchy is not supported)`);
+  });
+  packet.roles.forEach((r, i) => {
+    if (!r || typeof r.key !== 'string') out.push(`roles.json: role ${i + 1} has no key`);
+    else if (!Array.isArray(r.instructions) || !r.instructions.every((l) => typeof l === 'string')) out.push(`roles.json: ${r.key}: instructions must be a list of lines`);
+  });
+  return out;
+}
+
+/** A throwaway copy of the sources, so a candidate is checked as the files a later build reads. */
+function copyRepo(root) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-import-'));
+  for (const f of ['groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams', 'avatars']) {
+    if (fs.existsSync(path.join(root, f))) fs.cpSync(path.join(root, f), path.join(dir, f), { recursive: true });
+  }
+  return dir;
+}
+
 /**
+ * Merge a packet into the sources and check the result as files: the sources are written to a
+ * throwaway copy and built from disk, the same way the next `node build.js` will read them.
  * @param {{teams: object[], roles: object[]}} packet
  * @param {string} [root] the catalogue repo
  * @returns {{rolesSource: object, teamsSource: object, problems: string[], taken: object}}
  */
 function importPacket(packet, root = source.ROOT) {
+  const shape = shapeProblems(packet);
+  if (shape.length) return { problems: shape, taken: { roles: 0, teamsNew: 0, teamsReplaced: 0 } };
   const cur = source.read(root);
   const builtin = JSON.parse(fs.readFileSync(path.join(root, 'kosmos-builtin-roles.json'), 'utf8'));
   const builtinKeys = new Set([...(builtin.roles || []), ...(builtin.hidden || [])].map((r) => (typeof r === 'string' ? r : r.key)));
   const have = new Set(cur.rolesSource.roles.map((r) => r.key));
-  const roleKey = (k) => k;   // kept roles and built-ins share the packet's key, so members need no remap
-  const newRoles = packet.roles.filter((r) => !have.has(r.key) && !builtinKeys.has(r.key)).map(roleFrom);
+  const mapped = packet.roles.filter((r) => !have.has(r.key) && !builtinKeys.has(r.key)).map(roleFrom);
+  const newRoles = mapped.map((m) => m.role);
+  const problems = mapped.flatMap((m) => m.problems);
   const groups = cur.rolesSource.GROUP_ORDER.slice();
   for (const r of newRoles) if (!groups.includes(r.group)) groups.push(r.group);
-  const replaced = new Set(packet.teams.map((t) => t.key));
-  const kept = cur.teamsSource.teams.filter((t) => !replaced.has(t.key));
+  const byKey = new Map(cur.teamsSource.teams.map((t) => [t.key, t]));
+  const kept = cur.teamsSource.teams.filter((t) => !packet.teams.some((p) => p.key === t.key));
   const nextRank = { business: 0, personal: 0 };
-  for (const t of kept) nextRank[t.kind] = Math.max(nextRank[t.kind] || 0, t.rank);
-  const teams = kept.concat(packet.teams.map((t) => teamFrom(t, (nextRank[t.kind] = (nextRank[t.kind] || 0) + 1), roleKey)));
+  for (const t of cur.teamsSource.teams) nextRank[t.kind] = Math.max(nextRank[t.kind] || 0, t.rank);
+  const incoming = packet.teams.map((t) => {
+    const published = byKey.get(t.key);
+    return teamFrom(t, published ? null : (nextRank[t.kind] = (nextRank[t.kind] || 0) + 1), published);
+  });
+  // A kept slot keeps its portrait file: say so when the person in it changed.
+  for (const t of incoming) {
+    const published = byKey.get(t.key);
+    if (!published) continue;
+    for (const m of t.members) {
+      const was = published.members.find((o) => o.slot === m.slot);
+      if (was && was.name !== m.name && fs.existsSync(path.join(root, 'avatars', `${t.key}-${m.slot}.webp`))) {
+        problems.push(`${t.key}/${m.slot}: avatars/${t.key}-${m.slot}.webp is ${was.name}'s portrait, and this slot is now ${m.name}`);
+      }
+    }
+  }
+  const teams = kept.concat(incoming);
   const rolesSource = { GROUP_ORDER: groups, roles: cur.rolesSource.roles.concat(newRoles) };
   const teamsSource = { ...cur.teamsSource, teams };
-  const { problems } = build.build({ root, rolesSource, teamsSource });
+  // In memory first: every rule the builder makes, even for a role whose file would not parse.
+  problems.push(...build.build({ root, rolesSource, teamsSource }).problems);
+  const tmp = copyRepo(root);
+  try {
+    source.write(rolesSource, teamsSource, tmp);
+    // A new role that does not parse is reported once; every member using it would repeat it.
+    const unread = new Set(newRoles.map((r) => r.key));
+    const built = build.build({ root: tmp });
+    for (const r of built.catalogue ? built.catalogue.roles || [] : []) unread.delete(r.key);
+    // The same problem from both builds can list its two teams in either order.
+    const norm = (x) => x.split(/\s+/).sort().join(' ');
+    const seen = new Set(problems.map(norm));
+    problems.push(...built.problems.filter((x) => !seen.has(norm(x))).filter((x) => {
+      const m = x.match(/role "([^"]+)" is neither a catalogue role/);
+      return !(m && unread.has(m[1]) && built.problems.some((y) => y.startsWith(`roles/${m[1]}/role.md:`)));
+    }));
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
   /* The portrait prompt reads presentation as how the person presents ("a woman in her 30s"); the
      builder takes any text, so a personality phrase there would make every prompt read wrong. */
   for (const t of teams) for (const m of t.members) {
     if (!PRESENTATIONS.includes(m.avatar.presentation)) problems.push(`${t.key}/${m.slot}: presentation ${JSON.stringify(m.avatar.presentation)} is not one of ${PRESENTATIONS.join(', ')} (the portrait prompt reads it as how the person presents)`);
   }
-  return {
-    rolesSource, teamsSource, problems,
-    taken: { roles: newRoles.length, teamsNew: packet.teams.length - (cur.teamsSource.teams.length - kept.length), teamsReplaced: cur.teamsSource.teams.length - kept.length },
-  };
+  const replaced = cur.teamsSource.teams.length - kept.length;
+  return { rolesSource, teamsSource, problems, taken: { roles: newRoles.length, teamsNew: packet.teams.length - replaced, teamsReplaced: replaced } };
 }
 
 /** Problems grouped by what they say, most common first, so 300 lines read as a dozen kinds. */
@@ -112,22 +187,30 @@ function summarise(problems) {
   return [...kinds.entries()].sort((a, b) => b[1].length - a[1].length);
 }
 
-function main(argv) {
+function main(argv, root = source.ROOT, out = process.stdout) {
   const dir = argv.find((a) => !a.startsWith('--'));
   if (!dir) { process.stderr.write('usage: node tools/import-packet.js <packet dir> [--write]\n'); return 2; }
-  const packet = { teams: JSON.parse(fs.readFileSync(path.join(dir, 'teams.json'), 'utf8')), roles: JSON.parse(fs.readFileSync(path.join(dir, 'roles.json'), 'utf8')) };
-  const r = importPacket(packet);
-  process.stdout.write(`packet: ${packet.teams.length} teams (${r.taken.teamsReplaced} replace published ones), ${packet.roles.length} roles (${r.taken.roles} new)\n`);
+  let packet;
+  try {
+    packet = { teams: JSON.parse(fs.readFileSync(path.join(dir, 'teams.json'), 'utf8')), roles: JSON.parse(fs.readFileSync(path.join(dir, 'roles.json'), 'utf8')) };
+  } catch (err) {
+    process.stderr.write(`import-packet: could not read the packet in ${dir}: ${err.message}\n`);
+    return 2;
+  }
+  const r = importPacket(packet, root);
+  const nTeams = Array.isArray(packet.teams) ? packet.teams.length : 0;
+  const nRoles = Array.isArray(packet.roles) ? packet.roles.length : 0;
+  out.write(`packet: ${nTeams} teams (${r.taken.teamsNew} new, ${r.taken.teamsReplaced} replace published ones), ${nRoles} roles (${r.taken.roles} new)\n`);
   if (!r.problems.length) {
-    if (argv.includes('--write')) { source.write(r.rolesSource, r.teamsSource); process.stdout.write('written; run npm test and node build.js\n'); }
-    else process.stdout.write('nothing refused; run again with --write\n');
+    if (argv.includes('--write')) { source.write(r.rolesSource, r.teamsSource, root); out.write('written; run npm test and node build.js\n'); }
+    else out.write('nothing refused; run again with --write\n');
     return 0;
   }
-  process.stdout.write(`${r.problems.length} problems; nothing written\n`);
-  for (const [, list] of summarise(r.problems)) process.stdout.write(`\n${list.length} x ${list[0]}\n`);
+  out.write(`${r.problems.length} problems; nothing written\n`);
+  for (const [, list] of summarise(r.problems)) out.write(`\n${list.length} x ${list[0]}\n`);
   return 1;
 }
 
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
 
-module.exports = { importPacket, summarise, roleFrom, teamFrom, sections };
+module.exports = { importPacket, summarise, roleFrom, teamFrom, sections, shapeProblems, main };
