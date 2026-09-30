@@ -2,7 +2,7 @@
   "key": "home",
   "kind": "personal",
   "rank": 1,
-  "label": "Household Management Team",
+  "label": "Home Team",
   "blurb": "A Household Manager with maintenance, meals, money and errands",
   "purpose": "For running a home without it running you. The Household Manager keeps the list; the team plans maintenance, plans meals and shopping, keeps the budget, and researches purchases and keeps the errands list.",
   "project": {
@@ -14,85 +14,85 @@
       "slot": "lead",
       "role": "household",
       "title": "Household Manager",
-      "name": "Lorenzo",
+      "name": "Martha",
       "focus": [
-        "Sets household priorities, coordinates the roster, and maintains the shared plan."
+        "Keep one household list and a Sunday plan for the week."
       ],
       "avatar": {
-        "apparentAge": "Early 40s",
-        "presentation": "man",
-        "heritage": "Italian",
-        "hair": "tidy modern crew cut and observant eyes",
-        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "apparentAge": "50s",
+        "presentation": "woman",
+        "heritage": "Irish",
+        "hair": "short auburn hair",
+        "attire": "soft blue sweater",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "maintenance",
       "role": "maintenance",
-      "title": "Maintenance Coordinator",
-      "name": "Harriet",
+      "title": "Home Maintenance Planner",
+      "name": "Joe",
       "focus": [
-        "Organizes upkeep schedules, service-provider research, and repair follow-ups."
+        "Keep the seasonal maintenance calendar and repairs list."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
-        "presentation": "woman",
-        "heritage": "English",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "polished dark wrap top with simple silver jewelry",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "apparentAge": "50s",
+        "presentation": "man",
+        "heritage": "Italian American",
+        "hair": "grey hair, moustache",
+        "attire": "flannel shirt",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "meals",
       "role": "meals",
-      "title": "Meal and Grocery Planner",
-      "name": "Cem",
+      "title": "Meal Planner",
+      "name": "Aiko",
       "focus": [
-        "Builds meal plans, grocery lists, and food-preparation schedules."
+        "Plan the week's meals and the shopping list every Saturday."
       ],
       "avatar": {
-        "apparentAge": "Late 30s",
-        "presentation": "man",
-        "heritage": "Turkish",
-        "hair": "tidy modern crew cut and observant eyes",
-        "attire": "graphite utility jacket over a classic heather-grey tee",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Japanese",
+        "hair": "short black hair",
+        "attire": "striped apron over a white tee",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "budget",
       "role": "budget",
-      "title": "Household Budget Organizer",
-      "name": "Hiwot",
+      "title": "Budget Coach",
+      "name": "Desmond",
       "focus": [
-        "Tracks household costs, subscriptions, and upcoming expenses."
+        "Track spending against the household budget monthly."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "woman",
-        "heritage": "Amhara Ethiopian",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "contemporary utility chore jacket over a white tee",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
+        "apparentAge": "40s",
+        "presentation": "man",
+        "heritage": "Jamaican British",
+        "hair": "short hair, trimmed beard",
+        "attire": "navy sweater",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "errands",
       "role": "shopper",
-      "title": "Errands and Chores Coordinator",
-      "name": "Zanele",
+      "title": "Shopping and Errands",
+      "name": "Lina",
       "focus": [
-        "Organizes shopping, chores, recurring tasks, and shared assignments."
+        "Research purchases and keep the errands list."
       ],
       "avatar": {
-        "apparentAge": "Early 30s",
+        "apparentAge": "20s",
         "presentation": "woman",
-        "heritage": "Zulu South African",
-        "hair": "straight hair cut into a polished modern bob",
-        "attire": "fitted modern crewneck sweater in charcoal",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "heritage": "Lebanese",
+        "hair": "long dark hair",
+        "attire": "denim jacket",
+        "expression": "warm, confident smile"
       }
     }
   ]
