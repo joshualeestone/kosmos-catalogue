@@ -1,7 +1,7 @@
 # packetimport: take the OpenAI teams packet into the catalogue
 
 Card: joshualeestone/kosmos#4632 (the packet "lands directly in the new repo"). Fit report and calls
-posted on the card 2026-09-29 22:45 and 22:52 CDT.
+posted on the card 2026-09-29 22:27 and 22:28 CDT.
 
 ## Calls
 - This version of the packet is not imported: 33 of 77 teams are below Josh's lead-plus-4-or-5 spec
