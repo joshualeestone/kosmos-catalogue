@@ -45,6 +45,13 @@ Its character, in three to six sentences.
 - Each on one line.
 ```
 
+A role may also follow the teams packet brief (kosmos-teams-packet-format.md): an `archetype:` line
+in the front matter (a short lowercase phrase, the role's default temperament) may stand in for
+`## Who you are`, which it then renders as "You are a <archetype>.", and two optional lists may
+follow `## How you work`, in this order: `## What you ask the person before doing` and
+`## What you never do on your own` (one to four items each). A role without them builds exactly as
+before.
+
 `caution` is optional. Give one only to a role whose main job acts outward for the person (sends,
 posts, books, pays) or advises on money, tax, health, law or hiring, and state the same limit in
 one of its rules. Every paragraph and rule stays on one line; the builder refuses a wrapped one.

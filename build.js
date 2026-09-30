@@ -61,8 +61,16 @@ function sentences(text) {
 function instructions(r) {
   const noun = lowerLabel(r.label);
   const lines = [`You are **{{NAME}}**, ${articleFor(noun)} ${noun}.`, ''];
-  lines.push(...wrap(r.desc), '', '## Who you are', '', ...wrap(r.who), '', '## How you work', '');
+  // With no Who you are paragraph, the archetype stands in for it (the brief's per-role temperament).
+  // Neither is reported as a problem where the role is checked; compose nothing from the hole.
+  const who = r.who !== undefined ? r.who : typeof r.archetype === 'string' ? `You are ${articleFor(r.archetype)} ${r.archetype}.` : '';
+  lines.push(...wrap(r.desc), '', '## Who you are', '', ...wrap(who), '', '## How you work', '');
   for (const b of r.how) lines.push(...wrap(b, '- ', '  '));
+  for (const [head, list] of [['What you ask the person before doing', r.ask], ['What you never do on your own', r.never]]) {
+    if (!list) continue;
+    lines.push('', `## ${head}`, '');
+    for (const b of list) lines.push(...wrap(b, '- ', '  '));
+  }
   return lines;
 }
 
@@ -187,8 +195,17 @@ function build(src = {}) {
     if (builtin.has(k)) problems.push(`${k}: Kosmos already has a built-in role with this key`);
     seen.add(k);
     if (!groups.includes(r.group)) problems.push(`${k}: unknown group ${r.group}`);
-    const n = sentences(r.who);
-    if (n < 3 || n > 6) problems.push(`${k}: character is ${n} sentences, three to six is the rule`);
+    if (r.who !== undefined) {
+      const n = sentences(r.who);
+      if (n < 3 || n > 6) problems.push(`${k}: character is ${n} sentences, three to six is the rule`);
+    } else if (!r.archetype) problems.push(`${k}: needs a Who you are paragraph or an archetype`);
+    // An archetype is a short phrase ("calm, exacting bookkeeper"), rendered as "You are a <archetype>."
+    if (r.archetype !== undefined && (typeof r.archetype !== 'string' || !/^[a-z][^.!?]{2,79}$/.test(r.archetype))) {
+      problems.push(`${k}: archetype must be a short lowercase phrase with no full stop, under 80 characters`);
+    }
+    for (const [label, list] of [['What you ask the person before doing', r.ask], ['What you never do on your own', r.never]]) {
+      if (list !== undefined && (!Array.isArray(list) || list.length < 1 || list.length > 4)) problems.push(`${k}: ${label} needs one to four items`);
+    }
     if (!Array.isArray(r.how) || r.how.length !== 3) problems.push(`${k}: How you work needs exactly three bullets`);
     if (!r.first || r.first.length <= 10) problems.push(`${k}: first action too short`);
     const entry = { key: k, group: r.group, label: r.label, blurb: r.blurb, firstAction: r.first };
