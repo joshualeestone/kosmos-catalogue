@@ -35,3 +35,10 @@ format predates the brief, so the catalogue changes, not the packet).
   into the new fields, each refused, with the clean role as control.
 - "an" before a silent h (honest, honour, hour, heir). Output for the 69 roles is still identical
   (catalogue and text).
+
+## Review iteration 2 (changes)
+- The archetype sentence has its own article rule by sound (an honest, a user-focused, a one-track,
+  a unique, an unimportant-seeming); labels keep articleFor, so existing output is unchanged. An
+  archetype may not start with a, an or the.
+- The renderer skips a list of the wrong shape (ask, never, and how, which crashed on main too); the
+  shape is reported where the role is checked. Output for the 69 roles still identical.

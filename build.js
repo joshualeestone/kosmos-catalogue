@@ -37,8 +37,15 @@ function lowerLabel(label) {
 function articleFor(phrase) {
   const first = phrase.split(/\s+/)[0];
   if (ACRONYMS.has(first)) return 'AEFHILMNORSX'.includes(first[0]) ? 'an' : 'a';
-  if (/^(honest|honou?r|hour|heir)/i.test(first)) return 'an';   // a silent h
   return 'aeiou'.includes(first[0].toLowerCase()) ? 'an' : 'a';
+}
+
+/** The article before an archetype, which is free text: by sound where the first letter misleads
+ *  (a silent h takes "an"; a "you" or "w" sound takes "a"). Labels keep articleFor, unchanged. */
+function archetypeArticle(phrase) {
+  if (/^(honest|honou?r|hour|heir)/i.test(phrase)) return 'an';
+  if (/^(u[bcfklrst][aeiou]|use|usu|uniq|univ|unif|unit|union|ure|one|once|eu|ewe)/i.test(phrase)) return 'a';
+  return articleFor(phrase);
 }
 
 /** Greedy wrap at 76 columns, breaking only at spaces. */
@@ -64,11 +71,11 @@ function instructions(r) {
   const lines = [`You are **{{NAME}}**, ${articleFor(noun)} ${noun}.`, ''];
   // With no Who you are paragraph, the archetype stands in for it (the brief's per-role temperament).
   // Neither is reported as a problem where the role is checked; compose nothing from the hole.
-  const who = r.who !== undefined ? r.who : typeof r.archetype === 'string' ? `You are ${articleFor(r.archetype)} ${r.archetype}.` : '';
+  const who = r.who !== undefined ? r.who : typeof r.archetype === 'string' ? `You are ${archetypeArticle(r.archetype)} ${r.archetype}.` : '';
   lines.push(...wrap(r.desc), '', '## Who you are', '', ...wrap(who), '', '## How you work', '');
-  for (const b of r.how) lines.push(...wrap(b, '- ', '  '));
+  for (const b of Array.isArray(r.how) ? r.how : []) lines.push(...wrap(b, '- ', '  '));
   for (const [head, list] of [['What you ask the person before doing', r.ask], ['What you never do on your own', r.never]]) {
-    if (!list) continue;
+    if (!Array.isArray(list)) continue;   // a wrong shape is reported where the role is checked
     lines.push('', `## ${head}`, '');
     for (const b of list) lines.push(...wrap(b, '- ', '  '));
   }
@@ -202,8 +209,8 @@ function build(src = {}) {
       if (r.archetype !== undefined) problems.push(`${k}: has both a Who you are paragraph and an archetype; keep one`);
     } else if (!r.archetype) problems.push(`${k}: needs a Who you are paragraph or an archetype`);
     // An archetype is a short phrase ("calm, exacting bookkeeper"), rendered as "You are a <archetype>."
-    if (r.archetype !== undefined && (typeof r.archetype !== 'string' || !/^[a-z][^.!?]{2,79}$/.test(r.archetype))) {
-      problems.push(`${k}: archetype must be a short lowercase phrase with no full stop, under 80 characters`);
+    if (r.archetype !== undefined && (typeof r.archetype !== 'string' || !/^(?!(a|an|the)\s)[a-z][^.!?]{2,79}$/.test(r.archetype))) {
+      problems.push(`${k}: archetype must be a short lowercase phrase with no leading a, an or the and no full stop, under 80 characters`);
     }
     for (const [label, list] of [['What you ask the person before doing', r.ask], ['What you never do on your own', r.never]]) {
       if (list !== undefined && (!Array.isArray(list) || list.length < 1 || list.length > 4)) problems.push(`${k}: ${label} needs one to four items`);

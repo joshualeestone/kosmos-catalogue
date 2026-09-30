@@ -95,8 +95,25 @@ test('a role with both a Who you are paragraph and an archetype is refused', () 
   assert.match(build.build({ rolesSource: { ...read.rolesSource, roles } }).problems.join('\n'), /cos: has both/);
 });
 
-test('an archetype starting with a silent h takes "an"', () => {
-  const b = buildWith(BRIEF.replace('calm, far-sighted planner', 'honest, careful planner'));
-  assert.deepEqual(b.problems, []);
-  assert.match(b.catalogue.roles.find((r) => r.key === 'cos').instructions.join('\n'), /You are an honest, careful planner\./);
+test('the archetype takes the article its sound needs, and may not bring its own', () => {
+  for (const [phrase, article] of [['honest, careful planner', 'an'], ['user-focused planner', 'a'], ['one-track planner', 'a'],
+    ['unique thinker', 'a'], ['unimportant-seeming planner', 'an'], ['universal helper', 'a'], ['upbeat organiser', 'an'], ['energetic planner', 'an'], ['calm planner', 'a']]) {
+    const b = buildWith(BRIEF.replace('calm, far-sighted planner', phrase));
+    assert.deepEqual(b.problems, [], phrase);
+    const text = b.catalogue.roles.find((r) => r.key === 'cos').instructions.join('\n');
+    assert.ok(text.includes(`You are ${article} ${phrase}.`), `${phrase}: ${text.match(/You are [^\n]*/)}`);
+  }
+  for (const lead of ['a calm planner', 'an honest planner', 'the planner']) {
+    assert.match(buildWith(BRIEF.replace('calm, far-sighted planner', lead)).problems.join('\n'), /no leading a, an or the/, lead);
+  }
+});
+
+test('a role given in memory with lists of the wrong shape is reported, not a crash', () => {
+  const read = source.read();
+  const { role } = source.parseRole('cos', BRIEF);
+  for (const bad of [{ ask: 5 }, { never: 'x' }, { how: 7 }]) {
+    const roles = read.rolesSource.roles.map((r) => (r.key === 'cos' ? { ...role, group: r.group, ...bad } : r));
+    const out = build.build({ rolesSource: { ...read.rolesSource, roles } });
+    assert.ok(out.problems.some((x) => /^cos: /.test(x)), JSON.stringify(bad));
+  }
 });
