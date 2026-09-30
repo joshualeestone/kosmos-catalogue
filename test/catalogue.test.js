@@ -886,9 +886,13 @@ test('published-serial\'s marker is the file named `published` at the top of thi
   assert.equal(require('../published-serial').MARKER, path.join(REPO, 'published'));
   // In the step that reads the published serial, not merely somewhere in the file (a comment).
   const yml = fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8');
-  const step = yml.slice(yml.indexOf('- name: Read the published serial'));
-  const body = step.slice(0, step.indexOf('\n      - ', 1));
-  assert.match(body, /\n {10}if \[ ! -e published \]; then\n/, 'the serial step no longer tests for the marker by this name at the repo root');
+  const start = yml.indexOf('- name: Read the published serial');
+  assert.ok(start >= 0, 'publish.yml has no step named "Read the published serial"');
+  const step = yml.slice(start);
+  const end = step.indexOf('\n      - ', 1);
+  assert.ok(end > 0, 'premise: another step follows it, so its run block has an end');
+  const body = step.slice(0, end);
+  assert.match(body, /\n\s+if \[ ! -e published \]; then\n/, 'the serial step no longer tests for the marker by this name at the repo root');
   assert.match(body, /node published-serial\.js /, 'premise: this is the step that runs published-serial.js');
 });
 
