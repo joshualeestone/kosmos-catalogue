@@ -48,6 +48,8 @@ test('a packet holding a published team, unchanged, replaces it with nothing ref
   // Unchanged means unchanged: the same place in the menu and the same slots (portraits are named by slot).
   assert.equal(t.rank, EXEC.rank);
   assert.deepEqual(t.members.map((m) => m.slot), EXEC.members.map((m) => m.slot));
+  // Field for field: nothing (the project name, say) is rebuilt differently from what is published.
+  assert.deepEqual(t, EXEC);
   assert.equal(r.teamsSource.teams.length, fs.readdirSync(path.join(REPO, 'teams')).length, 'a replaced team was added twice');
 });
 
@@ -216,7 +218,7 @@ test('replacing a team: a swapped member gets a new slot, a repeated role gets a
     assert.equal(slots[2], reports[1].slot);
     assert.equal(slots[slots.length - 1], reports[1].role);
     assert.notEqual(reports[1].slot, reports[1].role, 'premise: the published slot is not named after its role');
-    assert.ok(r.problems.some((x) => x === `exec/lead: avatars/exec-lead.webp is ${lead.name}'s portrait, and this slot is now Octavia`), r.problems.join('\n'));
+    assert.ok(r.problems.some((x) => x === `exec/lead: avatars/exec-lead.webp is ${lead.name}'s portrait (${lead.role}), and this slot is now Octavia (${lead.role}) or looks different`), r.problems.join('\n'));
   } finally {
     fs.rmSync(repo, { recursive: true, force: true });
   }
@@ -228,4 +230,63 @@ test('in a new team, a role that repeats is numbered', () => {
   const t = teamFrom({ key: 'k', label: 'K Team', members: [m('cos', true), m('copywriter'), m('copywriter'), m('copywriter')] }, 1, null);
   assert.deepEqual(t.members.map((x) => x.slot), ['lead', 'copywriter', 'copywriter-2', 'copywriter-3']);
   assert.equal(t.project.name, 'K');
+});
+
+test('a replaced team that changes kind takes the next rank of its new kind, not a clashing one', () => {
+  const p = execAsPacket();
+  p.kind = 'personal';
+  const r = importPacket({ teams: [p], roles: [] });
+  const t = r.teamsSource.teams.find((x) => x.key === 'exec');
+  const personal = r.teamsSource.teams.filter((x) => x.kind === 'personal' && x.key !== 'exec').map((x) => x.rank);
+  assert.equal(t.rank, Math.max(...personal) + 1);
+  assert.ok(!r.problems.some((x) => /share personal rank/.test(x)), r.problems.join('\n'));
+});
+
+test('--write refuses sources with uncommitted changes, and a stray argument', () => {
+  const { spawnSync } = require('node:child_process');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'import-packet-in-'));
+  const repo = copyRepo();
+  try {
+    fs.writeFileSync(path.join(dir, 'teams.json'), JSON.stringify([execAsPacket()]));
+    fs.writeFileSync(path.join(dir, 'roles.json'), '[]');
+    const git = (...a) => assert.equal(spawnSync('git', ['-C', repo, ...a], { encoding: 'utf8' }).status, 0, a.join(' '));
+    git('init', '-q'); git('add', '-A'); git('-c', 'user.name=t', '-c', 'user.email=t@t', 'commit', '-q', '-m', 'base');
+    // An uncommitted edit someone is in the middle of (still a valid role file).
+    const cos = path.join(repo, 'roles', 'cos', 'role.md');
+    const clean = fs.readFileSync(cos, 'utf8');
+    fs.writeFileSync(cos, clean.replace('You keep the person', 'You keep the busy person'));
+    assert.notEqual(fs.readFileSync(cos, 'utf8'), clean, 'premise: the edit changed the file');
+    const out = { text: '', write(s) { this.text += s; } };
+    const err = [];
+    const was = process.stderr.write;
+    process.stderr.write = (s) => { err.push(String(s)); return true; };
+    let code;
+    try { code = main([dir, '--write'], repo, out); } finally { process.stderr.write = was; }
+    assert.equal(code, 2, 'wrote over an uncommitted edit');
+    assert.match(err.join(''), /uncommitted changes \(roles\/cos\/role\.md\)/);
+    assert.match(fs.readFileSync(cos, 'utf8'), /You keep the busy person/);
+    fs.writeFileSync(cos, clean);
+    // CONTROL: clean, the same call writes.
+    assert.equal(main([dir, '--write'], repo, out), 0, out.text);
+    assert.equal(main([dir, 'write'], repo, out), 2);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+    fs.rmSync(repo, { recursive: true, force: true });
+  }
+});
+
+test('a kept slot whose role changed while its portrait exists is reported', () => {
+  const repo = copyRepo();
+  try {
+    fs.writeFileSync(path.join(repo, 'avatars', 'exec-travel.webp'), 'x');
+    const p = execAsPacket();
+    const i = EXEC.members.findIndex((m) => m.slot === 'travel');
+    const r0 = importPacket({ teams: [p], roles: [] }, repo);
+    assert.ok(!r0.problems.some((x) => /exec-travel\.webp is/.test(x)), 'CONTROL: an unchanged slot is not reported');
+    p.members[i] = { ...p.members[i], avatar: { ...p.members[i].avatar, hair: 'a shaved head' } };
+    const r = importPacket({ teams: [p], roles: [] }, repo);
+    assert.ok(r.problems.some((x) => /exec\/travel: avatars\/exec-travel\.webp is .* portrait/.test(x)), r.problems.join('\n'));
+  } finally {
+    fs.rmSync(repo, { recursive: true, force: true });
+  }
 });

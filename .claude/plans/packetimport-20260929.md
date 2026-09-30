@@ -55,3 +55,14 @@ non-colliding names, and the portraits.
 - The throwaway copy is made inside the try, so a failed copy is cleaned up too.
 - Tests: the escape, non-text fields, --write of a refused packet writes nothing, a replaced team with
   a changed role, a repeated role and a reused portrait, and numbering in a new team.
+
+## Review iteration 3 (changes)
+- A replaced team keeps its published project name (6 of 20 are not their label; exec's "My Office"
+  was being renamed with nothing reported). The unchanged-team test now compares the whole team.
+- A replaced team that changes kind takes the next rank of its new kind instead of a clashing one.
+- --write refuses while the sources have uncommitted changes, so the printed undo (git -C <root>
+  checkout of the source paths, plus rm of exactly the files this run created) cannot lose work.
+- One packet folder only; the portrait warning also fires on a changed role or looks; a member with
+  no avatar is reported, not a crash.
+- My first uncommitted-changes test could not fail (it appended an empty string and its draft file
+  failed the run for another reason); rewritten around a real edit, it fails with the guard removed.

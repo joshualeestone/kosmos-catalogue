@@ -74,8 +74,9 @@ function teamFrom(p, rank, published) {
     };
   });
   return {
-    key: p.key, kind: p.kind, rank: published ? published.rank : rank, label: p.label, blurb: p.blurb, purpose: p.purpose,
-    project: { name: String(p.label).replace(/ Team$/, ''), goal: p.goal },
+    key: p.key, kind: p.kind, rank: published && published.kind === p.kind ? published.rank : rank, label: p.label, blurb: p.blurb, purpose: p.purpose,
+    // A published team keeps its project name (several are not its label, e.g. exec's "My Office").
+    project: { name: published ? published.project.name : String(p.label).replace(/ Team$/, ''), goal: p.goal },
     members,
   };
 }
@@ -150,16 +151,18 @@ function importPacket(packet, root = source.ROOT) {
   for (const t of cur.teamsSource.teams) nextRank[t.kind] = Math.max(nextRank[t.kind] || 0, t.rank);
   const incoming = packet.teams.map((t) => {
     const published = byKey.get(t.key);
-    return teamFrom(t, published ? null : (nextRank[t.kind] = (nextRank[t.kind] || 0) + 1), published);
+    const keeps = published && published.kind === t.kind;
+    return teamFrom(t, keeps ? null : (nextRank[t.kind] = (nextRank[t.kind] || 0) + 1), published);
   });
-  // A kept slot keeps its portrait file: say so when the person in it changed.
+  // A kept slot keeps its portrait file: say so when the person in it changed (name, role or looks).
   for (const t of incoming) {
     const published = byKey.get(t.key);
     if (!published) continue;
     for (const m of t.members) {
       const was = published.members.find((o) => o.slot === m.slot);
-      if (was && was.name !== m.name && fs.existsSync(path.join(root, 'avatars', `${t.key}-${m.slot}.webp`))) {
-        problems.push(`${t.key}/${m.slot}: avatars/${t.key}-${m.slot}.webp is ${was.name}'s portrait, and this slot is now ${m.name}`);
+      const changed = was && (was.name !== m.name || was.role !== m.role || JSON.stringify(was.avatar) !== JSON.stringify(m.avatar));
+      if (changed && fs.existsSync(path.join(root, 'avatars', `${t.key}-${m.slot}.webp`))) {
+        problems.push(`${t.key}/${m.slot}: avatars/${t.key}-${m.slot}.webp is ${was.name}'s portrait (${was.role}), and this slot is now ${m.name} (${m.role}) or looks different`);
       }
     }
   }
@@ -189,7 +192,8 @@ function importPacket(packet, root = source.ROOT) {
   /* The portrait prompt reads presentation as how the person presents ("a woman in her 30s"); the
      builder takes any text, so a personality phrase there would make every prompt read wrong. */
   for (const t of teams) for (const m of t.members) {
-    if (!PRESENTATIONS.includes(m.avatar.presentation)) problems.push(`${t.key}/${m.slot}: presentation ${JSON.stringify(m.avatar.presentation)} is not one of ${PRESENTATIONS.join(', ')} (the portrait prompt reads it as how the person presents)`);
+    const pres = (m.avatar || {}).presentation;
+    if (!PRESENTATIONS.includes(pres)) problems.push(`${t.key}/${m.slot}: presentation ${JSON.stringify(pres)} is not one of ${PRESENTATIONS.join(', ')} (the portrait prompt reads it as how the person presents)`);
   }
   const replaced = cur.teamsSource.teams.length - kept.length;
   return { rolesSource, teamsSource, problems, taken: { roles: newRoles.length, teamsNew: packet.teams.length - replaced, teamsReplaced: replaced } };
@@ -206,8 +210,18 @@ function summarise(problems) {
   return [...kinds.entries()].sort((a, b) => b[1].length - a[1].length);
 }
 
+/** Uncommitted changes to the sources in root, as git lists them; none when root is not a git
+ *  checkout (a copy made by a test), since there is then nothing to undo with. */
+function uncommitted(root) {
+  const r = require('node:child_process').spawnSync('git', ['-C', root, 'status', '--porcelain', '--', 'groups.json', 'settings.json', 'roles', 'teams'], { encoding: 'utf8' });
+  if (r.status !== 0) return [];
+  return r.stdout.split('\n').filter(Boolean).map((l) => l.slice(3));
+}
+
 function main(argv, root = source.ROOT, out = process.stdout) {
-  const dir = argv.find((a) => !a.startsWith('--'));
+  const dirs = argv.filter((a) => !a.startsWith('--'));
+  if (dirs.length > 1) { process.stderr.write(`import-packet: one packet folder only (also got ${dirs.slice(1).join(' ')}); options start with --\n`); return 2; }
+  const dir = dirs[0];
   const unknown = argv.filter((a) => a.startsWith('--') && a !== '--write');
   if (unknown.length) { process.stderr.write(`import-packet: unknown option ${unknown.join(' ')}\n`); return 2; }
   if (!dir) { process.stderr.write('usage: node tools/import-packet.js <packet dir> [--write]\n'); return 2; }
@@ -228,8 +242,19 @@ function main(argv, root = source.ROOT, out = process.stdout) {
   out.write(`packet: ${nTeams} teams (${r.taken.teamsNew} new, ${r.taken.teamsReplaced} replace published ones), ${nRoles} roles (${r.taken.roles} new)\n`);
   if (!r.problems.length) {
     if (argv.includes('--write')) {
+      const dirty = uncommitted(root);
+      if (dirty.length) {
+        process.stderr.write(`import-packet: the sources have uncommitted changes (${dirty.slice(0, 5).join(', ')}${dirty.length > 5 ? ', ...' : ''}); commit or stash them first, so a write can be undone without losing them\n`);
+        return 2;
+      }
+      const created = [
+        ...r.rolesSource.roles.map((x) => path.join('roles', x.key)),
+        ...r.teamsSource.teams.map((x) => path.join('teams', `${x.key}.json`)),
+      ].filter((rel) => !fs.existsSync(path.join(root, rel)));
       try { source.write(r.rolesSource, r.teamsSource, root); } catch (err) {
-        process.stderr.write(`import-packet: writing stopped partway (${err.message}); the sources may be half written: see git status, and git checkout -- . && git clean -fd roles teams to undo\n`);
+        const undo = [`git -C ${JSON.stringify(root)} checkout -- groups.json settings.json roles teams`];
+        if (created.length) undo.push(`rm -r ${created.map((rel) => JSON.stringify(path.join(root, rel))).join(' ')}`);
+        process.stderr.write(`import-packet: writing stopped partway (${err.message}); the sources may be half written. To undo:\n  ${undo.join('\n  ')}\n`);
         return 2;
       }
       out.write('written; run npm test and node build.js\n');
