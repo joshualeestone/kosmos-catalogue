@@ -290,3 +290,21 @@ test('a kept slot whose role changed while its portrait exists is reported', () 
     fs.rmSync(repo, { recursive: true, force: true });
   }
 });
+
+test('the uncommitted-changes check passes only for a folder that is not a git checkout, never because it could not look', () => {
+  const { uncommitted } = require('../tools/import-packet');
+  const plain = fs.mkdtempSync(path.join(os.tmpdir(), 'import-packet-plain-'));
+  try {
+    assert.deepEqual(uncommitted(plain), []);
+    // A path git cannot even enter is a failure to look, not a clean tree.
+    assert.throws(() => uncommitted(path.join(plain, 'missing')), /could not check the sources/);
+  } finally {
+    fs.rmSync(plain, { recursive: true, force: true });
+  }
+});
+
+test('a line that names an Object property is text, not a heading', () => {
+  const s = sections(['## How you work', 'constructor', '- a rule.', 'toString']);
+  assert.deepEqual(s.how, ['a rule.']);
+  assert.equal(s.problems.length, 2, s.problems.join('\n'));
+});

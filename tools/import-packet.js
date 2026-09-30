@@ -20,6 +20,8 @@ const path = require('node:path');
 const build = require('../build');
 const source = require('../lib/source');
 
+const AVATAR_FIELDS = ['apparentAge', 'presentation', 'heritage', 'hair', 'attire', 'expression'];
+
 /** The presentations the published teams use, which the portrait prompt is written for. */
 const PRESENTATIONS = ['woman', 'man', 'nonbinary person'];
 
@@ -31,7 +33,7 @@ function sections(lines) {
   const out = { desc: '', how: [], ask: [], never: [], problems: [] };
   let at = null;
   for (const l of lines) {
-    if (HEADS[l]) { at = HEADS[l]; continue; }
+    if (Object.hasOwn(HEADS, l)) { at = HEADS[l]; continue; }
     if (!l.trim()) continue;
     if (/^#/.test(l)) out.problems.push(`a heading this importer does not know: ${JSON.stringify(l)}`);
     else if (at && l.startsWith('- ')) out[at].push(l.slice(2));
@@ -120,8 +122,13 @@ function shapeProblems(packet) {
 /** A throwaway copy of the sources, so a candidate is checked as the files a later build reads. */
 function copyRepo(root) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-import-'));
-  for (const f of ['groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams', 'avatars']) {
-    if (fs.existsSync(path.join(root, f))) fs.cpSync(path.join(root, f), path.join(dir, f), { recursive: true });
+  try {
+    for (const f of ['groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams', 'avatars']) {
+      if (fs.existsSync(path.join(root, f))) fs.cpSync(path.join(root, f), path.join(dir, f), { recursive: true });
+    }
+  } catch (err) {
+    fs.rmSync(dir, { recursive: true, force: true });
+    throw err;
   }
   return dir;
 }
@@ -160,7 +167,7 @@ function importPacket(packet, root = source.ROOT) {
     if (!published) continue;
     for (const m of t.members) {
       const was = published.members.find((o) => o.slot === m.slot);
-      const changed = was && (was.name !== m.name || was.role !== m.role || JSON.stringify(was.avatar) !== JSON.stringify(m.avatar));
+      const changed = was && (was.name !== m.name || was.role !== m.role || AVATAR_FIELDS.some((f) => (was.avatar || {})[f] !== (m.avatar || {})[f]));
       if (changed && fs.existsSync(path.join(root, 'avatars', `${t.key}-${m.slot}.webp`))) {
         problems.push(`${t.key}/${m.slot}: avatars/${t.key}-${m.slot}.webp is ${was.name}'s portrait (${was.role}), and this slot is now ${m.name} (${m.role}) or looks different`);
       }
@@ -210,12 +217,14 @@ function summarise(problems) {
   return [...kinds.entries()].sort((a, b) => b[1].length - a[1].length);
 }
 
-/** Uncommitted changes to the sources in root, as git lists them; none when root is not a git
- *  checkout (a copy made by a test), since there is then nothing to undo with. */
+/** Uncommitted changes to the sources in root, as git lists them. None when root is not a git
+ *  checkout at all (a copy made by a test: nothing to undo with). Any other failure (git missing,
+ *  a repo git refuses) throws: the guard must not pass because it could not look. */
 function uncommitted(root) {
   const r = require('node:child_process').spawnSync('git', ['-C', root, 'status', '--porcelain', '--', 'groups.json', 'settings.json', 'roles', 'teams'], { encoding: 'utf8' });
-  if (r.status !== 0) return [];
-  return r.stdout.split('\n').filter(Boolean).map((l) => l.slice(3));
+  if (r.status === 0) return r.stdout.split('\n').filter(Boolean).map((l) => l.slice(3));
+  if (r.status === 128 && /not a git repository/i.test(r.stderr || '')) return [];
+  throw new Error(`could not check the sources for uncommitted changes: ${(r.error && r.error.message) || (r.stderr || '').trim() || `git exited ${r.status}`}`);
 }
 
 function main(argv, root = source.ROOT, out = process.stdout) {
@@ -242,7 +251,8 @@ function main(argv, root = source.ROOT, out = process.stdout) {
   out.write(`packet: ${nTeams} teams (${r.taken.teamsNew} new, ${r.taken.teamsReplaced} replace published ones), ${nRoles} roles (${r.taken.roles} new)\n`);
   if (!r.problems.length) {
     if (argv.includes('--write')) {
-      const dirty = uncommitted(root);
+      let dirty;
+      try { dirty = uncommitted(root); } catch (err) { process.stderr.write(`import-packet: ${err.message}; nothing written\n`); return 2; }
       if (dirty.length) {
         process.stderr.write(`import-packet: the sources have uncommitted changes (${dirty.slice(0, 5).join(', ')}${dirty.length > 5 ? ', ...' : ''}); commit or stash them first, so a write can be undone without losing them\n`);
         return 2;
@@ -269,4 +279,4 @@ function main(argv, root = source.ROOT, out = process.stdout) {
 
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
 
-module.exports = { importPacket, summarise, roleFrom, teamFrom, sections, shapeProblems, main };
+module.exports = { importPacket, summarise, roleFrom, teamFrom, sections, shapeProblems, main, uncommitted };

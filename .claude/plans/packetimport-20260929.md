@@ -66,3 +66,10 @@ non-colliding names, and the portraits.
   no avatar is reported, not a crash.
 - My first uncommitted-changes test could not fail (it appended an empty string and its draft file
   failed the run for another reason); rewritten around a real edit, it fails with the guard removed.
+
+## Review iteration 4 (changes)
+- The uncommitted-changes check passes only for a folder that is not a git checkout; git missing, a
+  repo git refuses or a path it cannot enter now refuses the write instead of passing.
+- The throwaway copy removes itself when copying fails.
+- A line that names an Object property ("constructor") is text, not a heading; the portrait check
+  compares the six avatar fields, not JSON key order.
