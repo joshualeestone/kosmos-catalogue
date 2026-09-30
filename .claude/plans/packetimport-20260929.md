@@ -45,3 +45,13 @@ non-colliding names, and the portraits.
 - A packet of the wrong shape (no members, a deeper hierarchy, no packet at all) is reported, not a
   crash. Tests cover --write round trip, the disk-only refusal, unknown headings and shape; the two
   MAJOR tests each fail with their fix removed.
+
+## Review iteration 2 (changes)
+- Every packet key (team, role, member role) must match KEY_RE before anything touches a disk, and
+  source.write() refuses such a key itself: a role keyed "../../x" was written outside the throwaway
+  copy during a dry run (measured with the guards removed, then deleted).
+- Fields that are not text are reported instead of crashing the builder; main() turns any throw into
+  exit 2 with a message, reports a --write that stops partway (with the undo), refuses unknown options.
+- The throwaway copy is made inside the try, so a failed copy is cleaned up too.
+- Tests: the escape, non-text fields, --write of a refused packet writes nothing, a replaced team with
+  a changed role, a repeated role and a reused portrait, and numbering in a new team.

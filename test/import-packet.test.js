@@ -148,3 +148,84 @@ test('a packet of the wrong shape is reported, not a crash', () => {
   const out = { text: '', write(s) { this.text += s; } };
   assert.equal(main([path.join(os.tmpdir(), 'no-such-packet-' + process.pid)], REPO, out), 2);
 });
+
+test('a key that could reach outside the repo is refused before anything is written', () => {
+  const escape = `import-packet-escape-${process.pid}`;
+  const target = path.join(os.tmpdir(), escape);
+  const r = importPacket({ teams: [], roles: [packetRole(`../../${escape}`, FULL)] });
+  assert.match(r.problems.join('\n'), /role 1: key must be lowercase words/);
+  assert.equal(fs.existsSync(target), false, 'a dry run wrote outside its throwaway copy');
+  const t = execAsPacket();
+  t.key = `../${escape}`;
+  assert.match(importPacket({ teams: [t], roles: [] }).problems.join('\n'), /team 1: key must be lowercase words/);
+  const m = execAsPacket();
+  m.members[1].role = '../x';
+  assert.match(importPacket({ teams: [m], roles: [] }).problems.join('\n'), /member 2: role must be a role key/);
+  assert.equal(fs.existsSync(target), false);
+  // And the writer itself refuses such a key, whoever calls it.
+  assert.throws(() => require('../lib/source').write({ GROUP_ORDER: [], roles: [{ key: '../x' }] }, { teams: [] }, target), /must be lowercase words/);
+  assert.equal(fs.existsSync(target), false);
+});
+
+test('a field that is not text is reported, not a crash in the builder', () => {
+  const r = importPacket({ teams: [], roles: [packetRole('grant-writer', { ...FULL, name: 5 })] });
+  assert.deepEqual(r.problems, ['roles.json: grant-writer: name must be text']);
+  const t = execAsPacket();
+  t.members[0].name = ['Eleanor'];
+  assert.match(importPacket({ teams: [t], roles: [] }).problems.join('\n'), /member 1: name must be text/);
+});
+
+test('--write on a refused packet writes nothing, and an unknown option is refused', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'import-packet-in-'));
+  const repo = copyRepo();
+  try {
+    const p = execAsPacket();
+    p.members = p.members.slice(0, 4);
+    fs.writeFileSync(path.join(dir, 'teams.json'), JSON.stringify([p]));
+    fs.writeFileSync(path.join(dir, 'roles.json'), JSON.stringify([packetRole('grant-writer', FULL)]));
+    const before = fs.readFileSync(path.join(repo, 'teams', 'exec.json'), 'utf8');
+    const out = { text: '', write(s) { this.text += s; } };
+    assert.equal(main([dir, '--write'], repo, out), 1, out.text);
+    assert.equal(fs.readFileSync(path.join(repo, 'teams', 'exec.json'), 'utf8'), before, 'a refused packet changed a team');
+    assert.equal(fs.existsSync(path.join(repo, 'roles', 'grant-writer')), false, 'a refused packet wrote a role');
+    assert.equal(main([dir, '--wrtie'], repo, out), 2);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+    fs.rmSync(repo, { recursive: true, force: true });
+  }
+});
+
+test('replacing a team: a swapped member gets a new slot, a repeated role gets a free slot, a reused portrait is reported', () => {
+  const repo = copyRepo();
+  try {
+    const p = execAsPacket();
+    const lead = EXEC.members.find((m) => m.slot === 'lead');
+    const reports = EXEC.members.filter((m) => m.slot !== 'lead');
+    // The first report's role changes; the last report becomes a second member of the first report's role.
+    p.members[1] = { ...p.members[1], role: 'cos-new-role-that-does-not-exist' };
+    p.members[p.members.length - 1] = { ...p.members[p.members.length - 1], role: reports[1].role, name: 'Zebedee' };
+    // A portrait for the lead, whose person changes.
+    fs.writeFileSync(path.join(repo, 'avatars', `exec-lead.webp`), 'x');
+    p.members[0] = { ...p.members[0], name: 'Octavia' };
+    const r = importPacket({ teams: [p], roles: [] }, repo);
+    const t = r.teamsSource.teams.find((x) => x.key === 'exec');
+    const slots = t.members.map((m) => m.slot);
+    assert.equal(new Set(slots).size, slots.length, `slots repeat: ${slots}`);
+    assert.equal(slots[1], 'cos-new-role-that-does-not-exist');
+    // The published member with that role keeps its slot; the second gets the role key, free here.
+    assert.equal(slots[2], reports[1].slot);
+    assert.equal(slots[slots.length - 1], reports[1].role);
+    assert.notEqual(reports[1].slot, reports[1].role, 'premise: the published slot is not named after its role');
+    assert.ok(r.problems.some((x) => x === `exec/lead: avatars/exec-lead.webp is ${lead.name}'s portrait, and this slot is now Octavia`), r.problems.join('\n'));
+  } finally {
+    fs.rmSync(repo, { recursive: true, force: true });
+  }
+});
+
+test('in a new team, a role that repeats is numbered', () => {
+  const { teamFrom } = require('../tools/import-packet');
+  const m = (role, lead) => ({ title: 't', role, name: 'n', focus: 'f', avatar: {}, ...(lead ? {} : { reportsTo: 'lead' }) });
+  const t = teamFrom({ key: 'k', label: 'K Team', members: [m('cos', true), m('copywriter'), m('copywriter'), m('copywriter')] }, 1, null);
+  assert.deepEqual(t.members.map((x) => x.slot), ['lead', 'copywriter', 'copywriter-2', 'copywriter-3']);
+  assert.equal(t.project.name, 'K');
+});

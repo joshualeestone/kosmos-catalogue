@@ -80,20 +80,38 @@ function teamFrom(p, rank, published) {
   };
 }
 
-/** What would make the importer read a packet wrong: its shape, before any mapping. */
+/** What would make the importer read a packet wrong: its shape, before any mapping and before
+ *  anything touches a disk. Every key names a file or folder, so each must match KEY_RE here: a
+ *  key such as "../x" would otherwise be written outside the throwaway copy. */
 function shapeProblems(packet) {
   const out = [];
   if (!Array.isArray(packet.teams)) return ['teams.json: must be a list of teams'];
   if (!Array.isArray(packet.roles)) return ['roles.json: must be a list of roles'];
+  const key = (k) => typeof k === 'string' && source.KEY_RE.test(k);
+  const text = (v) => v === undefined || typeof v === 'string';
+  const bad = (o, fields) => fields.filter((f) => !text(o[f]));
   packet.teams.forEach((t, i) => {
-    const name = t && typeof t.key === 'string' ? t.key : `team ${i + 1}`;
-    if (!t || typeof t !== 'object' || typeof t.key !== 'string') out.push(`teams.json: ${name} has no key`);
-    else if (!Array.isArray(t.members) || !t.members.every((m) => m && typeof m === 'object' && typeof m.role === 'string')) out.push(`teams.json: ${name}: members must be a list of people, each with a role`);
-    else if (t.members.some((m) => m.reportsTo && m.reportsTo !== 'lead')) out.push(`teams.json: ${name}: every member reports to the lead (a deeper hierarchy is not supported)`);
+    const name = t && key(t.key) ? t.key : `team ${i + 1}`;
+    if (!t || typeof t !== 'object' || !key(t.key)) { out.push(`teams.json: ${name}: key must be lowercase words joined by hyphens`); return; }
+    const f = bad(t, ['kind', 'label', 'blurb', 'purpose', 'goal']);
+    if (f.length) out.push(`teams.json: ${name}: ${f.join(', ')} must be text`);
+    if (!Array.isArray(t.members) || !t.members.every((m) => m && typeof m === 'object')) { out.push(`teams.json: ${name}: members must be a list of people, each with a role`); return; }
+    t.members.forEach((m, j) => {
+      const who = `teams.json: ${name}: member ${j + 1}`;
+      if (!key(m.role)) out.push(`${who}: role must be a role key (lowercase words joined by hyphens)`);
+      const mf = bad(m, ['title', 'name']);
+      if (!(text(m.focus) || (Array.isArray(m.focus) && m.focus.every((x) => typeof x === 'string')))) mf.push('focus');
+      if (m.avatar !== undefined && (!m.avatar || typeof m.avatar !== 'object' || Object.values(m.avatar).some((v) => typeof v !== 'string'))) mf.push('avatar');
+      if (mf.length) out.push(`${who}: ${mf.join(', ')} must be text`);
+      if (m.reportsTo && m.reportsTo !== 'lead') out.push(`${who}: every member reports to the lead (a deeper hierarchy is not supported)`);
+    });
   });
   packet.roles.forEach((r, i) => {
-    if (!r || typeof r.key !== 'string') out.push(`roles.json: role ${i + 1} has no key`);
-    else if (!Array.isArray(r.instructions) || !r.instructions.every((l) => typeof l === 'string')) out.push(`roles.json: ${r.key}: instructions must be a list of lines`);
+    if (!r || typeof r !== 'object' || !key(r.key)) { out.push(`roles.json: role ${i + 1}: key must be lowercase words joined by hyphens`); return; }
+    const f = bad(r, ['name', 'summary', 'category', 'first', 'character']);
+    if (!(r.caution === null || text(r.caution))) f.push('caution');
+    if (f.length) out.push(`roles.json: ${r.key}: ${f.join(', ')} must be text`);
+    if (!Array.isArray(r.instructions) || !r.instructions.every((l) => typeof l === 'string')) out.push(`roles.json: ${r.key}: instructions must be a list of lines`);
   });
   return out;
 }
@@ -150,8 +168,9 @@ function importPacket(packet, root = source.ROOT) {
   const teamsSource = { ...cur.teamsSource, teams };
   // In memory first: every rule the builder makes, even for a role whose file would not parse.
   problems.push(...build.build({ root, rolesSource, teamsSource }).problems);
-  const tmp = copyRepo(root);
+  let tmp = null;
   try {
+    tmp = copyRepo(root);
     source.write(rolesSource, teamsSource, tmp);
     // A new role that does not parse is reported once; every member using it would repeat it.
     const unread = new Set(newRoles.map((r) => r.key));
@@ -165,7 +184,7 @@ function importPacket(packet, root = source.ROOT) {
       return !(m && unread.has(m[1]) && built.problems.some((y) => y.startsWith(`roles/${m[1]}/role.md:`)));
     }));
   } finally {
-    fs.rmSync(tmp, { recursive: true, force: true });
+    if (tmp) fs.rmSync(tmp, { recursive: true, force: true });
   }
   /* The portrait prompt reads presentation as how the person presents ("a woman in her 30s"); the
      builder takes any text, so a personality phrase there would make every prompt read wrong. */
@@ -189,6 +208,8 @@ function summarise(problems) {
 
 function main(argv, root = source.ROOT, out = process.stdout) {
   const dir = argv.find((a) => !a.startsWith('--'));
+  const unknown = argv.filter((a) => a.startsWith('--') && a !== '--write');
+  if (unknown.length) { process.stderr.write(`import-packet: unknown option ${unknown.join(' ')}\n`); return 2; }
   if (!dir) { process.stderr.write('usage: node tools/import-packet.js <packet dir> [--write]\n'); return 2; }
   let packet;
   try {
@@ -197,12 +218,22 @@ function main(argv, root = source.ROOT, out = process.stdout) {
     process.stderr.write(`import-packet: could not read the packet in ${dir}: ${err.message}\n`);
     return 2;
   }
-  const r = importPacket(packet, root);
+  let r;
+  try { r = importPacket(packet, root); } catch (err) {
+    process.stderr.write(`import-packet: the packet could not be checked (nothing written): ${err.message}\n`);
+    return 2;
+  }
   const nTeams = Array.isArray(packet.teams) ? packet.teams.length : 0;
   const nRoles = Array.isArray(packet.roles) ? packet.roles.length : 0;
   out.write(`packet: ${nTeams} teams (${r.taken.teamsNew} new, ${r.taken.teamsReplaced} replace published ones), ${nRoles} roles (${r.taken.roles} new)\n`);
   if (!r.problems.length) {
-    if (argv.includes('--write')) { source.write(r.rolesSource, r.teamsSource, root); out.write('written; run npm test and node build.js\n'); }
+    if (argv.includes('--write')) {
+      try { source.write(r.rolesSource, r.teamsSource, root); } catch (err) {
+        process.stderr.write(`import-packet: writing stopped partway (${err.message}); the sources may be half written: see git status, and git checkout -- . && git clean -fd roles teams to undo\n`);
+        return 2;
+      }
+      out.write('written; run npm test and node build.js\n');
+    }
     else out.write('nothing refused; run again with --write\n');
     return 0;
   }
