@@ -75,7 +75,8 @@ function markerIn(value, nameAllowed = true) {
 }
 
 /** Any character outside what this catalogue's text is made of: letters, digits, punctuation,
- *  symbols, the plain space and combining accents, in the Latin script (and the script-neutral
+ *  symbols, the plain space and combining accents (only ones with no precomposed letter survive the
+ *  NFKC check below; type é, not e plus an accent), in the Latin script (and the script-neutral
  *  characters every script shares). Another script's letters are refused too: a right-to-left
  *  letter reorders what a diff shows, and a Cyrillic or Greek lookalike spells a different word.
  *  The IPA, phonetic and extended Latin letter blocks are refused as well (small capitals and other
@@ -156,7 +157,7 @@ function build(src = {}) {
   if (typeof ts.AVATAR_STYLE !== 'string' || !ts.AVATAR_STYLE) problems.push('settings.json: avatarStyle is missing');
   // Checked here as well as inside each team: avatarStyle is also published on its own.
   const shared = [ts.TEAM_CAUTION, ts.AVATAR_STYLE];
-  if (emDashIn(shared) || hiddenIn(shared) || markerIn(shared, false) || outwardIn(shared)) problems.push('settings.json: plain text only (no em dash, hidden character or template marker)');
+  if (emDashIn(shared) || hiddenIn(shared) || markerIn(shared, false) || outwardIn(shared)) problems.push('settings.json: plain text only (no em dash, hidden character, template marker, web address, link or command)');
   // Kosmos's own roles: a team member may name one, and a catalogue role must not reuse a key.
   const kosmos = readBuiltin(root, problems);
   if (!kosmos.all.every((k) => KEY_RE.test(k)) || hiddenIn(kosmos) || emDashIn(kosmos) || markerIn(kosmos) || outwardIn(kosmos)) {

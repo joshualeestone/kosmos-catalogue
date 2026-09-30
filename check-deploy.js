@@ -42,6 +42,7 @@ function checkDeploy({ dist, builtSerial, publicKeyFile = PUBLIC_KEY }) {
   if (!verify(bytes, sig, fs.readFileSync(publicKeyFile, 'utf8'))) return { ok: false, message: 'refused: the signature does not verify' };
   let c;
   try { c = JSON.parse(bytes.toString('utf8')); } catch { return { ok: false, message: 'refused: catalogue.json is not JSON' }; }
+  if (!c || c.version !== 2 || !Array.isArray(c.teams)) return { ok: false, message: 'refused: catalogue.json is not a version 2 catalogue' };
   if (String(c.serial) !== String(builtSerial)) return { ok: false, message: `refused: serial ${c.serial} is not the built ${builtSerial}` };
   const want = new Set(['catalogue.json', 'catalogue.json.sig']);
   for (const t of c.teams || []) {

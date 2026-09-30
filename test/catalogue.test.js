@@ -756,9 +756,14 @@ test('a rebuild with the serial handed down (previous = serial - 1) is byte-iden
   try {
     const git = (...x) => execFileSync('git', ['-C', dir, '-c', 'user.name=t', '-c', 'user.email=t@t', '-c', 'commit.gpgsign=false', '-c', 'core.hooksPath=/dev/null', ...x], { stdio: 'ignore', env: build.withoutGitDir() });
     git('init', '-q'); git('add', '-A'); git('commit', '-q', '-m', 'x');
+    // A published serial ABOVE the commit time: the case where the serial comes from previous + 1,
+    // not from the clock, and the sign job must reproduce it from the serial handed down.
+    const commit = Number(execFileSync('git', ['-C', dir, 'log', '-1', '--format=%ct'], { encoding: 'utf8', env: build.withoutGitDir() }).trim());
+    const published = commit + 100;
     process.stdout.write = () => true;
-    assert.equal(build.main([], { root: dir, out: a, previousSerial: 1759190400 + 1e6 }), 0);
+    assert.equal(build.main([], { root: dir, out: a, previousSerial: published }), 0);
     const serial = JSON.parse(fs.readFileSync(path.join(a, 'catalogue.json'), 'utf8')).serial;
+    assert.equal(serial, published + 1, 'premise: the serial came from previous + 1, not the commit time');
     assert.equal(build.main([], { root: dir, out: b, previousSerial: serial - 1 }), 0);
   } finally { process.stdout.write = w; fs.rmSync(dir, { recursive: true, force: true }); }
   try {
