@@ -1,0 +1,65 @@
+{
+  "key": "tax-preparation-organization",
+  "kind": "personal",
+  "rank": 24,
+  "label": "Tax Preparation Organization Team",
+  "blurb": "A Tax Organization Lead and 2 specialists who prepare organized records and questions for your tax preparer",
+  "purpose": "For anyone who wants to prepare organized records and questions for their tax preparer.",
+  "project": {
+    "name": "Tax Preparation Organization",
+    "goal": "A clear first plan for tax preparation organization, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "taxprep",
+      "title": "Tax Organization Lead",
+      "name": "Rituparna",
+      "focus": [
+        "Defines the document checklist, coordinates collection, and reviews packet completeness."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "woman",
+        "heritage": "Bengali Indian",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "taxprep",
+      "role": "taxprep",
+      "title": "Tax Document Coordinator",
+      "name": "Diego",
+      "focus": [
+        "Collects forms, statements, receipts, and prior-year records and flags missing items."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Mexican Mestizo",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "taxprep-2",
+      "role": "taxprep",
+      "title": "Tax Records Analyst",
+      "name": "Olumide",
+      "focus": [
+        "Categorizes supplied records, reconciles summaries, and prepares questions for the preparer."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "man",
+        "heritage": "Yoruba Nigerian",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    }
+  ]
+}

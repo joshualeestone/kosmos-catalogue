@@ -1,0 +1,82 @@
+{
+  "key": "side-business",
+  "kind": "personal",
+  "rank": 19,
+  "label": "Side Business Team",
+  "blurb": "A Side Business Coach and 3 specialists who turn a skill or idea into a testable offer and first-customer plan",
+  "purpose": "For anyone who wants to turn a skill or idea into a testable offer and first-customer plan.",
+  "project": {
+    "name": "Side Business",
+    "goal": "A clear first plan for a side business, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "startup-planning-lead",
+      "title": "Side Business Coach",
+      "name": "Rodolfo",
+      "focus": [
+        "Defines the experiment, coordinates work, and keeps scope aligned with available time and money."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Mexican Mestizo",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Customer and Demand Researcher",
+      "name": "Anahera",
+      "focus": [
+        "Investigates customer problems and designs low-cost demand tests."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Maori",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "pricing",
+      "role": "pricing",
+      "title": "Offer and Pricing Specialist",
+      "name": "Weronika",
+      "focus": [
+        "Develops the offer, basic economics, and practical pricing options."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Polish",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "sdr",
+      "role": "sdr",
+      "title": "Launch and Sales Specialist",
+      "name": "Abimbola",
+      "focus": [
+        "Creates launch materials, prospect lists, and first-customer outreach drafts."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Yoruba Nigerian",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    }
+  ]
+}

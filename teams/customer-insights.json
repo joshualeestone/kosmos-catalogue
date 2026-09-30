@@ -1,0 +1,82 @@
+{
+  "key": "customer-insights",
+  "kind": "business",
+  "rank": 19,
+  "label": "Customer Insights Team",
+  "blurb": "A Customer Insights Lead and 3 specialists who turn customer feedback into clear needs and improvement priorities",
+  "purpose": "For a business that wants to turn customer feedback into clear needs and improvement priorities.",
+  "project": {
+    "name": "Customer Insights",
+    "goal": "A clear first plan for customer insights, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "voc",
+      "title": "Customer Insights Lead",
+      "name": "Esteban",
+      "focus": [
+        "Defines the analysis, resolves conflicting evidence, and owns the recommendations."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Puerto Rican, mixed European and African heritage",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Qualitative Researcher",
+      "name": "Malik",
+      "focus": [
+        "Codes interviews, reviews, and open-ended feedback into themes."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "African American",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "survey-quantitative-analyst",
+      "role": "survey-quantitative-analyst",
+      "title": "Survey and Quantitative Analyst",
+      "name": "Thao",
+      "focus": [
+        "Analyzes survey results and checks sample limits and segment differences."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Kinh Vietnamese",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "voc",
+      "role": "voc",
+      "title": "Customer Journey Analyst",
+      "name": "Shreya",
+      "focus": [
+        "Maps friction and unmet needs across the customer experience."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Bengali Indian",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

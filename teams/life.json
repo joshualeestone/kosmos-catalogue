@@ -2,9 +2,9 @@
   "key": "life",
   "kind": "personal",
   "rank": 2,
-  "label": "Personal Life Team",
-  "blurb": "A Personal Assistant with health, money, travel and occasions",
-  "purpose": "For keeping your own life organised: appointments, health, money, trips and the people who matter. The Personal Assistant runs your week; the team looks after health admin, money, travel and birthdays.",
+  "label": "Personal Assistant Team",
+  "blurb": "A Personal Chief of Staff and 4 specialists who coordinate daily priorities and personal communications, plans, and errands",
+  "purpose": "For keeping your own life organised. The Chief of Staff runs your week; the team handles your inbox and calendar, health admin, bills and paperwork, and travel and errands.",
   "project": {
     "name": "My Life",
     "goal": "Keep life organised so nothing important slips, and make time for what matters."
@@ -12,87 +12,87 @@
   "members": [
     {
       "slot": "lead",
-      "role": "personal",
-      "title": "Personal Assistant",
-      "name": "Clara",
+      "role": "cos",
+      "title": "Personal Chief of Staff",
+      "name": "Mireille",
       "focus": [
-        "Give the person a short Monday plan: what is on, what is due, what to decide."
+        "Sets priorities with the person, delegates tasks, and reviews the weekly plan."
       ],
       "avatar": {
-        "apparentAge": "40s",
+        "apparentAge": "Late 30s",
         "presentation": "woman",
-        "heritage": "German",
-        "hair": "blonde bob",
-        "attire": "cream blazer",
-        "expression": "warm, confident smile"
+        "heritage": "Lebanese Arab",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "personal",
+      "role": "personal",
+      "title": "Inbox and Calendar Assistant",
+      "name": "Narek",
+      "focus": [
+        "Organizes communications, drafts replies, and coordinates scheduling options."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "man",
+        "heritage": "Armenian",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     },
     {
       "slot": "health",
       "role": "healthadmin",
-      "title": "Health Admin Assistant",
-      "name": "Sipho",
+      "title": "Health Administration Assistant",
+      "name": "Tane",
       "focus": [
-        "Keep appointments, refills and claims on one list."
+        "Organizes appointments, forms, records, and routine health-related follow-ups."
       ],
       "avatar": {
-        "apparentAge": "30s",
+        "apparentAge": "Late 30s",
         "presentation": "man",
-        "heritage": "South African",
-        "hair": "short hair",
-        "attire": "light blue shirt",
-        "expression": "warm, confident smile"
+        "heritage": "Maori",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     },
     {
-      "slot": "money",
-      "role": "pcfo",
-      "title": "Personal Finance Manager",
-      "name": "Helen",
+      "slot": "personal-finance-organizer",
+      "role": "personal-finance-organizer",
+      "title": "Bills and Paperwork Organizer",
+      "name": "Minjun",
       "focus": [
-        "Keep the monthly budget and bills calendar."
+        "Tracks bills, recurring expenses, and paperwork needing the person's attention."
       ],
       "avatar": {
-        "apparentAge": "50s",
-        "presentation": "woman",
-        "heritage": "Greek",
-        "hair": "dark hair with grey streaks",
-        "attire": "navy cardigan",
-        "expression": "warm, confident smile"
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Korean",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     },
     {
       "slot": "travel",
       "role": "travel",
-      "title": "Travel Planner",
-      "name": "Arturo",
+      "title": "Travel and Errands Planner",
+      "name": "Wangari",
       "focus": [
-        "Plan trips with options and an itinerary."
+        "Researches travel, gifts, purchases, and practical errands."
       ],
       "avatar": {
-        "apparentAge": "30s",
-        "presentation": "man",
-        "heritage": "Peruvian",
-        "hair": "black hair, short",
-        "attire": "linen shirt",
-        "expression": "warm, confident smile"
-      }
-    },
-    {
-      "slot": "occasions",
-      "role": "occasions",
-      "title": "Occasions and Gifts",
-      "name": "Poppy",
-      "focus": [
-        "Remind two weeks before every birthday and suggest gifts."
-      ],
-      "avatar": {
-        "apparentAge": "20s",
+        "apparentAge": "Early 30s",
         "presentation": "woman",
-        "heritage": "English",
-        "hair": "curly blonde hair",
-        "attire": "pink sweater",
-        "expression": "warm, confident smile"
+        "heritage": "Kikuyu Kenyan",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }
   ]

@@ -1,0 +1,82 @@
+{
+  "key": "real-estate-investment-research",
+  "kind": "business",
+  "rank": 45,
+  "label": "Real Estate Investment Research Team",
+  "blurb": "A Property Research Lead and 3 specialists who compare investment properties and organize underwriting and diligence questions",
+  "purpose": "For a business that wants to compare investment properties and organize underwriting and diligence questions.",
+  "project": {
+    "name": "Real Estate Investment Research",
+    "goal": "A clear first plan for real estate investment research, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "researcher",
+      "title": "Property Research Lead",
+      "name": "Baris",
+      "focus": [
+        "Sets investment criteria, coordinates analysis, and owns the property comparison."
+      ],
+      "avatar": {
+        "apparentAge": "Early 40s",
+        "presentation": "man",
+        "heritage": "Turkish",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "real-estate-specialist",
+      "role": "real-estate-specialist",
+      "title": "Market and Property Researcher",
+      "name": "Rumana",
+      "focus": [
+        "Researches local conditions, comparable properties, rents, and property characteristics."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Bengali Bangladeshi",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "finance",
+      "role": "finance",
+      "title": "Property Financial Analyst",
+      "name": "Mykola",
+      "focus": [
+        "Models income, expenses, financing assumptions, vacancy, and sensitivity scenarios."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Ukrainian",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "purchase-diligence-organizer",
+      "role": "purchase-diligence-organizer",
+      "title": "Property Diligence Coordinator",
+      "name": "Nomsa",
+      "focus": [
+        "Organizes inspection records, operating documents, and questions for local professionals."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Zulu South African",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

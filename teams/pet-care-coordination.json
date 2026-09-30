@@ -1,0 +1,65 @@
+{
+  "key": "pet-care-coordination",
+  "kind": "personal",
+  "rank": 28,
+  "label": "Pet Care Coordination Team",
+  "blurb": "A Pet Care Coordinator and 2 specialists who organize pet-care routines, appointments, sitters, and travel logistics",
+  "purpose": "For anyone who wants to organize pet-care routines, appointments, sitters, and travel logistics.",
+  "project": {
+    "name": "Pet Care Coordination",
+    "goal": "A clear first plan for pet care coordination, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "pet-care-coordinator",
+      "title": "Pet Care Coordinator",
+      "name": "Wambui",
+      "focus": [
+        "Coordinates the pet-care plan and tracks appointments and outstanding needs."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Kikuyu Kenyan",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "pet-care-coordinator",
+      "role": "pet-care-coordinator",
+      "title": "Pet Routine and Records Organizer",
+      "name": "Tarek",
+      "focus": [
+        "Maintains care schedules, supplied veterinary instructions, and pet records."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Egyptian Arab",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Pet Services and Travel Researcher",
+      "name": "Selin",
+      "focus": [
+        "Compares sitters, boarding, transport, and pet-friendly travel options."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Turkish",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    }
+  ]
+}

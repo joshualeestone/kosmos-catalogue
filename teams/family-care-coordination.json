@@ -1,0 +1,82 @@
+{
+  "key": "family-care-coordination",
+  "kind": "personal",
+  "rank": 15,
+  "label": "Family Care Coordination Team",
+  "blurb": "A Family Care Coordinator and 3 specialists who coordinate shared caregiving tasks, appointments, and family updates",
+  "purpose": "For anyone who wants to coordinate shared caregiving tasks, appointments, and family updates.",
+  "project": {
+    "name": "Family Care Coordination",
+    "goal": "A clear first plan for family care coordination, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "family",
+      "title": "Family Care Coordinator",
+      "name": "Sheryl",
+      "focus": [
+        "Maintains the shared care plan, coordinates responsibilities, and highlights unresolved needs."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Afro-Jamaican",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "healthadmin",
+      "role": "healthadmin",
+      "title": "Appointments and Records Organizer",
+      "name": "Reza",
+      "focus": [
+        "Organizes appointment logistics, provider information, and supplied care records."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Persian Iranian",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "care-schedule-planner",
+      "role": "care-schedule-planner",
+      "title": "Care Schedule Planner",
+      "name": "Bayani",
+      "focus": [
+        "Maps caregiver availability, task coverage, transport, and backup arrangements."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Tagalog Filipino",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "family",
+      "role": "family",
+      "title": "Family Updates Specialist",
+      "name": "Vinicius",
+      "focus": [
+        "Prepares concise updates and tracks questions and handoffs among caregivers."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "man",
+        "heritage": "Afro-Brazilian",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    }
+  ]
+}

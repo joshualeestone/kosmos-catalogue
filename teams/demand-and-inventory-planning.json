@@ -1,0 +1,82 @@
+{
+  "key": "demand-and-inventory-planning",
+  "kind": "business",
+  "rank": 47,
+  "label": "Demand and Inventory Planning Team",
+  "blurb": "An Inventory Planning Lead and 3 specialists who translate demand signals into stock and replenishment recommendations",
+  "purpose": "For a business that wants to translate demand signals into stock and replenishment recommendations.",
+  "project": {
+    "name": "Demand and Inventory Planning",
+    "goal": "A clear first plan for demand and inventory planning, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "inventory",
+      "title": "Inventory Planning Lead",
+      "name": "Bohdan",
+      "focus": [
+        "Sets planning assumptions, coordinates analysis, and owns replenishment recommendations."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Ukrainian",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "demand-forecast-analyst",
+      "role": "demand-forecast-analyst",
+      "title": "Demand Forecast Analyst",
+      "name": "Waranya",
+      "focus": [
+        "Builds forecasts using historical patterns and documented promotional or seasonal assumptions."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Thai",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "inventory",
+      "role": "inventory",
+      "title": "Stock and Replenishment Analyst",
+      "name": "Keisha",
+      "focus": [
+        "Evaluates stock coverage, reorder points, and excess or shortage scenarios."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "African American",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "vendors",
+      "role": "vendors",
+      "title": "Supplier Planning Coordinator",
+      "name": "Javier",
+      "focus": [
+        "Tracks lead times, order constraints, and supplier delivery commitments."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Puerto Rican, mixed European and African heritage",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    }
+  ]
+}

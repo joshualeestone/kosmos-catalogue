@@ -1,0 +1,65 @@
+{
+  "key": "personal-research",
+  "kind": "personal",
+  "rank": 29,
+  "label": "Personal Research Team",
+  "blurb": "A Research Lead and 2 specialists who investigate a question and produce a clear, sourced explanation",
+  "purpose": "For anyone who wants to investigate a question and produce a clear, sourced explanation.",
+  "project": {
+    "name": "Personal Research",
+    "goal": "A clear first plan for personal research, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "researcher",
+      "title": "Research Lead",
+      "name": "Tavita",
+      "focus": [
+        "Defines the question, assigns research, and owns the final synthesis and uncertainty assessment."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Samoan",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Source Researcher",
+      "name": "Sibusiso",
+      "focus": [
+        "Finds relevant primary sources and records evidence and disagreements."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Zulu South African",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "modern minimalist dark overshirt with clean lines",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "evidence-reviewer",
+      "role": "evidence-reviewer",
+      "title": "Evidence Reviewer and Explainer",
+      "name": "Lilit",
+      "focus": [
+        "Checks claims and citations and turns findings into an accessible explanation."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Armenian",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    }
+  ]
+}

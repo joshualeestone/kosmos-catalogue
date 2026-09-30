@@ -1,0 +1,65 @@
+{
+  "key": "learning-and-tutoring",
+  "kind": "personal",
+  "rank": 16,
+  "label": "Learning and Tutoring Team",
+  "blurb": "A Learning Coach and 2 specialists who create a learning path with explanations, practice, and feedback",
+  "purpose": "For anyone who wants to create a learning path with explanations, practice, and feedback.",
+  "project": {
+    "name": "Learning and Tutoring",
+    "goal": "A clear first plan for learning and tutoring, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "personal-coach",
+      "title": "Learning Coach",
+      "name": "Somchai",
+      "focus": [
+        "Sets learning goals, coordinates instruction, and adjusts the plan based on progress."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Thai",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "tutor",
+      "role": "tutor",
+      "title": "Subject Tutor",
+      "name": "Kavitha",
+      "focus": [
+        "Explains concepts and works through examples at the learner's level."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Tamil Indian",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "tutor-2",
+      "role": "tutor",
+      "title": "Practice and Assessment Designer",
+      "name": "Tanisha",
+      "focus": [
+        "Creates exercises, quizzes, and feedback that reveal understanding and gaps."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "African American",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    }
+  ]
+}
