@@ -820,3 +820,16 @@ test('the bars that draw like an em dash and the object-replacement character ar
     assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)), JSON.stringify(ch));
   }
 });
+
+test('stops and slashes that pass for "." and "/" in an address are refused', () => {
+  for (const ch of ['\u3002', '\u2044', '\u2215', '\u29F8']) {
+    const r = source.read().rolesSource;
+    r.roles[1].how[1] = `Always check evil${ch}example first.`;
+    assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)), JSON.stringify(ch));
+  }
+});
+
+test('the publish workflow names bash for every step, so pipefail applies', () => {
+  const text = fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8');
+  assert.match(text, /\ndefaults:\n {2}run:\n {4}shell: bash\n/);
+});

@@ -21,6 +21,11 @@ permissions:
 concurrency:
   group: pages
   cancel-in-progress: false
+# Named, so every run step gets bash -e -o pipefail (an unnamed shell gets -e alone): a failure
+# anywhere in a pipeline fails the step.
+defaults:
+  run:
+    shell: bash
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -55,17 +60,23 @@ jobs:
           earlier=0
           if [ ! -e published ]; then
             # Before the marker is committed: were there earlier Pages deployments whose deploy job
-            # succeeded? One is enough. Captured first, so a failed request stops the step (a
+            # succeeded? One is enough. Every page of the list is read, so none is missed. Captured first, so a failed request stops the step (a
             # failure inside `for ... in $(...)` would not).
-            urls=$(gh api "repos/${{ github.repository }}/deployments?environment=github-pages&per_page=100" --jq '.[].statuses_url') || { echo "could not list earlier deployments"; exit 1; }
+            urls=$(gh api --paginate "repos/${{ github.repository }}/deployments?environment=github-pages&per_page=100" --jq '.[].statuses_url') || { echo "could not list earlier deployments"; exit 1; }
             for u in $urls; do
               n=$(gh api "$u" --jq '[.[]|select(.state=="success")]|length') || { echo "could not read deployment statuses"; exit 1; }
               if [ "$n" != 0 ]; then earlier=1; break; fi
             done
           fi
-          code=$(curl -sSL --max-time 30 --retry 3 --retry-all-errors -H 'Cache-Control: no-cache' \
-            -o "$RUNNER_TEMP/published.json" -w '%{http_code}' \
-            "https://joshualeestone.github.io/kosmos-catalogue/catalogue.json?run=${{ github.run_id }}") || code=000
+          # Up to three tries: curl's own retry covers a broken connection, this covers a 5xx or 429
+          # from Pages. A 200 or a 404 is an answer and ends the loop.
+          for try in 1 2 3; do
+            code=$(curl -sSL --max-time 30 --retry 3 --retry-all-errors -H 'Cache-Control: no-cache' \
+              -o "$RUNNER_TEMP/published.json" -w '%{http_code}' \
+              "https://joshualeestone.github.io/kosmos-catalogue/catalogue.json?run=${{ github.run_id }}-$try") || code=000
+            case "$code" in 200|404) break ;; esac
+            sleep 20
+          done
           prev=$(node published-serial.js "$RUNNER_TEMP/published.json" "$code" "$earlier")
           echo "published serial: $prev"
           echo "CATALOGUE_PREVIOUS_SERIAL=$prev" >> "$GITHUB_ENV"
@@ -177,7 +188,7 @@ jobs:
           want="$BUILT_SERIAL"
           case "$want" in ''|*[!0-9]*) echo "no serial from the build job"; exit 1 ;; esac
           for i in $(seq 1 60); do
-            # A failed request is "not yet": the step runs under bash -e -o pipefail, so it must not end the loop.
+            # A failed request is "not yet": steps run under bash -e -o pipefail (defaults above), so it must not end the loop.
             got=$( (curl -sSL --max-time 30 -H 'Cache-Control: no-cache' "https://joshualeestone.github.io/kosmos-catalogue/catalogue.json?check=${{ github.run_id }}-$i" || true) | node -e 'let s="";process.stdin.on("data",(d)=>s+=d).on("end",()=>{try{process.stdout.write(String(JSON.parse(s).serial))}catch{}})' || true)
             if [ "$got" = "$want" ]; then echo "Pages serves serial $want"; exit 0; fi
             sleep 15
