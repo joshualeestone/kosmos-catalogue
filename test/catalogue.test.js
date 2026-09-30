@@ -896,10 +896,16 @@ test('main() uses the marker beside the script: a 404 is the first publish witho
   try {
     fs.copyFileSync(path.join(REPO, 'published-serial.js'), path.join(dir, 'published-serial.js'));
     const run = () => { delete require.cache[path.join(dir, 'published-serial.js')]; return require(path.join(dir, 'published-serial.js')).main([path.join(dir, 'absent.json'), '404', '0']); };
-    process.stderr.write = () => true;
+    let said = '';
+    process.stderr.write = (t) => { said += t; return true; };
     process.stdout.write = () => true;
     assert.equal(run(), 0, 'no marker: a 404 is the first publish');
     fs.writeFileSync(path.join(dir, 'published'), '');
     assert.equal(run(), 1, 'marker committed: a 404 is an outage');
-  } finally { process.stderr.write = w; process.stdout.write = o; fs.rmSync(dir, { recursive: true, force: true }); }
+    assert.match(said, /missing \(404\)/, 'refused for the missing catalogue, not for another reason');
+  } finally {
+    process.stderr.write = w; process.stdout.write = o;
+    delete require.cache[path.join(dir, 'published-serial.js')];
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
