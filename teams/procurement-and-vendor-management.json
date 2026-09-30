@@ -1,0 +1,99 @@
+{
+  "key": "procurement-and-vendor-management",
+  "kind": "business",
+  "rank": 43,
+  "label": "Procurement and Vendor Management Team",
+  "blurb": "A Procurement Manager and 4 specialists who source suitable vendors and coordinate evaluation and ongoing obligations",
+  "purpose": "Designed for business owners, leaders, and teams executing on procurement and vendor management. Source suitable vendors and coordinate evaluation and ongoing obligations. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Procurement and Vendor Management",
+    "goal": "Deliver a comprehensive initial procurement and vendor management plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "logistics-manager",
+      "title": "Procurement Manager",
+      "name": "Kasun",
+      "focus": [
+        "Defines purchasing criteria, coordinates evaluations, and owns vendor recommendations."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Sinhalese Sri Lankan",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Supplier Researcher",
+      "name": "Lucy",
+      "focus": [
+        "Builds supplier shortlists and gathers capability, availability, and pricing information."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "English",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "proposal-cost-analyst",
+      "role": "proposal-cost-analyst",
+      "title": "Proposal and Cost Analyst",
+      "name": "Jiho",
+      "focus": [
+        "Compares bids, total costs, assumptions, and commercial tradeoffs."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Korean",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "vendor-manager",
+      "role": "vendor-manager",
+      "title": "Vendor Coordinator",
+      "name": "Larissa",
+      "focus": [
+        "Tracks service commitments, renewal dates, performance issues, and follow-ups."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Afro-Brazilian",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "legal-analyst",
+      "role": "legal-analyst",
+      "title": "Supplier Contract Analyst",
+      "name": "Funmilayo",
+      "focus": [
+        "Reviews supplier contracts and flags terms, renewals, and obligations to negotiate."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Yoruba Nigerian",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    }
+  ]
+}

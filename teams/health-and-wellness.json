@@ -1,0 +1,99 @@
+{
+  "key": "health-and-wellness",
+  "kind": "personal",
+  "rank": 22,
+  "label": "Health and Wellness Team",
+  "blurb": "A Wellness Coach and 4 specialists who coordinate general wellness routines, fitness, meals, habits, and health administration",
+  "purpose": "Created for individuals, families, and organizers looking for dedicated support with health and wellness. Coordinate general wellness routines, fitness, meals, habits, and health administration. The team takes care of preparation, detailed planning, and practical follow-through to keep everything running smoothly.",
+  "project": {
+    "name": "Health and Wellness",
+    "goal": "Deliver a comprehensive initial health and wellness plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "personal-coach",
+      "title": "Wellness Coach",
+      "name": "Mostafa",
+      "focus": [
+        "Sets realistic wellness goals, coordinates the team, and reviews progress and routine adjustments."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Egyptian Arab",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "personal-coach",
+      "role": "personal-coach",
+      "title": "Fitness Planner",
+      "name": "Maritza",
+      "focus": [
+        "Develops general activity plans around preferences, available equipment, and stated constraints."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Puerto Rican, mixed European and African heritage",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "meal-planner",
+      "role": "meal-planner",
+      "title": "Nutrition and Meal Planning Specialist",
+      "name": "Wanjiru",
+      "focus": [
+        "Creates general food and meal plans reflecting the user's preferences and supplied guidance."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Kikuyu Kenyan",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "personal-coach-2",
+      "role": "personal-coach",
+      "title": "Sleep and Habit Coach",
+      "name": "Simran",
+      "focus": [
+        "Builds practical routines and tracks sleep-related habits and consistency."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Punjabi Indian",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "health-coordinator",
+      "role": "health-coordinator",
+      "title": "Health Administration Coordinator",
+      "name": "Bongani",
+      "focus": [
+        "Organizes appointments, records, and questions for the user's healthcare professionals."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Zulu South African",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    }
+  ]
+}

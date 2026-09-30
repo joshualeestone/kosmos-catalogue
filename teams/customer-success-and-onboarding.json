@@ -1,0 +1,99 @@
+{
+  "key": "customer-success-and-onboarding",
+  "kind": "business",
+  "rank": 33,
+  "label": "Customer Success and Onboarding Team",
+  "blurb": "A Head of Customer Success and 4 specialists who help customers reach useful outcomes and sustain adoption",
+  "purpose": "Designed for business owners, leaders, and teams executing on customer success and onboarding. Help customers reach useful outcomes and sustain adoption. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Customer Success and Onboarding",
+    "goal": "Deliver a comprehensive initial customer success and onboarding plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "customer-success",
+      "title": "Head of Customer Success",
+      "name": "Chaiwat",
+      "focus": [
+        "Sets customer success plans, coordinates specialists, and owns account priorities."
+      ],
+      "avatar": {
+        "apparentAge": "Early 40s",
+        "presentation": "man",
+        "heritage": "Thai",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "recruiter",
+      "role": "recruiter",
+      "title": "Onboarding Specialist",
+      "name": "Guadalupe",
+      "focus": [
+        "Builds kickoff materials, setup checklists, and first-value milestones."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Mexican Mestizo",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "adoption-training-specialist",
+      "role": "adoption-training-specialist",
+      "title": "Adoption and Training Specialist",
+      "name": "Tanvir",
+      "focus": [
+        "Creates enablement materials and identifies barriers to product use."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Bengali Bangladeshi",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "health-coordinator",
+      "role": "health-coordinator",
+      "title": "Account Health Analyst",
+      "name": "Latoya",
+      "focus": [
+        "Reviews usage, feedback, and agreed success measures for signs of risk."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Afro-Jamaican",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "renewal-growth-coordinator",
+      "role": "renewal-growth-coordinator",
+      "title": "Renewal and Growth Coordinator",
+      "name": "Tui",
+      "focus": [
+        "Prepares account reviews, renewal plans, and relevant expansion opportunities."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Samoan",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

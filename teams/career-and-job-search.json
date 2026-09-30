@@ -1,0 +1,99 @@
+{
+  "key": "career-and-job-search",
+  "kind": "personal",
+  "rank": 19,
+  "label": "Career and Job Search Team",
+  "blurb": "A Career Coach and 4 specialists who coordinate career direction, applications, interviews, and professional presentation",
+  "purpose": "Created for individuals, families, and organizers looking for dedicated support with career and job search. Coordinate career direction, applications, interviews, and professional presentation. The team takes care of preparation, detailed planning, and practical follow-through to keep everything running smoothly.",
+  "project": {
+    "name": "Career and Job Search",
+    "goal": "Deliver a comprehensive initial career and job search plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "personal-coach",
+      "title": "Career Coach",
+      "name": "Astrid",
+      "focus": [
+        "Clarifies career goals, coordinates the search, and reviews progress and tradeoffs."
+      ],
+      "avatar": {
+        "apparentAge": "Early 40s",
+        "presentation": "woman",
+        "heritage": "Swedish",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "resume-application-writer",
+      "role": "resume-application-writer",
+      "title": "Resume and Application Writer",
+      "name": "Kerem",
+      "focus": [
+        "Tailors resumes, cover letters, and application answers using the user's experience."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "man",
+        "heritage": "Turkish",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "job-scout",
+      "role": "job-scout",
+      "title": "Job Scout",
+      "name": "Huy",
+      "focus": [
+        "Finds relevant roles and researches employers, requirements, and application deadlines."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Kinh Vietnamese",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "personal-coach",
+      "role": "personal-coach",
+      "title": "Interview Coach",
+      "name": "Theodora",
+      "focus": [
+        "Develops practice questions and gives structured feedback on interview answers."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Greek",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "personal-brand-specialist",
+      "role": "personal-brand-specialist",
+      "title": "Personal Brand Specialist",
+      "name": "Oliver",
+      "focus": [
+        "Improves professional profiles, portfolio narratives, and networking introductions."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "English",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

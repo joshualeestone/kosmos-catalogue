@@ -1,0 +1,99 @@
+{
+  "key": "customer-insights",
+  "kind": "business",
+  "rank": 19,
+  "label": "Customer Insights Team",
+  "blurb": "A Customer Insights Lead and 4 specialists who turn customer feedback into clear needs and improvement priorities",
+  "purpose": "Designed for business owners, leaders, and teams executing on customer insights. Turn customer feedback into clear needs and improvement priorities. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Customer Insights",
+    "goal": "Deliver a comprehensive initial customer insights plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "customer-insights-analyst",
+      "title": "Customer Insights Lead",
+      "name": "Esteban",
+      "focus": [
+        "Defines the analysis, resolves conflicting evidence, and owns the recommendations."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Puerto Rican, mixed European and African heritage",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Qualitative Researcher",
+      "name": "Malik",
+      "focus": [
+        "Codes interviews, reviews, and open-ended feedback into themes."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "African American",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "survey-quantitative-analyst",
+      "role": "survey-quantitative-analyst",
+      "title": "Survey and Quantitative Analyst",
+      "name": "Thao",
+      "focus": [
+        "Analyzes survey results and checks sample limits and segment differences."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Kinh Vietnamese",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "customer-insights-analyst",
+      "role": "customer-insights-analyst",
+      "title": "Customer Journey Analyst",
+      "name": "Shreya",
+      "focus": [
+        "Maps friction and unmet needs across the customer experience."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Bengali Indian",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "data-analyst",
+      "role": "data-analyst",
+      "title": "Customer Data Analyst",
+      "name": "Katarzyna",
+      "focus": [
+        "Analyzes usage and purchase data to test what interviews and surveys suggest."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Polish",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    }
+  ]
+}

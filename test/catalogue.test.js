@@ -804,6 +804,9 @@ test('check-deploy passes exactly the signed build and refuses every other tree'
     const make = (edit = () => {}) => {
       const dist = fs.mkdtempSync(path.join(root, 'd-'));
       const c = build.build({ serial: 42 }).catalogue;
+      // One portrait of the test's own, whatever the repo's avatars/ holds: the real portraits
+      // (kosmos#4555) would otherwise be names this throwaway dist does not carry.
+      for (const t of c.teams) for (const x of t.members) { delete x.avatar.image; delete x.avatar.imageSha256; }
       const m = c.teams[0].members[0];
       fs.mkdirSync(path.join(dist, 'avatars'));
       fs.writeFileSync(path.join(dist, 'avatars', m.avatar.id + '.webp'), webp('face'));

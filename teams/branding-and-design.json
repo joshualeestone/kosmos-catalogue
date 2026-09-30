@@ -1,0 +1,99 @@
+{
+  "key": "branding-and-design",
+  "kind": "business",
+  "rank": 27,
+  "label": "Branding and Design Team",
+  "blurb": "A Brand Director and 4 specialists who create a coherent brand position, voice, and visual system",
+  "purpose": "Designed for business owners, leaders, and teams executing on branding and design. Create a coherent brand position, voice, and visual system. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Branding and Design",
+    "goal": "Deliver a comprehensive initial branding and design plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "brand-director",
+      "title": "Brand Director",
+      "name": "Elif",
+      "focus": [
+        "Defines the brand direction, coordinates creative work, and approves consistency."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "woman",
+        "heritage": "Turkish",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "brand-strategist",
+      "role": "brand-strategist",
+      "title": "Brand Strategist",
+      "name": "Senthil",
+      "focus": [
+        "Clarifies audiences, positioning, differentiation, and brand architecture."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Tamil Indian",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "copywriter",
+      "role": "copywriter",
+      "title": "Messaging Copywriter",
+      "name": "Lwazi",
+      "focus": [
+        "Creates value propositions, voice guidance, taglines, and core messages."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Zulu South African",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "product-designer",
+      "role": "product-designer",
+      "title": "Visual Identity Designer",
+      "name": "Pimchanok",
+      "focus": [
+        "Develops logo directions, color and type choices, and brand assets."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Thai",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "brand-guidelines-specialist",
+      "role": "brand-guidelines-specialist",
+      "title": "Brand Guidelines Specialist",
+      "name": "Minji",
+      "focus": [
+        "Documents usage rules and checks materials against the brand system."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Korean",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "key": "paid-advertising",
+  "kind": "business",
+  "rank": 28,
+  "label": "Paid Advertising Team",
+  "blurb": "A Paid Media Lead and 4 specialists who plan paid campaigns, prepare creative, and analyze performance",
+  "purpose": "Designed for business owners, leaders, and teams executing on paid advertising. Plan paid campaigns, prepare creative, and analyze performance. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Paid Advertising",
+    "goal": "Deliver a comprehensive initial paid advertising plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "paid-media-specialist",
+      "title": "Paid Media Lead",
+      "name": "Tesfaye",
+      "focus": [
+        "Owns channel plans, budget proposals, campaign coordination, and optimization priorities."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Amhara Ethiopian",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "modern minimalist dark overshirt with clean lines",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "audience-media-planner",
+      "role": "audience-media-planner",
+      "title": "Audience and Media Planner",
+      "name": "Faiz",
+      "focus": [
+        "Researches audiences and proposes targeting, placements, and channel allocation."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Malay Malaysian",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "copywriter",
+      "role": "copywriter",
+      "title": "Ad Copywriter",
+      "name": "Shirin",
+      "focus": [
+        "Creates ad messages, hooks, and test variants."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Persian Iranian",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "product-designer",
+      "role": "product-designer",
+      "title": "Ad Creative Designer",
+      "name": "Hala",
+      "focus": [
+        "Develops visual concepts and assets for the selected placements."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Lebanese Arab",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "measurement-specialist",
+      "role": "measurement-specialist",
+      "title": "Measurement Specialist",
+      "name": "Soumya",
+      "focus": [
+        "Checks tracking requirements and analyzes cost, conversion, and experiment results."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Bengali Indian",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    }
+  ]
+}
