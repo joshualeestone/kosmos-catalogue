@@ -164,6 +164,12 @@ function main(argv) {
   fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, 'catalogue.json'), text);
   fs.writeFileSync(path.join(OUT, 'catalogue.json.sha256'), sha256(text) + '  catalogue.json\n');
+  // The portraits the catalogue names, published beside it under the same relative paths.
+  const images = catalogue.teams.flatMap((t) => t.members.map((m) => m.avatar.image)).filter(Boolean);
+  for (const rel of images) {
+    fs.mkdirSync(path.dirname(path.join(OUT, rel)), { recursive: true });
+    fs.copyFileSync(path.join(source.ROOT, rel), path.join(OUT, rel));
+  }
   process.stdout.write(`wrote dist/catalogue.json: ${summary}\n`);
   return 0;
 }

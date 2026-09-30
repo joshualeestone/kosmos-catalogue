@@ -72,3 +72,18 @@ em dash in any spelling, and more (see `build.js`).
 - Every person is fictional. Personality comes from the job, never from age, gender or heritage.
 - Nothing here names a real person, a real customer, or anyone's computer or account: this
   repository is public.
+
+## Publishing
+
+Every push to `main` runs `.github/workflows/publish.yml`: the tests, the build, then
+`node sign.js`, which signs `dist/catalogue.json` with the key in the Actions secret
+`CATALOGUE_SIGNING_KEY` and writes `catalogue.json.sig`. The result is deployed to GitHub Pages,
+and installkosmos.com/catalogue/ passes through to it.
+
+Kosmos downloads `catalogue.json` and its `.sig`, and uses the catalogue only when the signature
+verifies against the public key it carries (the same key as `signing-key.pub.pem` here). A file
+changed anywhere between this repo and the person's computer is refused, and Kosmos keeps using
+its built-in roles.
+
+`sign.js` refuses to publish when the secret does not match `signing-key.pub.pem`. Changing the
+key needs a new pair, a new `signing-key.pub.pem`, and a Kosmos release carrying the new public key.

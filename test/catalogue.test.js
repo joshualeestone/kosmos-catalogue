@@ -154,3 +154,27 @@ test('nothing in the sources looks like a person\'s machine, address or credenti
   // CONTROL: the pattern sees each shape it is for.
   for (const s of ['/Users/someone/x', 'a@b.co', 'ghp_' + 'a'.repeat(20)]) assert.ok(bad.test(s), s);
 });
+
+test('a signature verifies only for the exact bytes and the matching key', () => {
+  const crypto = require('node:crypto');
+  const { sign, verify } = require('../sign');
+  const pair = () => crypto.generateKeyPairSync('ed25519');
+  const a = pair();
+  const b = pair();
+  const priv = a.privateKey.export({ type: 'pkcs8', format: 'pem' });
+  const pubA = a.publicKey.export({ type: 'spki', format: 'pem' });
+  const pubB = b.publicKey.export({ type: 'spki', format: 'pem' });
+  const bytes = Buffer.from(build.build().text);
+  const sig = sign(bytes, priv);
+  assert.equal(verify(bytes, sig, pubA), true, 'CONTROL: the matching key verifies');
+  const tampered = Buffer.from(bytes); tampered[10] ^= 1;
+  assert.equal(verify(tampered, sig, pubA), false, 'one changed byte still verified');
+  assert.equal(verify(bytes, sig, pubB), false, 'another key verified');
+  assert.equal(verify(bytes, 'not base64 at all', pubA), false);
+});
+
+test('the committed public key is an Ed25519 key', () => {
+  const crypto = require('node:crypto');
+  const key = crypto.createPublicKey(fs.readFileSync(path.join(REPO, 'signing-key.pub.pem'), 'utf8'));
+  assert.equal(key.asymmetricKeyType, 'ed25519');
+});
