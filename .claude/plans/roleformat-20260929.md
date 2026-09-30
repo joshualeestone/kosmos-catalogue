@@ -50,3 +50,9 @@ format predates the brief, so the catalogue changes, not the packet).
   of the list before it; roleText writes no heading for an empty list.
 - An archetype with a trailing or doubled space is refused; the length message says 80 at most.
 - Output for the 69 roles still identical.
+
+## Review iteration 4: converged (NITs only, recorded, not changed)
+- An empty heading in the middle of the body is refused as "must be a list" rather than "has no
+  items" (refused either way; only the message).
+- Article edge cases (hourly, onerous) are within the accepted ones.
+- An archetype may carry Markdown emphasis characters (cosmetic; links, HTML and markers refused).
