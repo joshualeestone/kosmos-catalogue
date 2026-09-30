@@ -79,3 +79,12 @@ non-colliding names, and the portraits.
   run wrote through it, outside the repo, while reporting "nothing written". Now reported as a
   problem, the disk check is skipped, and --write stays refused (the builder refuses links too).
 - A key repeated inside one packet is reported by name.
+
+## Review iteration 6: converged (NITs only, recorded, not changed)
+- The dedupe key sorts a problem's words, so two different problems with the same words would merge
+  (no real case found: messages carry keys).
+- --write rewrites every role and team canonically; a hand-formatted file would show as diff noise
+  (the tree is required clean first, so git diff shows it; read/write round-trips today, measured).
+- summarise() strips the first "x: " prefix, which only affects grouping, never counts or refusal.
+- Unknown avatar, team and member fields in a packet are dropped without a report (the personality
+  block is the known one, for the format-change step).
