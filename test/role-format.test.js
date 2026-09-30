@@ -117,3 +117,31 @@ test('a role given in memory with lists of the wrong shape is reported, not a cr
     assert.ok(out.problems.some((x) => /^cos: /.test(x)), JSON.stringify(bad));
   }
 });
+
+test('an item that is empty or not text is refused in every list, including How you work', () => {
+  const read = source.read();
+  const { role } = source.parseRole('cos', BRIEF);
+  for (const bad of [{ ask: [5] }, { never: [null] }, { ask: [''] }, { how: ['a', ' ', 'c'] }]) {
+    const roles = read.rolesSource.roles.map((r) => (r.key === 'cos' ? { ...role, group: r.group, ...bad } : r));
+    assert.match(build.build({ rolesSource: { ...read.rolesSource, roles } }).problems.join('\n'), /has an empty item or one that is not text/, JSON.stringify(bad));
+  }
+});
+
+test('a section heading with nothing under it is named, and roleText writes no heading for an empty list', () => {
+  const empty = BRIEF.replace(/\n\n## What you never do on your own\n\n[\s\S]*$/, '\n\n## What you never do on your own\n');
+  assert.notEqual(empty, BRIEF, 'premise');
+  assert.deepEqual(source.parseRole('cos', empty).problems, ['roles/cos/role.md: What you never do on your own has no items']);
+  const { role } = source.parseRole('cos', BRIEF);
+  const text = source.roleText({ ...role, never: [] });
+  assert.doesNotMatch(text, /What you never do/);
+  assert.deepEqual(source.parseRole('cos', text).problems, [], 'what roleText wrote does not parse');
+});
+
+test('an archetype with a trailing or doubled space is refused', () => {
+  const read = source.read();
+  const { role } = source.parseRole('cos', BRIEF);
+  for (const a of ['calm cook ', 'calm  cook']) {
+    const roles = read.rolesSource.roles.map((r) => (r.key === 'cos' ? { ...role, group: r.group, archetype: a } : r));
+    assert.match(build.build({ rolesSource: { ...read.rolesSource, roles } }).problems.join('\n'), /no extra spaces/, JSON.stringify(a));
+  }
+});

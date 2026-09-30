@@ -209,11 +209,14 @@ function build(src = {}) {
       if (r.archetype !== undefined) problems.push(`${k}: has both a Who you are paragraph and an archetype; keep one`);
     } else if (!r.archetype) problems.push(`${k}: needs a Who you are paragraph or an archetype`);
     // An archetype is a short phrase ("calm, exacting bookkeeper"), rendered as "You are a <archetype>."
-    if (r.archetype !== undefined && (typeof r.archetype !== 'string' || !/^(?!(a|an|the)\s)[a-z][^.!?]{2,79}$/.test(r.archetype))) {
-      problems.push(`${k}: archetype must be a short lowercase phrase with no leading a, an or the and no full stop, under 80 characters`);
+    if (r.archetype !== undefined && (typeof r.archetype !== 'string' || !/^(?!(a|an|the)\s)[a-z][^.!?]{2,79}$/.test(r.archetype) || /\s$|\s\s/.test(r.archetype))) {
+      problems.push(`${k}: archetype must be a short lowercase phrase with no leading a, an or the, no full stop and no extra spaces, 80 characters at most`);
     }
     for (const [label, list] of [['What you ask the person before doing', r.ask], ['What you never do on your own', r.never]]) {
       if (list !== undefined && (!Array.isArray(list) || list.length < 1 || list.length > 4)) problems.push(`${k}: ${label} needs one to four items`);
+    }
+    for (const [label, list] of [['How you work', r.how], ['What you ask the person before doing', r.ask], ['What you never do on your own', r.never]]) {
+      if (Array.isArray(list) && list.some((x) => typeof x !== 'string' || !x.trim())) problems.push(`${k}: ${label} has an empty item or one that is not text`);
     }
     if (!Array.isArray(r.how) || r.how.length !== 3) problems.push(`${k}: How you work needs exactly three bullets`);
     if (!r.first || r.first.length <= 10) problems.push(`${k}: first action too short`);

@@ -42,3 +42,11 @@ format predates the brief, so the catalogue changes, not the packet).
   archetype may not start with a, an or the.
 - The renderer skips a list of the wrong shape (ask, never, and how, which crashed on main too); the
   shape is reported where the role is checked. Output for the 69 roles still identical.
+
+## Review iteration 3 (changes)
+- Every item of How you work, ask and never must be non-blank text (an in-memory role could render
+  "- null"; How you work had the same gap on main).
+- A section heading with nothing under it is named ("... has no items") instead of reading as part
+  of the list before it; roleText writes no heading for an empty list.
+- An archetype with a trailing or doubled space is refused; the length message says 80 at most.
+- Output for the 69 roles still identical.
