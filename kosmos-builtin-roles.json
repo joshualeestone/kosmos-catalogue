@@ -1,0 +1,52 @@
+{
+  "note": "Every role key Kosmos has built in (engine/roles.js), the hidden ones (own, setup) included, and the menu groups its built-in roles sit in. A team member may use a menu role; a catalogue role must not reuse any of these keys; groups.json must keep every one of these groups. Update it when Kosmos changes its built-in roles.",
+  "roles": [
+    "pm",
+    "director",
+    "ea",
+    "email",
+    "ops",
+    "meet",
+    "process",
+    "researcher",
+    "writer",
+    "copy",
+    "marketing",
+    "social",
+    "seo",
+    "design",
+    "sales",
+    "accounts",
+    "support",
+    "ecom",
+    "data",
+    "finance",
+    "books",
+    "product",
+    "productdir",
+    "engineer",
+    "qa",
+    "security",
+    "legal",
+    "recruiting",
+    "vendors",
+    "household",
+    "family",
+    "personal",
+    "travel"
+  ],
+  "hidden": [
+    "own",
+    "setup"
+  ],
+  "groups": [
+    "Running the work",
+    "Words and research",
+    "Marketing and growth",
+    "Customers and revenue",
+    "Numbers",
+    "Building software",
+    "Contracts, hiring and suppliers",
+    "Personal and family"
+  ]
+}

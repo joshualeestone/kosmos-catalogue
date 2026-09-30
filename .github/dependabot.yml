@@ -1,0 +1,8 @@
+# Keep the pinned actions current. publish.yml holds the signing key, so its pins must not go
+# stale; each bump arrives as a pull request that test.yml checks.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
