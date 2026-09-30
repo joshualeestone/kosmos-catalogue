@@ -72,6 +72,16 @@ function markerIn(value) {
   return /<!--/.test(blob) || /\{\{(?!NAME\}\})/.test(blob);
 }
 
+/** Characters a reader cannot see or that reorder what they see: bidi controls, zero-width
+ *  characters, tag characters and other control characters. Text here becomes instructions for
+ *  agents with tools, so nothing may say more than what a reviewer reads. */
+const HIDDEN_RE = /[\u0000-\u0008\u000B-\u001F\u007F-\u009F\u00AD\u200B-\u200F\u2028-\u202E\u2060-\u206F\uFEFF]|\uDB40[\uDC00-\uDC7F]/;
+function hiddenIn(value) {
+  const strings = [];
+  (function walk(v) { if (typeof v === 'string') strings.push(v); else if (v && typeof v === 'object') Object.values(v).forEach(walk); })(value);
+  return strings.some((s) => HIDDEN_RE.test(s));
+}
+
 /** Why Kosmos would refuse this as an agent name (its engine/create.js nameProblem, ported), or null. */
 function nameProblem(raw) {
   const name = String(raw);
@@ -117,6 +127,8 @@ function build(src = {}) {
   const pickable = new Set(kosmos.menu);      // a team member may use one (never own or setup)
   const groups = rs.GROUP_ORDER;
   if (emDashIn(groups)) problems.push('groups.json: em dash in a group name');
+  if (hiddenIn(groups)) problems.push('groups.json: an invisible or direction-changing character in a group name');
+  if (new Set(groups).size !== groups.length || !groups.every(isText)) problems.push('groups.json: every group needs a name, once');
   for (const g of kosmos.groups) {
     if (!groups.includes(g)) problems.push(`groups.json: Kosmos's built-in roles sit in the group ${JSON.stringify(g)}, so it must stay (even with no catalogue role in it)`);
   }
@@ -141,6 +153,9 @@ function build(src = {}) {
     if (entry.instructions.some((l) => (l.match(/`/g) || []).length % 2)) problems.push(`${k}: a code span is split across lines`);
     if (emDashIn(entry)) problems.push(`${k}: em dash`);
     if (markerIn(entry)) problems.push(`${k}: a template marker other than {{NAME}}, or an HTML comment`);
+    // The source too: the wrapper splits on whitespace, and JavaScript counts U+FEFF as whitespace,
+    // so the built text alone would hide one that is in the file.
+    if (hiddenIn([r, entry])) problems.push(`${k}: an invisible or direction-changing character`);
     roles.push(entry);
   }
   const teams = [];
@@ -156,9 +171,10 @@ function build(src = {}) {
     const AVATAR = ['apparentAge', 'presentation', 'heritage', 'hair', 'attire', 'expression'];
     const incomplete = t.members.find((m) => !isText(m.name) || !isText(m.title) || !isText(m.role)
       || !Array.isArray(m.focus) || !m.focus.every(isText)
-      || !m.avatar || typeof m.avatar !== 'object' || !AVATAR.every((f) => isText(m.avatar[f])));
+      || !m.avatar || typeof m.avatar !== 'object' || !AVATAR.every((f) => isText(m.avatar[f]))
+      || Object.keys(m.avatar).some((f) => !AVATAR.includes(f)));
     if (incomplete) {
-      problems.push(`${t.key}/${incomplete.slot}: needs a name, title, role, focus (a list of lines) and an avatar with ${AVATAR.join(', ')}`);
+      problems.push(`${t.key}/${incomplete.slot}: needs a name, title, role, focus (a list of lines) and an avatar with exactly ${AVATAR.join(', ')}`);
       continue;
     }
     for (const m of t.members) {
@@ -208,6 +224,7 @@ function build(src = {}) {
     // Team text is what the Team screen shows (#4556, #4557), so it gets the same guard.
     if (emDashIn(entry)) problems.push(`${t.key}: em dash`);
     if (markerIn(entry)) problems.push(`${t.key}: a template marker, or an HTML comment`);
+    if (hiddenIn([t, entry])) problems.push(`${t.key}: an invisible or direction-changing character`);
     teams.push(entry);
   }
   // serial: which build this is, inside the signed bytes, so Kosmos can refuse an older catalogue
@@ -217,7 +234,9 @@ function build(src = {}) {
   try {
     if (fs.lstatSync(path.join(root, 'avatars')).isDirectory()) {
       for (const f of fs.readdirSync(path.join(root, 'avatars'))) {
-        if (f.endsWith('.webp') && !avatarIds.has(f.slice(0, -5))) problems.push(`avatars/${f}: no team member has the id ${f.slice(0, -5)}`);
+        if (f === 'README.md') continue;
+        if (!f.endsWith('.webp')) problems.push(`avatars/${f}: only <member id>.webp portraits belong here`);
+        else if (!avatarIds.has(f.slice(0, -5))) problems.push(`avatars/${f}: no team member has the id ${f.slice(0, -5)}`);
       }
     }
   } catch { /* no avatars folder: nothing to match */ }
@@ -308,8 +327,8 @@ function main(argv, opts = {}) {
   // publish.yml passes the published catalogue's serial; a new one must be above it, or every
   // Kosmos holding the published one would refuse it.
   const given = opts.previousSerial ?? process.env.CATALOGUE_PREVIOUS_SERIAL ?? '';
-  const previous = given === '' ? 0 : Number(given);
-  if (!Number.isInteger(previous) || previous < 0) {
+  const previous = given === '' ? 0 : (/^\d+$/.test(String(given)) ? Number(given) : NaN);
+  if (!Number.isInteger(previous)) {
     process.stderr.write(`refused: the published serial ${JSON.stringify(String(given))} is not a whole number\n`);
     return 1;
   }

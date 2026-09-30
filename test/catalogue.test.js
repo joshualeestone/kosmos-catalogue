@@ -465,3 +465,46 @@ test('published-serial refuses a deployment count that is empty or not a number'
     assert.equal(main(['/nonexistent', '404', '0']), 0, 'CONTROL: a real zero is the first publish');
   } finally { process.stderr.write = w; process.stdout.write = o; }
 });
+
+test('invisible and direction-changing characters are refused anywhere in a role, team or group', () => {
+  for (const ch of ['‮', '​', '⁦', '﻿', '\u0007', '󠁁']) {
+    const r = source.read().rolesSource;
+    r.roles[2].who = r.roles[2].who.replace('You ', `You${ch} `);
+    assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)), JSON.stringify(ch));
+    const t = source.read().teamsSource;
+    t.teams[0].members[0].avatar.hair = `long${ch} hair`;
+    assert.ok(build.build({ teamsSource: t }).problems.some((p) => /invisible or direction-changing/.test(p)), JSON.stringify(ch));
+  }
+  const g = source.read().rolesSource;
+  g.GROUP_ORDER.push(g.GROUP_ORDER[0]);
+  assert.ok(build.build({ rolesSource: g }).problems.some((p) => /every group needs a name, once/.test(p)));
+  // CONTROL: ordinary punctuation and accented letters pass.
+  const ok = source.read().rolesSource;
+  ok.roles[2].who = ok.roles[2].who.replace('You ', 'You (café, naïve) ');
+  assert.deepEqual(build.build({ rolesSource: ok }).problems, []);
+});
+
+test('an unknown avatar field, or a file in avatars/ that is not a named portrait, is reported', () => {
+  const t = source.read().teamsSource;
+  t.teams[0].members[0].avatar.hairr = 'x';
+  assert.ok(build.build({ teamsSource: t }).problems.some((p) => /avatar with exactly/.test(p)));
+  const dir = copyRepo();
+  try {
+    fs.mkdirSync(path.join(dir, 'avatars'));
+    fs.writeFileSync(path.join(dir, 'avatars', 'README.md'), 'x');
+    assert.deepEqual(build.build({ root: dir }).problems, [], 'CONTROL: the README is allowed');
+    fs.writeFileSync(path.join(dir, 'avatars', 'marketing-lead.png'), 'x');
+    assert.ok(build.build({ root: dir }).problems.some((p) => /marketing-lead\.png: only/.test(p)));
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('published-serial: the committed marker makes a 404 an outage even with no run history', () => {
+  const { publishedSerial } = require('../published-serial');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-marker-'));
+  try {
+    const marker = path.join(dir, 'published');
+    assert.deepEqual(publishedSerial('/nonexistent', '404', 0, marker), { ok: true, serial: 0 }, 'CONTROL: no marker, no runs');
+    fs.writeFileSync(marker, '');
+    assert.equal(publishedSerial('/nonexistent', '404', 0, marker).ok, false);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});

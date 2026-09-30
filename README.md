@@ -106,6 +106,15 @@ it already had.
 signed. The key is a secret of the `github-pages` environment, which only `main` may deploy to, so
 a workflow on another branch cannot read it.
 
+**The actions in `publish.yml` run with the signing key.** They are pinned to commits, and
+Dependabot proposes updates as pull requests. Read what an update to one of those actions changes
+before merging it: merging it hands that code the key.
+
+**After the first publish, commit an empty file named `published`** at the top of the repo. From
+then on a missing catalogue on Pages stops the publish, instead of being read as "nothing published
+yet", which would drop the serial floor. (Before it exists, the count of successful publish runs
+stands in for it.)
+
 **To undo a change, merge a revert.** Never move `main` back: the publish would carry a lower
 serial, and every copy of Kosmos holding the newer catalogue would refuse it. A ruleset on `main`
 refuses force-pushes and deletion for the same reason.

@@ -5,13 +5,19 @@
  *
  *     node published-serial.js <file> <http-status> <earlier-deployments>
  *
- * Prints the serial. A 404 is 0 only when no earlier deployment exists (the first publish); after
- * one, a missing file is an outage to stop on, never a reason to drop the floor to zero.
+ * Prints the serial. A 404 is 0 only before the first publish: when publish.yml has no successful
+ * run AND the committed marker `published` does not exist. After that, a missing file is an outage
+ * to stop on, never a reason to drop the floor to zero. The marker is committed once, after the first
+ * publish, so the answer does not rest on run history alone (runs can be deleted, a workflow renamed).
  */
 const fs = require('node:fs');
+const path = require('node:path');
+
+const MARKER = path.join(__dirname, 'published');
 
 /** @returns {{ok: true, serial: number} | {ok: false, because: string}} */
-function publishedSerial(file, status, earlier) {
+function publishedSerial(file, status, earlier, marker = MARKER) {
+  if (fs.existsSync(marker)) earlier = Math.max(earlier, 1);
   if (status === '404') {
     return earlier === 0 ? { ok: true, serial: 0 } : { ok: false, because: `the published catalogue is missing (404) although ${earlier} deployment(s) came before` };
   }
@@ -31,5 +37,5 @@ function main([file, status, earlier]) {
   return 0;
 }
 
-module.exports = { publishedSerial, main };
+module.exports = { publishedSerial, main, MARKER };
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
