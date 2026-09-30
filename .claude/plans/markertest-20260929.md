@@ -24,3 +24,9 @@ without it.
 - A test runs a copy of published-serial.js in its own folder, without and then with a marker beside
   it, so main()'s use of the default marker is covered without depending on this checkout.
 - The comment on the path pin says it checks the path on purpose, not the file.
+
+## Review iterations 4 and 5
+- The main() marker test checks why it refuses (the missing catalogue) and what it prints without
+  the marker (0); the workflow check is anchored to the serial step's own run block.
+- Deferred: the `<branch> -- ...` commit subjects are the format the challenge-loop skill prescribes
+  (two hyphens, not an em dash); the squash-merge subject is a plain sentence.

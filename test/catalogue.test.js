@@ -469,7 +469,7 @@ test('a portrait no member names is reported', () => {
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
-test('published-serial refuses a deployment count that is empty or not a number', () => {
+test('published-serial refuses a deployment count that is not a count', () => {
   const { main } = require('../published-serial');
   const w = process.stderr.write;
   const o = process.stdout.write;
@@ -477,12 +477,12 @@ test('published-serial refuses a deployment count that is empty or not a number'
   // holds the committed `published` marker (a 404 does: after the first publish it is an outage).
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-count-'));
   const f = path.join(dir, 'p.json');
-  fs.writeFileSync(f, JSON.stringify({ serial: 5 }));
   let said = '';
   let out = '';
   process.stderr.write = (t) => { said += t; return true; };
   process.stdout.write = (t) => { out += t; return true; };
   try {
+    fs.writeFileSync(f, JSON.stringify({ serial: 5 }));
     const bad = ['', 'null', '-1', '1.5', ' 1'];
     for (const n of bad) assert.equal(main([f, '200', n]), 1, JSON.stringify(n));
     assert.equal((said.match(/is not a count/g) || []).length, bad.length, 'refused for the count, not for another reason');
@@ -884,8 +884,12 @@ test('published-serial\'s marker is the file named `published` at the top of thi
   // It checks the path, not that the file exists: no test's outcome may depend on the marker being
   // committed (that dependence is what failed a publish once). The workflow runs from the repo root.
   assert.equal(require('../published-serial').MARKER, path.join(REPO, 'published'));
-  assert.match(fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8'), /\[ ! -e published \]/,
-    'publish.yml no longer tests for the marker by this name at the repo root');
+  // In the step that reads the published serial, not merely somewhere in the file (a comment).
+  const yml = fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8');
+  const step = yml.slice(yml.indexOf('- name: Read the published serial'));
+  const body = step.slice(0, step.indexOf('\n      - ', 1));
+  assert.match(body, /\n {10}if \[ ! -e published \]; then\n/, 'the serial step no longer tests for the marker by this name at the repo root');
+  assert.match(body, /node published-serial\.js /, 'premise: this is the step that runs published-serial.js');
 });
 
 test('main() uses the marker beside the script: a 404 is the first publish without it, an outage with it', () => {
@@ -897,9 +901,11 @@ test('main() uses the marker beside the script: a 404 is the first publish witho
     fs.copyFileSync(path.join(REPO, 'published-serial.js'), path.join(dir, 'published-serial.js'));
     const run = () => { delete require.cache[path.join(dir, 'published-serial.js')]; return require(path.join(dir, 'published-serial.js')).main([path.join(dir, 'absent.json'), '404', '0']); };
     let said = '';
+    let out = '';
     process.stderr.write = (t) => { said += t; return true; };
-    process.stdout.write = () => true;
+    process.stdout.write = (t) => { out += t; return true; };
     assert.equal(run(), 0, 'no marker: a 404 is the first publish');
+    assert.equal(out, '0', 'and it prints the serial floor the workflow passes on: 0');
     fs.writeFileSync(path.join(dir, 'published'), '');
     assert.equal(run(), 1, 'marker committed: a 404 is an outage');
     assert.match(said, /missing \(404\)/, 'refused for the missing catalogue, not for another reason');
