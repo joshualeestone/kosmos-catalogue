@@ -17,3 +17,10 @@ without it.
 ## Review iteration 1
 - A test pins published-serial's default marker path (the one main() and the workflow use) to the
   repo root, since every other marker test passes its own path.
+
+## Review iterations 2 and 3
+- The refusal test checks the reason ("is not a count") for five malformed counts, and that the
+  accepted count prints the published serial.
+- A test runs a copy of published-serial.js in its own folder, without and then with a marker beside
+  it, so main()'s use of the default marker is covered without depending on this checkout.
+- The comment on the path pin says it checks the path on purpose, not the file.
