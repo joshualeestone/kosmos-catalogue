@@ -73,12 +73,12 @@ test('sections out of order, an archetype that is not a short phrase, and too ma
 
 test('the new fields get every text check the old ones do', () => {
   const cases = [
-    ['an em dash in a never item', BRIEF.replace('Never accept a meeting', 'Never — accept a meeting'), /em dash/],
+    ['an em dash in a never item', BRIEF.replace('Never accept a meeting', 'Never \u2014 accept a meeting'), /em dash/],
     ['an escaped em dash in the archetype', BRIEF.replace('calm, far-sighted planner', 'calm &mdash; planner'), /em dash/],
     ['a web address in an ask item', BRIEF.replace('Which three things', 'Check example.com for which three things'), /web address/],
     ['a template marker in a never item', BRIEF.replace('Never send anything', 'Never send {{X}} anything'), /template marker/],
     ['an HTML comment in an ask item', BRIEF.replace('Which three things', 'Which <!-- x --> three things'), /template marker|angle bracket/],
-    ['a hidden character in the archetype', BRIEF.replace('calm, far-sighted', 'calm,​ far-sighted'), /invisible/],
+    ['a hidden character in the archetype', BRIEF.replace('calm, far-sighted', 'calm,\u200b far-sighted'), /invisible/],
   ];
   for (const [what, text, re] of cases) {
     assert.notEqual(text, BRIEF, `premise: ${what} changed the text`);
