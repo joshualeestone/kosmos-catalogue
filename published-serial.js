@@ -5,8 +5,8 @@
  *
  *     node published-serial.js <file> <http-status> <earlier-deployments>
  *
- * Prints the serial. A 404 is 0 only before the first publish: when publish.yml has no successful
- * run AND the committed marker `published` does not exist. After that, a missing file is an outage
+ * Prints the serial. A 404 is 0 only before the first publish: when no earlier Pages deployment
+ * succeeded AND the committed marker `published` does not exist. After that, a missing file is an outage
  * to stop on, never a reason to drop the floor to zero. The marker is committed once, after the first
  * publish, so the answer does not rest on run history alone (runs can be deleted, a workflow renamed).
  */

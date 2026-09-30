@@ -85,7 +85,7 @@ test('teams: unique keys and ranks, a lead plus 4 or 5 reports, every member com
 });
 
 test('suggested names are unique across the whole catalogue, so two seeded teams can share a board', () => {
-  const names = built().teams.flatMap((t) => t.members.map((m) => m.name.toLowerCase()));
+  const names = built().teams.flatMap((t) => t.members.map((m) => build.slugFor(m.name)));
   assert.equal(new Set(names).size, names.length);
 });
 
@@ -285,11 +285,15 @@ test('main: refuses outside a git checkout, and in one writes the catalogue with
   const out = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-out-'));
   const quiet = (fn) => { const w = process.stdout.write; const e = process.stderr.write; process.stdout.write = () => true; process.stderr.write = () => true; try { return fn(); } finally { process.stdout.write = w; process.stderr.write = e; } };
   try {
-    assert.equal(quiet(() => build.main(['--check'], { root: dir, out })), 1, 'no git, no serial: refused');
+    let said = '';
+    const w0 = process.stderr.write;
+    process.stderr.write = (t) => { said += t; return true; };
+    try { assert.equal(build.main(['--check'], { root: dir, out, previousSerial: 0 }), 1, 'no git, no serial: refused'); } finally { process.stderr.write = w0; }
+    assert.match(said, /no serial/);
     const id = build.build().catalogue.teams[0].members[0].avatar.id;
     fs.mkdirSync(path.join(dir, 'avatars'));
     fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), webp('portrait'));
-    const git = (...a) => execFileSync('git', ['-C', dir, '-c', 'commit.gpgsign=false', '-c', 'core.hooksPath=/dev/null', ...a], { stdio: 'ignore', env: { ...process.env, GIT_AUTHOR_NAME: 't', GIT_AUTHOR_EMAIL: 't@t', GIT_COMMITTER_NAME: 't', GIT_COMMITTER_EMAIL: 't@t' } });
+    const git = (...a) => execFileSync('git', ['-C', dir, '-c', 'commit.gpgsign=false', '-c', 'core.hooksPath=/dev/null', ...a], { stdio: 'ignore', env: { ...build.withoutGitDir(), GIT_AUTHOR_NAME: 't', GIT_AUTHOR_EMAIL: 't@t', GIT_COMMITTER_NAME: 't', GIT_COMMITTER_EMAIL: 't@t' } });
     git('init', '-q'); git('add', '-A'); git('commit', '-q', '-m', 'x');
     assert.equal(quiet(() => build.main(['--check'], { root: dir, out })), 0);
     assert.equal(fs.readdirSync(out).length, 0, '--check wrote something');
@@ -325,9 +329,9 @@ test('a new serial always exceeds the published one, even from a commit with a s
   const out = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-out-'));
   const w = process.stdout.write;
   try {
-    execFileSync('git', ['-C', dir, 'init', '-q'], { stdio: 'ignore' });
-    execFileSync('git', ['-C', dir, 'add', '-A'], { stdio: 'ignore' });
-    execFileSync('git', ['-C', dir, '-c', 'user.name=t', '-c', 'user.email=t@t', '-c', 'commit.gpgsign=false', '-c', 'core.hooksPath=/dev/null', 'commit', '-q', '-m', 'x'], { stdio: 'ignore' });
+    execFileSync('git', ['-C', dir, 'init', '-q'], { stdio: 'ignore', env: build.withoutGitDir() });
+    execFileSync('git', ['-C', dir, 'add', '-A'], { stdio: 'ignore', env: build.withoutGitDir() });
+    execFileSync('git', ['-C', dir, '-c', 'user.name=t', '-c', 'user.email=t@t', '-c', 'commit.gpgsign=false', '-c', 'core.hooksPath=/dev/null', 'commit', '-q', '-m', 'x'], { stdio: 'ignore', env: build.withoutGitDir() });
     process.stdout.write = () => true;
     const serialAfter = (previousSerial) => { assert.equal(build.main([], { root: dir, out, previousSerial }), 0); return JSON.parse(fs.readFileSync(path.join(out, 'catalogue.json'), 'utf8')).serial; };
     const commit = serialAfter(0);

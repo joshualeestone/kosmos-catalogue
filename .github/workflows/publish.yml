@@ -1,7 +1,7 @@
 # Publish the catalogue on every push to main: check, build, sign, and deploy to GitHub Pages.
-# Kosmos reads it at https://installkosmos.com/catalogue/, which the site passes through to the
-# Pages address (a rewrite in chaoskosmos-site's vercel.json), so the address Kosmos knows is ours
-# and the host behind it can change without a Kosmos release.
+# Kosmos will read it at https://installkosmos.com/catalogue/, which the site will pass through to
+# the Pages address (a rewrite in chaoskosmos-site's vercel.json, kosmos#4632), so the address
+# Kosmos knows is ours and the host behind it can change without a Kosmos release.
 #
 # The signing key is a secret of the github-pages ENVIRONMENT, which only main may deploy to, so a
 # workflow on any other branch cannot read it. Every action is pinned to a commit, because this is
@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  actions: read
+  deployments: read
   pages: write
   id-token: write
 concurrency:
@@ -49,7 +49,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          earlier=$(gh api "repos/${{ github.repository }}/actions/workflows/publish.yml/runs?status=success&per_page=1" --jq .total_count)
+          # Earlier deployments that reached Pages (a deployment status of success), not runs that
+          # finished green: a run can deploy and still fail a later step.
+          earlier=0
+          for u in $(gh api "repos/${{ github.repository }}/deployments?environment=github-pages&per_page=100" --jq '.[].statuses_url'); do
+            if [ "$(gh api "$u" --jq '[.[]|select(.state=="success")]|length')" != 0 ]; then earlier=$((earlier + 1)); fi
+          done
           code=$(curl -sSL --max-time 30 --retry 3 --retry-all-errors -H 'Cache-Control: no-cache' \
             -o "$RUNNER_TEMP/published.json" -w '%{http_code}' \
             "https://joshualeestone.github.io/kosmos-catalogue/catalogue.json?run=${{ github.run_id }}") || code=000
