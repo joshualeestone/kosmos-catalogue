@@ -267,7 +267,7 @@ test('a key or slot that is not lowercase words and hyphens is refused before it
     fs.writeFileSync(path.join(dir, 'groups.json'), JSON.stringify([{ group: 'G', roles: ['../escape'] }]));
     assert.ok(build.build({ root: dir }).problems.some((p) => /role key "\.\.\/escape"/.test(p)));
     fs.writeFileSync(path.join(dir, 'groups.json'), '{"not": "a list"}');
-    assert.ok(build.build({ root: dir }).problems.some((p) => /groups\.json: must be a list/.test(p)));
+    assert.ok(build.build({ root: dir }).problems.some((p) => /groups\.json: must be a (JSON )?list/.test(p)));
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
@@ -467,7 +467,7 @@ test('published-serial refuses a deployment count that is empty or not a number'
 });
 
 test('invisible and direction-changing characters are refused anywhere in a role, team or group', () => {
-  for (const ch of ['‮', '​', '⁦', '﻿', '\u0007', '󠁁']) {
+  for (const ch of ['\uFE0F', '\u{E0100}', '\u061C', '\u3164', '\u2800', '\uFFF9', '\u00A0', '\u202E', '\u200B', '\u2066', '\uFEFF', '\u0007', '\u{E0041}']) {
     const r = source.read().rolesSource;
     r.roles[2].who = r.roles[2].who.replace('You ', `You${ch} `);
     assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)), JSON.stringify(ch));
@@ -507,4 +507,25 @@ test('published-serial: the committed marker makes a 404 an outage even with no 
     fs.writeFileSync(marker, '');
     assert.equal(publishedSerial('/nonexistent', '404', 0, marker).ok, false);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('a role missing its name is reported and left out, and a team file that is not an object is reported', () => {
+  const dir = copyRepo();
+  try {
+    const cos = path.join(dir, 'roles', 'cos', 'role.md');
+    fs.writeFileSync(cos, fs.readFileSync(cos, 'utf8').replace(/^name: .*\n/m, 'name:  \n'));
+    const team = fs.readdirSync(path.join(dir, 'teams'))[0];
+    fs.writeFileSync(path.join(dir, 'teams', team), 'null');
+    fs.writeFileSync(path.join(dir, 'settings.json'), '[]');
+    const p = build.build({ root: dir }).problems.join('\n');
+    assert.match(p, /roles\/cos\/role\.md: name is missing/);
+    assert.match(p, new RegExp(`teams/${team.replace('.', '\\.')}: must be a JSON object`));
+    assert.match(p, /settings\.json: must be a JSON object/);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+  const t = source.read().teamsSource;
+  t.teams[0].members[1].title = '   ';
+  assert.ok(build.build({ teamsSource: t }).problems.some((p) => /needs a name, title/.test(p)), 'a blank title');
+  const u = source.read().teamsSource;
+  u.teams[0].project.extra = { nested: true };
+  assert.ok(build.build({ teamsSource: u }).problems.some((p) => /exactly a name and goal/.test(p)));
 });
