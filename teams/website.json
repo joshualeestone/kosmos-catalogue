@@ -1,0 +1,116 @@
+{
+  "key": "website",
+  "kind": "business",
+  "rank": 5,
+  "label": "Website Team",
+  "blurb": "A Website Lead with design, writing, building, search and testing",
+  "purpose": "For a business that needs a new website or a better one. The lead keeps the scope clear; the team designs the pages, writes the words, builds it, makes it findable and tests it before launch.",
+  "project": {
+    "name": "Website",
+    "goal": "Launch a clear, fast website that turns visitors into customers."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "webdir",
+      "title": "Website Lead",
+      "name": "Nadia",
+      "focus": [
+        "Own the site plan and the launch checklist."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Egyptian",
+        "hair": "dark hair, loose waves",
+        "attire": "rust-coloured blazer",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "design",
+      "role": "webdesign",
+      "title": "Web Designer",
+      "name": "Felix",
+      "focus": [
+        "Design each page mobile-first from the site plan."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "man",
+        "heritage": "German",
+        "hair": "messy blond hair",
+        "attire": "black tee",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "copy",
+      "role": "copy",
+      "title": "Web Copywriter",
+      "name": "Zoe",
+      "focus": [
+        "Write every page's words, headline first."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Australian",
+        "hair": "wavy red hair",
+        "attire": "denim shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "dev",
+      "role": "webdev",
+      "title": "Web Developer",
+      "name": "Arjun",
+      "focus": [
+        "Build the pages on a staging copy and fix what testing finds."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Tamil",
+        "hair": "short black hair, glasses",
+        "attire": "dark hoodie",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "seo",
+      "role": "seo",
+      "title": "SEO Specialist",
+      "name": "Lucia",
+      "focus": [
+        "Set each page's search terms, titles and descriptions."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "Argentinian",
+        "hair": "long brown hair",
+        "attire": "soft white sweater",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "qa",
+      "role": "qa",
+      "title": "Website Tester",
+      "name": "Wei",
+      "focus": [
+        "Test every page on phone and desktop before launch and after every change."
+      ],
+      "avatar": {
+        "apparentAge": "50s",
+        "presentation": "man",
+        "heritage": "Chinese Malaysian",
+        "hair": "short grey hair",
+        "attire": "checked shirt",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

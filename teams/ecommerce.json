@@ -1,0 +1,116 @@
+{
+  "key": "ecommerce",
+  "kind": "business",
+  "rank": 10,
+  "label": "E-commerce Team",
+  "blurb": "An E-commerce Manager with listings, orders, stock, ads and support",
+  "purpose": "For an online store. The E-commerce Manager watches sales and the store; the team writes listings, tracks orders and returns, plans stock, plans ads and drafts customer replies.",
+  "project": {
+    "name": "Online Store",
+    "goal": "Grow online sales while keeping customers happy and stock right."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "ecom",
+      "title": "E-commerce Manager",
+      "name": "Isabella",
+      "focus": [
+        "Review sales, stock and reviews every week and set priorities."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Brazilian",
+        "hair": "long dark hair, loose waves",
+        "attire": "black blazer",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "listings",
+      "role": "listings",
+      "title": "Product Listing Writer",
+      "name": "Noah",
+      "focus": [
+        "Write or improve five listings a week."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "man",
+        "heritage": "Dutch",
+        "hair": "blond hair, short",
+        "attire": "grey tee",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "orders",
+      "role": "orders",
+      "title": "Orders and Returns Specialist",
+      "name": "Fatima",
+      "focus": [
+        "Keep the late and returned orders list and draft customer updates."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Bangladeshi",
+        "hair": "hijab in soft pink",
+        "attire": "cream top",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "stock",
+      "role": "inventory",
+      "title": "Inventory Planner",
+      "name": "Chen",
+      "focus": [
+        "Say what to reorder before anything sells out."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "man",
+        "heritage": "Chinese",
+        "hair": "short black hair, glasses",
+        "attire": "navy polo",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "ads",
+      "role": "ppc",
+      "title": "Paid Ads Specialist",
+      "name": "Ava",
+      "focus": [
+        "Plan small ad tests and report cost per sale."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Irish American",
+        "hair": "long light brown hair",
+        "attire": "olive jacket",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "support",
+      "role": "support",
+      "title": "Customer Support",
+      "name": "Kofi",
+      "focus": [
+        "Draft replies to customer questions every day."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Ghanaian",
+        "hair": "short twists",
+        "attire": "orange sweater",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

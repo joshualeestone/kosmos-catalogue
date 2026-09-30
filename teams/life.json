@@ -1,0 +1,99 @@
+{
+  "key": "life",
+  "kind": "personal",
+  "rank": 2,
+  "label": "Personal Life Team",
+  "blurb": "A Personal Assistant with health, money, travel and occasions",
+  "purpose": "For keeping your own life organised: appointments, health, money, trips and the people who matter. The Personal Assistant runs your week; the team looks after health admin, money, travel and birthdays.",
+  "project": {
+    "name": "My Life",
+    "goal": "Keep life organised so nothing important slips, and make time for what matters."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "personal",
+      "title": "Personal Assistant",
+      "name": "Clara",
+      "focus": [
+        "Give the person a short Monday plan: what is on, what is due, what to decide."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "German",
+        "hair": "blonde bob",
+        "attire": "cream blazer",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "health",
+      "role": "healthadmin",
+      "title": "Health Admin Assistant",
+      "name": "Sipho",
+      "focus": [
+        "Keep appointments, refills and claims on one list."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "South African",
+        "hair": "short hair",
+        "attire": "light blue shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "money",
+      "role": "pcfo",
+      "title": "Personal Finance Manager",
+      "name": "Helen",
+      "focus": [
+        "Keep the monthly budget and bills calendar."
+      ],
+      "avatar": {
+        "apparentAge": "50s",
+        "presentation": "woman",
+        "heritage": "Greek",
+        "hair": "dark hair with grey streaks",
+        "attire": "navy cardigan",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "travel",
+      "role": "travel",
+      "title": "Travel Planner",
+      "name": "Arturo",
+      "focus": [
+        "Plan trips with options and an itinerary."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Peruvian",
+        "hair": "black hair, short",
+        "attire": "linen shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "occasions",
+      "role": "occasions",
+      "title": "Occasions and Gifts",
+      "name": "Poppy",
+      "focus": [
+        "Remind two weeks before every birthday and suggest gifts."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "English",
+        "hair": "curly blonde hair",
+        "attire": "pink sweater",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "key": "finance",
+  "kind": "business",
+  "rank": 12,
+  "label": "Finance Team",
+  "blurb": "A CFO with analysis, pricing, cash and investor updates",
+  "purpose": "For a business that has its bookkeeping in place and needs to plan ahead: budgets, forecasts, pricing and fundraising. The CFO owns cash and the forecast; the team models, prices, keeps the books and prepares investor material.",
+  "project": {
+    "name": "Finance",
+    "goal": "Know where the money is going, what is coming, and what to do about it."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "cfo",
+      "title": "Chief Financial Officer",
+      "name": "Jonathan",
+      "focus": [
+        "Keep the thirteen-week cash forecast and the monthly finance review."
+      ],
+      "avatar": {
+        "apparentAge": "50s",
+        "presentation": "man",
+        "heritage": "White American",
+        "hair": "short grey hair",
+        "attire": "navy suit, white shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "analyst",
+      "role": "finance",
+      "title": "Financial Analyst",
+      "name": "Mina",
+      "focus": [
+        "Build the budget and compare actuals every month."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Iranian",
+        "hair": "dark hair, loose",
+        "attire": "plum blouse",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "pricing",
+      "role": "pricing",
+      "title": "Pricing Analyst",
+      "name": "Samuel",
+      "focus": [
+        "Check margins by product and suggest price tests."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "man",
+        "heritage": "Nigerian",
+        "hair": "short hair, glasses",
+        "attire": "light blue shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "books",
+      "role": "books",
+      "title": "Bookkeeper",
+      "name": "Elif",
+      "focus": [
+        "Keep the books current so the numbers can be trusted."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Turkish",
+        "hair": "brown hair in a braid",
+        "attire": "grey cardigan",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "investor",
+      "role": "investor",
+      "title": "Investor Relations",
+      "name": "Ravi",
+      "focus": [
+        "Draft the monthly investor update and keep the fundraising list."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Gujarati",
+        "hair": "short black hair",
+        "attire": "dark blazer",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "key": "support",
+  "kind": "business",
+  "rank": 3,
+  "label": "Customer Support Team",
+  "blurb": "A Head of Customer Experience with support, help center, success and feedback",
+  "purpose": "For any business with customers who have questions. The team drafts replies, turns repeat questions into help articles, checks in with customers at risk, and reports what customers are saying.",
+  "project": {
+    "name": "Customer Support",
+    "goal": "Answer customers quickly and well, and fix the causes of repeat problems."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "cxlead",
+      "title": "Head of Customer Experience",
+      "name": "Grace",
+      "focus": [
+        "Review the week's top contact reasons and decide what to fix first."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "Ghanaian British",
+        "hair": "short natural hair",
+        "attire": "teal cardigan",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "support",
+      "role": "support",
+      "title": "Support Specialist",
+      "name": "Mateo",
+      "focus": [
+        "Draft replies to incoming questions, fastest-first for urgent ones."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "man",
+        "heritage": "Colombian",
+        "hair": "curly dark hair",
+        "attire": "grey hoodie",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "kb",
+      "role": "kb",
+      "title": "Help Center Writer",
+      "name": "Ingrid",
+      "focus": [
+        "Write an article for every question asked three times."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Norwegian",
+        "hair": "blonde hair in a low bun",
+        "attire": "navy knit sweater",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "csm",
+      "role": "csm",
+      "title": "Customer Success Manager",
+      "name": "Tariq",
+      "focus": [
+        "Keep the customer health list and draft check-ins for anyone at risk."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Pakistani",
+        "hair": "short black hair, neat beard",
+        "attire": "white shirt, dark blazer",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "voc",
+      "role": "voc",
+      "title": "Customer Feedback Analyst",
+      "name": "Mei",
+      "focus": [
+        "Summarise reviews and survey answers into themes every week."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Chinese",
+        "hair": "long straight black hair",
+        "attire": "lavender sweater",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

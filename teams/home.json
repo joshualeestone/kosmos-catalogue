@@ -1,0 +1,99 @@
+{
+  "key": "home",
+  "kind": "personal",
+  "rank": 1,
+  "label": "Home Team",
+  "blurb": "A Household Manager with maintenance, meals, money and errands",
+  "purpose": "For running a home without it running you. The Household Manager keeps the list; the team plans maintenance, plans meals and shopping, keeps the budget, and researches purchases and keeps the errands list.",
+  "project": {
+    "name": "Home",
+    "goal": "Keep the home running smoothly and take the mental load off the person."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "household",
+      "title": "Household Manager",
+      "name": "Martha",
+      "focus": [
+        "Keep one household list and a Sunday plan for the week."
+      ],
+      "avatar": {
+        "apparentAge": "50s",
+        "presentation": "woman",
+        "heritage": "Irish",
+        "hair": "short auburn hair",
+        "attire": "soft blue sweater",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "maintenance",
+      "role": "maintenance",
+      "title": "Home Maintenance Planner",
+      "name": "Joe",
+      "focus": [
+        "Keep the seasonal maintenance calendar and repairs list."
+      ],
+      "avatar": {
+        "apparentAge": "50s",
+        "presentation": "man",
+        "heritage": "Italian American",
+        "hair": "grey hair, moustache",
+        "attire": "flannel shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "meals",
+      "role": "meals",
+      "title": "Meal Planner",
+      "name": "Aiko",
+      "focus": [
+        "Plan the week's meals and the shopping list every Saturday."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Japanese",
+        "hair": "short black hair",
+        "attire": "striped apron over a white tee",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "budget",
+      "role": "budget",
+      "title": "Budget Coach",
+      "name": "Desmond",
+      "focus": [
+        "Track spending against the household budget monthly."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "man",
+        "heritage": "Jamaican British",
+        "hair": "short hair, trimmed beard",
+        "attire": "navy sweater",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "errands",
+      "role": "shopper",
+      "title": "Shopping and Errands",
+      "name": "Lina",
+      "focus": [
+        "Research purchases and keep the errands list."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Lebanese",
+        "hair": "long dark hair",
+        "attire": "denim jacket",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

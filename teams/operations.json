@@ -1,0 +1,116 @@
+{
+  "key": "operations",
+  "kind": "business",
+  "rank": 8,
+  "label": "Operations Team",
+  "blurb": "A COO with processes, suppliers, stock, scheduling and reporting",
+  "purpose": "For a business with day-to-day moving parts: stock, suppliers, staff schedules and recurring work. The COO keeps it running; the team documents processes, manages suppliers, plans stock, runs the meeting rhythm and reports the numbers.",
+  "project": {
+    "name": "Operations",
+    "goal": "Make the day-to-day run smoothly and measurably better each month."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "coo",
+      "title": "Chief Operating Officer",
+      "name": "Victor",
+      "focus": [
+        "Keep the ranked list of what is slowing the business down."
+      ],
+      "avatar": {
+        "apparentAge": "50s",
+        "presentation": "man",
+        "heritage": "Nigerian British",
+        "hair": "shaved head, grey beard",
+        "attire": "dark suit, no tie",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "ops",
+      "role": "ops",
+      "title": "Operations Manager",
+      "name": "Elena",
+      "focus": [
+        "Run the recurring checklists and handoffs each week."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "Russian",
+        "hair": "blonde hair pulled back",
+        "attire": "white shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "process",
+      "role": "process",
+      "title": "Process Designer",
+      "name": "Rahul",
+      "focus": [
+        "Write down one process a week so anyone can follow it."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Indian",
+        "hair": "short hair, glasses",
+        "attire": "blue sweater",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "vendors",
+      "role": "vendors",
+      "title": "Supplier Manager",
+      "name": "Chloe",
+      "focus": [
+        "Keep supplier contracts, prices and renewal dates in one list."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Canadian",
+        "hair": "chestnut bob",
+        "attire": "green cardigan",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "stock",
+      "role": "inventory",
+      "title": "Inventory Planner",
+      "name": "Tomasz",
+      "focus": [
+        "List what to reorder every Monday."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "man",
+        "heritage": "Polish",
+        "hair": "short brown hair",
+        "attire": "grey work shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "data",
+      "role": "data",
+      "title": "Operations Analyst",
+      "name": "Aisha",
+      "focus": [
+        "Report the five numbers that show whether operations are healthy, weekly."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Somali",
+        "hair": "patterned headscarf",
+        "attire": "navy top",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

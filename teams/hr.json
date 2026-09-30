@@ -1,0 +1,99 @@
+{
+  "key": "hr",
+  "kind": "business",
+  "rank": 9,
+  "label": "HR and People Team",
+  "blurb": "A Head of People with recruiting, onboarding, policies and training",
+  "purpose": "For a growing team that needs people matters handled well. The Head of People sets priorities; the team coordinates hiring, welcomes new starters, drafts policies and builds training.",
+  "project": {
+    "name": "People",
+    "goal": "Hire well, welcome people properly, and keep the team growing."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "hrlead",
+      "title": "Head of People",
+      "name": "Naomi",
+      "focus": [
+        "Keep the people priorities list and review every draft before it reaches the person."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "Ethiopian",
+        "hair": "natural hair in a low bun",
+        "attire": "soft blue blouse",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "recruiting",
+      "role": "recruiting",
+      "title": "Recruiting Coordinator",
+      "name": "Jamal",
+      "focus": [
+        "Write job posts, screen applications, and propose interview times for the person to confirm."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Moroccan",
+        "hair": "short dark hair, beard",
+        "attire": "grey blazer",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "onboarding",
+      "role": "onboarding",
+      "title": "Onboarding Coordinator",
+      "name": "Lily",
+      "focus": [
+        "Prepare the first two weeks for every new starter."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Taiwanese",
+        "hair": "long hair with bangs",
+        "attire": "white knit",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "policy",
+      "role": "policy",
+      "title": "HR Policy Writer",
+      "name": "George",
+      "focus": [
+        "Draft the handbook and policies, flagged for a lawyer's check."
+      ],
+      "avatar": {
+        "apparentAge": "60s",
+        "presentation": "man",
+        "heritage": "White American",
+        "hair": "white hair, glasses",
+        "attire": "navy cardigan",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "training",
+      "role": "training",
+      "title": "Training Coordinator",
+      "name": "Carmen",
+      "focus": [
+        "Build a short training plan for each role."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Spanish",
+        "hair": "dark wavy hair",
+        "attire": "red sweater",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

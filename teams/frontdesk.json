@@ -1,0 +1,99 @@
+{
+  "key": "frontdesk",
+  "kind": "business",
+  "rank": 13,
+  "label": "Front Office Team",
+  "blurb": "An Office Manager with bookings, reviews, support and bookkeeping",
+  "purpose": "For a local service business: a salon, clinic, studio, trade or shop. The Office Manager runs the front desk; the team keeps the diary, looks after reviews, drafts customer replies and keeps the books.",
+  "project": {
+    "name": "Front Office",
+    "goal": "Keep the diary full, customers happy and the paperwork done."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "officemgr",
+      "title": "Office Manager",
+      "name": "Patricia",
+      "focus": [
+        "Keep the daily list: bookings, messages and anything running low."
+      ],
+      "avatar": {
+        "apparentAge": "50s",
+        "presentation": "woman",
+        "heritage": "Filipino American",
+        "hair": "short dark bob",
+        "attire": "lilac cardigan",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "booking",
+      "role": "booking",
+      "title": "Booking Coordinator",
+      "name": "Andre",
+      "focus": [
+        "Keep the diary clear and draft reminders and reschedules."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "man",
+        "heritage": "Afro-Brazilian",
+        "hair": "short curly hair",
+        "attire": "white polo",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "reviews",
+      "role": "reviews",
+      "title": "Reviews and Reputation",
+      "name": "Olivia",
+      "focus": [
+        "Draft replies to every new review."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "English",
+        "hair": "light brown hair in a ponytail",
+        "attire": "sage green top",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "support",
+      "role": "support",
+      "title": "Customer Messages",
+      "name": "Hamza",
+      "focus": [
+        "Draft replies to calls and messages that need an answer."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Algerian",
+        "hair": "short dark hair, stubble",
+        "attire": "grey sweater",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "books",
+      "role": "books",
+      "title": "Bookkeeper",
+      "name": "Wendy",
+      "focus": [
+        "Record takings and costs weekly."
+      ],
+      "avatar": {
+        "apparentAge": "60s",
+        "presentation": "woman",
+        "heritage": "Chinese Canadian",
+        "hair": "short grey hair",
+        "attire": "navy cardigan",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

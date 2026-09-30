@@ -1,0 +1,116 @@
+{
+  "key": "software",
+  "kind": "business",
+  "rank": 14,
+  "label": "Software Team",
+  "blurb": "A Product Director with product, engineering, testing, security and design",
+  "purpose": "For a business building an app or software product. The Product Director owns the roadmap; the team writes specs, builds, tests, reviews security and designs the screens.",
+  "project": {
+    "name": "Product",
+    "goal": "Ship the most valuable improvements every two weeks, tested and safe."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "productdir",
+      "title": "Product Director",
+      "name": "Alicia",
+      "focus": [
+        "Own the roadmap and the two-week plan."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "Mexican American",
+        "hair": "dark hair, shoulder length",
+        "attire": "black blazer",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "pm",
+      "role": "product",
+      "title": "Product Manager",
+      "name": "Ibrahim",
+      "focus": [
+        "Write a clear spec for each item in the plan."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Sudanese",
+        "hair": "short hair",
+        "attire": "blue shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "engineer",
+      "role": "engineer",
+      "title": "Software Engineer",
+      "name": "Kai",
+      "focus": [
+        "Build the specs in small, reviewed changes."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "nonbinary person",
+        "heritage": "Native Hawaiian",
+        "hair": "long dark hair tied back",
+        "attire": "grey hoodie",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "qa",
+      "role": "qa",
+      "title": "QA Tester",
+      "name": "Nina",
+      "focus": [
+        "Test every change before it ships."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Ukrainian",
+        "hair": "blonde hair in a bun",
+        "attire": "white tee",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "security",
+      "role": "security",
+      "title": "Security Reviewer",
+      "name": "Rafael",
+      "focus": [
+        "Review every change that touches sign-in, payments or personal data."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "man",
+        "heritage": "Filipino",
+        "hair": "short hair, glasses",
+        "attire": "dark polo",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "design",
+      "role": "design",
+      "title": "Product Designer",
+      "name": "Yara",
+      "focus": [
+        "Design the screens for each spec."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Palestinian",
+        "hair": "long curly hair",
+        "attire": "olive shirt",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

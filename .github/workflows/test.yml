@@ -1,0 +1,25 @@
+# Check the sources and build catalogue.json on every push and pull request.
+# `node --test test/` names the directory, so every test file in it runs; the job fails on the
+# exit code, not on reading the reporter's summary.
+name: test
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+      - run: node build.js --check
+      - run: node --test test/
+      - run: node build.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: catalogue
+          path: dist/

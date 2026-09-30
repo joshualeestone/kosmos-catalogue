@@ -1,0 +1,99 @@
+{
+  "key": "fundraising",
+  "kind": "business",
+  "rank": 15,
+  "label": "Fundraising Team",
+  "blurb": "A Development Director with grants, donors, events and newsletter",
+  "purpose": "For a nonprofit, school or community group. The Development Director sets the fundraising plan; the team finds and writes grants, thanks and updates donors, plans events and writes the supporter newsletter.",
+  "project": {
+    "name": "Fundraising",
+    "goal": "Raise enough, from enough sources, to fund the mission reliably."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "devdir",
+      "title": "Development Director",
+      "name": "Beatrice",
+      "focus": [
+        "Keep the fundraising plan and the deadline calendar."
+      ],
+      "avatar": {
+        "apparentAge": "50s",
+        "presentation": "woman",
+        "heritage": "Kenyan",
+        "hair": "short natural grey hair",
+        "attire": "emerald blouse",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "grants",
+      "role": "grants",
+      "title": "Grant Writer",
+      "name": "Julian",
+      "focus": [
+        "Find fitting grants and draft applications."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "man",
+        "heritage": "White Canadian",
+        "hair": "brown hair, beard",
+        "attire": "tweed jacket",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "donors",
+      "role": "donors",
+      "title": "Donor Relations",
+      "name": "Mariam",
+      "focus": [
+        "Draft thank-yous within a day and keep donors updated."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Egyptian",
+        "hair": "hijab in navy",
+        "attire": "cream top",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "events",
+      "role": "events",
+      "title": "Events Coordinator",
+      "name": "Tyler",
+      "focus": [
+        "Plan the fundraising events from budget to run sheet."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "man",
+        "heritage": "African American",
+        "hair": "short fade",
+        "attire": "burgundy sweater",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "newsletter",
+      "role": "newsletter",
+      "title": "Supporter Newsletter",
+      "name": "Keiko",
+      "focus": [
+        "Write the supporter newsletter with real stories."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "Japanese American",
+        "hair": "shoulder-length black hair",
+        "attire": "soft grey cardigan",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

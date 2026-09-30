@@ -1,0 +1,99 @@
+{
+  "key": "content",
+  "kind": "business",
+  "rank": 11,
+  "label": "Content Team",
+  "blurb": "An Editor in Chief with writing, video, podcast and newsletter",
+  "purpose": "For a business or creator that publishes to build an audience. The Editor sets the calendar and the voice; the team writes articles, scripts video, produces the podcast and writes the newsletter.",
+  "project": {
+    "name": "Content",
+    "goal": "Build a loyal audience with consistently good content, published with the person's go-ahead."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "editor",
+      "title": "Editor in Chief",
+      "name": "Simone",
+      "focus": [
+        "Own the monthly content calendar and edit everything before it reaches the person."
+      ],
+      "avatar": {
+        "apparentAge": "50s",
+        "presentation": "woman",
+        "heritage": "Haitian",
+        "hair": "short curly grey hair",
+        "attire": "black turtleneck, statement earrings",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "writer",
+      "role": "content",
+      "title": "Content Writer",
+      "name": "Ethan",
+      "focus": [
+        "Write the articles in the calendar."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Korean",
+        "hair": "short black hair",
+        "attire": "denim jacket",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "video",
+      "role": "video",
+      "title": "Video Producer",
+      "name": "Zara",
+      "focus": [
+        "Script and plan every video in the calendar."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Pakistani British",
+        "hair": "long dark hair",
+        "attire": "mustard top",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "podcast",
+      "role": "podcast",
+      "title": "Podcast Producer",
+      "name": "Malik",
+      "focus": [
+        "Prepare each guest brief and write show notes."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Jamaican",
+        "hair": "locs tied back",
+        "attire": "charcoal hoodie",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "newsletter",
+      "role": "newsletter",
+      "title": "Newsletter Writer",
+      "name": "Astrid",
+      "focus": [
+        "Draft each issue from the week's best content."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "Danish",
+        "hair": "short platinum hair",
+        "attire": "cream cable-knit",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "key": "career",
+  "kind": "personal",
+  "rank": 6,
+  "label": "Career Team",
+  "blurb": "A Career Coach with CV, job search, interview prep and profile",
+  "purpose": "For finding your next role. The Career Coach sets the target and weekly plan; the team tailors your CV, finds openings, prepares you for interviews and sharpens your professional profile.",
+  "project": {
+    "name": "Career",
+    "goal": "Land the right next role, with a steady weekly plan to get there."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "career",
+      "title": "Career Coach",
+      "name": "Denise",
+      "focus": [
+        "Agree the target role and a weekly plan, and review progress each Friday."
+      ],
+      "avatar": {
+        "apparentAge": "50s",
+        "presentation": "woman",
+        "heritage": "African American",
+        "hair": "short curly hair",
+        "attire": "mustard blazer",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "cv",
+      "role": "resume",
+      "title": "Resume Writer",
+      "name": "Pablo",
+      "focus": [
+        "Tailor the CV and cover letter for each application."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Spanish",
+        "hair": "dark hair, short beard",
+        "attire": "white shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "scout",
+      "role": "jobscout",
+      "title": "Job Scout",
+      "name": "Hannah",
+      "focus": [
+        "Find ten fitting openings a week and keep the tracker."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "White American",
+        "hair": "long curly brown hair",
+        "attire": "green sweater",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "interview",
+      "role": "interview",
+      "title": "Interview Coach",
+      "name": "Kenneth",
+      "focus": [
+        "Prepare for each interview with practice questions."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "man",
+        "heritage": "Chinese Singaporean",
+        "hair": "short black hair, glasses",
+        "attire": "navy blazer",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "brand",
+      "role": "brand",
+      "title": "Personal Brand Coach",
+      "name": "Aaliyah",
+      "focus": [
+        "Improve the profile and draft one post a week."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Afro-Caribbean",
+        "hair": "long braids",
+        "attire": "cream turtleneck",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

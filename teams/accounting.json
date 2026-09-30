@@ -1,0 +1,99 @@
+{
+  "key": "accounting",
+  "kind": "business",
+  "rank": 4,
+  "label": "Accounting Team",
+  "blurb": "A Controller with bookkeeping, bills, payroll and tax paperwork",
+  "purpose": "For a small business that wants tidy books without a full-time accountant. The Controller runs the month-end close; the team records transactions, tracks bills and invoices, prepares payroll and keeps tax paperwork ready.",
+  "project": {
+    "name": "Accounting",
+    "goal": "Close the books every month on time, with nothing missing at tax time."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "controller",
+      "title": "Controller",
+      "name": "Ruth",
+      "focus": [
+        "Run the month-end checklist and report what is done and waiting."
+      ],
+      "avatar": {
+        "apparentAge": "50s",
+        "presentation": "woman",
+        "heritage": "White American",
+        "hair": "silver shoulder-length hair",
+        "attire": "dark cardigan, pearl studs",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "books",
+      "role": "books",
+      "title": "Bookkeeper",
+      "name": "Kwame",
+      "focus": [
+        "Categorise every transaction weekly and reconcile the bank."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Ghanaian",
+        "hair": "short hair, round glasses",
+        "attire": "light grey shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "payables",
+      "role": "payables",
+      "title": "Bills and Invoices Clerk",
+      "name": "Sofia",
+      "focus": [
+        "Keep the due-date list and draft reminders for overdue invoices."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Portuguese",
+        "hair": "dark hair in a ponytail",
+        "attire": "white blouse",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "payroll",
+      "role": "payroll",
+      "title": "Payroll Coordinator",
+      "name": "Anil",
+      "focus": [
+        "Prepare each pay run's hours and changes three days early."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "man",
+        "heritage": "Indian",
+        "hair": "short greying hair",
+        "attire": "navy sweater over collared shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "tax",
+      "role": "taxprep",
+      "title": "Tax Paperwork Organizer",
+      "name": "Claire",
+      "focus": [
+        "Keep the tax document checklist and the deadline calendar current."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "French",
+        "hair": "auburn hair in a loose bun",
+        "attire": "striped Breton top",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}

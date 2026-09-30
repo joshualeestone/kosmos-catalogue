@@ -1,0 +1,139 @@
+[
+  {
+    "group": "Running the work",
+    "roles": [
+      "cos",
+      "coo",
+      "officemgr"
+    ]
+  },
+  {
+    "group": "Words and research",
+    "roles": [
+      "translator"
+    ]
+  },
+  {
+    "group": "Content and media",
+    "roles": [
+      "editor",
+      "content",
+      "video",
+      "podcast",
+      "newsletter",
+      "creatorlead"
+    ]
+  },
+  {
+    "group": "Marketing and growth",
+    "roles": [
+      "cmo",
+      "emailmkt",
+      "ppc",
+      "pr",
+      "sociallead",
+      "community",
+      "partnerships"
+    ]
+  },
+  {
+    "group": "Websites and design",
+    "roles": [
+      "webdir",
+      "webdesign",
+      "webdev",
+      "ux"
+    ]
+  },
+  {
+    "group": "Customers and revenue",
+    "roles": [
+      "salesdir",
+      "sdr",
+      "proposals",
+      "crm",
+      "cxlead",
+      "csm",
+      "kb",
+      "voc",
+      "orders",
+      "listings",
+      "reviews",
+      "booking"
+    ]
+  },
+  {
+    "group": "Numbers",
+    "roles": [
+      "cfo",
+      "controller",
+      "payables",
+      "payroll",
+      "taxprep",
+      "investor",
+      "pricing",
+      "inventory"
+    ]
+  },
+  {
+    "group": "Building software",
+    "roles": []
+  },
+  {
+    "group": "People and HR",
+    "roles": [
+      "hrlead",
+      "onboarding",
+      "policy",
+      "training"
+    ]
+  },
+  {
+    "group": "Contracts, hiring and suppliers",
+    "roles": []
+  },
+  {
+    "group": "Fundraising and events",
+    "roles": [
+      "devdir",
+      "grants",
+      "donors",
+      "events"
+    ]
+  },
+  {
+    "group": "Health and wellbeing",
+    "roles": [
+      "wellness",
+      "fitness",
+      "nutrition",
+      "habits",
+      "healthadmin"
+    ]
+  },
+  {
+    "group": "Money and career",
+    "roles": [
+      "pcfo",
+      "budget",
+      "subscriptions",
+      "investing",
+      "career",
+      "resume",
+      "jobscout",
+      "interview",
+      "brand"
+    ]
+  },
+  {
+    "group": "Personal and family",
+    "roles": [
+      "tutor",
+      "maintenance",
+      "meals",
+      "shopper",
+      "occasions",
+      "school"
+    ]
+  }
+]

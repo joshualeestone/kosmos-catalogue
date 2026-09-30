@@ -1,0 +1,116 @@
+{
+  "key": "social",
+  "kind": "business",
+  "rank": 6,
+  "label": "Social Media Team",
+  "blurb": "A Head of Social with posts, video, design, community and partnerships",
+  "purpose": "For a business whose customers live on social media. The Head of Social sets the plan; the team drafts posts, scripts short videos, makes graphics, looks after comments and messages, and finds collaborators.",
+  "project": {
+    "name": "Social Media",
+    "goal": "Build a steady, engaged following that turns into customers."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "sociallead",
+      "title": "Head of Social",
+      "name": "Jade",
+      "focus": [
+        "Own the two-week plan and approve every post before it reaches the person."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Vietnamese Australian",
+        "hair": "sleek black hair, side part",
+        "attire": "cropped white blazer",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "posts",
+      "role": "social",
+      "title": "Social Media Manager",
+      "name": "Luca",
+      "focus": [
+        "Draft the planned posts for each platform and line them up for the person to approve."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "man",
+        "heritage": "Italian",
+        "hair": "dark curly hair",
+        "attire": "linen shirt",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "video",
+      "role": "video",
+      "title": "Short Video Producer",
+      "name": "Imani",
+      "focus": [
+        "Script two short videos a week with hooks and captions."
+      ],
+      "avatar": {
+        "apparentAge": "20s",
+        "presentation": "woman",
+        "heritage": "Kenyan",
+        "hair": "long box braids",
+        "attire": "bright yellow top",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "design",
+      "role": "design",
+      "title": "Social Designer",
+      "name": "Oscar",
+      "focus": [
+        "Make graphics and thumbnails in the brand style."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Swedish",
+        "hair": "short blond hair, beard",
+        "attire": "grey knit",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "community",
+      "role": "community",
+      "title": "Community Manager",
+      "name": "Rosa",
+      "focus": [
+        "Sort comments and messages daily and draft replies."
+      ],
+      "avatar": {
+        "apparentAge": "40s",
+        "presentation": "woman",
+        "heritage": "Puerto Rican",
+        "hair": "curly dark hair",
+        "attire": "coral blouse",
+        "expression": "warm, confident smile"
+      }
+    },
+    {
+      "slot": "partners",
+      "role": "partnerships",
+      "title": "Creator Partnerships",
+      "name": "Aiden",
+      "focus": [
+        "Find creators and brands that fit, and draft outreach."
+      ],
+      "avatar": {
+        "apparentAge": "30s",
+        "presentation": "man",
+        "heritage": "Irish",
+        "hair": "short red hair, freckles",
+        "attire": "navy bomber jacket",
+        "expression": "warm, confident smile"
+      }
+    }
+  ]
+}
