@@ -4,7 +4,9 @@
    A folded team (teams-fill rekey) is named by its packet key in the file, by its published key here. */
 const fs = require('fs'), path = require('path');
 const [P, W, B, OUT, FILL] = process.argv.slice(2);
-const rekey = JSON.parse(fs.readFileSync(FILL, 'utf8')).rekey || {};
+const fill = JSON.parse(fs.readFileSync(FILL, 'utf8'));
+const rekey = fill.rekey || {};
+const retitle = fill.retitle || {};
 const orig = JSON.parse(fs.readFileSync(path.join(P, 'teams.json'), 'utf8'));
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const files = new Set(fs.readdirSync(B).filter((f) => f.endsWith('.webp')));
@@ -14,7 +16,8 @@ for (const ot of orig) {
   const t = JSON.parse(fs.readFileSync(path.join(W, 'teams', key + '.json'), 'utf8'));
   for (const om of ot.members) {
     const png = `${ot.key}-${slug(om.title)}`;
-    const hits = t.members.filter((x) => x.title === om.title);
+    const title = retitle[`${ot.key}/${om.title}`] || om.title;   // a seat retitled by the fills
+    const hits = t.members.filter((x) => x.title === title);
     if (hits.length !== 1) { problems.push(`${png}: ${hits.length} members with this title`); continue; }
     if (!files.has(png + '.webp')) { problems.push(`no image ${png}`); continue; }
     const id = `${key}-${hits[0].slot}`;

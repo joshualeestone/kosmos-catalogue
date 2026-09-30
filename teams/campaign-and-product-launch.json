@@ -1,0 +1,99 @@
+{
+  "key": "campaign-and-product-launch",
+  "kind": "business",
+  "rank": 28,
+  "label": "Campaign and Product Launch Team",
+  "blurb": "A Launch Director and 4 specialists who coordinate launch strategy, materials, and cross-channel readiness",
+  "purpose": "For a business that wants to coordinate launch strategy, materials, and cross-channel readiness.",
+  "project": {
+    "name": "Campaign and Product Launch",
+    "goal": "A clear first plan for campaign and product launch, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "launch-director",
+      "title": "Launch Director",
+      "name": "Linnea",
+      "focus": [
+        "Owns the launch plan, coordinates dependencies, and decides whether work is ready for review."
+      ],
+      "avatar": {
+        "apparentAge": "Early 40s",
+        "presentation": "woman",
+        "heritage": "Swedish",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "launch-strategist",
+      "role": "launch-strategist",
+      "title": "Launch Strategist",
+      "name": "Daichi",
+      "focus": [
+        "Defines audience, offer, positioning, and the launch sequence."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Japanese",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "marketing",
+      "role": "marketing",
+      "title": "Campaign Producer",
+      "name": "Winston",
+      "focus": [
+        "Coordinates campaign copy, design briefs, and asset production."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "man",
+        "heritage": "Afro-Jamaican",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "channel-coordinator",
+      "role": "channel-coordinator",
+      "title": "Channel Coordinator",
+      "name": "Kateryna",
+      "focus": [
+        "Aligns email, social, website, paid media, and partner plans."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Ukrainian",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "launch-analyst",
+      "role": "launch-analyst",
+      "title": "Launch Analyst",
+      "name": "Lupe",
+      "focus": [
+        "Defines success measures and assembles post-launch results and lessons."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Samoan",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    }
+  ]
+}

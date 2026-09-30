@@ -548,7 +548,8 @@
   "community-and-volunteer-coordination/Volunteer Coordinator": "pm",
   "home-selling/Market Comparison Researcher": "real-estate-specialist",
   "real-estate-investment-research/Market and Property Researcher": "real-estate-specialist",
-  "procurement-and-vendor-management/Proposal and Cost Analyst": "vendors"
+  "procurement-and-vendor-management/Proposal and Cost Analyst": "vendors",
+  "compliance-and-audit-preparation/Compliance Program Lead": "control-review-analyst"
  },
  "positional": [
   "content",
@@ -673,6 +674,23 @@
  "teamText": {
   "life": {
    "purpose": "For keeping your own life organised. The Chief of Staff runs your week; the team handles your inbox and calendar, health admin, bills and paperwork, and travel and errands."
+  },
+  "side-business": {
+   "goal": "A clear first plan for a side business, with milestones, an owner for each, and what done looks like."
+  },
+  "proposal-and-rfp": {
+   "goal": "A clear first plan for the proposal or RFP, with milestones, an owner for each, and what done looks like."
   }
+ },
+ "retitle": {
+  "procurement-and-vendor-management/Proposal and Cost Analyst": "Bid and Cost Analyst",
+  "fundraising-and-grants/Grant and Pitch Writer": "Grant Writer",
+  "fundraising-and-grants/Donor and Investor Relations Specialist": "Donor Relations Specialist"
+ },
+ "focus": {
+  "fundraising-and-grants/Development Director": "Sets fundraising goals, coordinates the work, and adapts the plan to the organization's needs.",
+  "fundraising-and-grants/Funding Researcher": "Finds suitable grants and donors, and summarizes eligibility and fit.",
+  "fundraising-and-grants/Grant and Pitch Writer": "Drafts grant narratives using documented organizational evidence.",
+  "business-automation/Integration Builder": "Configures tool connections and builds data movement and automation logic, and leaves switching on anything that sends, pays, or deletes to the person."
  }
 }

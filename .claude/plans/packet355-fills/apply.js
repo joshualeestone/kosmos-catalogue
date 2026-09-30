@@ -110,6 +110,16 @@ for (const [who, role] of Object.entries(fixed.seat)) {
   const hits = (teams.find((t) => t.key === tk) || { members: [] }).members.filter((x) => x.title === title);
   if (hits.length !== 1) problems.push(`seat: ${hits.length} members for ${who}`); else hits[0].role = role;
 }
+// Seat titles and focus lines (review 6), keyed by the packet's own team key and title; map.js reads the
+// same retitle map, since a portrait is named after the packet's title.
+for (const [kind, map] of [['focus', fixed.focus || {}], ['retitle', fixed.retitle || {}]]) {
+  for (const [who, value] of Object.entries(map)) {
+    const [tk, title] = who.split('/');
+    const hits = (teams.find((t) => t.key === tk) || { members: [] }).members.filter((x) => x.title === title);
+    if (hits.length !== 1) { problems.push(`${kind}: ${hits.length} members for ${who}`); continue; }
+    if (kind === 'focus') hits[0].focus = value; else hits[0].title = value;
+  }
+}
 // A role no seat uses after all this is not taken either (the picker would list it for nothing).
 const usedRoles = new Set(teams.flatMap((t) => t.members.map((m) => m.role)));
 for (let i = roles.length - 1; i >= 0; i--) if (!usedRoles.has(roles[i].key)) { console.log(`not taken, no seat uses it: ${roles[i].key}`); roles.splice(i, 1); }
@@ -157,7 +167,7 @@ for (const t of teams) {
   }
   const m = /^(?:Designed for business owners, leaders, and teams executing on|Created for individuals, families, and organizers looking for dedicated support with) [^.]+\. (.+?\.) The team (?:coordinates|takes care of) [^.]+\.$/.exec(t.purpose);
   if (!m) { problems.push(`${t.key}: purpose is not the packet template, left as it is: ${t.purpose}`); continue; }
-  const doing = (m[1].charAt(0).toLowerCase() + m[1].slice(1)).replace(/the user[’']s/g, 'your');
+  const doing = (m[1].charAt(0).toLowerCase() + m[1].slice(1)).replace(/the user[’']s/g, 'their');
   t.purpose = t.kind === 'business' ? `For a business that wants to ${doing}` : `For anyone who wants to ${doing}`;
   const name = plainCase(t.label);
   const lead = /^[A-Z0-9&]{2,}$/.test(name.split(' ')[0]) ? name : name.charAt(0).toLowerCase() + name.slice(1);
