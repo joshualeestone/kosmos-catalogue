@@ -1,0 +1,99 @@
+{
+  "key": "process-improvement-and-documentation",
+  "kind": "business",
+  "rank": 40,
+  "label": "Process Improvement and Documentation Team",
+  "blurb": "A Process Improvement Lead and 4 specialists who improve repeatable workflows and document how they should run",
+  "purpose": "Designed for business owners, leaders, and teams executing on process improvement and documentation. Improve repeatable workflows and document how they should run. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Process Improvement and Documentation",
+    "goal": "Deliver a comprehensive initial process improvement and documentation plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "ops",
+      "title": "Process Improvement Lead",
+      "name": "Dina",
+      "focus": [
+        "Scopes the workflow review, prioritizes improvements, and owns the proposed operating process."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "woman",
+        "heritage": "Egyptian Arab",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "ops",
+      "role": "ops",
+      "title": "Process Analyst",
+      "name": "Matteo",
+      "focus": [
+        "Maps current workflows and identifies delays, rework, and unclear handoffs."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Italian",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "procedure-writer",
+      "role": "procedure-writer",
+      "title": "Procedure Writer",
+      "name": "Kariuki",
+      "focus": [
+        "Creates operating procedures, checklists, and role-specific instructions."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Kikuyu Kenyan",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "training",
+      "role": "training",
+      "title": "Training Designer",
+      "name": "Shanice",
+      "focus": [
+        "Turns revised processes into learning materials and practical exercises."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Afro-Jamaican",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "data",
+      "role": "data",
+      "title": "Process Metrics Analyst",
+      "name": "Henrik",
+      "focus": [
+        "Measures cycle times and error rates before and after each change."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "man",
+        "heritage": "Swedish",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    }
+  ]
+}

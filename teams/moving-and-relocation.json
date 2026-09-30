@@ -1,0 +1,99 @@
+{
+  "key": "moving-and-relocation",
+  "kind": "personal",
+  "rank": 10,
+  "label": "Moving and Relocation Team",
+  "blurb": "A Relocation Manager and 4 specialists who coordinate the research, preparation, and practical tasks of a move",
+  "purpose": "Created for individuals, families, and organizers looking for dedicated support with moving and relocation. Coordinate the research, preparation, and practical tasks of a move. The team takes care of preparation, detailed planning, and practical follow-through to keep everything running smoothly.",
+  "project": {
+    "name": "Moving and Relocation",
+    "goal": "Deliver a comprehensive initial moving and relocation plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "relocation-coordinator",
+      "title": "Relocation Manager",
+      "name": "Marlon",
+      "focus": [
+        "Sets the moving plan, coordinates specialists, and tracks the critical deadlines."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Afro-Jamaican",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Neighborhood Researcher",
+      "name": "Chutima",
+      "focus": [
+        "Compares locations against housing, commute, school, and lifestyle criteria."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Thai",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "relocation-coordinator",
+      "role": "relocation-coordinator",
+      "title": "Moving Logistics Coordinator",
+      "name": "Saravanan",
+      "focus": [
+        "Compares movers and organizes packing, transport, and move-day plans."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Tamil Indian",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "move-administration-specialist",
+      "role": "move-administration-specialist",
+      "title": "Move-in Administration Specialist",
+      "name": "Malia",
+      "focus": [
+        "Tracks utilities, address changes, essential purchases, and setup tasks."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Samoan",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "budget",
+      "role": "budget",
+      "title": "Moving Budget Organizer",
+      "name": "Tomasz",
+      "focus": [
+        "Builds the moving budget and tracks quotes, deposits, and costs against it."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Polish",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

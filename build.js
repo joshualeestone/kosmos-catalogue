@@ -196,15 +196,18 @@ function build(src = {}) {
   }
   const roles = [];
   const seen = new Set();
-  // The picker lists roles by name, so two keys with one name read as the same role twice (#4555).
-  const labels = new Map();
+  // The picker lists roles by name, Kosmos's built-in ones beside these, so two keys with one name
+  // read as the same role twice (#4555).
+  const labels = new Map(Object.entries(kosmos.names).map(([bk, n]) => [n.trim().toLowerCase(), `${bk} (built into Kosmos)`]));
   for (const r of rs.roles) {
     const k = r.key;
     if (!KEY_RE.test(String(k))) problems.push(`role key ${JSON.stringify(k)} must be lowercase words joined by hyphens`);
     if (seen.has(k)) problems.push('duplicate role key ' + k);
-    const label = String(r.label).trim().toLowerCase();
-    if (labels.has(label)) problems.push(`${k}: the name ${JSON.stringify(r.label)} is already the role ${labels.get(label)}`);
-    else labels.set(label, k);
+    if (isText(r.label)) {
+      const label = r.label.trim().toLowerCase();
+      if (labels.has(label)) problems.push(`${k}: the name ${JSON.stringify(r.label)} is already the role ${labels.get(label)}`);
+      else labels.set(label, k);
+    }
     if (builtin.has(k)) problems.push(`${k}: Kosmos already has a built-in role with this key`);
     seen.add(k);
     if (!groups.includes(r.group)) problems.push(`${k}: unknown group ${r.group}`);
@@ -348,10 +351,14 @@ function readBuiltin(root, problems) {
   try {
     const b = JSON.parse(fs.readFileSync(path.join(root, 'kosmos-builtin-roles.json'), 'utf8'));
     const ok = (l) => Array.isArray(l) && l.every((k) => typeof k === 'string');
-    if (ok(b.roles) && ok(b.hidden) && ok(b.groups)) return { menu: b.roles, all: b.roles.concat(b.hidden), groups: b.groups };
+    // names (optional): each menu role's name, so a catalogue role cannot take a built-in's name (#4555).
+    const names = b.names === undefined ? {} : b.names;
+    const namesOk = names && typeof names === 'object' && !Array.isArray(names)
+      && Object.entries(names).every(([k, v]) => b.roles.includes(k) && typeof v === 'string' && v.trim());
+    if (ok(b.roles) && ok(b.hidden) && ok(b.groups) && namesOk) return { menu: b.roles, all: b.roles.concat(b.hidden), groups: b.groups, names };
   } catch { /* reported below */ }
-  problems.push('kosmos-builtin-roles.json: must hold "roles" (menu), "hidden" and "groups" lists');
-  return { menu: [], all: [], groups: [] };
+  problems.push('kosmos-builtin-roles.json: must hold "roles" (menu), "hidden" and "groups" lists, and "names" (if any) must name menu roles');
+  return { menu: [], all: [], groups: [], names: {} };
 }
 
 /**

@@ -126,6 +126,12 @@ test('two roles with one name are refused, whatever the case (#4555)', () => {
   const twin = { ...r.roles[1], key: 'twin-of-one', label: r.roles[0].label.toUpperCase() };
   r.roles.push(twin);
   assert.ok(build.build({ rolesSource: r }).problems.some((p) => p === `twin-of-one: the name ${JSON.stringify(twin.label)} is already the role ${r.roles[0].key}`));
+  // A built-in role's name counts too: Kosmos lists its own roles in the same picker.
+  const b = JSON.parse(fs.readFileSync(path.join(REPO, 'kosmos-builtin-roles.json'), 'utf8'));
+  assert.equal(b.names.pm, 'Project Manager', 'premise: the built-in list carries the names');
+  const r2 = source.read().rolesSource;
+  r2.roles.push({ ...r2.roles[1], key: 'pm-twin', label: 'project manager' });
+  assert.ok(build.build({ rolesSource: r2 }).problems.includes('pm-twin: the name "project manager" is already the role pm (built into Kosmos)'));
 });
 
 test('the builder refuses role text whose wrap would split a code span', () => {

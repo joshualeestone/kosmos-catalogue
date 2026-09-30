@@ -1,5 +1,5 @@
 {
-  "note": "Every role key Kosmos has built in (engine/roles.js), the hidden ones (own, setup) included, and the menu groups its built-in roles sit in. A team member may use a menu role; a catalogue role must not reuse any of these keys; groups.json must keep every one of these groups. Update it when Kosmos changes its built-in roles.",
+  "note": "Every role key Kosmos has built in (engine/roles.js), the hidden ones (own, setup) included, and the menu groups its built-in roles sit in. A team member may use a menu role; a catalogue role must not reuse any of these keys; groups.json must keep every one of these groups. names holds each menu role's name, so a catalogue role cannot take one (#4555). Update it when Kosmos changes its built-in roles.",
   "roles": [
     "pm",
     "director",
@@ -35,6 +35,41 @@
     "personal",
     "travel"
   ],
+  "names": {
+    "pm": "Project Manager",
+    "director": "Project Director",
+    "ea": "Executive Assistant",
+    "email": "Email Assistant",
+    "ops": "Operations Manager",
+    "meet": "Meeting Assistant",
+    "process": "Process Designer",
+    "researcher": "Researcher",
+    "writer": "Business Writer",
+    "copy": "Copywriter",
+    "marketing": "Marketing Manager",
+    "social": "Social Media Manager",
+    "seo": "SEO Specialist",
+    "design": "Designer",
+    "sales": "Sales Assistant",
+    "accounts": "Account Manager",
+    "support": "Customer Support",
+    "ecom": "E-commerce Manager",
+    "data": "Data Analyst",
+    "finance": "Financial Analyst",
+    "books": "Bookkeeper",
+    "product": "Product Manager",
+    "productdir": "Product Director",
+    "engineer": "Software Engineer",
+    "qa": "QA Tester",
+    "security": "Security Reviewer",
+    "legal": "Contract Reviewer",
+    "recruiting": "Recruiting Coordinator",
+    "vendors": "Vendor Manager",
+    "household": "Household Manager",
+    "family": "Family Coordinator",
+    "personal": "Personal Assistant",
+    "travel": "Travel Planner"
+  },
   "hidden": [
     "own",
     "setup"

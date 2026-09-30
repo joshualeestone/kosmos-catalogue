@@ -1,0 +1,99 @@
+{
+  "key": "creative-projects",
+  "kind": "personal",
+  "rank": 23,
+  "label": "Creative Projects Team",
+  "blurb": "A Creative Director and 4 specialists who develop and finish a book, podcast, video series, or other creative work",
+  "purpose": "Created for individuals, families, and organizers looking for dedicated support with creative projects. Develop and finish a book, podcast, video series, or other creative work. The team takes care of preparation, detailed planning, and practical follow-through to keep everything running smoothly.",
+  "project": {
+    "name": "Creative Projects",
+    "goal": "Deliver a comprehensive initial creative projects plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "creative-director",
+      "title": "Creative Director",
+      "name": "Siranush",
+      "focus": [
+        "Defines the creative brief, coordinates specialists, and owns editorial direction and completion priorities."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Armenian",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "concept-research-specialist",
+      "role": "concept-research-specialist",
+      "title": "Concept and Research Specialist",
+      "name": "Wei",
+      "focus": [
+        "Develops concepts, background research, outlines, and reference material."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Han Chinese",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "modern minimalist dark overshirt with clean lines",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "writer-story-developer",
+      "role": "writer-story-developer",
+      "title": "Writer and Story Developer",
+      "name": "Arief",
+      "focus": [
+        "Creates drafts, scripts, structures, and narrative revisions."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Javanese Indonesian",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "production-planner",
+      "role": "production-planner",
+      "title": "Production Planner",
+      "name": "Iryna",
+      "focus": [
+        "Organizes production requirements, assets, schedules, and release preparation."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Ukrainian",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "editor",
+      "role": "editor",
+      "title": "Editor and Quality Reviewer",
+      "name": "Yaw",
+      "focus": [
+        "Reviews clarity, consistency, pacing, and fit with the creative brief."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Akan Ghanaian",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    }
+  ]
+}

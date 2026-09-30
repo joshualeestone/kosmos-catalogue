@@ -1,0 +1,99 @@
+{
+  "key": "customer-support",
+  "kind": "business",
+  "rank": 34,
+  "label": "Customer Support Team",
+  "blurb": "A Head of Customer Experience and 4 specialists who resolve routine service issues and turn recurring questions into improvements",
+  "purpose": "Designed for business owners, leaders, and teams executing on customer support. Resolve routine service issues and turn recurring questions into improvements. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Customer Support",
+    "goal": "Deliver a comprehensive initial customer support plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "cxlead",
+      "title": "Head of Customer Experience",
+      "name": "Haruka",
+      "focus": [
+        "Sets service priorities, coordinates escalations, and reviews resolution quality."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "woman",
+        "heritage": "Japanese",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "support",
+      "role": "support",
+      "title": "Support Specialist",
+      "name": "Taehyun",
+      "focus": [
+        "Triages incoming inquiries and prepares accurate, context-specific responses."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Korean",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "support-2",
+      "role": "support",
+      "title": "Help Center Writer",
+      "name": "Charlotte",
+      "focus": [
+        "Creates and maintains answers, troubleshooting guides, and self-service articles."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "English",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "csm",
+      "role": "csm",
+      "title": "Customer Success Liaison",
+      "name": "Calliope",
+      "focus": [
+        "Coordinates follow-through when support issues affect onboarding or account goals."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Greek",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "voc",
+      "role": "voc",
+      "title": "Feedback Analyst",
+      "name": "Chamara",
+      "focus": [
+        "Finds recurring issues and recommends service, documentation, or product improvements."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Sinhalese Sri Lankan",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    }
+  ]
+}

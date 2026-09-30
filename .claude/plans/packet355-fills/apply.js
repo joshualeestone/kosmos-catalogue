@@ -49,16 +49,6 @@ for (const p of ['woman', 'man']) for (const k of ['hair', 'attire']) pools[p][k
 // and the names kosmos's no-name-refs-3071 guard forbids (spelled in parts, as that guard does).
 const fixed = JSON.parse(fs.readFileSync(path.join(F, 'teams-fill.json'), 'utf8'));
 
-// A packet role that is a published role under another key (same name) is not taken: its seats use
-// the published role (review round 1: ten names appeared twice in the picker).
-for (const t of teams) for (const m of t.members) if (fixed.sameAs[m.role]) m.role = fixed.sameAs[m.role];
-for (let i = roles.length - 1; i >= 0; i--) if (fixed.sameAs[roles[i].key]) roles.splice(i, 1);
-// Seats whose packet role does not fit the team (review round 1).
-for (const [who, role] of Object.entries(fixed.seat)) {
-  const [tk, title] = who.split('/');
-  const m = (teams.find((t) => t.key === tk) || { members: [] }).members.find((x) => x.title === title);
-  if (!m) problems.push(`seat: no ${who}`); else m.role = role;
-}
 const replaced = new Set(teams.map((t) => t.key));
 const published = [];
 for (const f of fs.readdirSync(path.join(CAT, 'teams'))) {
@@ -96,6 +86,30 @@ for (const [tk, adds] of Object.entries(fixed.add)) {
   const n = t.members.length - 1;
   t.blurb = t.blurb.replace(/ and \d+ specialists /, ` and ${n} specialists `);
 }
+// Roles Kosmos or the catalogue already has (reviews 1 and 2). A packet role that does the same job
+// as a built-in or published role is not taken; its seats use the existing role.
+for (const t of teams) for (const m of t.members) if (fixed.sameAs[m.role]) m.role = fixed.sameAs[m.role];
+for (let i = roles.length - 1; i >= 0; i--) if (fixed.sameAs[roles[i].key]) roles.splice(i, 1);
+// A packet team that replaces a published one keeps the published team's roles, seat for seat (the
+// packet lists the same seats in the same order: compared side by side on 09-30; only the sizes are
+// checked here). The importer then
+// keeps the published slots, so portrait ids do not move.
+for (const tk of fixed.positional) {
+  const t = teams.find((x) => x.key === tk);
+  const pub = JSON.parse(fs.readFileSync(path.join(CAT, 'teams', `${tk}.json`), 'utf8'));
+  if (!t || t.members.length !== pub.members.length) { problems.push(`positional: ${tk} sizes differ`); continue; }
+  t.members.forEach((m, i) => { m.role = pub.members[i].role; });
+}
+// Single seats whose role does not fit the team.
+for (const [who, role] of Object.entries(fixed.seat)) {
+  const [tk, title] = who.split('/');
+  const hits = (teams.find((t) => t.key === tk) || { members: [] }).members.filter((x) => x.title === title);
+  if (hits.length !== 1) problems.push(`seat: ${hits.length} members for ${who}`); else hits[0].role = role;
+}
+// A role no seat uses after all this is not taken either (the picker would list it for nothing).
+const usedRoles = new Set(teams.flatMap((t) => t.members.map((m) => m.role)));
+for (let i = roles.length - 1; i >= 0; i--) if (!usedRoles.has(roles[i].key)) { console.log(`not taken, no seat uses it: ${roles[i].key}`); roles.splice(i, 1); }
+
 // "A Automation Lead" and the like.
 for (const t of teams) t.blurb = t.blurb.replace(/^A (?=[AEIOU])/, 'An ');
 

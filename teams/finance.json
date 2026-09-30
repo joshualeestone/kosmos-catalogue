@@ -3,96 +3,96 @@
   "kind": "business",
   "rank": 12,
   "label": "Finance Team",
-  "blurb": "A CFO with analysis, pricing, cash and investor updates",
-  "purpose": "For a business that has its bookkeeping in place and needs to plan ahead: budgets, forecasts, pricing and fundraising. The CFO owns cash and the forecast; the team models, prices, keeps the books and prepares investor material.",
+  "blurb": "A Chief Financial Officer and 4 specialists who coordinate financial planning, analysis, pricing, records, and investor communication",
+  "purpose": "Designed for business owners, leaders, and teams executing on finance. Coordinate financial planning, analysis, pricing, records, and investor communication. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
   "project": {
     "name": "Finance",
-    "goal": "Know where the money is going, what is coming, and what to do about it."
+    "goal": "Deliver a comprehensive initial finance plan with clear milestones, assigned responsibilities, and verified outputs."
   },
   "members": [
     {
       "slot": "lead",
       "role": "cfo",
       "title": "Chief Financial Officer",
-      "name": "Jonathan",
+      "name": "Farhad",
       "focus": [
-        "Keep the thirteen-week cash forecast and the monthly finance review."
+        "Sets financial planning priorities, coordinates specialists, and reviews the integrated financial view."
       ],
       "avatar": {
-        "apparentAge": "50s",
+        "apparentAge": "Mid 30s",
         "presentation": "man",
-        "heritage": "White American",
-        "hair": "short grey hair",
-        "attire": "navy suit, white shirt",
-        "expression": "warm, confident smile"
+        "heritage": "Persian Iranian",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     },
     {
       "slot": "analyst",
       "role": "finance",
-      "title": "Financial Analyst",
-      "name": "Mina",
+      "title": "Financial Planning Analyst",
+      "name": "Tasnim",
       "focus": [
-        "Build the budget and compare actuals every month."
+        "Builds budgets, forecasts, cash-flow scenarios, and variance explanations."
       ],
       "avatar": {
-        "apparentAge": "30s",
+        "apparentAge": "Mid 20s",
         "presentation": "woman",
-        "heritage": "Iranian",
-        "hair": "dark hair, loose",
-        "attire": "plum blouse",
-        "expression": "warm, confident smile"
+        "heritage": "Bengali Bangladeshi",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     },
     {
       "slot": "pricing",
       "role": "pricing",
-      "title": "Pricing Analyst",
-      "name": "Samuel",
+      "title": "Pricing and Unit Economics Analyst",
+      "name": "Wulan",
       "focus": [
-        "Check margins by product and suggest price tests."
+        "Evaluates pricing, margins, contribution economics, and offer tradeoffs."
       ],
       "avatar": {
-        "apparentAge": "40s",
-        "presentation": "man",
-        "heritage": "Nigerian",
-        "hair": "short hair, glasses",
-        "attire": "light blue shirt",
-        "expression": "warm, confident smile"
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Javanese Indonesian",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     },
     {
       "slot": "books",
       "role": "books",
-      "title": "Bookkeeper",
-      "name": "Elif",
+      "title": "Bookkeeping Liaison",
+      "name": "Lahiru",
       "focus": [
-        "Keep the books current so the numbers can be trusted."
+        "Reconciles planning inputs with supplied accounting records and tracks missing information."
       ],
       "avatar": {
-        "apparentAge": "30s",
-        "presentation": "woman",
-        "heritage": "Turkish",
-        "hair": "brown hair in a braid",
-        "attire": "grey cardigan",
-        "expression": "warm, confident smile"
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Sinhalese Sri Lankan",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     },
     {
       "slot": "investor",
       "role": "investor",
-      "title": "Investor Relations",
-      "name": "Ravi",
+      "title": "Investor Relations Specialist",
+      "name": "Olena",
       "focus": [
-        "Draft the monthly investor update and keep the fundraising list."
+        "Prepares financial narratives, investor updates, and responses to information requests."
       ],
       "avatar": {
-        "apparentAge": "30s",
-        "presentation": "man",
-        "heritage": "Gujarati",
-        "hair": "short black hair",
-        "attire": "dark blazer",
-        "expression": "warm, confident smile"
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Ukrainian",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }
   ]

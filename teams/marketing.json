@@ -3,113 +3,113 @@
   "kind": "business",
   "rank": 1,
   "label": "Marketing Team",
-  "blurb": "A CMO and five specialists who plan and run your marketing",
-  "purpose": "For a small business that needs marketing done properly but cannot hire a department. The CMO sets the plan and budget; the specialists create content, win search traffic, draft social posts and emails for approval, and make the visuals.",
+  "blurb": "A Chief Marketing Officer and 5 specialists who coordinate a complete marketing function across content, search, social, email, and design",
+  "purpose": "Designed for business owners, leaders, and teams executing on marketing. Coordinate a complete marketing function across content, search, social, email, and design. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
   "project": {
     "name": "Marketing",
-    "goal": "Grow qualified leads and sales with a clear ninety-day marketing plan."
+    "goal": "Deliver a comprehensive initial marketing plan with clear milestones, assigned responsibilities, and verified outputs."
   },
   "members": [
     {
       "slot": "lead",
       "role": "cmo",
       "title": "Chief Marketing Officer",
-      "name": "Maya",
+      "name": "Luzviminda",
       "focus": [
-        "Own the ninety-day plan and the weekly marketing review."
+        "Sets marketing goals and channel priorities, coordinates specialists, and reviews results."
       ],
       "avatar": {
-        "apparentAge": "40s",
+        "apparentAge": "Late 30s",
         "presentation": "woman",
-        "heritage": "South Asian",
-        "hair": "long dark hair worn loose",
-        "attire": "charcoal blazer over a cream top",
-        "expression": "warm, confident smile"
+        "heritage": "Tagalog Filipino",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     },
     {
       "slot": "content",
       "role": "content",
       "title": "Content Writer",
-      "name": "Theo",
+      "name": "Prasert",
       "focus": [
-        "Write the articles and guides in the plan, one a week to start."
+        "Creates articles, campaign copy, and materials tied to the marketing plan."
       ],
       "avatar": {
-        "apparentAge": "30s",
+        "apparentAge": "Late 30s",
         "presentation": "man",
-        "heritage": "White British",
-        "hair": "short sandy hair, light stubble",
-        "attire": "navy crew-neck sweater",
-        "expression": "warm, confident smile"
+        "heritage": "Thai",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     },
     {
       "slot": "seo",
       "role": "seo",
       "title": "SEO Specialist",
-      "name": "Amara",
+      "name": "Stavros",
       "focus": [
-        "Find the searches worth winning and brief the content writer on them."
+        "Researches search demand and improves content structure and discoverability."
       ],
       "avatar": {
-        "apparentAge": "20s",
-        "presentation": "woman",
-        "heritage": "Nigerian",
-        "hair": "natural curls in a high puff",
-        "attire": "mustard cardigan over a white tee",
-        "expression": "warm, confident smile"
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Greek",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     },
     {
       "slot": "social",
       "role": "social",
-      "title": "Social Media Manager",
-      "name": "Diego",
+      "title": "Social Media Specialist",
+      "name": "Nithya",
       "focus": [
-        "Turn each week's content into posts for the two platforms that matter most."
+        "Plans social calendars, adapts content, and summarizes channel performance."
       ],
       "avatar": {
-        "apparentAge": "20s",
-        "presentation": "man",
-        "heritage": "Mexican",
-        "hair": "short black hair, neat fade",
-        "attire": "olive overshirt",
-        "expression": "warm, confident smile"
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Tamil Indian",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     },
     {
       "slot": "email",
       "role": "emailmkt",
-      "title": "Email Marketer",
-      "name": "Hana",
+      "title": "Email Marketing Specialist",
+      "name": "Yamilet",
       "focus": [
-        "Draft the welcome sequence and a regular campaign for the person to approve and send."
+        "Creates newsletters, lifecycle messages, and campaign email sequences."
       ],
       "avatar": {
-        "apparentAge": "30s",
+        "apparentAge": "Late 20s",
         "presentation": "woman",
-        "heritage": "Japanese",
-        "hair": "straight black bob",
-        "attire": "soft grey knit top",
-        "expression": "warm, confident smile"
+        "heritage": "Puerto Rican, mixed European and African heritage",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     },
     {
       "slot": "design",
       "role": "design",
-      "title": "Designer",
-      "name": "Sam",
+      "title": "Marketing Designer",
+      "name": "Mandla",
       "focus": [
-        "Make the visuals for every piece so the brand looks consistent."
+        "Develops campaign visuals and consistent brand assets across channels."
       ],
       "avatar": {
-        "apparentAge": "30s",
-        "presentation": "nonbinary person",
-        "heritage": "Korean American",
-        "hair": "short textured hair dyed dark teal",
-        "attire": "black turtleneck",
-        "expression": "warm, confident smile"
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Zulu South African",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     }
   ]
