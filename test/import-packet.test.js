@@ -53,11 +53,15 @@ test('a packet holding a published team, unchanged, replaces it with nothing ref
   assert.equal(r.teamsSource.teams.length, fs.readdirSync(path.join(REPO, 'teams')).length, 'a replaced team was added twice');
 });
 
-test('a team below a lead and 4 reports is reported, not taken', () => {
+test('a team outside a lead and 1 to 5 reports is reported, not taken; a small one is taken', () => {
   const p = execAsPacket();
-  p.members = p.members.slice(0, 4);
+  p.members = p.members.slice(0, 1);
   const r = importPacket({ teams: [p], roles: [] });
-  assert.ok(r.problems.some((x) => /exec: needs 4 or 5 reports, has 3/.test(x)), r.problems.join('\n'));
+  assert.ok(r.problems.some((x) => /exec: needs 1 to 5 reports, has 0/.test(x)), r.problems.join('\n'));
+  const q = execAsPacket();
+  q.members = q.members.slice(0, 2);
+  const r2 = importPacket({ teams: [q], roles: [] });
+  assert.ok(!r2.problems.some((x) => /reports, has/.test(x)), 'a lead and one report was refused: ' + r2.problems.join('\n'));
 });
 
 test('a presentation the portrait prompt cannot read is reported', () => {
