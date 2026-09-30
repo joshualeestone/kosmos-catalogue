@@ -109,9 +109,13 @@ a workflow on another branch cannot read it.
 
 **The key shares a job with as little code as possible.** `publish.yml` builds in one job, signs in
 a second and deploys in a third; only the signing job can read the key, and it runs just three
-actions (checkout, download-artifact and upload-artifact), each pinned to a commit, plus `sign.js`.
-Dependabot proposes updates to the pins as pull requests. Read what an update to one of those three
-changes before merging it: merging it hands that code the key.
+actions (checkout, download-artifact and upload-artifact), each pinned to a commit, plus the builder
+and `sign.js`. It builds the catalogue again from its own checkout and signs only if that matches
+what the build job made, byte for byte, so nothing that runs in the build job chooses what is signed.
+Every job re-checks that it is running for the tip of `main`, and the deploy job re-verifies the
+signature and publishes exactly the catalogue, its signature and the portraits it names.
+Dependabot proposes updates to the pins as pull requests; the tests list the sign job's three
+commits, so an update to one of them fails until someone edits that list after reading the change.
 
 **After the first publish, commit an empty file named `published`** at the top of the repo. From
 then on a missing catalogue on Pages stops the publish, instead of being read as "nothing published

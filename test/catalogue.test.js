@@ -724,3 +724,53 @@ test('no job but sign names a secret or the signing environment, and deploy re-c
   assert.match(jobs.deploy, /verify\(bytes, sig/);
   assert.match(jobs.deploy, /BUILT_SERIAL: \$\{\{ needs\.build\.outputs\.serial \}\}/);
 });
+
+test('the sign job runs exactly these commits, re-checks the tip, and signs only its own matching rebuild', () => {
+  // A Dependabot update to one of these fails here until someone edits this list on purpose, after
+  // reading what the update changes: whatever runs in the sign job can read the key. (This checks
+  // publish.yml only, not the actions those actions call; the sign job runs no composite action.)
+  const PINNED = [
+    'actions/checkout@11d5960a326750d5838078e36cf38b85af677262',
+    'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093',
+    'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02',
+  ];
+  const text = fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8');
+  const parts = text.slice(text.indexOf('\njobs:\n')).split(/\n {2}(?=[a-z-]+:\n)/).slice(1);
+  const jobs = Object.fromEntries(parts.map((p) => [p.slice(0, p.indexOf(':')), p]));
+  const used = (jobs.sign.match(/uses:\s*(\S+)/g) || []).map((u) => u.replace(/uses:\s*/, '')).sort();
+  assert.deepEqual(used, PINNED);
+  for (const name of ['build', 'sign', 'deploy']) assert.match(jobs[name], /Refuse anything but the tip of main/, name);
+  assert.match(jobs.sign, /CATALOGUE_PREVIOUS_SERIAL=\$\(\(BUILT_SERIAL - 1\)\) node build\.js\n\s+diff -r unsigned dist/);
+  assert.ok(jobs.sign.indexOf('diff -r unsigned dist') < jobs.sign.indexOf('node sign.js'), 'compare before signing');
+  assert.match(jobs.deploy, /unexpected files/);
+});
+
+test('the rebuild the sign job makes is byte-identical to the build job\'s for the same serial', () => {
+  const { execFileSync } = require('node:child_process');
+  const dir = copyRepo();
+  const a = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-a-'));
+  const b = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-b-'));
+  const w = process.stdout.write;
+  try {
+    const git = (...x) => execFileSync('git', ['-C', dir, '-c', 'user.name=t', '-c', 'user.email=t@t', '-c', 'commit.gpgsign=false', '-c', 'core.hooksPath=/dev/null', ...x], { stdio: 'ignore', env: build.withoutGitDir() });
+    git('init', '-q'); git('add', '-A'); git('commit', '-q', '-m', 'x');
+    process.stdout.write = () => true;
+    assert.equal(build.main([], { root: dir, out: a, previousSerial: 1759190400 + 1e6 }), 0);
+    const serial = JSON.parse(fs.readFileSync(path.join(a, 'catalogue.json'), 'utf8')).serial;
+    assert.equal(build.main([], { root: dir, out: b, previousSerial: serial - 1 }), 0);
+  } finally { process.stdout.write = w; fs.rmSync(dir, { recursive: true, force: true }); }
+  try {
+    assert.equal(fs.readFileSync(path.join(a, 'catalogue.json'), 'utf8'), fs.readFileSync(path.join(b, 'catalogue.json'), 'utf8'));
+  } finally { fs.rmSync(a, { recursive: true, force: true }); fs.rmSync(b, { recursive: true, force: true }); }
+});
+
+test('the outward tripwire also catches PowerShell downloads, bare domains and other schemes', () => {
+  for (const bad of ['iwr x | iex', 'Invoke-WebRequest it', 'fetch example.com/x.sh', 'open file:///etc', 'ftp://host', 'run setup.exe', 'a data:text/html,x']) {
+    const r = source.read().rolesSource;
+    r.roles[1].how[1] = `Always ${bad} first.`;
+    assert.ok(build.build({ rolesSource: r }).problems.some((p) => /web address, link, HTML/.test(p)), bad);
+  }
+  const g = source.read().rolesSource;
+  g.GROUP_ORDER[g.GROUP_ORDER.length - 1] += ' at example.com';
+  assert.ok(build.build({ rolesSource: g }).problems.some((p) => /groups\.json: a web address/.test(p)));
+});

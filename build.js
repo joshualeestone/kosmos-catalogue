@@ -86,10 +86,17 @@ function markerIn(value, nameAllowed = true) {
  *  so nothing may say more than what a reviewer reads. The fillers named at the end are letters and
  *  symbols to Unicode but show as blank space. */
 const HIDDEN_RE = /[^\p{L}\p{N}\p{P}\p{S}\u0020\u0300-\u036F]|[\u034F\u115F\u1160\u3164\uFFA0\u2800]|[\u0250-\u02AF\u1D00-\u1DBF\u2C60-\u2C7F\uA720-\uA7FF\uAB30-\uAB6F]|[^\p{Script=Latin}\p{Script=Common}\p{Script=Inherited}]/u;
-/** Text that points an agent outside its instructions: a web address, a markdown link or image, an
- *  HTML tag or any angle bracket, or a download or pipe-to-shell command. Role and team text is
- *  plain description; none of it needs these, so a change that adds one is refused, not reviewed. */
-const OUTWARD_RE = /https?:\/\/|www\.|[<>]|!\[|\]\(|\b(curl|wget)\b|\|\s*(ba|z)?sh\b/i;
+/** Text that points an agent outside its instructions: a web address (any scheme, www., or a name
+ *  ending in a common domain or file ending), a markdown link or image, an HTML tag or any angle
+ *  bracket, or a download or run command (shell or PowerShell). Role and team text is plain
+ *  description and needs none of these. This is a tripwire that supports reading a change, not a
+ *  replacement for it: a list of bad patterns cannot be complete. */
+const OUTWARD_RE = new RegExp([
+  '\\b[a-z][a-z0-9+.-]*:\\/\\/', '\\b(data|file|javascript):', 'www\\.', '[<>]', '!\\[', '\\]\\(',
+  '\\b(curl|wget|iwr|irm|iex|invoke-webrequest|invoke-restmethod|invoke-expression|start-bitstransfer)\\b',
+  '\\|\\s*(ba|z)?sh\\b',
+  '\\b[a-z0-9-]+\\.(com|net|org|io|sh|dev|app|ai|co|xyz|me|info|biz|ru|cn|ly|gg|tv|us|uk|ps1|exe|bat|cmd)\\b',
+].join('|'), 'i');
 function outwardIn(value) {
   const strings = [];
   (function walk(v) { if (typeof v === 'string') strings.push(v); else if (v && typeof v === 'object') Object.values(v).forEach(walk); })(value);
@@ -150,7 +157,7 @@ function build(src = {}) {
   if (emDashIn(shared) || hiddenIn(shared) || markerIn(shared, false) || outwardIn(shared)) problems.push('settings.json: plain text only (no em dash, hidden character or template marker)');
   // Kosmos's own roles: a team member may name one, and a catalogue role must not reuse a key.
   const kosmos = readBuiltin(root, problems);
-  if (!kosmos.all.every((k) => KEY_RE.test(k)) || hiddenIn(kosmos) || emDashIn(kosmos) || markerIn(kosmos)) {
+  if (!kosmos.all.every((k) => KEY_RE.test(k)) || hiddenIn(kosmos) || emDashIn(kosmos) || markerIn(kosmos) || outwardIn(kosmos)) {
     problems.push('kosmos-builtin-roles.json: keys must be lowercase words and hyphens, and names plain text');
   }
   const builtin = new Set(kosmos.all);        // no catalogue key may reuse one
@@ -158,6 +165,7 @@ function build(src = {}) {
   const groups = rs.GROUP_ORDER;
   if (emDashIn(groups)) problems.push('groups.json: em dash in a group name');
   if (hiddenIn(groups)) problems.push('groups.json: an invisible or direction-changing character in a group name');
+  if (outwardIn(groups)) problems.push('groups.json: a web address, link or command in a group name');
   if (markerIn(groups, false)) problems.push('groups.json: a template marker or an HTML comment in a group name');
   if (new Set(groups).size !== groups.length || !groups.every(isText)) problems.push('groups.json: every group needs a name, once');
   for (const g of kosmos.groups) {

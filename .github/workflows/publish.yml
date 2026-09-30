@@ -7,7 +7,8 @@
 #   build   runs the tests and the builder; no key, read-only permissions.
 #   sign    the only job that can read CATALOGUE_SIGNING_KEY (a secret of the catalogue-signing
 #           environment, which only main may use). It runs three actions, each a plain node
-#           action pinned to a commit (checkout, download-artifact, upload-artifact), and sign.js.
+#           action pinned to a commit (checkout, download-artifact, upload-artifact), rebuilds the
+#           catalogue itself and signs it only if it matches the build job's byte for byte.
 #   deploy  hands the signed files to Pages. No key. upload-pages-artifact is a composite action
 #           that calls another action by tag, which is why it lives here and not beside the key.
 name: publish
@@ -58,7 +59,8 @@ jobs:
             # failure inside `for ... in $(...)` would not).
             urls=$(gh api "repos/${{ github.repository }}/deployments?environment=github-pages&per_page=100" --jq '.[].statuses_url') || { echo "could not list earlier deployments"; exit 1; }
             for u in $urls; do
-              if [ "$(gh api "$u" --jq '[.[]|select(.state=="success")]|length')" != 0 ]; then earlier=1; break; fi
+              n=$(gh api "$u" --jq '[.[]|select(.state=="success")]|length') || { echo "could not read deployment statuses"; exit 1; }
+              if [ "$n" != 0 ]; then earlier=1; break; fi
             done
           fi
           code=$(curl -sSL --max-time 30 --retry 3 --retry-all-errors -H 'Cache-Control: no-cache' \
@@ -84,14 +86,29 @@ jobs:
     permissions:
       contents: read
     steps:
+      # Every job that can publish re-checks the tip: a re-run of this job alone (GitHub allows it for
+      # 30 days) would otherwise sign or deploy an old run's catalogue.
+      - name: Refuse anything but the tip of main
+        run: |
+          tip=$(git ls-remote https://github.com/${{ github.repository }} refs/heads/main | cut -f1)
+          if [ "$tip" != "$GITHUB_SHA" ]; then echo "refused: $GITHUB_SHA is not the tip of main ($tip)"; exit 1; fi
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: unsigned
-          path: dist/
-      # The runner's own node: sign.js needs only node:crypto, so no setup action runs beside the key.
+          path: unsigned/
+      # The build job's code chooses nothing that gets signed: this job builds the catalogue again
+      # from its own checkout (the same serial: previous + 1 = the built one) and signs only if
+      # every file matches what the build job made, byte for byte. The runner's own node runs it:
+      # build.js and sign.js need only node's built-in modules, so no setup action runs beside the key.
+      - name: Rebuild and compare
+        env:
+          BUILT_SERIAL: ${{ needs.build.outputs.serial }}
+        run: |
+          CATALOGUE_PREVIOUS_SERIAL=$((BUILT_SERIAL - 1)) node build.js
+          diff -r unsigned dist
       - run: node sign.js
         env:
           CATALOGUE_SIGNING_KEY: ${{ secrets.CATALOGUE_SIGNING_KEY }}
@@ -112,6 +129,12 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
+      # Every job that can publish re-checks the tip: a re-run of this job alone (GitHub allows it for
+      # 30 days) would otherwise sign or deploy an old run's catalogue.
+      - name: Refuse anything but the tip of main
+        run: |
+          tip=$(git ls-remote https://github.com/${{ github.repository }} refs/heads/main | cut -f1)
+          if [ "$tip" != "$GITHUB_SHA" ]; then echo "refused: $GITHUB_SHA is not the tip of main ($tip)"; exit 1; fi
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: signed
@@ -131,8 +154,22 @@ jobs:
             const bytes = fs.readFileSync("dist/catalogue.json");
             const sig = fs.readFileSync("dist/catalogue.json.sig", "utf8").trim();
             if (!verify(bytes, sig, fs.readFileSync("repo/signing-key.pub.pem", "utf8"))) { console.error("refused: the signature does not verify"); process.exit(1); }
-            const serial = String(JSON.parse(bytes).serial);
+            const c = JSON.parse(bytes);
+            const serial = String(c.serial);
             if (serial !== process.env.BUILT_SERIAL) { console.error(`refused: serial ${serial} is not the built ${process.env.BUILT_SERIAL}`); process.exit(1); }
+            // Exactly the catalogue, its signature and the portraits it names (each matching its
+            // signed hash): no other file reaches Pages, and through it installkosmos.com.
+            const crypto = require("crypto");
+            const want = new Set(["catalogue.json", "catalogue.json.sig"]);
+            for (const t of c.teams) for (const m of t.members) if (m.avatar.image) {
+              want.add(m.avatar.image);
+              const h = crypto.createHash("sha256").update(fs.readFileSync("dist/" + m.avatar.image)).digest("hex");
+              if (h !== m.avatar.imageSha256) { console.error(`refused: ${m.avatar.image} does not match its hash`); process.exit(1); }
+            }
+            const have = fs.readdirSync("dist", { recursive: true }).filter((f) => fs.statSync("dist/" + f).isFile());
+            const extra = have.filter((f) => !want.has(f));
+            const missing = [...want].filter((f) => !have.includes(f));
+            if (extra.length || missing.length) { console.error(`refused: unexpected files ${JSON.stringify(extra)}, missing ${JSON.stringify(missing)}`); process.exit(1); }
             console.log(`deploying serial ${serial}, signature verified`);
           '
         env:
