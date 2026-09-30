@@ -79,11 +79,14 @@ for (const [tk, adds] of Object.entries(fixed.add)) {
   for (const [role, title, name, pres, heritage, focus] of adds) {
     const usedHair = new Set(t.members.map((m) => m.avatar.hair));
     const usedAttire = new Set(t.members.map((m) => m.avatar.attire));
-    const pick = (list) => { for (let i = 0; i < list.length; i++) { const v = list[(turn + i) % list.length]; if (!usedHair.has(v) && !usedAttire.has(v)) return v; } return list[turn % list.length]; };
+    const age = ages[turn % ages.length];
+    // Grey temples only from the late thirties on (review 7: they read wrong on someone in their twenties).
+    const fits = (v) => !/salt-and-pepper/.test(v) || /40s|Late 30s/.test(age);
+    const pick = (list) => { for (let i = 0; i < list.length; i++) { const v = list[(turn + i) % list.length]; if (!usedHair.has(v) && !usedAttire.has(v) && fits(v)) return v; } return list.find(fits); };
     if (t.members.some((m) => m.avatar.heritage === heritage)) problems.push(`${tk}: heritage ${heritage} already on the team`);
     t.members.push({
       title, role, name, reportsTo: 'lead', focus,
-      avatar: { apparentAge: ages[turn % ages.length], presentation: pres, heritage, hair: pick(pools[pres].hair), attire: pick(pools[pres].attire), expression: exprs[turn % exprs.length] },
+      avatar: { apparentAge: age, presentation: pres, heritage, hair: pick(pools[pres].hair), attire: pick(pools[pres].attire), expression: exprs[turn % exprs.length] },
     });
     turn += 1;
   }

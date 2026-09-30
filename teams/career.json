@@ -2,7 +2,7 @@
   "key": "career",
   "kind": "personal",
   "rank": 6,
-  "label": "Career Team",
+  "label": "Career and Job Search Team",
   "blurb": "A Career Coach with CV, job search, interview prep and profile",
   "purpose": "For finding your next role. The Career Coach sets the target and weekly plan; the team tailors your CV, finds openings, prepares you for interviews and sharpens your professional profile.",
   "project": {
@@ -14,85 +14,85 @@
       "slot": "lead",
       "role": "career",
       "title": "Career Coach",
-      "name": "Denise",
+      "name": "Astrid",
       "focus": [
-        "Agree the target role and a weekly plan, and review progress each Friday."
+        "Clarifies career goals, coordinates the search, and reviews progress and tradeoffs."
       ],
       "avatar": {
-        "apparentAge": "50s",
+        "apparentAge": "Early 40s",
         "presentation": "woman",
-        "heritage": "African American",
-        "hair": "short curly hair",
-        "attire": "mustard blazer",
-        "expression": "warm, confident smile"
+        "heritage": "Swedish",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     },
     {
       "slot": "cv",
       "role": "resume",
-      "title": "Resume Writer",
-      "name": "Pablo",
+      "title": "Resume and Application Writer",
+      "name": "Kerem",
       "focus": [
-        "Tailor the CV and cover letter for each application."
+        "Tailors resumes, cover letters, and application answers using the user's experience."
       ],
       "avatar": {
-        "apparentAge": "30s",
+        "apparentAge": "Late 20s",
         "presentation": "man",
-        "heritage": "Spanish",
-        "hair": "dark hair, short beard",
-        "attire": "white shirt",
-        "expression": "warm, confident smile"
+        "heritage": "Turkish",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     },
     {
       "slot": "scout",
       "role": "jobscout",
       "title": "Job Scout",
-      "name": "Hannah",
+      "name": "Huy",
       "focus": [
-        "Find ten fitting openings a week and keep the tracker."
+        "Finds relevant roles and researches employers, requirements, and application deadlines."
       ],
       "avatar": {
-        "apparentAge": "20s",
-        "presentation": "woman",
-        "heritage": "White American",
-        "hair": "long curly brown hair",
-        "attire": "green sweater",
-        "expression": "warm, confident smile"
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Kinh Vietnamese",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     },
     {
       "slot": "interview",
       "role": "interview",
       "title": "Interview Coach",
-      "name": "Kenneth",
+      "name": "Theodora",
       "focus": [
-        "Prepare for each interview with practice questions."
+        "Develops practice questions and gives structured feedback on interview answers."
       ],
       "avatar": {
-        "apparentAge": "40s",
-        "presentation": "man",
-        "heritage": "Chinese Singaporean",
-        "hair": "short black hair, glasses",
-        "attire": "navy blazer",
-        "expression": "warm, confident smile"
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Greek",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     },
     {
       "slot": "brand",
       "role": "brand",
-      "title": "Personal Brand Coach",
-      "name": "Aaliyah",
+      "title": "Personal Brand Specialist",
+      "name": "Oliver",
       "focus": [
-        "Improve the profile and draft one post a week."
+        "Improves professional profiles, portfolio narratives, and networking introductions."
       ],
       "avatar": {
-        "apparentAge": "30s",
-        "presentation": "woman",
-        "heritage": "Afro-Caribbean",
-        "hair": "long braids",
-        "attire": "cream turtleneck",
-        "expression": "warm, confident smile"
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "English",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     }
   ]

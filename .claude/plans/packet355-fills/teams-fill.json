@@ -526,7 +526,7 @@
   "project-management/Communications Coordinator": "writer",
   "property-management/Tenant Communications Coordinator": "property-manager",
   "event-planning/Attendee Communications Specialist": "guest-experience-coordinator",
-  "logistics/Documentation Specialist": "logistics-manager",
+  "logistics/Documentation Specialist": "project-documentation-coordinator",
   "business-development/Head of Business Development": "partnerships",
   "compliance-and-audit-preparation/Requirements Researcher": "researcher",
   "proposal-and-rfp/Requirements Analyst": "researcher",
@@ -549,7 +549,8 @@
   "home-selling/Market Comparison Researcher": "real-estate-specialist",
   "real-estate-investment-research/Market and Property Researcher": "real-estate-specialist",
   "procurement-and-vendor-management/Proposal and Cost Analyst": "vendors",
-  "compliance-and-audit-preparation/Compliance Program Lead": "control-review-analyst"
+  "compliance-and-audit-preparation/Compliance Program Lead": "control-review-analyst",
+  "logistics/Carrier and Supplier Coordinator": "vendors"
  },
  "positional": [
   "content",
@@ -685,12 +686,16 @@
  "retitle": {
   "procurement-and-vendor-management/Proposal and Cost Analyst": "Bid and Cost Analyst",
   "fundraising-and-grants/Grant and Pitch Writer": "Grant Writer",
-  "fundraising-and-grants/Donor and Investor Relations Specialist": "Donor Relations Specialist"
+  "fundraising-and-grants/Donor and Investor Relations Specialist": "Donor Relations Specialist",
+  "personal-assistant/Personal Finance Organizer": "Bills and Paperwork Organizer"
  },
  "focus": {
   "fundraising-and-grants/Development Director": "Sets fundraising goals, coordinates the work, and adapts the plan to the organization's needs.",
   "fundraising-and-grants/Funding Researcher": "Finds suitable grants and donors, and summarizes eligibility and fit.",
   "fundraising-and-grants/Grant and Pitch Writer": "Drafts grant narratives using documented organizational evidence.",
-  "business-automation/Integration Builder": "Configures tool connections and builds data movement and automation logic, and leaves switching on anything that sends, pays, or deletes to the person."
+  "business-automation/Integration Builder": "Configures tool connections and builds data movement and automation logic, and leaves switching on anything that sends, pays, or deletes to the person.",
+  "insurance-comparison-and-claims/Claims Documentation Coordinator": "Organizes incident records, receipts, and correspondence, and prepares claim-status follow-ups for the person to send.",
+  "compliance-and-audit-preparation/Evidence Coordinator": "Lists the evidence still owed, drafts requests for the person to send, and organizes and indexes what comes back.",
+  "home-buying/Purchase Diligence Organizer": "Tracks showings, inspection questions, and documents, and drafts follow-ups to the person's professionals for them to send."
  }
 }

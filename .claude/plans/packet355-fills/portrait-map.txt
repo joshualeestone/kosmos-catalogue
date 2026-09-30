@@ -108,9 +108,9 @@ fundraising-and-grants-fundraising-events-coordinator.png -> fundraising-events
 fundraising-and-grants-newsletter-and-impact-writer.png -> fundraising-newsletter
 logistics-logistics-manager.png -> logistics-lead
 logistics-transport-planner.png -> logistics-transport-planner
-logistics-carrier-and-supplier-coordinator.png -> logistics-logistics-manager
-logistics-shipment-tracking-specialist.png -> logistics-logistics-manager-2
-logistics-documentation-specialist.png -> logistics-logistics-manager-3
+logistics-carrier-and-supplier-coordinator.png -> logistics-vendors
+logistics-shipment-tracking-specialist.png -> logistics-logistics-manager
+logistics-documentation-specialist.png -> logistics-project-documentation-coordinator
 tech-support-technical-support-lead.png -> tech-support-lead
 tech-support-technical-triage-specialist.png -> tech-support-tech-support
 tech-support-troubleshooting-specialist.png -> tech-support-tech-support-2
