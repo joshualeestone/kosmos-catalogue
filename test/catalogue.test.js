@@ -554,7 +554,7 @@ test('the combining grapheme joiner is refused like the other blank characters',
 });
 
 test('letters from another script are refused: a right-to-left letter or a lookalike spells something else', () => {
-  for (const ch of ['א', 'ا', 'а', 'ο']) {
+  for (const ch of ['\u05D0', '\u0627', '\u0430', '\u03BF']) {
     const r = source.read().rolesSource;
     r.roles[2].who = r.roles[2].who.replace('You ', `Y${ch}u `);
     assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)), JSON.stringify(ch));
