@@ -51,8 +51,11 @@ jobs:
         run: |
           # Earlier deployments that reached Pages (a deployment status of success), not runs that
           # finished green: a run can deploy and still fail a later step.
+          # Captured first, so a failed request stops the step (a failure inside `for ... in $(...)`
+          # would not). Newest first, 100 at most: a lower bound, which is all the 404 rule needs.
+          urls=$(gh api "repos/${{ github.repository }}/deployments?environment=github-pages&per_page=100" --jq '.[].statuses_url') || { echo "could not list earlier deployments"; exit 1; }
           earlier=0
-          for u in $(gh api "repos/${{ github.repository }}/deployments?environment=github-pages&per_page=100" --jq '.[].statuses_url'); do
+          for u in $urls; do
             if [ "$(gh api "$u" --jq '[.[]|select(.state=="success")]|length')" != 0 ]; then earlier=$((earlier + 1)); fi
           done
           code=$(curl -sSL --max-time 30 --retry 3 --retry-all-errors -H 'Cache-Control: no-cache' \

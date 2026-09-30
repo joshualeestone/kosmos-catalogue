@@ -602,3 +602,32 @@ test('kosmos-builtin-roles.json without its three lists is reported', () => {
     assert.ok(build.build({ root: dir }).problems.some((p) => /must hold "roles" \(menu\), "hidden" and "groups"/.test(p)));
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
+
+test('every action in the workflows is pinned to a commit, and checkout keeps no token', () => {
+  for (const f of fs.readdirSync(path.join(REPO, '.github', 'workflows'))) {
+    const text = fs.readFileSync(path.join(REPO, '.github', 'workflows', f), 'utf8');
+    const uses = text.match(/uses:\s*\S+/g) || [];
+    assert.ok(uses.length > 0, `${f}: premise: it uses actions`);
+    for (const u of uses) assert.match(u, /@[0-9a-f]{40}$/, `${f}: ${u} is not pinned to a commit`);
+    const checkouts = text.split('actions/checkout@').length - 1;
+    assert.equal((text.match(/persist-credentials: false/g) || []).length, checkouts, `${f}: a checkout keeps its token`);
+  }
+  // CONTROL: the pattern refuses a tag.
+  assert.doesNotMatch('uses: actions/checkout@v4', /@[0-9a-f]{40}$/);
+});
+
+test('settings text gets the same checks as the rest, and write() is the inverse of read()', () => {
+  const t = source.read().teamsSource;
+  t.AVATAR_STYLE = 'Soft light {{NAME}}';
+  assert.ok(build.build({ teamsSource: { ...t, teams: [] } }).problems.some((p) => /settings\.json: plain text only/.test(p)));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-write-'));
+  try {
+    const { rolesSource, teamsSource } = source.read();
+    fs.copyFileSync(path.join(REPO, 'kosmos-builtin-roles.json'), path.join(dir, 'kosmos-builtin-roles.json'));
+    source.write(rolesSource, teamsSource, dir);
+    const again = source.read(dir);
+    assert.deepEqual(again.problems, []);
+    assert.deepEqual(again.rolesSource, rolesSource);
+    assert.deepEqual(again.teamsSource, teamsSource);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});

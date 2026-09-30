@@ -134,6 +134,9 @@ function build(src = {}) {
   const problems = read.problems.slice();
   if (typeof ts.TEAM_CAUTION !== 'string' || !ts.TEAM_CAUTION) problems.push('settings.json: teamCaution is missing');
   if (typeof ts.AVATAR_STYLE !== 'string' || !ts.AVATAR_STYLE) problems.push('settings.json: avatarStyle is missing');
+  // Checked here as well as inside each team: avatarStyle is also published on its own.
+  const shared = [ts.TEAM_CAUTION, ts.AVATAR_STYLE];
+  if (emDashIn(shared) || hiddenIn(shared) || markerIn(shared, false)) problems.push('settings.json: plain text only (no em dash, hidden character or template marker)');
   // Kosmos's own roles: a team member may name one, and a catalogue role must not reuse a key.
   const kosmos = readBuiltin(root, problems);
   if (!kosmos.all.every((k) => KEY_RE.test(k)) || hiddenIn(kosmos) || emDashIn(kosmos) || markerIn(kosmos)) {
@@ -349,7 +352,7 @@ function main(argv, opts = {}) {
   // Kosmos holding the published one would refuse it.
   const given = opts.previousSerial ?? process.env.CATALOGUE_PREVIOUS_SERIAL ?? '';
   const previous = given === '' ? 0 : (/^\d+$/.test(String(given)) ? Number(given) : NaN);
-  if (!Number.isInteger(previous)) {
+  if (!Number.isSafeInteger(previous)) {
     process.stderr.write(`refused: the published serial ${JSON.stringify(String(given))} is not a whole number\n`);
     return 1;
   }
