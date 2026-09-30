@@ -37,7 +37,9 @@ jobs:
       - name: Refuse anything but the tip of main
         run: |
           tip=$(git ls-remote origin refs/heads/main | cut -f1)
-          if [ "$tip" != "$GITHUB_SHA" ]; then echo "refused: $GITHUB_SHA is not the tip of main ($tip); push a new commit instead of re-running"; exit 1; fi
+          # A run queued behind a deploy while a newer commit landed also stops here; that is expected,
+          # and the newer commit's own run publishes.
+          if [ "$tip" != "$GITHUB_SHA" ]; then echo "refused: $GITHUB_SHA is not the tip of main ($tip); the tip's own run publishes (to publish again, push a new commit, never re-run an old one)"; exit 1; fi
       - run: node build.js --check
       - run: node --test test/
       # The new serial must exceed the published one (build.js takes the larger of the commit time
@@ -70,7 +72,8 @@ jobs:
         run: |
           want=$(node -e 'process.stdout.write(String(require("./dist/catalogue.json").serial))')
           for i in $(seq 1 60); do
-            got=$(curl -sSL --max-time 30 -H 'Cache-Control: no-cache' "https://joshualeestone.github.io/kosmos-catalogue/catalogue.json?check=${{ github.run_id }}-$i" | node -e 'let s="";process.stdin.on("data",(d)=>s+=d).on("end",()=>{try{process.stdout.write(String(JSON.parse(s).serial))}catch{}})')
+            # A failed request is "not yet": the step runs under bash -e -o pipefail, so it must not end the loop.
+            got=$( (curl -sSL --max-time 30 -H 'Cache-Control: no-cache' "https://joshualeestone.github.io/kosmos-catalogue/catalogue.json?check=${{ github.run_id }}-$i" || true) | node -e 'let s="";process.stdin.on("data",(d)=>s+=d).on("end",()=>{try{process.stdout.write(String(JSON.parse(s).serial))}catch{}})' || true)
             if [ "$got" = "$want" ]; then echo "Pages serves serial $want"; exit 0; fi
             sleep 15
           done

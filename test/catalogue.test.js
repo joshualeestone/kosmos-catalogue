@@ -582,3 +582,19 @@ test('a role key in groups.json that is not text is reported, and a linked avata
     assert.equal(build.build({ root: dir }).problems.filter((p) => /avatars\/: must be a folder/.test(p)).length, 1);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
+
+test('compatibility lookalikes are refused: mathematical, fullwidth and small-capital letters, Roman numerals', () => {
+  for (const ch of ['\u{1D5EE}', '\uFF21', '\u1D00', '\u2160', '\u2026']) {
+    const r = source.read().rolesSource;
+    r.roles[2].who = r.roles[2].who.replace('You ', `Y${ch}u `);
+    assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)), JSON.stringify(ch));
+  }
+});
+
+test('kosmos-builtin-roles.json without its three lists is reported', () => {
+  const dir = copyRepo();
+  try {
+    fs.writeFileSync(path.join(dir, 'kosmos-builtin-roles.json'), JSON.stringify({ roles: ['pm'] }));
+    assert.ok(build.build({ root: dir }).problems.some((p) => /must hold "roles" \(menu\), "hidden" and "groups"/.test(p)));
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
