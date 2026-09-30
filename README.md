@@ -80,23 +80,29 @@ em dash in any spelling, a team member on a role that exists neither here nor in
 
 Every push to `main` runs `.github/workflows/publish.yml`: the tests, the build, then
 `node sign.js`, which signs `dist/catalogue.json` with the key in the `CATALOGUE_SIGNING_KEY`
-secret and writes `catalogue.json.sig`. The result is deployed to GitHub Pages, and
-installkosmos.com/catalogue/ passes through to it.
+secret and writes `catalogue.json.sig`. The result is deployed to GitHub Pages.
+installkosmos.com/catalogue/ will pass through to it (a rewrite in the installkosmos.com site, part
+of joshualeestone/kosmos#4632).
 
-What the signed file carries for Kosmos to check:
+What the signed file carries, and what Kosmos will check once its download ships (#4632):
 - **The signature** covers the file's exact bytes, verified against the public key Kosmos carries
-  (the same key as `signing-key.pub.pem` here). A file changed anywhere between this repo and the
-  person's computer is refused.
-- **`serial`**, the commit time of the build, so Kosmos can refuse a catalogue older than the one it
-  already holds. An old file replayed later still has a valid signature; the serial is what stops it.
-  A copy of Kosmos that holds no catalogue yet has nothing to compare against, so Kosmos also
-  refuses any serial older than the one it was released with.
+  (the same key as `signing-key.pub.pem` here), so a file changed anywhere between this repo and
+  the person's computer is refused.
+- **`serial`**, the commit time of the build and always above the serial already published, so
+  Kosmos can refuse a catalogue older than the one it holds. An old file replayed later still has a
+  valid signature; the serial is what stops it. A copy of Kosmos that holds no catalogue yet has
+  nothing to compare against, so Kosmos will also refuse any serial older than the one it was
+  released with.
 - **`avatar.imageSha256`** for every portrait, so an image fetched beside the catalogue can be
   checked too.
 
 **Who can change what Kosmos trusts:** anyone who can merge to `main`, because `main` is what gets
 signed. The key is a secret of the `github-pages` environment, which only `main` may deploy to, so
 a workflow on another branch cannot read it.
+
+**To undo a change, merge a revert.** Never move `main` back: the publish would carry a lower
+serial, and every copy of Kosmos holding the newer catalogue would refuse it. A ruleset on `main`
+refuses force-pushes and deletion for the same reason.
 
 `sign.js` refuses to publish when the secret does not match `signing-key.pub.pem`. Changing the
 key needs a new pair, a new `signing-key.pub.pem`, and a Kosmos release carrying the new public key.

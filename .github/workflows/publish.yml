@@ -31,6 +31,18 @@ jobs:
           node-version: 26
       - run: node build.js --check
       - run: node --test test/
+      # The new serial must exceed the published one (build.js takes the larger of the commit time
+      # and this plus one). A first publish finds nothing (404); anything else unreadable stops here.
+      - name: Read the published serial
+        run: |
+          code=$(curl -sS -o "$RUNNER_TEMP/published.json" -w '%{http_code}' https://joshualeestone.github.io/kosmos-catalogue/catalogue.json)
+          case "$code" in
+            200) prev=$(node -e 'const c = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")); if (!Number.isInteger(c.serial)) process.exit(1); process.stdout.write(String(c.serial))' "$RUNNER_TEMP/published.json") ;;
+            404) prev=0 ;;
+            *) echo "could not read the published catalogue (HTTP $code)"; exit 1 ;;
+          esac
+          echo "published serial: $prev"
+          echo "CATALOGUE_PREVIOUS_SERIAL=$prev" >> "$GITHUB_ENV"
       - run: node build.js
       - run: node sign.js
         env:

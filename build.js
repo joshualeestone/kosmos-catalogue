@@ -88,7 +88,9 @@ function build(src = {}) {
   if (typeof ts.TEAM_CAUTION !== 'string' || !ts.TEAM_CAUTION) problems.push('settings.json: teamCaution is missing');
   if (typeof ts.AVATAR_STYLE !== 'string' || !ts.AVATAR_STYLE) problems.push('settings.json: avatarStyle is missing');
   // Kosmos's own roles: a team member may name one, and a catalogue role must not reuse a key.
-  const builtin = new Set(readBuiltin(root, problems));
+  const kosmos = readBuiltin(root, problems);
+  const builtin = new Set(kosmos.all);        // no catalogue key may reuse one
+  const pickable = new Set(kosmos.menu);      // a team member may use one (never own or setup)
   const groups = rs.GROUP_ORDER;
   if (emDashIn(groups)) problems.push('groups.json: em dash in a group name');
   const roles = [];
@@ -123,8 +125,14 @@ function build(src = {}) {
     if (!Array.isArray(t.members) || !t.members.every((m) => m && typeof m === 'object')) { problems.push(`${t.key}: members must be a list of people`); continue; }
     const badSlot = t.members.find((m) => !KEY_RE.test(String(m.slot)));
     if (badSlot) { problems.push(`${t.key}: slot ${JSON.stringify(badSlot.slot)} must be lowercase words joined by hyphens`); continue; }
-    const unnamed = t.members.find((m) => typeof m.name !== 'string' || !m.name);
-    if (unnamed) { problems.push(`${t.key}/${unnamed.slot}: needs a suggested name`); continue; }
+    const AVATAR = ['apparentAge', 'presentation', 'heritage', 'hair', 'attire', 'expression'];
+    const incomplete = t.members.find((m) => !isText(m.name) || !isText(m.title) || !isText(m.role)
+      || !Array.isArray(m.focus) || !m.focus.every(isText)
+      || !m.avatar || typeof m.avatar !== 'object' || !AVATAR.every((f) => isText(m.avatar[f])));
+    if (incomplete) {
+      problems.push(`${t.key}/${incomplete.slot}: needs a name, title, role, focus (a list of lines) and an avatar with ${AVATAR.join(', ')}`);
+      continue;
+    }
     for (const m of t.members) {
       const id = `${t.key}-${m.slot}`;
       if (avatarIds.has(id)) problems.push(`portrait id ${id} is used by ${avatarIds.get(id)} and ${t.key}`);
@@ -146,8 +154,7 @@ function build(src = {}) {
     if (reports < 4 || reports > 5) problems.push(`${t.key}: needs 4 or 5 reports, has ${reports}`);
     if (new Set(t.members.map((m) => m.slot)).size !== t.members.length) problems.push(`${t.key}: a slot repeats`);
     for (const m of t.members) {
-      if (!Array.isArray(m.focus)) problems.push(`${t.key}/${m.slot}: focus must be a list`);
-      if (!seen.has(m.role) && !builtin.has(m.role)) problems.push(`${t.key}/${m.slot}: role ${JSON.stringify(m.role)} is neither a catalogue role nor one Kosmos has built in`);
+      if (!seen.has(m.role) && !pickable.has(m.role)) problems.push(`${t.key}/${m.slot}: role ${JSON.stringify(m.role)} is neither a catalogue role nor one Kosmos has built in`);
     }
     const members = t.members.map((m) => {
       const id = `${t.key}-${m.slot}`;
@@ -170,11 +177,12 @@ function build(src = {}) {
   }
   // serial: which build this is, inside the signed bytes, so Kosmos can refuse an older catalogue
   // than the one it already holds (a replayed old file carries a valid signature too).
-  const catalogue = { generated: NOTE, version: 1, serial: src.serial || 0, groups, roles, avatarStyle: ts.AVATAR_STYLE, teams };
+  const catalogue = { generated: NOTE, version: 2, serial: src.serial || 0, groups, roles, avatarStyle: ts.AVATAR_STYLE, teams };
   return { catalogue, text: JSON.stringify(catalogue, null, 2) + '\n', problems };
 }
 
 const KEY_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+const isText = (v) => typeof v === 'string' && v.length > 0;
 // A commit time this far past the clock is a wrong clock, not a build: signed as the serial, it
 // would make Kosmos refuse every real catalogue until the clock caught up.
 const FUTURE_SKEW_S = 3600;
@@ -183,11 +191,12 @@ function sha256(bytes) { return crypto.createHash('sha256').update(bytes).digest
 
 function readBuiltin(root, problems) {
   try {
-    const list = JSON.parse(fs.readFileSync(path.join(root, 'kosmos-builtin-roles.json'), 'utf8')).roles;
-    if (Array.isArray(list) && list.every((k) => typeof k === 'string')) return list;
+    const b = JSON.parse(fs.readFileSync(path.join(root, 'kosmos-builtin-roles.json'), 'utf8'));
+    const ok = (l) => Array.isArray(l) && l.every((k) => typeof k === 'string');
+    if (ok(b.roles) && ok(b.hidden)) return { menu: b.roles, all: b.roles.concat(b.hidden) };
   } catch { /* reported below */ }
-  problems.push('kosmos-builtin-roles.json: must hold a "roles" list of role keys');
-  return [];
+  problems.push('kosmos-builtin-roles.json: must hold "roles" (menu) and "hidden" lists of role keys');
+  return { menu: [], all: [] };
 }
 
 /**
@@ -204,7 +213,8 @@ function portrait(root, id, problems) {
   return { path: rel, sha256: sha256(fs.readFileSync(path.join(root, rel))) };
 }
 
-/** The commit time of HEAD in seconds, which only grows as main moves: the catalogue's serial. */
+/** The commit time of HEAD in seconds. Not guaranteed to grow (a commit made on a slow clock),
+ *  so main() also keeps the serial above the one already published. */
 function commitTime(root) {
   try {
     const out = require('node:child_process').execFileSync('git', ['-C', root, 'log', '-1', '--format=%ct', 'HEAD'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
@@ -222,12 +232,17 @@ function serialProblem(serial, nowS = Math.floor(Date.now() / 1000)) {
 
 /**
  * @param {string[]} argv
- * @param {{root?: string, out?: string, nowS?: number}} [opts] a repo copy and output folder (tests)
+ * @param {{root?: string, out?: string, nowS?: number, previousSerial?: number}} [opts] a repo copy and
+ *   output folder (tests), and the published serial the new one must exceed
  */
 function main(argv, opts = {}) {
   const root = opts.root || source.ROOT;
   const out = opts.out || OUT;
-  const serial = commitTime(root);
+  // publish.yml passes the published catalogue's serial; a new one must be above it, or every
+  // Kosmos holding the published one would refuse it.
+  const previous = Number(opts.previousSerial ?? process.env.CATALOGUE_PREVIOUS_SERIAL ?? 0) || 0;
+  const commit = commitTime(root);
+  const serial = commit ? Math.max(commit, previous + 1) : 0;
   const { catalogue, text, problems } = build({ root, serial });
   const sp = serialProblem(serial, opts.nowS);
   if (sp) problems.push(sp);
@@ -238,6 +253,8 @@ function main(argv, opts = {}) {
   const members = catalogue.teams.reduce((s, t) => s + t.members.length, 0);
   const summary = `${catalogue.roles.length} roles and ${catalogue.teams.length} teams (${members} members)`;
   if (argv.includes('--check')) { process.stdout.write(`ok: ${summary}\n`); return 0; }
+  // Start from an empty folder, so no signature or portrait from an earlier build rides along.
+  fs.rmSync(out, { recursive: true, force: true });
   fs.mkdirSync(out, { recursive: true });
   fs.writeFileSync(path.join(out, 'catalogue.json'), text);
   // The portraits the catalogue names, published beside it under the same relative paths.

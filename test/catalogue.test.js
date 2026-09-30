@@ -31,7 +31,7 @@ test('the sources pass every check the builder makes', () => {
 });
 
 test('every role file reads back to the same text it was written from', () => {
-  for (const key of fs.readdirSync(path.join(REPO, 'roles'))) {
+  for (const key of fs.readdirSync(path.join(REPO, 'roles')).filter((n) => !n.startsWith('.'))) {
     const text = fs.readFileSync(path.join(REPO, 'roles', key, 'role.md'), 'utf8');
     const { role, problems } = source.parseRole(key, text);
     assert.deepEqual(problems, [], key);
@@ -283,7 +283,7 @@ test('main: refuses outside a git checkout, and in one writes the catalogue with
     const id = build.build().catalogue.teams[0].members[0].avatar.id;
     fs.mkdirSync(path.join(dir, 'avatars'));
     fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), 'portrait');
-    const git = (...a) => execFileSync('git', ['-C', dir, ...a], { stdio: 'ignore', env: { ...process.env, GIT_AUTHOR_NAME: 't', GIT_AUTHOR_EMAIL: 't@t', GIT_COMMITTER_NAME: 't', GIT_COMMITTER_EMAIL: 't@t' } });
+    const git = (...a) => execFileSync('git', ['-C', dir, '-c', 'commit.gpgsign=false', '-c', 'core.hooksPath=/dev/null', ...a], { stdio: 'ignore', env: { ...process.env, GIT_AUTHOR_NAME: 't', GIT_AUTHOR_EMAIL: 't@t', GIT_COMMITTER_NAME: 't', GIT_COMMITTER_EMAIL: 't@t' } });
     git('init', '-q'); git('add', '-A'); git('commit', '-q', '-m', 'x');
     assert.equal(quiet(() => build.main(['--check'], { root: dir, out })), 0);
     assert.equal(fs.readdirSync(out).length, 0, '--check wrote something');
@@ -294,4 +294,38 @@ test('main: refuses outside a git checkout, and in one writes the catalogue with
     // A clock that says the commit is from the past means the same checkout is from the future.
     assert.equal(quiet(() => build.main(['--check'], { root: dir, out, nowS: c.serial - 7200 })), 1);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); fs.rmSync(out, { recursive: true, force: true }); }
+});
+
+test('the hidden built-in roles count too: no catalogue key may be own or setup, and no member may use one', () => {
+  const r = source.read().rolesSource;
+  r.roles[0].key = 'setup';
+  assert.ok(build.build({ rolesSource: r }).problems.some((p) => /setup: Kosmos already has a built-in role/.test(p)));
+  const t = source.read().teamsSource;
+  t.teams[0].members[1].role = 'own';
+  assert.ok(build.build({ teamsSource: t }).problems.some((p) => /role "own" is neither/.test(p)));
+});
+
+test('a member missing a title, an avatar field or a text focus line is reported, not thrown', () => {
+  for (const spoil of [(m) => { delete m.title; }, (m) => { delete m.avatar.hair; }, (m) => { m.focus = [{}]; }, (m) => { delete m.avatar; }]) {
+    const t = source.read().teamsSource;
+    spoil(t.teams[0].members[1]);
+    assert.ok(build.build({ teamsSource: t }).problems.some((p) => /needs a name, title, role, focus/.test(p)), spoil.toString());
+  }
+});
+
+test('a new serial always exceeds the published one, even from a commit with a slow clock', () => {
+  const { execFileSync } = require('node:child_process');
+  const dir = copyRepo();
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-out-'));
+  const w = process.stdout.write;
+  try {
+    execFileSync('git', ['-C', dir, 'init', '-q'], { stdio: 'ignore' });
+    execFileSync('git', ['-C', dir, 'add', '-A'], { stdio: 'ignore' });
+    execFileSync('git', ['-C', dir, '-c', 'user.name=t', '-c', 'user.email=t@t', '-c', 'commit.gpgsign=false', '-c', 'core.hooksPath=/dev/null', 'commit', '-q', '-m', 'x'], { stdio: 'ignore' });
+    process.stdout.write = () => true;
+    const serialAfter = (previousSerial) => { assert.equal(build.main([], { root: dir, out, previousSerial }), 0); return JSON.parse(fs.readFileSync(path.join(out, 'catalogue.json'), 'utf8')).serial; };
+    const commit = serialAfter(0);
+    assert.equal(serialAfter(commit + 100), commit + 101, 'a published serial ahead of the commit clock was not exceeded');
+    assert.equal(serialAfter(commit - 100), commit, 'CONTROL: an older published serial leaves the commit time');
+  } finally { process.stdout.write = w; fs.rmSync(dir, { recursive: true, force: true }); fs.rmSync(out, { recursive: true, force: true }); }
 });
