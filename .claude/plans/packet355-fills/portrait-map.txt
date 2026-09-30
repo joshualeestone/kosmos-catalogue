@@ -88,7 +88,7 @@ sales-crm-and-revenue-operations-specialist.png -> sales-crm
 proposal-and-rfp-proposal-manager.png -> proposal-and-rfp-lead
 proposal-and-rfp-requirements-analyst.png -> proposal-and-rfp-researcher
 proposal-and-rfp-solution-writer.png -> proposal-and-rfp-solution-writer
-proposal-and-rfp-commercial-analyst.png -> proposal-and-rfp-commercial-analyst
+proposal-and-rfp-commercial-analyst.png -> proposal-and-rfp-proposal-cost-analyst
 proposal-and-rfp-proposal-reviewer.png -> proposal-and-rfp-proposal-reviewer
 customer-success-and-onboarding-head-of-customer-success.png -> customer-success-and-onboarding-lead
 customer-success-and-onboarding-onboarding-specialist.png -> customer-success-and-onboarding-csm
@@ -142,8 +142,8 @@ accounting-and-bookkeeping-payroll-coordinator.png -> accounting-payroll
 accounting-and-bookkeeping-tax-paperwork-specialist.png -> accounting-tax
 procurement-and-vendor-management-procurement-manager.png -> procurement-and-vendor-management-lead
 procurement-and-vendor-management-supplier-researcher.png -> procurement-and-vendor-management-researcher
-procurement-and-vendor-management-proposal-and-cost-analyst.png -> procurement-and-vendor-management-proposal-cost-analyst
-procurement-and-vendor-management-vendor-coordinator.png -> procurement-and-vendor-management-vendors
+procurement-and-vendor-management-proposal-and-cost-analyst.png -> procurement-and-vendor-management-vendors
+procurement-and-vendor-management-vendor-coordinator.png -> procurement-and-vendor-management-vendors-2
 software-development-product-director.png -> software-lead
 software-development-product-manager.png -> software-pm
 software-development-software-engineer.png -> software-engineer
@@ -182,7 +182,7 @@ home-renovation-contractor-researcher.png -> home-renovation-researcher-2
 home-renovation-budget-and-schedule-analyst.png -> home-renovation-budget
 home-renovation-project-documentation-coordinator.png -> home-renovation-project-documentation-coordinator
 community-and-volunteer-coordination-community-program-lead.png -> community-and-volunteer-coordination-lead
-community-and-volunteer-coordination-volunteer-coordinator.png -> community-and-volunteer-coordination-community
+community-and-volunteer-coordination-volunteer-coordinator.png -> community-and-volunteer-coordination-pm
 community-and-volunteer-coordination-activities-and-logistics-planner.png -> community-and-volunteer-coordination-events
 community-and-volunteer-coordination-community-communications-specialist.png -> community-and-volunteer-coordination-pr
 personal-assistant-personal-chief-of-staff.png -> life-lead
@@ -232,7 +232,7 @@ creative-projects-creative-director.png -> creative-projects-lead
 creative-projects-concept-and-research-specialist.png -> creative-projects-concept-research-specialist
 creative-projects-writer-and-story-developer.png -> creative-projects-writer-story-developer
 creative-projects-production-planner.png -> creative-projects-production-planner
-creative-projects-editor-and-quality-reviewer.png -> creative-projects-editor
+creative-projects-editor-and-quality-reviewer.png -> creative-projects-content
 side-business-side-business-coach.png -> side-business-lead
 side-business-customer-and-demand-researcher.png -> side-business-researcher
 side-business-offer-and-pricing-specialist.png -> side-business-pricing
@@ -269,7 +269,7 @@ board-and-investor-reporting-financial-reporting-analyst.png -> board-and-invest
 board-and-investor-reporting-operating-metrics-analyst.png -> board-and-investor-reporting-data
 board-and-investor-reporting-presentation-and-narrative-writer.png -> board-and-investor-reporting-presentation-narrative-writer
 real-estate-investment-research-property-research-lead.png -> real-estate-investment-research-lead
-real-estate-investment-research-market-and-property-researcher.png -> real-estate-investment-research-market-analyst
+real-estate-investment-research-market-and-property-researcher.png -> real-estate-investment-research-real-estate-specialist
 real-estate-investment-research-property-financial-analyst.png -> real-estate-investment-research-finance
 real-estate-investment-research-property-diligence-coordinator.png -> real-estate-investment-research-purchase-diligence-organizer
 property-management-property-operations-manager.png -> property-management-lead
@@ -285,7 +285,7 @@ home-buying-neighborhood-and-home-researcher.png -> home-buying-researcher
 home-buying-ownership-cost-analyst.png -> home-buying-ownership-cost-analyst
 home-buying-purchase-diligence-organizer.png -> home-buying-purchase-diligence-organizer
 home-selling-home-sale-coordinator.png -> home-selling-lead
-home-selling-market-comparison-researcher.png -> home-selling-market-analyst
+home-selling-market-comparison-researcher.png -> home-selling-real-estate-specialist
 home-selling-home-preparation-planner.png -> home-selling-home-preparation-planner
 home-selling-listing-and-transaction-organizer.png -> home-selling-listing-transaction-organizer
 insurance-comparison-and-claims-insurance-research-lead.png -> insurance-comparison-and-claims-lead

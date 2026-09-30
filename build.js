@@ -247,6 +247,8 @@ function build(src = {}) {
     roles.push(entry);
   }
   const teams = [];
+  // Joined, because the instructions are wrapped and the sentence can fall across two lines.
+  const leadOnly = new Set(roles.filter((r) => r.instructions.join(' ').replace(/\s+/g, ' ').includes(LEAD_LINE)).map((r) => r.key));
   const seenNames = new Map();
   const seenRanks = new Map();
   const teamLabels = new Map();
@@ -297,6 +299,9 @@ function build(src = {}) {
     if (new Set(t.members.map((m) => m.slot)).size !== t.members.length) problems.push(`${t.key}: a slot repeats`);
     for (const m of t.members) {
       if (!seen.has(m.role) && !pickable.has(m.role)) problems.push(`${t.key}/${m.slot}: role ${JSON.stringify(m.role)} is neither a catalogue role nor one Kosmos has built in`);
+      // A role written for a team's lead tells its agent the team is the agents under On this team; a
+      // report is also told it reports to the lead, so it would read as leading and reporting (#4555).
+      if (m.slot !== 'lead' && leadOnly.has(m.role)) problems.push(`${t.key}/${m.slot}: role ${m.role} is written for a team's lead ("${LEAD_LINE}"), and this seat reports to the lead`);
     }
     const members = t.members.map((m) => {
       const id = `${t.key}-${m.slot}`;
@@ -350,6 +355,8 @@ const isText = (v) => typeof v === 'string' && v.trim().length > 0;
 // A commit time this far past the clock is a wrong clock, not a build: signed as the serial, it
 // would make Kosmos refuse every real catalogue until the clock caught up.
 const FUTURE_SKEW_S = 3600;
+/** The sentence that marks a role written for a team's lead (#4555). */
+const LEAD_LINE = 'Your team is the agents';
 const MAX_PORTRAIT_BYTES = 512 * 1024;
 
 function sha256(bytes) { return crypto.createHash('sha256').update(bytes).digest('hex'); }

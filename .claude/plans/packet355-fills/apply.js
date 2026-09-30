@@ -164,6 +164,12 @@ for (const t of teams) {
   t.goal = `A clear first plan for ${lead}, with milestones, an owner for each, and what done looks like.`;
 }
 for (const t of teams) t.blurb = t.blurb.replace(/the user[’']s/g, 'your');
+// A carried text that no longer matches the team's seats (review 5: life).
+for (const [k, text] of Object.entries(fixed.teamText || {})) {
+  const t = teams.find((x) => x.key === k);
+  if (!t) { problems.push(`teamText: no team ${k}`); continue; }
+  Object.assign(t, text);
+}
 
 // "A Automation Lead" and the like.
 for (const t of teams) t.blurb = t.blurb.replace(/^A (?=[AEIOU])/, 'An ');

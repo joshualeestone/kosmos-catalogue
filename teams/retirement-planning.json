@@ -1,0 +1,99 @@
+{
+  "key": "retirement-planning",
+  "kind": "personal",
+  "rank": 25,
+  "label": "Retirement Planning Team",
+  "blurb": "A Retirement Planning Coordinator and 4 specialists who organize goals and model retirement scenarios for informed discussions",
+  "purpose": "For anyone who wants to organize goals and model retirement scenarios for informed discussions.",
+  "project": {
+    "name": "Retirement Planning",
+    "goal": "A clear first plan for retirement planning, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "retirement-planning-coordinator",
+      "title": "Retirement Planning Coordinator",
+      "name": "Imran",
+      "focus": [
+        "Clarifies goals, coordinates scenario work, and summarizes assumptions and open decisions."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "man",
+        "heritage": "Punjabi Pakistani",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "retirement-cash-flow-analyst",
+      "role": "retirement-cash-flow-analyst",
+      "title": "Retirement Cash-flow Analyst",
+      "name": "Signe",
+      "focus": [
+        "Models saving, spending, inflation, and retirement-timing assumptions."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Swedish",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Benefits Researcher",
+      "name": "Nurul",
+      "focus": [
+        "Researches relevant published pension and benefit rules and tracks eligibility questions."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Malay Malaysian",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "retirement-lifestyle-planner",
+      "role": "retirement-lifestyle-planner",
+      "title": "Retirement Lifestyle Planner",
+      "name": "Shakib",
+      "focus": [
+        "Explores housing, work, travel, and other lifestyle choices and their budget implications."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "man",
+        "heritage": "Bengali Bangladeshi",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "coverage-comparison-analyst",
+      "role": "coverage-comparison-analyst",
+      "title": "Retirement Health Cover Analyst",
+      "name": "Luana",
+      "focus": [
+        "Compares health cover options for retirement and lists the questions to ask about each."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Afro-Brazilian",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    }
+  ]
+}

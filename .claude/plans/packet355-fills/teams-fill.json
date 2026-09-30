@@ -68,12 +68,12 @@
   ],
   "tech-support": [
    [
-    "documentation-specialist",
-    "Help Documentation Writer",
+    "tech-support",
+    "Device and Account Setup Specialist",
     "Seoyeon",
     "woman",
     "Korean",
-    "Turns solved problems into clear help articles, so users can fix common issues themselves."
+    "Walks users through setting up new devices and accounts safely, step by step."
    ]
   ],
   "process-improvement-and-documentation": [
@@ -108,12 +108,12 @@
   ],
   "community-and-volunteer-coordination": [
    [
-    "event-planner",
-    "Community Events Planner",
+    "newsletter",
+    "Community Newsletter Writer",
     "Mwangi",
     "man",
     "Kikuyu Kenyan",
-    "Plans community events, from venue and schedule to supplies and volunteers."
+    "Writes the regular update that tells members and volunteers what is coming up and what their work achieved."
    ]
   ],
   "meal-planning": [
@@ -197,7 +197,7 @@
     "Otavio",
     "man",
     "Afro-Brazilian",
-    "Routes contracts to reviewers, tracks versions, and chases open items before deadlines."
+    "Tracks who reviews each contract and which version is current, and drafts reminders for open items before deadlines."
    ]
   ],
   "quality-assurance-and-testing": [
@@ -262,7 +262,7 @@
   ],
   "home-buying": [
    [
-    "pcfo",
+    "budget",
     "Mortgage and Budget Planner",
     "Shelly",
     "woman",
@@ -305,7 +305,7 @@
     "Rajesh",
     "man",
     "Punjabi Indian",
-    "Checks what insurance covers before appointments and follows up on claims and bills."
+    "Checks what insurance covers before appointments, and prepares claim and billing follow-ups for the person to send."
    ]
   ],
   "tax-preparation-organization": [
@@ -339,11 +339,11 @@
   "estate-and-legacy-organization": [
    [
     "personal-finance-organizer",
-    "Accounts and Beneficiaries Organizer",
+    "Digital Accounts Organizer",
     "Kenta",
     "man",
     "Japanese",
-    "Lists accounts, policies, and named beneficiaries, and flags any that need updating."
+    "Lists online accounts and subscriptions, and notes what the person wants to happen to each."
    ]
   ],
   "new-parent-planning": [
@@ -367,11 +367,11 @@
    ],
    [
     "pet-care-coordinator",
-    "Sitter and Boarding Coordinator",
+    "Pet Training and Enrichment Planner",
     "Malee",
     "woman",
     "Thai",
-    "Compares sitters and boarding options and keeps care instructions ready for each stay."
+    "Plans training, exercise, and enrichment that fit the pet and the household routine."
    ]
   ],
   "personal-research": [
@@ -394,7 +394,7 @@
   ],
   "translation-and-localization": [
    [
-    "editor",
+    "writer",
     "Terminology and Style Specialist",
     "Guoqiang",
     "man",
@@ -482,7 +482,8 @@
   "packaging-experiment-specialist": "pricing",
   "knowledge-escalation-specialist": "kb",
   "renewal-growth-coordinator": "csm",
-  "appointments-records-organizer": "healthadmin"
+  "appointments-records-organizer": "healthadmin",
+  "commercial-analyst": "proposal-cost-analyst"
  },
  "seat": {
   "wedding-planning/Budget and Booking Coordinator": "events",
@@ -541,7 +542,13 @@
   "translation-and-localization/Localization QA Specialist": "translator",
   "college-and-scholarship-applications/Application Writing Coach": "tutor",
   "personal-assistant/Travel and Errands Planner": "travel",
-  "business-automation/Workflow Analyst": "process"
+  "business-automation/Workflow Analyst": "process",
+  "creative-projects/Editor and Quality Reviewer": "content",
+  "community-and-volunteer-coordination/Community Program Lead": "director",
+  "community-and-volunteer-coordination/Volunteer Coordinator": "pm",
+  "home-selling/Market Comparison Researcher": "real-estate-specialist",
+  "real-estate-investment-research/Market and Property Researcher": "real-estate-specialist",
+  "procurement-and-vendor-management/Proposal and Cost Analyst": "vendors"
  },
  "positional": [
   "content",
@@ -662,5 +669,10 @@
  },
  "publishedBlurbExcept": [
   "life"
- ]
+ ],
+ "teamText": {
+  "life": {
+   "purpose": "For keeping your own life organised. The Chief of Staff runs your week; the team handles your inbox and calendar, health admin, bills and paperwork, and travel and errands."
+  }
+ }
 }

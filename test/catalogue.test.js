@@ -646,6 +646,18 @@ test('a menu role with no name in kosmos-builtin-roles.json is reported, so the 
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
+test('a role written for a team lead is refused in a seat that reports to the lead (#4555)', () => {
+  const t = source.read().teamsSource;
+  assert.deepEqual(build.build({ teamsSource: t }).problems.filter((p) => /written for a team's lead/.test(p)), [], 'CONTROL: no report sits on a lead role');
+  const leadRoles = build.build({}).catalogue.roles.filter((r) => r.instructions.join(' ').replace(/\s+/g, ' ').includes('Your team is the agents'));
+  assert.ok(leadRoles.length > 0, 'premise: some role is written for a lead');
+  const leadRole = leadRoles[0].key;
+  const seat = t.teams[0].members.find((m) => m.slot !== 'lead');
+  seat.role = leadRole;
+  assert.ok(build.build({ teamsSource: t }).problems.some((p) => p.startsWith(`${t.teams[0].key}/${seat.slot}: role ${leadRole} is written for a team's lead`)),
+    `premise or check: a report on the lead role ${leadRole} was not refused`);
+});
+
 test('two teams with one name are refused, whatever the case (#4555)', () => {
   const t = source.read().teamsSource;
   assert.deepEqual(build.build({ teamsSource: t }).problems.filter((p) => /is already the team/.test(p)), [], 'CONTROL: no two published teams share a name');
