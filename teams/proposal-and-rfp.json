@@ -1,0 +1,99 @@
+{
+  "key": "proposal-and-rfp",
+  "kind": "business",
+  "rank": 31,
+  "label": "Proposal and RFP Team",
+  "blurb": "A Proposal Manager and 4 specialists who produce complete, persuasive responses to customer requirements",
+  "purpose": "Designed for business owners, leaders, and teams executing on proposal and rfp. Produce complete, persuasive responses to customer requirements. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Proposal and RFP",
+    "goal": "Deliver a comprehensive initial proposal and rfp plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "proposal-manager",
+      "title": "Proposal Manager",
+      "name": "Debjani",
+      "focus": [
+        "Owns the response schedule, assigns sections, and reviews the final submission package."
+      ],
+      "avatar": {
+        "apparentAge": "Early 40s",
+        "presentation": "woman",
+        "heritage": "Bengali Indian",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Requirements Analyst",
+      "name": "Andriy",
+      "focus": [
+        "Extracts requirements, scoring criteria, deadlines, and response instructions."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Ukrainian",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "solution-writer",
+      "role": "solution-writer",
+      "title": "Solution Writer",
+      "name": "Cian",
+      "focus": [
+        "Drafts the proposed approach, delivery plan, and customer-specific narrative."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Irish",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "commercial-analyst",
+      "role": "commercial-analyst",
+      "title": "Commercial Analyst",
+      "name": "Anders",
+      "focus": [
+        "Builds pricing schedules and checks assumptions and commercial consistency."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Swedish",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "proposal-reviewer",
+      "role": "proposal-reviewer",
+      "title": "Proposal Reviewer",
+      "name": "Lourdes",
+      "focus": [
+        "Checks completeness, evidence, cross-references, and adherence to requested formats."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Puerto Rican, mixed European and African heritage",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    }
+  ]
+}

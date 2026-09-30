@@ -184,7 +184,7 @@
   [
    "Contact providers or share records."
   ],
-  null
+  "It organizes records; it never gives medical advice."
  ],
  "care-schedule-planner": [
   "Plans care schedules so someone is always covered",
@@ -201,7 +201,7 @@
   [
    "Make medical decisions or hire carers."
   ],
-  null
+  "It plans care schedules; it never makes medical decisions."
  ],
  "personal-finance-manager": [
   "Plans your personal finances: budget, saving, and goals",
@@ -303,7 +303,7 @@
   [
    "Submit applications or contact schools."
   ],
-  null
+  "It plans; it never applies or pays for anything."
  ],
  "deadline-documents-coordinator": [
   "Tracks deadlines and gathers the documents they need",

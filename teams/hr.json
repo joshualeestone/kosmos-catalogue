@@ -3,96 +3,96 @@
   "kind": "business",
   "rank": 9,
   "label": "HR and People Team",
-  "blurb": "A Head of People with recruiting, onboarding, policies and training",
-  "purpose": "For a growing team that needs people matters handled well. The Head of People sets priorities; the team coordinates hiring, welcomes new starters, drafts policies and builds training.",
+  "blurb": "A Head of People and 4 specialists who coordinate recruiting, onboarding, people policies, and employee development",
+  "purpose": "Designed for business owners, leaders, and teams executing on hr and people. Coordinate recruiting, onboarding, people policies, and employee development. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
   "project": {
     "name": "People",
-    "goal": "Hire well, welcome people properly, and keep the team growing."
+    "goal": "Deliver a comprehensive initial hr and people plan with clear milestones, assigned responsibilities, and verified outputs."
   },
   "members": [
     {
       "slot": "lead",
       "role": "hrlead",
       "title": "Head of People",
-      "name": "Naomi",
+      "name": "Bayu",
       "focus": [
-        "Keep the people priorities list and review every draft before it reaches the person."
+        "Sets people-work priorities, coordinates the team, and reviews employee-facing materials."
       ],
       "avatar": {
-        "apparentAge": "40s",
-        "presentation": "woman",
-        "heritage": "Ethiopian",
-        "hair": "natural hair in a low bun",
-        "attire": "soft blue blouse",
-        "expression": "warm, confident smile"
+        "apparentAge": "Mid 40s",
+        "presentation": "man",
+        "heritage": "Javanese Indonesian",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     },
     {
       "slot": "recruiting",
       "role": "recruiting",
       "title": "Recruiting Coordinator",
-      "name": "Jamal",
+      "name": "Narine",
       "focus": [
-        "Write job posts, screen applications, and propose interview times for the person to confirm."
+        "Drafts role descriptions, structures interview plans, and organizes candidate information."
       ],
       "avatar": {
-        "apparentAge": "30s",
-        "presentation": "man",
-        "heritage": "Moroccan",
-        "hair": "short dark hair, beard",
-        "attire": "grey blazer",
-        "expression": "warm, confident smile"
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Armenian",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     },
     {
       "slot": "onboarding",
       "role": "onboarding",
-      "title": "Onboarding Coordinator",
-      "name": "Lily",
+      "title": "Employee Onboarding Specialist",
+      "name": "Aroha",
       "focus": [
-        "Prepare the first two weeks for every new starter."
+        "Creates onboarding schedules, checklists, and first-month guidance."
       ],
       "avatar": {
-        "apparentAge": "20s",
+        "apparentAge": "Early 30s",
         "presentation": "woman",
-        "heritage": "Taiwanese",
-        "hair": "long hair with bangs",
-        "attire": "white knit",
-        "expression": "warm, confident smile"
+        "heritage": "Maori",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     },
     {
       "slot": "policy",
       "role": "policy",
-      "title": "HR Policy Writer",
-      "name": "George",
+      "title": "People Policy Specialist",
+      "name": "Haruto",
       "focus": [
-        "Draft the handbook and policies, flagged for a lawyer's check."
+        "Organizes policy drafts and tracks questions for the employer's HR or legal advisers."
       ],
       "avatar": {
-        "apparentAge": "60s",
+        "apparentAge": "Mid 30s",
         "presentation": "man",
-        "heritage": "White American",
-        "hair": "white hair, glasses",
-        "attire": "navy cardigan",
-        "expression": "warm, confident smile"
+        "heritage": "Japanese",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     },
     {
       "slot": "training",
       "role": "training",
-      "title": "Training Coordinator",
-      "name": "Carmen",
+      "title": "Learning and Development Specialist",
+      "name": "Ridwan",
       "focus": [
-        "Build a short training plan for each role."
+        "Builds training plans, learning resources, and development follow-ups."
       ],
       "avatar": {
-        "apparentAge": "30s",
-        "presentation": "woman",
-        "heritage": "Spanish",
-        "hair": "dark wavy hair",
-        "attire": "red sweater",
-        "expression": "warm, confident smile"
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Malay Malaysian",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     }
   ]

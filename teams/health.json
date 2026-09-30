@@ -3,96 +3,96 @@
   "kind": "personal",
   "rank": 4,
   "label": "Health and Wellness Team",
-  "blurb": "A Wellness Coach with fitness, nutrition, sleep and health admin",
-  "purpose": "For building healthier habits that stick. The Wellness Coach agrees the goals; the team plans workouts, meals, sleep and habits, and keeps health paperwork organised. It is not medical advice.",
+  "blurb": "A Wellness Coach and 4 specialists who coordinate general wellness routines, fitness, meals, habits, and health administration",
+  "purpose": "Created for individuals, families, and organizers looking for dedicated support with health and wellness. Coordinate general wellness routines, fitness, meals, habits, and health administration. The team takes care of preparation, detailed planning, and practical follow-through to keep everything running smoothly.",
   "project": {
     "name": "Health",
-    "goal": "Build a few healthy habits that last, one step at a time."
+    "goal": "Deliver a comprehensive initial health and wellness plan with clear milestones, assigned responsibilities, and verified outputs."
   },
   "members": [
     {
       "slot": "lead",
       "role": "wellness",
       "title": "Wellness Coach",
-      "name": "Leilani",
+      "name": "Mostafa",
       "focus": [
-        "Agree one or two goals and check in every week."
+        "Sets realistic wellness goals, coordinates the team, and reviews progress and routine adjustments."
       ],
       "avatar": {
-        "apparentAge": "30s",
-        "presentation": "woman",
-        "heritage": "Samoan",
-        "hair": "long wavy dark hair",
-        "attire": "sage athletic zip top",
-        "expression": "warm, confident smile"
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Egyptian Arab",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     },
     {
       "slot": "fitness",
       "role": "fitness",
-      "title": "Fitness Coach",
-      "name": "Marco",
+      "title": "Fitness Planner",
+      "name": "Maritza",
       "focus": [
-        "Plan the week's workouts to fit the time available."
+        "Develops general activity plans around preferences, available equipment, and stated constraints."
       ],
       "avatar": {
-        "apparentAge": "30s",
-        "presentation": "man",
-        "heritage": "Brazilian",
-        "hair": "short dark hair",
-        "attire": "grey training tee",
-        "expression": "warm, confident smile"
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Puerto Rican, mixed European and African heritage",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     },
     {
       "slot": "nutrition",
       "role": "nutrition",
-      "title": "Nutrition Planner",
-      "name": "Anjali",
+      "title": "Nutrition and Meal Planning Specialist",
+      "name": "Wanjiru",
       "focus": [
-        "Plan balanced meals and a shopping list."
+        "Creates general food and meal plans reflecting the user's preferences and supplied guidance."
       ],
       "avatar": {
-        "apparentAge": "40s",
+        "apparentAge": "Early 30s",
         "presentation": "woman",
-        "heritage": "Indian",
-        "hair": "dark hair in a bun",
-        "attire": "white shirt",
-        "expression": "warm, confident smile"
+        "heritage": "Kikuyu Kenyan",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     },
     {
       "slot": "sleep",
       "role": "habits",
-      "title": "Habits and Sleep Coach",
-      "name": "Walter",
+      "title": "Sleep and Habit Coach",
+      "name": "Simran",
       "focus": [
-        "Help build one small habit at a time and better sleep."
+        "Builds practical routines and tracks sleep-related habits and consistency."
       ],
       "avatar": {
-        "apparentAge": "50s",
-        "presentation": "man",
-        "heritage": "White American",
-        "hair": "salt-and-pepper hair",
-        "attire": "navy henley",
-        "expression": "warm, confident smile"
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Punjabi Indian",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     },
     {
       "slot": "admin",
       "role": "healthadmin",
-      "title": "Health Admin Assistant",
-      "name": "Mercy",
+      "title": "Health Administration Coordinator",
+      "name": "Bongani",
       "focus": [
-        "Keep appointments and refills on track."
+        "Organizes appointments, records, and questions for the user's healthcare professionals."
       ],
       "avatar": {
-        "apparentAge": "40s",
-        "presentation": "woman",
-        "heritage": "Ghanaian",
-        "hair": "short natural hair",
-        "attire": "teal cardigan",
-        "expression": "warm, confident smile"
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Zulu South African",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     }
   ]

@@ -48,6 +48,10 @@ for (const p of ['woman', 'man']) for (const k of ['hair', 'attire']) pools[p][k
 // Names: first names in the published catalogue (teams the packet does not replace), the packet,
 // and the names kosmos's no-name-refs-3071 guard forbids (spelled in parts, as that guard does).
 const fixed = JSON.parse(fs.readFileSync(path.join(F, 'teams-fill.json'), 'utf8'));
+// The catalogue's roles and Kosmos's built-ins, as main has them.
+const catRoles = new Set(fs.readdirSync(path.join(CAT, 'roles')));
+const builtin = JSON.parse(fs.readFileSync(path.join(CAT, 'kosmos-builtin-roles.json'), 'utf8'));
+const bi = new Set([...(builtin.roles || []), ...(builtin.hidden || [])].map((r) => (typeof r === 'string' ? r : r.key)));
 
 const replaced = new Set(teams.map((t) => t.key));
 const published = [];
@@ -110,6 +114,25 @@ for (const [who, role] of Object.entries(fixed.seat)) {
 const usedRoles = new Set(teams.flatMap((t) => t.members.map((m) => m.role)));
 for (let i = roles.length - 1; i >= 0; i--) if (!usedRoles.has(roles[i].key)) { console.log(`not taken, no seat uses it: ${roles[i].key}`); roles.splice(i, 1); }
 
+// Picker groups: every role taken goes in a group the picker already has (review 3: the packet's
+// categories made a "General" of 86 and seven one-to-three-role groups). Strategy is the one new group.
+for (const r of roles) {
+  const g = fixed.group[r.key];
+  if (g) r.category = g;
+  else if (!catRoles.has(r.key) && !bi.has(r.key)) problems.push(`group: no group for new role ${r.key}`);
+}
+// A packet team that does the same job as a published one under another key replaces it (review 3: the
+// packet covers every published team): it takes the published key, so the importer keeps the published
+// team's rank, project name, and a member's slot where the role matches.
+for (const [pk, pubKey] of Object.entries(fixed.rekey)) {
+  const t = teams.find((x) => x.key === pk);
+  if (!t) { problems.push(`rekey: no team ${pk}`); continue; }
+  if (teams.some((x) => x.key === pubKey)) { problems.push(`rekey: ${pubKey} is already a packet team`); continue; }
+  const pub = JSON.parse(fs.readFileSync(path.join(CAT, 'teams', `${pubKey}.json`), 'utf8'));
+  if (pub.kind !== t.kind) problems.push(`rekey: ${pk} is ${t.kind}, ${pubKey} is ${pub.kind}`);
+  t.key = pubKey;
+}
+
 // "A Automation Lead" and the like.
 for (const t of teams) t.blurb = t.blurb.replace(/^A (?=[AEIOU])/, 'An ');
 
@@ -123,9 +146,6 @@ for (const t of teams) for (const m of t.members) {
   if (forbiddenHit(m.name)) problems.push(`name ${m.name} (${t.key}) is on the no-name-refs list`);
 }
 // Every role a member uses exists: the packet's, the catalogue's, or a Kosmos built-in.
-const catRoles = new Set(fs.readdirSync(path.join(CAT, 'roles')));
-const builtin = JSON.parse(fs.readFileSync(path.join(CAT, 'kosmos-builtin-roles.json'), 'utf8'));
-const bi = new Set([...(builtin.roles || []), ...(builtin.hidden || [])].map((r) => (typeof r === 'string' ? r : r.key)));
 const pk = new Set(roles.map((r) => r.key));
 for (const t of teams) for (const m of t.members) if (!pk.has(m.role) && !catRoles.has(m.role) && !bi.has(m.role)) problems.push(`${t.key}/${m.name}: unknown role ${m.role}`);
 

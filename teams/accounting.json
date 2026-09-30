@@ -2,97 +2,97 @@
   "key": "accounting",
   "kind": "business",
   "rank": 4,
-  "label": "Accounting Team",
-  "blurb": "A Controller with bookkeeping, bills, payroll and tax paperwork",
-  "purpose": "For a small business that wants tidy books without a full-time accountant. The Controller runs the month-end close; the team records transactions, tracks bills and invoices, prepares payroll and keeps tax paperwork ready.",
+  "label": "Accounting and Bookkeeping Team",
+  "blurb": "A Controller and 4 specialists who organize business records, invoices, payroll inputs, and tax paperwork",
+  "purpose": "Designed for business owners, leaders, and teams executing on accounting and bookkeeping. Organize business records, invoices, payroll inputs, and tax paperwork. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
   "project": {
     "name": "Accounting",
-    "goal": "Close the books every month on time, with nothing missing at tax time."
+    "goal": "Deliver a comprehensive initial accounting and bookkeeping plan with clear milestones, assigned responsibilities, and verified outputs."
   },
   "members": [
     {
       "slot": "lead",
       "role": "controller",
       "title": "Controller",
-      "name": "Ruth",
+      "name": "Lindiwe",
       "focus": [
-        "Run the month-end checklist and report what is done and waiting."
+        "Coordinates accounting work, reviews reconciliations, and owns the closing checklist."
       ],
       "avatar": {
-        "apparentAge": "50s",
+        "apparentAge": "Early 40s",
         "presentation": "woman",
-        "heritage": "White American",
-        "hair": "silver shoulder-length hair",
-        "attire": "dark cardigan, pearl studs",
-        "expression": "warm, confident smile"
+        "heritage": "Zulu South African",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     },
     {
       "slot": "books",
       "role": "books",
       "title": "Bookkeeper",
-      "name": "Kwame",
+      "name": "Lachlan",
       "focus": [
-        "Categorise every transaction weekly and reconcile the bank."
+        "Categorizes transactions, reconciles records, and documents unresolved entries."
       ],
       "avatar": {
-        "apparentAge": "30s",
+        "apparentAge": "Late 20s",
         "presentation": "man",
-        "heritage": "Ghanaian",
-        "hair": "short hair, round glasses",
-        "attire": "light grey shirt",
-        "expression": "warm, confident smile"
+        "heritage": "Scottish",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     },
     {
       "slot": "payables",
       "role": "payables",
-      "title": "Bills and Invoices Clerk",
-      "name": "Sofia",
+      "title": "Bills and Invoices Specialist",
+      "name": "Tamika",
       "focus": [
-        "Keep the due-date list and draft reminders for overdue invoices."
+        "Organizes payables, receivables, invoice drafts, and outstanding balances."
       ],
       "avatar": {
-        "apparentAge": "20s",
+        "apparentAge": "Late 30s",
         "presentation": "woman",
-        "heritage": "Portuguese",
-        "hair": "dark hair in a ponytail",
-        "attire": "white blouse",
-        "expression": "warm, confident smile"
+        "heritage": "African American",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     },
     {
       "slot": "payroll",
       "role": "payroll",
       "title": "Payroll Coordinator",
-      "name": "Anil",
+      "name": "Eleni",
       "focus": [
-        "Prepare each pay run's hours and changes three days early."
+        "Prepares payroll inputs and checks changes, missing records, and reconciliation items."
       ],
       "avatar": {
-        "apparentAge": "40s",
-        "presentation": "man",
-        "heritage": "Indian",
-        "hair": "short greying hair",
-        "attire": "navy sweater over collared shirt",
-        "expression": "warm, confident smile"
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Greek",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     },
     {
       "slot": "tax",
       "role": "taxprep",
-      "title": "Tax Paperwork Organizer",
-      "name": "Claire",
+      "title": "Tax Paperwork Specialist",
+      "name": "Babatunde",
       "focus": [
-        "Keep the tax document checklist and the deadline calendar current."
+        "Organizes tax documents and schedules and tracks questions for the tax preparer."
       ],
       "avatar": {
-        "apparentAge": "40s",
-        "presentation": "woman",
-        "heritage": "French",
-        "hair": "auburn hair in a loose bun",
-        "attire": "striped Breton top",
-        "expression": "warm, confident smile"
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Yoruba Nigerian",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     }
   ]

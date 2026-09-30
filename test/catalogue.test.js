@@ -634,6 +634,25 @@ test('kosmos-builtin-roles.json without its three lists is reported', () => {
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
+test('a menu role with no name in kosmos-builtin-roles.json is reported, so the name check cannot miss it (#4555)', () => {
+  const dir = copyRepo();
+  try {
+    const file = path.join(dir, 'kosmos-builtin-roles.json');
+    const b = JSON.parse(fs.readFileSync(file, 'utf8'));
+    assert.ok(!build.build({ root: dir }).problems.some((p) => /"names" must name every menu role/.test(p)), 'CONTROL: the real file names every menu role');
+    delete b.names.pm;
+    fs.writeFileSync(file, JSON.stringify(b));
+    assert.ok(build.build({ root: dir }).problems.some((p) => /"names" must name every menu role/.test(p)));
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('two teams with one name are refused, whatever the case (#4555)', () => {
+  const t = source.read().teamsSource;
+  assert.deepEqual(build.build({ teamsSource: t }).problems.filter((p) => /is already the team/.test(p)), [], 'CONTROL: no two published teams share a name');
+  t.teams[1].label = t.teams[0].label.toUpperCase();
+  assert.ok(build.build({ teamsSource: t }).problems.includes(`${t.teams[1].key}: the team name ${JSON.stringify(t.teams[1].label)} is already the team ${t.teams[0].key}`));
+});
+
 test('every action in the workflows is pinned to a commit, and checkout keeps no token', () => {
   for (const f of fs.readdirSync(path.join(REPO, '.github', 'workflows'))) {
     const text = fs.readFileSync(path.join(REPO, '.github', 'workflows', f), 'utf8');

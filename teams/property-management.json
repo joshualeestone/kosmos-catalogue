@@ -1,0 +1,99 @@
+{
+  "key": "property-management",
+  "kind": "business",
+  "rank": 46,
+  "label": "Property Management Team",
+  "blurb": "A Property Operations Manager and 4 specialists who coordinate property administration, maintenance, tenant requests, and lease milestones",
+  "purpose": "Designed for business owners, leaders, and teams executing on property management. Coordinate property administration, maintenance, tenant requests, and lease milestones. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "Property Management",
+    "goal": "Deliver a comprehensive initial property management plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "ops",
+      "title": "Property Operations Manager",
+      "name": "Farah",
+      "focus": [
+        "Sets priorities, coordinates service work, and reviews property status and exceptions."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Malay Malaysian",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "property-manager",
+      "role": "property-manager",
+      "title": "Tenant Communications Coordinator",
+      "name": "Tigran",
+      "focus": [
+        "Organizes tenant requests and drafts responses and routine notices for review."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Armenian",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "vendors",
+      "role": "vendors",
+      "title": "Maintenance and Vendor Coordinator",
+      "name": "Andreas",
+      "focus": [
+        "Tracks repairs, compares vendors, and organizes service schedules."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "man",
+        "heritage": "Greek",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "property-manager-2",
+      "role": "property-manager",
+      "title": "Lease and Property Finance Organizer",
+      "name": "Farida",
+      "focus": [
+        "Tracks lease dates, rent records, expenses, and documentation gaps."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Egyptian Arab",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "books",
+      "role": "books",
+      "title": "Rent and Expense Bookkeeper",
+      "name": "Muthoni",
+      "focus": [
+        "Records rent, deposits, and repair costs by property, and reconciles them monthly."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Kikuyu Kenyan",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

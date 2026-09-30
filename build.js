@@ -249,6 +249,7 @@ function build(src = {}) {
   const teams = [];
   const seenNames = new Map();
   const seenRanks = new Map();
+  const teamLabels = new Map();
   const avatarIds = new Map();
   for (const t of ts.teams) {
     // Keys and slots name files (avatars/<key>-<slot>.webp), so they are checked before any use.
@@ -283,6 +284,12 @@ function build(src = {}) {
     const rk = t.kind + '#' + t.rank;
     if (seenRanks.has(rk)) problems.push(`${seenRanks.get(rk)} and ${t.key} share ${t.kind} rank ${t.rank}`);
     seenRanks.set(rk, t.key);
+    // The team picker lists teams by name: two with one name read as the same team twice (#4555).
+    if (isText(t.label)) {
+      const tl = t.label.trim().toLowerCase();
+      if (teamLabels.has(tl)) problems.push(`${t.key}: the team name ${JSON.stringify(t.label)} is already the team ${teamLabels.get(tl)}`);
+      else teamLabels.set(tl, t.key);
+    }
     const leads = t.members.filter((m) => m.slot === 'lead').length;
     if (leads !== 1) problems.push(`${t.key}: needs exactly one lead slot, has ${leads}`);
     const reports = t.members.length - leads;
@@ -351,13 +358,15 @@ function readBuiltin(root, problems) {
   try {
     const b = JSON.parse(fs.readFileSync(path.join(root, 'kosmos-builtin-roles.json'), 'utf8'));
     const ok = (l) => Array.isArray(l) && l.every((k) => typeof k === 'string');
-    // names (optional): each menu role's name, so a catalogue role cannot take a built-in's name (#4555).
-    const names = b.names === undefined ? {} : b.names;
+    // names: each menu role's name, so a catalogue role cannot take a built-in's name (#4555).
+    const names = b.names;
+    // Every menu role is named, so a role Kosmos adds cannot be missed by the name check (review 3).
     const namesOk = names && typeof names === 'object' && !Array.isArray(names)
-      && Object.entries(names).every(([k, v]) => b.roles.includes(k) && typeof v === 'string' && v.trim());
+      && Object.entries(names).every(([k, v]) => b.roles.includes(k) && typeof v === 'string' && v.trim())
+      && ok(b.roles) && b.roles.every((k) => typeof names[k] === 'string');
     if (ok(b.roles) && ok(b.hidden) && ok(b.groups) && namesOk) return { menu: b.roles, all: b.roles.concat(b.hidden), groups: b.groups, names };
   } catch { /* reported below */ }
-  problems.push('kosmos-builtin-roles.json: must hold "roles" (menu), "hidden" and "groups" lists, and "names" (if any) must name menu roles');
+  problems.push('kosmos-builtin-roles.json: must hold "roles" (menu), "hidden" and "groups" lists, and "names" must name every menu role and nothing else');
   return { menu: [], all: [], groups: [], names: {} };
 }
 

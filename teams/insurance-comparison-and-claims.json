@@ -1,0 +1,99 @@
+{
+  "key": "insurance-comparison-and-claims",
+  "kind": "personal",
+  "rank": 22,
+  "label": "Insurance Comparison and Claims Team",
+  "blurb": "An Insurance Research Lead and 4 specialists who compare documented coverage and organize policy and claim materials",
+  "purpose": "Created for individuals, families, and organizers looking for dedicated support with insurance comparison and claims. Compare documented coverage and organize policy and claim materials. The team takes care of preparation, detailed planning, and practical follow-through to keep everything running smoothly.",
+  "project": {
+    "name": "Insurance Comparison and Claims",
+    "goal": "Deliver a comprehensive initial insurance comparison and claims plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "researcher",
+      "title": "Insurance Research Lead",
+      "name": "Juliana",
+      "focus": [
+        "Sets comparison criteria, coordinates the review, and owns the options and questions summary."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Colombian Mestizo",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "coverage-comparison-analyst",
+      "role": "coverage-comparison-analyst",
+      "title": "Coverage Comparison Analyst",
+      "name": "Arun",
+      "focus": [
+        "Compares premiums, limits, exclusions, deductibles, and renewal terms."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Tamil Indian",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "claims-documentation-coordinator",
+      "role": "claims-documentation-coordinator",
+      "title": "Claims Documentation Coordinator",
+      "name": "Fiona",
+      "focus": [
+        "Organizes incident records, receipts, correspondence, and claim-status follow-ups."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Scottish",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "personal-finance-organizer",
+      "role": "personal-finance-organizer",
+      "title": "Premium and Budget Organizer",
+      "name": "Chinedu",
+      "focus": [
+        "Tracks premiums, renewal dates, and excesses, and shows what cover costs each year."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "man",
+        "heritage": "Igbo Nigerian",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "modern minimalist dark overshirt with clean lines",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "asset-document-organizer",
+      "role": "asset-document-organizer",
+      "title": "Policy Records Organizer",
+      "name": "Xiulan",
+      "focus": [
+        "Keeps every policy, schedule, and renewal letter organized and easy to find."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Han Chinese",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

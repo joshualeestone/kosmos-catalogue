@@ -1,0 +1,99 @@
+{
+  "key": "seo-and-website-optimization",
+  "kind": "business",
+  "rank": 25,
+  "label": "SEO and Website Optimization Team",
+  "blurb": "A Search and Conversion Lead and 4 specialists who improve discoverability and the paths visitors take toward useful actions",
+  "purpose": "Designed for business owners, leaders, and teams executing on seo and website optimization. Improve discoverability and the paths visitors take toward useful actions. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
+  "project": {
+    "name": "SEO and Website Optimization",
+    "goal": "Deliver a comprehensive initial seo and website optimization plan with clear milestones, assigned responsibilities, and verified outputs."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "search-conversion-lead",
+      "title": "Search and Conversion Lead",
+      "name": "Pawel",
+      "focus": [
+        "Prioritizes search and conversion work and reviews proposed changes and results."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Polish",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Search Researcher",
+      "name": "Ihaia",
+      "focus": [
+        "Maps search intent, keyword opportunities, and competing content."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Maori",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "seo",
+      "role": "seo",
+      "title": "Technical SEO Specialist",
+      "name": "Yue",
+      "focus": [
+        "Reviews crawlability, indexing, site structure, and technical issues."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Han Chinese",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "content-optimization-specialist",
+      "role": "content-optimization-specialist",
+      "title": "Content Optimization Specialist",
+      "name": "Manuela",
+      "focus": [
+        "Improves page structure, internal links, and search-focused copy."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Colombian Mestizo",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "conversion-analyst",
+      "role": "conversion-analyst",
+      "title": "Conversion Analyst",
+      "name": "Njoroge",
+      "focus": [
+        "Studies visitor behavior and designs landing-page and funnel experiments."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Kikuyu Kenyan",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

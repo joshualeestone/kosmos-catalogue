@@ -2,114 +2,114 @@
   "key": "software",
   "kind": "business",
   "rank": 14,
-  "label": "Software Team",
-  "blurb": "A Product Director with product, engineering, testing, security and design",
-  "purpose": "For a business building an app or software product. The Product Director owns the roadmap; the team writes specs, builds, tests, reviews security and designs the screens.",
+  "label": "Software Development Team",
+  "blurb": "A Product Director and 5 specialists who turn a product request into designed, implemented, and tested software",
+  "purpose": "Designed for business owners, leaders, and teams executing on software development. Turn a product request into designed, implemented, and tested software. The team coordinates research, analysis, operational planning, and structured deliverables to drive measurable results.",
   "project": {
     "name": "Product",
-    "goal": "Ship the most valuable improvements every two weeks, tested and safe."
+    "goal": "Deliver a comprehensive initial software development plan with clear milestones, assigned responsibilities, and verified outputs."
   },
   "members": [
     {
       "slot": "lead",
       "role": "productdir",
       "title": "Product Director",
-      "name": "Alicia",
+      "name": "Oksana",
       "focus": [
-        "Own the roadmap and the two-week plan."
+        "Sets scope and priorities, coordinates delivery, and reviews release readiness."
       ],
       "avatar": {
-        "apparentAge": "40s",
+        "apparentAge": "Mid 40s",
         "presentation": "woman",
-        "heritage": "Mexican American",
-        "hair": "dark hair, shoulder length",
-        "attire": "black blazer",
-        "expression": "warm, confident smile"
+        "heritage": "Ukrainian",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     },
     {
       "slot": "pm",
       "role": "product",
       "title": "Product Manager",
-      "name": "Ibrahim",
+      "name": "Debashish",
       "focus": [
-        "Write a clear spec for each item in the plan."
+        "Develops requirements, user stories, acceptance criteria, and release notes."
       ],
       "avatar": {
-        "apparentAge": "30s",
+        "apparentAge": "Mid 20s",
         "presentation": "man",
-        "heritage": "Sudanese",
-        "hair": "short hair",
-        "attire": "blue shirt",
-        "expression": "warm, confident smile"
+        "heritage": "Bengali Indian",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     },
     {
       "slot": "engineer",
       "role": "engineer",
       "title": "Software Engineer",
-      "name": "Kai",
+      "name": "Orlando",
       "focus": [
-        "Build the specs in small, reviewed changes."
+        "Implements features, integrations, and technical documentation."
       ],
       "avatar": {
-        "apparentAge": "20s",
-        "presentation": "nonbinary person",
-        "heritage": "Native Hawaiian",
-        "hair": "long dark hair tied back",
-        "attire": "grey hoodie",
-        "expression": "warm, confident smile"
+        "apparentAge": "Late 20s",
+        "presentation": "man",
+        "heritage": "Puerto Rican, mixed European and African heritage",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     },
     {
       "slot": "qa",
       "role": "qa",
-      "title": "QA Tester",
-      "name": "Nina",
+      "title": "QA Engineer",
+      "name": "Ligaya",
       "focus": [
-        "Test every change before it ships."
+        "Designs and executes tests, reproduces defects, and verifies fixes."
       ],
       "avatar": {
-        "apparentAge": "30s",
+        "apparentAge": "Mid 20s",
         "presentation": "woman",
-        "heritage": "Ukrainian",
-        "hair": "blonde hair in a bun",
-        "attire": "white tee",
-        "expression": "warm, confident smile"
+        "heritage": "Tagalog Filipino",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     },
     {
       "slot": "security",
       "role": "security",
-      "title": "Security Reviewer",
-      "name": "Rafael",
+      "title": "Security Engineer",
+      "name": "Bjorn",
       "focus": [
-        "Review every change that touches sign-in, payments or personal data."
+        "Reviews changes for security weaknesses and proposes practical mitigations."
       ],
       "avatar": {
-        "apparentAge": "40s",
+        "apparentAge": "Mid 20s",
         "presentation": "man",
-        "heritage": "Filipino",
-        "hair": "short hair, glasses",
-        "attire": "dark polo",
-        "expression": "warm, confident smile"
+        "heritage": "Swedish",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
     },
     {
       "slot": "design",
       "role": "design",
       "title": "Product Designer",
-      "name": "Yara",
+      "name": "Ximena",
       "focus": [
-        "Design the screens for each spec."
+        "Designs user flows, interfaces, and interaction details."
       ],
       "avatar": {
-        "apparentAge": "20s",
+        "apparentAge": "Mid 30s",
         "presentation": "woman",
-        "heritage": "Palestinian",
-        "hair": "long curly hair",
-        "attire": "olive shirt",
-        "expression": "warm, confident smile"
+        "heritage": "Mexican Mestizo",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }
   ]

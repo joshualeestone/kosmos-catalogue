@@ -4,13 +4,29 @@
     "roles": [
       "cos",
       "coo",
-      "officemgr"
+      "officemgr",
+      "document-review-coordinator",
+      "scope-planning-specialist",
+      "schedule-dependency-coordinator",
+      "risk-progress-analyst",
+      "project-documentation-coordinator",
+      "property-manager"
     ]
   },
   {
     "group": "Words and research",
     "roles": [
-      "translator"
+      "translator",
+      "evidence-reviewer",
+      "survey-quantitative-analyst",
+      "data-preparation-specialist",
+      "visualization-specialist",
+      "analysis-reviewer",
+      "concept-research-specialist",
+      "writer-story-developer",
+      "presentation-narrative-writer",
+      "localization-lead",
+      "cultural-adaptation-specialist"
     ]
   },
   {
@@ -21,7 +37,9 @@
       "video",
       "podcast",
       "newsletter",
-      "creatorlead"
+      "creatorlead",
+      "creative-director",
+      "production-planner"
     ]
   },
   {
@@ -33,7 +51,21 @@
       "pr",
       "sociallead",
       "community",
-      "partnerships"
+      "partnerships",
+      "audience-lifecycle-strategist",
+      "performance-analyst",
+      "search-conversion-lead",
+      "content-optimization-specialist",
+      "conversion-analyst",
+      "brand-director",
+      "brand-strategist",
+      "brand-guidelines-specialist",
+      "audience-media-planner",
+      "measurement-specialist",
+      "launch-director",
+      "launch-strategist",
+      "channel-coordinator",
+      "launch-analyst"
     ]
   },
   {
@@ -59,7 +91,13 @@
       "orders",
       "listings",
       "reviews",
-      "booking"
+      "booking",
+      "partnership-proposal-writer",
+      "proposal-manager",
+      "solution-writer",
+      "commercial-analyst",
+      "proposal-reviewer",
+      "proposal-cost-analyst"
     ]
   },
   {
@@ -72,12 +110,20 @@
       "taxprep",
       "investor",
       "pricing",
-      "inventory"
+      "inventory",
+      "reporting-director",
+      "financial-reporting-analyst",
+      "demand-forecast-analyst"
     ]
   },
   {
     "group": "Building software",
-    "roles": []
+    "roles": [
+      "product-analyst",
+      "tech-support",
+      "identity-access-specialist",
+      "automation-lead"
+    ]
   },
   {
     "group": "People and HR",
@@ -90,7 +136,14 @@
   },
   {
     "group": "Contracts, hiring and suppliers",
-    "roles": []
+    "roles": [
+      "logistics-manager",
+      "transport-planner",
+      "terms-obligations-analyst",
+      "evidence-coordinator",
+      "control-review-analyst",
+      "remediation-planner"
+    ]
   },
   {
     "group": "Fundraising and events",
@@ -98,7 +151,10 @@
       "devdir",
       "grants",
       "donors",
-      "events"
+      "events",
+      "wedding-planner",
+      "guest-experience-coordinator",
+      "program-production-specialist"
     ]
   },
   {
@@ -108,7 +164,9 @@
       "fitness",
       "nutrition",
       "habits",
-      "healthadmin"
+      "healthadmin",
+      "appointments-records-organizer",
+      "care-schedule-planner"
     ]
   },
   {
@@ -122,7 +180,21 @@
       "resume",
       "jobscout",
       "interview",
-      "brand"
+      "brand",
+      "personal-finance-organizer",
+      "college-planning-lead",
+      "deadline-documents-coordinator",
+      "real-estate-specialist",
+      "ownership-cost-analyst",
+      "purchase-diligence-organizer",
+      "home-sale-coordinator",
+      "home-preparation-planner",
+      "listing-transaction-organizer",
+      "coverage-comparison-analyst",
+      "claims-documentation-coordinator",
+      "retirement-planning-coordinator",
+      "retirement-cash-flow-analyst",
+      "retirement-lifestyle-planner"
     ]
   },
   {
@@ -133,7 +205,29 @@
       "meals",
       "shopper",
       "occasions",
-      "school"
+      "school",
+      "personal-coach",
+      "relocation-coordinator",
+      "move-administration-specialist",
+      "renovation-planner",
+      "estate-organization-lead",
+      "asset-document-organizer",
+      "wishes-legacy-writer",
+      "planning-questions-coordinator",
+      "home-baby-supplies-planner",
+      "pet-care-coordinator"
+    ]
+  },
+  {
+    "group": "Strategy",
+    "roles": [
+      "cso",
+      "market-analyst",
+      "business-model-analyst",
+      "execution-planner",
+      "competitive-intel",
+      "intelligence-brief-writer",
+      "startup-planning-lead"
     ]
   }
 ]
