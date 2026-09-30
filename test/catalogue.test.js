@@ -478,11 +478,13 @@ test('published-serial refuses a deployment count that is empty or not a number'
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-count-'));
   const f = path.join(dir, 'p.json');
   fs.writeFileSync(f, JSON.stringify({ serial: 5 }));
-  process.stderr.write = () => true;
+  let said = '';
+  process.stderr.write = (t) => { said += t; return true; };
   process.stdout.write = () => true;
   try {
     assert.equal(main([f, '200', '']), 1);
     assert.equal(main([f, '200', 'null']), 1);
+    assert.equal((said.match(/is not a count/g) || []).length, 2, 'refused for the count, not for another reason');
     assert.equal(main([f, '200', '0']), 0, 'CONTROL: a real count is accepted');
   } finally { process.stderr.write = w; process.stdout.write = o; fs.rmSync(dir, { recursive: true, force: true }); }
 });
@@ -877,6 +879,9 @@ test('the outward refusal names the fragment that tripped it', () => {
 
 test('published-serial looks for the marker at the top of this repo, where the workflow checks it', () => {
   // The other marker tests pass their own path; this pins the default main() and the workflow use.
+  // It checks the path, not that the file exists: no test's outcome may depend on the marker being
+  // committed (that dependence is what failed a publish once). The workflow runs from the repo root.
   assert.equal(require('../published-serial').MARKER, path.join(REPO, 'published'));
-  assert.match(fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8'), /\[ ! -e published \]/);
+  assert.match(fs.readFileSync(path.join(REPO, '.github', 'workflows', 'publish.yml'), 'utf8'), /\[ ! -e published \]/,
+    'publish.yml no longer tests for the marker by this name at the repo root');
 });
