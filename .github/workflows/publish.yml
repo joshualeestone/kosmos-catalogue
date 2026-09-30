@@ -13,6 +13,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 concurrency:
@@ -32,15 +33,17 @@ jobs:
       - run: node build.js --check
       - run: node --test test/
       # The new serial must exceed the published one (build.js takes the larger of the commit time
-      # and this plus one). A first publish finds nothing (404); anything else unreadable stops here.
+      # and this plus one). published-serial.js decides what each answer means: a 404 counts as
+      # "nothing published yet" only before the first successful publish.
       - name: Read the published serial
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          code=$(curl -sS -o "$RUNNER_TEMP/published.json" -w '%{http_code}' https://joshualeestone.github.io/kosmos-catalogue/catalogue.json)
-          case "$code" in
-            200) prev=$(node -e 'const c = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")); if (!Number.isInteger(c.serial)) process.exit(1); process.stdout.write(String(c.serial))' "$RUNNER_TEMP/published.json") ;;
-            404) prev=0 ;;
-            *) echo "could not read the published catalogue (HTTP $code)"; exit 1 ;;
-          esac
+          earlier=$(gh api "repos/${{ github.repository }}/actions/workflows/publish.yml/runs?status=success&per_page=1" --jq .total_count)
+          code=$(curl -sS --max-time 30 --retry 3 --retry-all-errors -H 'Cache-Control: no-cache' \
+            -o "$RUNNER_TEMP/published.json" -w '%{http_code}' \
+            "https://joshualeestone.github.io/kosmos-catalogue/catalogue.json?run=${{ github.run_id }}") || code=000
+          prev=$(node published-serial.js "$RUNNER_TEMP/published.json" "$code" "$earlier")
           echo "published serial: $prev"
           echo "CATALOGUE_PREVIOUS_SERIAL=$prev" >> "$GITHUB_ENV"
       - run: node build.js

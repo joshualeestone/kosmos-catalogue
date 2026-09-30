@@ -16,7 +16,7 @@ Team screen, so someone who only makes their own agents never downloads any of i
 | `teams/<key>.json` | One team: a lead and 4 or 5 people who report to the lead |
 | `groups.json` | The groups the role picker shows, in order, and the roles in each |
 | `settings.json` | Text every team shares |
-| `kosmos-builtin-roles.json` | The roles Kosmos has built in: a team member may use one, a catalogue role may not reuse its key |
+| `kosmos-builtin-roles.json` | The roles Kosmos has built in: a team member may use a menu one, a catalogue role may not reuse any key |
 | `avatars/<team>-<slot>.webp` | Team members' portraits (fictional, generated people) |
 
 ### A role
@@ -88,13 +88,19 @@ What the signed file carries, and what Kosmos will check once its download ships
 - **The signature** covers the file's exact bytes, verified against the public key Kosmos carries
   (the same key as `signing-key.pub.pem` here), so a file changed anywhere between this repo and
   the person's computer is refused.
-- **`serial`**, the commit time of the build and always above the serial already published, so
+- **`serial`**, the commit time of the build and, in `publish.yml`, always above the serial already
+  published (`published-serial.js` reads it; a local `node build.js` uses the commit time alone), so
   Kosmos can refuse a catalogue older than the one it holds. An old file replayed later still has a
   valid signature; the serial is what stops it. A copy of Kosmos that holds no catalogue yet has
   nothing to compare against, so Kosmos will also refuse any serial older than the one it was
   released with.
 - **`avatar.imageSha256`** for every portrait, so an image fetched beside the catalogue can be
   checked too.
+
+The file and its signature are two downloads, and each cache between here and Kosmos can hold
+either one a little longer than the other just after a publish. A mismatch then looks like a bad
+signature, so Kosmos retries once before refusing, and a refusal leaves it on the catalogue it
+already had.
 
 **Who can change what Kosmos trusts:** anyone who can merge to `main`, because `main` is what gets
 signed. The key is a secret of the `github-pages` environment, which only `main` may deploy to, so

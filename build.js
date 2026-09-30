@@ -1,7 +1,7 @@
 'use strict';
 /**
  * Build dist/catalogue.json, the one file Kosmos downloads, from the source files in this repo
- * (lib/source.js describes them). Moved here from the Kosmos repo's tools/catalogue/build.js
+ * (lib/source.js describes them), kosmos-builtin-roles.json and the portraits in avatars/. Moved here from the Kosmos repo's tools/catalogue/build.js
  * (joshualeestone/kosmos#4632); the roles and teams it writes are the shape Kosmos's
  * engine/catalogue.js reads.
  *
@@ -9,7 +9,7 @@
  *     node build.js --check    check everything, write nothing (exit 1 on any problem)
  *
  * It refuses to write anything while a single problem remains. test/catalogue.test.js checks the
- * rules again against the built file.
+ * rules again against what build() returns.
  */
 const fs = require('node:fs');
 const path = require('node:path');
@@ -169,6 +169,9 @@ function build(src = {}) {
       return { slot: m.slot, role: m.role, title: m.title, name: m.name,
         reportsTo: m.slot === 'lead' ? null : 'lead', focus: m.focus, avatar: a };
     });
+    if (![t.label, t.blurb, t.purpose].every(isText) || !t.project || !isText(t.project.name) || !isText(t.project.goal)) {
+      problems.push(`${t.key}: needs a label, blurb, purpose, and a project with a name and goal`);
+    }
     const entry = { key: t.key, kind: t.kind, rank: t.rank, label: t.label, blurb: t.blurb,
       purpose: t.purpose, caution: ts.TEAM_CAUTION, project: t.project, members };
     // Team text is what the Team screen shows (#4556, #4557), so it gets the same guard.
@@ -177,7 +180,10 @@ function build(src = {}) {
   }
   // serial: which build this is, inside the signed bytes, so Kosmos can refuse an older catalogue
   // than the one it already holds (a replayed old file carries a valid signature too).
-  const catalogue = { generated: NOTE, version: 2, serial: src.serial || 0, groups, roles, avatarStyle: ts.AVATAR_STYLE, teams };
+  // kosmosRoles: the built-in keys this catalogue was checked against, so Kosmos's own tests can
+  // tell when its roles and this list have drifted apart.
+  const catalogue = { generated: NOTE, version: 2, serial: src.serial || 0, kosmosRoles: kosmos.all.slice().sort(),
+    groups, roles, avatarStyle: ts.AVATAR_STYLE, teams };
   return { catalogue, text: JSON.stringify(catalogue, null, 2) + '\n', problems };
 }
 
@@ -186,6 +192,7 @@ const isText = (v) => typeof v === 'string' && v.length > 0;
 // A commit time this far past the clock is a wrong clock, not a build: signed as the serial, it
 // would make Kosmos refuse every real catalogue until the clock caught up.
 const FUTURE_SKEW_S = 3600;
+const MAX_PORTRAIT_BYTES = 512 * 1024;
 
 function sha256(bytes) { return crypto.createHash('sha256').update(bytes).digest('hex'); }
 
@@ -207,10 +214,20 @@ function readBuiltin(root, problems) {
  */
 function portrait(root, id, problems) {
   const rel = `avatars/${id}.webp`;
+  let dir;
+  try { dir = fs.lstatSync(path.join(root, 'avatars')); } catch { return null; }
+  if (!dir.isDirectory()) { problems.push('avatars/: must be a folder in this repo, not a link'); return null; }
   let st;
   try { st = fs.lstatSync(path.join(root, rel)); } catch { return null; }
   if (!st.isFile()) { problems.push(`${rel}: must be a regular file, not a link or a folder`); return null; }
-  return { path: rel, sha256: sha256(fs.readFileSync(path.join(root, rel))) };
+  if (st.size > MAX_PORTRAIT_BYTES) { problems.push(`${rel}: larger than ${MAX_PORTRAIT_BYTES} bytes`); return null; }
+  const bytes = fs.readFileSync(path.join(root, rel));
+  // A WebP file is a RIFF container whose form type is WEBP.
+  if (bytes.subarray(0, 4).toString('latin1') !== 'RIFF' || bytes.subarray(8, 12).toString('latin1') !== 'WEBP') {
+    problems.push(`${rel}: is not a WebP image`);
+    return null;
+  }
+  return { path: rel, sha256: sha256(bytes) };
 }
 
 /** The commit time of HEAD in seconds. Not guaranteed to grow (a commit made on a slow clock),
@@ -240,7 +257,12 @@ function main(argv, opts = {}) {
   const out = opts.out || OUT;
   // publish.yml passes the published catalogue's serial; a new one must be above it, or every
   // Kosmos holding the published one would refuse it.
-  const previous = Number(opts.previousSerial ?? process.env.CATALOGUE_PREVIOUS_SERIAL ?? 0) || 0;
+  const given = opts.previousSerial ?? process.env.CATALOGUE_PREVIOUS_SERIAL ?? '';
+  const previous = given === '' ? 0 : Number(given);
+  if (!Number.isInteger(previous) || previous < 0) {
+    process.stderr.write(`refused: the published serial ${JSON.stringify(String(given))} is not a whole number\n`);
+    return 1;
+  }
   const commit = commitTime(root);
   const serial = commit ? Math.max(commit, previous + 1) : 0;
   const { catalogue, text, problems } = build({ root, serial });

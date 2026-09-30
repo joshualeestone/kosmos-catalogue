@@ -18,6 +18,8 @@ const source = require('../lib/source');
 
 const REPO = path.join(__dirname, '..');
 const built = () => build.build().catalogue;
+/** The smallest bytes the builder takes as a WebP file: a RIFF container of form type WEBP. */
+const webp = (tail = '') => Buffer.concat([Buffer.from('RIFF\x10\x00\x00\x00WEBPVP8 ', 'latin1'), Buffer.from(tail)]);
 
 /** A throwaway copy of the source files, for tests that break one. */
 function copyRepo() {
@@ -226,10 +228,14 @@ test('a portrait is published with its sha256 inside the signed catalogue, and a
   try {
     const id = build.build().catalogue.teams[0].members[0].avatar.id;
     fs.mkdirSync(path.join(dir, 'avatars'));
-    fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), 'image bytes');
+    fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), webp('image bytes'));
     const a = build.build({ root: dir }).catalogue.teams.flatMap((t) => t.members).find((m) => m.avatar.id === id).avatar;
     assert.equal(a.image, `avatars/${id}.webp`);
-    assert.equal(a.imageSha256, build.sha256('image bytes'));
+    assert.equal(a.imageSha256, build.sha256(webp('image bytes')));
+    fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), 'not an image');
+    assert.ok(build.build({ root: dir }).problems.some((p) => /is not a WebP image/.test(p)));
+    fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), webp('x'.repeat(512 * 1024)));
+    assert.ok(build.build({ root: dir }).problems.some((p) => /larger than/.test(p)));
     fs.rmSync(path.join(dir, 'avatars', id + '.webp'));
     fs.symlinkSync(path.join(REPO, 'README.md'), path.join(dir, 'avatars', id + '.webp'));
     assert.ok(build.build({ root: dir }).problems.some((p) => /must be a regular file/.test(p)));
@@ -282,7 +288,7 @@ test('main: refuses outside a git checkout, and in one writes the catalogue with
     assert.equal(quiet(() => build.main(['--check'], { root: dir, out })), 1, 'no git, no serial: refused');
     const id = build.build().catalogue.teams[0].members[0].avatar.id;
     fs.mkdirSync(path.join(dir, 'avatars'));
-    fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), 'portrait');
+    fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), webp('portrait'));
     const git = (...a) => execFileSync('git', ['-C', dir, '-c', 'commit.gpgsign=false', '-c', 'core.hooksPath=/dev/null', ...a], { stdio: 'ignore', env: { ...process.env, GIT_AUTHOR_NAME: 't', GIT_AUTHOR_EMAIL: 't@t', GIT_COMMITTER_NAME: 't', GIT_COMMITTER_EMAIL: 't@t' } });
     git('init', '-q'); git('add', '-A'); git('commit', '-q', '-m', 'x');
     assert.equal(quiet(() => build.main(['--check'], { root: dir, out })), 0);
@@ -290,7 +296,7 @@ test('main: refuses outside a git checkout, and in one writes the catalogue with
     assert.equal(quiet(() => build.main([], { root: dir, out })), 0);
     const c = JSON.parse(fs.readFileSync(path.join(out, 'catalogue.json'), 'utf8'));
     assert.ok(c.serial > 1700000000, `serial ${c.serial} is not a commit time`);
-    assert.equal(fs.readFileSync(path.join(out, 'avatars', id + '.webp'), 'utf8'), 'portrait');
+    assert.deepEqual(fs.readFileSync(path.join(out, 'avatars', id + '.webp')), webp('portrait'));
     // A clock that says the commit is from the past means the same checkout is from the future.
     assert.equal(quiet(() => build.main(['--check'], { root: dir, out, nowS: c.serial - 7200 })), 1);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); fs.rmSync(out, { recursive: true, force: true }); }
@@ -328,4 +334,56 @@ test('a new serial always exceeds the published one, even from a commit with a s
     assert.equal(serialAfter(commit + 100), commit + 101, 'a published serial ahead of the commit clock was not exceeded');
     assert.equal(serialAfter(commit - 100), commit, 'CONTROL: an older published serial leaves the commit time');
   } finally { process.stdout.write = w; fs.rmSync(dir, { recursive: true, force: true }); fs.rmSync(out, { recursive: true, force: true }); }
+});
+
+test('an avatars folder that is a link is refused, so nothing outside the repo is published', () => {
+  const dir = copyRepo();
+  const elsewhere = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-elsewhere-'));
+  try {
+    const id = build.build().catalogue.teams[0].members[0].avatar.id;
+    fs.writeFileSync(path.join(elsewhere, id + '.webp'), webp());
+    fs.symlinkSync(elsewhere, path.join(dir, 'avatars'));
+    assert.ok(build.build({ root: dir }).problems.some((p) => /avatars\/: must be a folder/.test(p)));
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); fs.rmSync(elsewhere, { recursive: true, force: true }); }
+});
+
+test('the builder itself refuses a team without its text, and a role with an empty caution or description', () => {
+  for (const spoil of [(t) => { delete t.blurb; }, (t) => { delete t.project; }, (t) => { t.project.goal = ''; }]) {
+    const ts = source.read().teamsSource;
+    spoil(ts.teams[2]);
+    assert.ok(build.build({ teamsSource: ts }).problems.some((p) => /needs a label, blurb, purpose/.test(p)), spoil.toString());
+  }
+  const base = fs.readFileSync(path.join(REPO, 'roles', 'cos', 'role.md'), 'utf8');
+  assert.ok(source.parseRole('cos', base.replace(/^caution: .*$/m, 'caution:')).problems.some((p) => /caution is empty/.test(p)));
+  assert.ok(source.parseRole('cos', base.replace(/---\n\n[^\n]+\n\n## Who/, '---\n\n \n\n## Who')).problems.some((p) => /description is empty/.test(p)));
+  assert.deepEqual(source.parseRole('cos', base).problems, [], 'CONTROL');
+});
+
+test('the catalogue names the Kosmos roles it was checked against', () => {
+  const list = JSON.parse(fs.readFileSync(path.join(REPO, 'kosmos-builtin-roles.json'), 'utf8'));
+  assert.deepEqual(built().kosmosRoles, list.roles.concat(list.hidden).sort());
+});
+
+test('published-serial: a 404 is zero only before the first publish; every other failure stops the publish', () => {
+  const { publishedSerial } = require('../published-serial');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-pub-'));
+  try {
+    const f = path.join(dir, 'p.json');
+    fs.writeFileSync(f, JSON.stringify({ serial: 1759190400 }));
+    assert.deepEqual(publishedSerial(f, '200', 3), { ok: true, serial: 1759190400 });
+    assert.deepEqual(publishedSerial(f, '404', 0), { ok: true, serial: 0 });
+    assert.match(publishedSerial(f, '404', 1).because, /missing \(404\) although 1/);
+    assert.match(publishedSerial(f, '503', 1).because, /HTTP 503/);
+    assert.match(publishedSerial(f, '000', 1).because, /HTTP 000/);
+    fs.writeFileSync(f, '{"no": "serial"}');
+    assert.match(publishedSerial(f, '200', 1).because, /no serial/);
+    fs.writeFileSync(f, '<html>');
+    assert.match(publishedSerial(f, '200', 1).because, /not JSON/);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('main refuses a published serial that is not a whole number', () => {
+  const w = process.stderr.write;
+  process.stderr.write = () => true;
+  try { assert.equal(build.main(['--check'], { previousSerial: 'abc' }), 1); } finally { process.stderr.write = w; }
 });
