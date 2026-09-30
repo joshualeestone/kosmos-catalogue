@@ -17,7 +17,11 @@ const MARKER = path.join(__dirname, 'published');
 
 /** @returns {{ok: true, serial: number} | {ok: false, because: string}} */
 function publishedSerial(file, status, earlier, marker = MARKER) {
-  if (fs.existsSync(marker)) earlier = Math.max(earlier, 1);
+  const marked = fs.existsSync(marker);
+  // After the first publish the marker must be committed; until it is, every publish stops here and
+  // says so, rather than leaning on run history that can be deleted.
+  if (earlier > 0 && !marked) return { ok: false, because: 'a publish has already succeeded, but the empty `published` marker is not committed; commit it, then publish again' };
+  if (marked) earlier = Math.max(earlier, 1);
   if (status === '404') {
     return earlier === 0 ? { ok: true, serial: 0 } : { ok: false, because: `the published catalogue is missing (404) although ${earlier} deployment(s) came before` };
   }

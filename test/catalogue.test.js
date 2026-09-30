@@ -369,16 +369,20 @@ test('published-serial: a 404 is zero only before the first publish; every other
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-pub-'));
   try {
     const f = path.join(dir, 'p.json');
+    const marker = path.join(dir, 'published');
+    const none = path.join(dir, 'absent');
+    fs.writeFileSync(marker, '');
     fs.writeFileSync(f, JSON.stringify({ serial: 1759190400 }));
-    assert.deepEqual(publishedSerial(f, '200', 3), { ok: true, serial: 1759190400 });
-    assert.deepEqual(publishedSerial(f, '404', 0), { ok: true, serial: 0 });
-    assert.match(publishedSerial(f, '404', 1).because, /missing \(404\) although 1/);
-    assert.match(publishedSerial(f, '503', 1).because, /HTTP 503/);
-    assert.match(publishedSerial(f, '000', 1).because, /HTTP 000/);
+    assert.deepEqual(publishedSerial(f, '200', 3, marker), { ok: true, serial: 1759190400 });
+    assert.deepEqual(publishedSerial(f, '404', 0, none), { ok: true, serial: 0 }, 'the first publish');
+    assert.match(publishedSerial(f, '404', 1, marker).because, /missing \(404\) although 1/);
+    assert.match(publishedSerial(f, '200', 1, none).because, /marker is not committed/, 'after the first publish, no marker stops it');
+    assert.match(publishedSerial(f, '503', 1, marker).because, /HTTP 503/);
+    assert.match(publishedSerial(f, '000', 1, marker).because, /HTTP 000/);
     fs.writeFileSync(f, '{"no": "serial"}');
-    assert.match(publishedSerial(f, '200', 1).because, /no serial/);
+    assert.match(publishedSerial(f, '200', 1, marker).because, /no serial/);
     fs.writeFileSync(f, '<html>');
-    assert.match(publishedSerial(f, '200', 1).because, /not JSON/);
+    assert.match(publishedSerial(f, '200', 1, marker).because, /not JSON/);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
@@ -528,4 +532,23 @@ test('a role missing its name is reported and left out, and a team file that is 
   const u = source.read().teamsSource;
   u.teams[0].project.extra = { nested: true };
   assert.ok(build.build({ teamsSource: u }).problems.some((p) => /exactly a name and goal/.test(p)));
+});
+
+test('a CRLF role file gets its own message, and a top-level file or folder that is a link is refused', () => {
+  const base = fs.readFileSync(path.join(REPO, 'roles', 'cos', 'role.md'), 'utf8');
+  assert.match(source.parseRole('cos', base.replace(/\n/g, '\r\n')).problems[0], /Windows line endings/);
+  for (const name of ['groups.json', 'teams']) {
+    const dir = copyRepo();
+    try {
+      fs.rmSync(path.join(dir, name), { recursive: true });
+      fs.symlinkSync(path.join(REPO, name), path.join(dir, name));
+      assert.ok(build.build({ root: dir }).problems.some((p) => p.startsWith(`${name}: must be a`)), name);
+    } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+  }
+});
+
+test('the combining grapheme joiner is refused like the other blank characters', () => {
+  const r = source.read().rolesSource;
+  r.roles[2].who = r.roles[2].who.replace('You ', 'You\u034F ');
+  assert.ok(build.build({ rolesSource: r }).problems.some((p) => /invisible or direction-changing/.test(p)));
 });

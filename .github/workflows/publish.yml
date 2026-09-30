@@ -64,3 +64,14 @@ jobs:
           path: dist/
       - id: deploy
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+      # The next publish reads the serial from Pages. Wait here until Pages serves this one, so the
+      # next run (queued behind this job by the concurrency group) never reads a stale, lower serial.
+      - name: Confirm Pages serves this serial
+        run: |
+          want=$(node -e 'process.stdout.write(String(require("./dist/catalogue.json").serial))')
+          for i in $(seq 1 60); do
+            got=$(curl -sSL --max-time 30 -H 'Cache-Control: no-cache' "https://joshualeestone.github.io/kosmos-catalogue/catalogue.json?check=${{ github.run_id }}-$i" | node -e 'let s="";process.stdin.on("data",(d)=>s+=d).on("end",()=>{try{process.stdout.write(String(JSON.parse(s).serial))}catch{}})')
+            if [ "$got" = "$want" ]; then echo "Pages serves serial $want"; exit 0; fi
+            sleep 15
+          done
+          echo "Pages still does not serve serial $want after 15 minutes (it serves ${got:-nothing})"; exit 1

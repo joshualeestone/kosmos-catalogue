@@ -79,7 +79,7 @@ function markerIn(value) {
  *  without anyone having to know its name. Text here becomes instructions for agents with tools,
  *  so nothing may say more than what a reviewer reads. The fillers named at the end are letters and
  *  symbols to Unicode but show as blank space. */
-const HIDDEN_RE = /[^\p{L}\p{N}\p{P}\p{S}\u0020\u0300-\u036F]|[\u115F\u1160\u3164\uFFA0\u2800]/u;
+const HIDDEN_RE = /[^\p{L}\p{N}\p{P}\p{S}\u0020\u0300-\u036F]|[\u034F\u115F\u1160\u3164\uFFA0\u2800]/u;
 function hiddenIn(value) {
   const strings = [];
   (function walk(v) { if (typeof v === 'string') strings.push(v); else if (v && typeof v === 'object') Object.values(v).forEach(walk); })(value);
@@ -127,6 +127,9 @@ function build(src = {}) {
   if (typeof ts.AVATAR_STYLE !== 'string' || !ts.AVATAR_STYLE) problems.push('settings.json: avatarStyle is missing');
   // Kosmos's own roles: a team member may name one, and a catalogue role must not reuse a key.
   const kosmos = readBuiltin(root, problems);
+  if (!kosmos.all.every((k) => KEY_RE.test(k)) || hiddenIn(kosmos) || emDashIn(kosmos) || markerIn(kosmos)) {
+    problems.push('kosmos-builtin-roles.json: keys must be lowercase words and hyphens, and names plain text');
+  }
   const builtin = new Set(kosmos.all);        // no catalogue key may reuse one
   const pickable = new Set(kosmos.menu);      // a team member may use one (never own or setup)
   const groups = rs.GROUP_ORDER;

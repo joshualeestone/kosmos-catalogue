@@ -89,7 +89,8 @@ What the signed file carries, and what Kosmos will check once its download ships
   (the same key as `signing-key.pub.pem` here), so a file changed anywhere between this repo and
   the person's computer is refused.
 - **`serial`**, the commit time of the build and, in `publish.yml`, always above the serial already
-  published (`published-serial.js` reads it; a local `node build.js` uses the commit time alone), so
+  published (the workflow fetches it and `published-serial.js` checks it; a local `node build.js`
+  uses the commit time alone), so
   Kosmos can refuse a catalogue older than the one it holds. An old file replayed later still has a
   valid signature; the serial is what stops it. A copy of Kosmos that holds no catalogue yet has
   nothing to compare against, so Kosmos will also refuse any serial older than the one it was
@@ -112,8 +113,7 @@ before merging it: merging it hands that code the key.
 
 **After the first publish, commit an empty file named `published`** at the top of the repo. From
 then on a missing catalogue on Pages stops the publish, instead of being read as "nothing published
-yet", which would drop the serial floor. (Before it exists, the count of successful publish runs
-stands in for it.)
+yet", which would drop the serial floor. Every publish after the first stops until it is committed.
 
 **To undo a change, merge a revert.** Never move `main` back: the publish would carry a lower
 serial, and every copy of Kosmos holding the newer catalogue would refuse it. A ruleset on `main`
