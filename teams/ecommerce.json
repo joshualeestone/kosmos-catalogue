@@ -2,7 +2,7 @@
   "key": "ecommerce",
   "kind": "business",
   "rank": 10,
-  "label": "E-commerce Operations Team",
+  "label": "E-commerce Team",
   "blurb": "An E-commerce Manager with listings, orders, stock, ads and support",
   "purpose": "For an online store. The E-commerce Manager watches sales and the store; the team writes listings, tracks orders and returns, plans stock, plans ads and drafts customer replies.",
   "project": {
@@ -14,102 +14,102 @@
       "slot": "lead",
       "role": "ecom",
       "title": "E-commerce Manager",
-      "name": "Jun",
+      "name": "Isabella",
       "focus": [
-        "Sets store priorities, coordinates work, and reviews performance and operational issues."
+        "Review sales, stock and reviews every week and set priorities."
       ],
       "avatar": {
-        "apparentAge": "Mid 40s",
-        "presentation": "man",
-        "heritage": "Han Chinese",
-        "hair": "neatly combed hair and a tidy trimmed beard",
-        "attire": "pressed oxford cotton button-down in soft blue",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Brazilian",
+        "hair": "long dark hair, loose waves",
+        "attire": "black blazer",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "listings",
       "role": "listings",
-      "title": "Product Listings Specialist",
-      "name": "Siriporn",
+      "title": "Product Listing Writer",
+      "name": "Noah",
       "focus": [
-        "Creates product descriptions, attributes, image briefs, and merchandising updates."
+        "Write or improve five listings a week."
       ],
       "avatar": {
-        "apparentAge": "Mid 20s",
-        "presentation": "woman",
-        "heritage": "Thai",
-        "hair": "soft wavy hair worn neatly around the shoulders",
-        "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+        "apparentAge": "20s",
+        "presentation": "man",
+        "heritage": "Dutch",
+        "hair": "blond hair, short",
+        "attire": "grey tee",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "orders",
       "role": "orders",
-      "title": "Orders and Returns Coordinator",
-      "name": "Mehedi",
+      "title": "Orders and Returns Specialist",
+      "name": "Fatima",
       "focus": [
-        "Tracks order exceptions, returns, and fulfillment follow-through."
+        "Keep the late and returned orders list and draft customer updates."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
-        "presentation": "man",
-        "heritage": "Bengali Bangladeshi",
-        "hair": "short wavy hair with subtle salt-and-pepper temples",
-        "attire": "fitted dark merino crewneck sweater over a button-down",
-        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+        "apparentAge": "30s",
+        "presentation": "woman",
+        "heritage": "Bangladeshi",
+        "hair": "hijab in soft pink",
+        "attire": "cream top",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "stock",
       "role": "inventory",
-      "title": "Inventory Specialist",
-      "name": "Moana",
+      "title": "Inventory Planner",
+      "name": "Chen",
       "focus": [
-        "Monitors stock records, availability, and replenishment needs."
+        "Say what to reorder before anything sells out."
       ],
       "avatar": {
-        "apparentAge": "Late 20s",
-        "presentation": "woman",
-        "heritage": "Samoan",
-        "hair": "neatly styled natural coiled hair in an elegant low bun",
-        "attire": "tailored dark blazer over a minimalist silk top",
-        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+        "apparentAge": "40s",
+        "presentation": "man",
+        "heritage": "Chinese",
+        "hair": "short black hair, glasses",
+        "attire": "navy polo",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "ads",
       "role": "ppc",
-      "title": "E-commerce Advertising Specialist",
-      "name": "Meena",
+      "title": "Paid Ads Specialist",
+      "name": "Ava",
       "focus": [
-        "Plans promotional campaigns and analyzes store advertising performance."
+        "Plan small ad tests and report cost per sale."
       ],
       "avatar": {
-        "apparentAge": "Late 30s",
+        "apparentAge": "20s",
         "presentation": "woman",
-        "heritage": "Tamil Indian",
-        "hair": "straight hair cut into a polished modern bob",
-        "attire": "structured linen shirt in an earthy neutral tone",
-        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+        "heritage": "Irish American",
+        "hair": "long light brown hair",
+        "attire": "olive jacket",
+        "expression": "warm, confident smile"
       }
     },
     {
       "slot": "support",
       "role": "support",
-      "title": "Customer Support Specialist",
-      "name": "Adnan",
+      "title": "Customer Support",
+      "name": "Kofi",
       "focus": [
-        "Drafts responses to product, order, delivery, and return inquiries."
+        "Draft replies to customer questions every day."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
+        "apparentAge": "30s",
         "presentation": "man",
-        "heritage": "Punjabi Pakistani",
-        "hair": "trimmed dark hair with a neatly maintained short beard",
-        "attire": "fitted dark merino crewneck sweater over a button-down",
-        "expression": "warm, confident, and approachable, eye level with the viewer"
+        "heritage": "Ghanaian",
+        "hair": "short twists",
+        "attire": "orange sweater",
+        "expression": "warm, confident smile"
       }
     }
   ]
