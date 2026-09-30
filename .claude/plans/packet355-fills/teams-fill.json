@@ -550,7 +550,8 @@
   "real-estate-investment-research/Market and Property Researcher": "real-estate-specialist",
   "procurement-and-vendor-management/Proposal and Cost Analyst": "vendors",
   "compliance-and-audit-preparation/Compliance Program Lead": "control-review-analyst",
-  "logistics/Carrier and Supplier Coordinator": "vendors"
+  "logistics/Carrier and Supplier Coordinator": "vendors",
+  "logistics/Shipment Tracking Specialist": "orders"
  },
  "positional": [
   "content",
@@ -696,6 +697,7 @@
   "business-automation/Integration Builder": "Configures tool connections and builds data movement and automation logic, and leaves switching on anything that sends, pays, or deletes to the person.",
   "insurance-comparison-and-claims/Claims Documentation Coordinator": "Organizes incident records, receipts, and correspondence, and prepares claim-status follow-ups for the person to send.",
   "compliance-and-audit-preparation/Evidence Coordinator": "Lists the evidence still owed, drafts requests for the person to send, and organizes and indexes what comes back.",
-  "home-buying/Purchase Diligence Organizer": "Tracks showings, inspection questions, and documents, and drafts follow-ups to the person's professionals for them to send."
+  "home-buying/Purchase Diligence Organizer": "Tracks showings, inspection questions, and documents, and drafts follow-ups to the person's professionals for them to send.",
+  "translation-and-localization/Localization Lead": "Defines languages, scope, terminology standards, and review priorities, and coordinates delivery."
  }
 }

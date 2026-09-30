@@ -123,6 +123,11 @@ for (const [kind, map] of [['focus', fixed.focus || {}], ['retitle', fixed.retit
     if (kind === 'focus') hits[0].focus = value; else hits[0].title = value;
   }
 }
+// Focus lines say "the person", as every role does (review 9).
+for (const t of teams) for (const m of t.members) {
+  m.focus = [m.focus].flat().map((l) => l.replace(/\bthe user['’]s\b/g, "the person's").replace(/\bthe user\b/g, 'the person'));
+  if (m.focus.length === 1) m.focus = m.focus[0];
+}
 // A role no seat uses after all this is not taken either (the picker would list it for nothing).
 const usedRoles = new Set(teams.flatMap((t) => t.members.map((m) => m.role)));
 for (let i = roles.length - 1; i >= 0; i--) if (!usedRoles.has(roles[i].key)) { console.log(`not taken, no seat uses it: ${roles[i].key}`); roles.splice(i, 1); }

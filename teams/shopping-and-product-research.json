@@ -1,0 +1,99 @@
+{
+  "key": "shopping-and-product-research",
+  "kind": "personal",
+  "rank": 14,
+  "label": "Shopping and Product Research Team",
+  "blurb": "A Shopping Research Lead and 4 specialists who compare purchases against your needs and budget",
+  "purpose": "For anyone who wants to compare purchases against their needs and budget.",
+  "project": {
+    "name": "Shopping and Product Research",
+    "goal": "A clear first plan for shopping and product research, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "researcher",
+      "title": "Shopping Research Lead",
+      "name": "Darius",
+      "focus": [
+        "Defines decision criteria, coordinates comparisons, and owns the final shortlist."
+      ],
+      "avatar": {
+        "apparentAge": "Early 40s",
+        "presentation": "man",
+        "heritage": "African American",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Product Researcher",
+      "name": "Emiko",
+      "focus": [
+        "Checks specifications, independent evidence, and suitability for the intended use."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Japanese",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "shopper",
+      "role": "shopper",
+      "title": "Price and Purchase Analyst",
+      "name": "Jiwoo",
+      "focus": [
+        "Compares total costs, availability, seller terms, warranties, and return conditions."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Korean",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "shopper-2",
+      "role": "shopper",
+      "title": "Deals and Timing Analyst",
+      "name": "Thiago",
+      "focus": [
+        "Tracks prices over time and suggests when to buy to get a fair price."
+      ],
+      "avatar": {
+        "apparentAge": "Early 40s",
+        "presentation": "man",
+        "heritage": "Afro-Brazilian",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "researcher-2",
+      "role": "researcher",
+      "title": "Reviews and Reliability Researcher",
+      "name": "Callum",
+      "focus": [
+        "Reads independent reviews and reliability reports, and summarizes what owners report."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "man",
+        "heritage": "Scottish",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

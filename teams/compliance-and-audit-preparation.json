@@ -1,0 +1,99 @@
+{
+  "key": "compliance-and-audit-preparation",
+  "kind": "business",
+  "rank": 40,
+  "label": "Compliance and Audit Preparation Team",
+  "blurb": "A Compliance Program Lead and 4 specialists who gather requirements and evidence and organize gaps for an audit or review",
+  "purpose": "For a business that wants to gather requirements and evidence and organize gaps for an audit or review.",
+  "project": {
+    "name": "Compliance and Audit Preparation",
+    "goal": "A clear first plan for compliance and audit preparation, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "control-review-analyst",
+      "title": "Compliance Program Lead",
+      "name": "Noelia",
+      "focus": [
+        "Scopes the review, coordinates evidence work, and owns the readiness summary."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "woman",
+        "heritage": "Puerto Rican, mixed European and African heritage",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Requirements Researcher",
+      "name": "Alejandro",
+      "focus": [
+        "Maps applicable requirements and records authoritative sources and jurisdiction assumptions."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Colombian Mestizo",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "evidence-coordinator",
+      "role": "evidence-coordinator",
+      "title": "Evidence Coordinator",
+      "name": "Thomas",
+      "focus": [
+        "Lists the evidence still owed, drafts requests for the person to send, and organizes and indexes what comes back."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "English",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "control-review-analyst",
+      "role": "control-review-analyst",
+      "title": "Control Review Analyst",
+      "name": "Soojin",
+      "focus": [
+        "Compares documented controls with requirements and identifies gaps and inconsistencies."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Korean",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "remediation-planner",
+      "role": "remediation-planner",
+      "title": "Remediation Planner",
+      "name": "Karolina",
+      "focus": [
+        "Tracks corrective actions, owners, deadlines, and unresolved review questions."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Polish",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    }
+  ]
+}

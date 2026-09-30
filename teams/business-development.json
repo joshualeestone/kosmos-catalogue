@@ -1,0 +1,99 @@
+{
+  "key": "business-development",
+  "kind": "business",
+  "rank": 30,
+  "label": "Business Development Team",
+  "blurb": "A Head of Business Development and 4 specialists who find and develop promising partnerships, channels, and markets",
+  "purpose": "For a business that wants to find and develop promising partnerships, channels, and markets.",
+  "project": {
+    "name": "Business Development",
+    "goal": "A clear first plan for business development, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "partnerships",
+      "title": "Head of Business Development",
+      "name": "Despina",
+      "focus": [
+        "Sets growth priorities, evaluates opportunities, and coordinates partnership development."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 40s",
+        "presentation": "woman",
+        "heritage": "Greek",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Opportunity Researcher",
+      "name": "Nusrat",
+      "focus": [
+        "Finds potential markets, channels, and partnership opportunities."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Bengali Bangladeshi",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "researcher-2",
+      "role": "researcher",
+      "title": "Partner Researcher",
+      "name": "Leandro",
+      "focus": [
+        "Builds partner profiles and evaluates strategic fit and mutual value."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Afro-Brazilian",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "partnership-proposal-writer",
+      "role": "partnership-proposal-writer",
+      "title": "Partnership Proposal Writer",
+      "name": "Hasmik",
+      "focus": [
+        "Creates partnership concepts, pitch materials, and proposed terms for review."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
+        "presentation": "woman",
+        "heritage": "Armenian",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "partnerships",
+      "role": "partnerships",
+      "title": "Partnership Coordinator",
+      "name": "Quang",
+      "focus": [
+        "Tracks conversations, commitments, next steps, and relationship milestones."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Kinh Vietnamese",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    }
+  ]
+}

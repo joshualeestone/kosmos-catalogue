@@ -1,0 +1,99 @@
+{
+  "key": "competitive-intelligence",
+  "kind": "business",
+  "rank": 18,
+  "label": "Competitive Intelligence Team",
+  "blurb": "A Competitive Intelligence Lead and 4 specialists who track competitors and explain changes that matter to the business",
+  "purpose": "For a business that wants to track competitors and explain changes that matter to the business.",
+  "project": {
+    "name": "Competitive Intelligence",
+    "goal": "A clear first plan for competitive intelligence, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "competitive-intel",
+      "title": "Competitive Intelligence Lead",
+      "name": "Saoirse",
+      "focus": [
+        "Sets the competitor watchlist and turns findings into recommended responses."
+      ],
+      "avatar": {
+        "apparentAge": "Early 40s",
+        "presentation": "woman",
+        "heritage": "Irish",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "competitive-intel",
+      "role": "competitive-intel",
+      "title": "Competitor Researcher",
+      "name": "Dimas",
+      "focus": [
+        "Tracks product releases, positioning, public announcements, and company activity."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "man",
+        "heritage": "Javanese Indonesian",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "pricing",
+      "role": "pricing",
+      "title": "Pricing and Product Analyst",
+      "name": "Kanya",
+      "focus": [
+        "Compares offers, features, packages, and pricing changes."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Thai",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "intelligence-brief-writer",
+      "role": "intelligence-brief-writer",
+      "title": "Intelligence Brief Writer",
+      "name": "Tharushi",
+      "focus": [
+        "Produces cited competitor profiles, change summaries, and internal briefings."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Sinhalese Sri Lankan",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "market-analyst",
+      "role": "market-analyst",
+      "title": "Market Signals Analyst",
+      "name": "Kabir",
+      "focus": [
+        "Watches pricing, hiring, and product signals across the market and flags shifts early."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "Punjabi Indian",
+        "hair": "neatly combed hair and a tidy trimmed beard",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    }
+  ]
+}

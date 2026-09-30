@@ -491,7 +491,7 @@
    "Which assets to include, and who may see the list."
   ],
   [
-   "Share the inventory with anyone."
+   "Share the inventory outside the team."
   ],
   null
  ],
@@ -508,7 +508,7 @@
    "Who the writing is for, and what the person wants to include."
   ],
   [
-   "Share anything written."
+   "Share anything written outside the team."
   ],
   null
  ],

@@ -660,7 +660,7 @@ test('a role written for a team lead is refused in a seat that reports to the le
 
 test('a built-in role written for a lead (pm) is refused on a report seat too (#4555)', () => {
   const b = JSON.parse(fs.readFileSync(path.join(REPO, 'kosmos-builtin-roles.json'), 'utf8'));
-  assert.deepEqual(b.leadOnly, ['pm'], 'premise: pm is listed as lead-only');
+  assert.ok(b.leadOnly.includes('pm'), 'premise: pm is listed as lead-only');
   const t = source.read().teamsSource;
   assert.deepEqual(build.build({ teamsSource: t }).problems.filter((p) => /role pm is written/.test(p)), [], 'CONTROL: no report sits on pm');
   const seat = t.teams[0].members.find((m) => m.slot !== 'lead');

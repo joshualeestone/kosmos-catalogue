@@ -2,7 +2,7 @@
   "key": "fundraising",
   "kind": "business",
   "rank": 15,
-  "label": "Fundraising Team",
+  "label": "Fundraising and Grants Team",
   "blurb": "A Development Director with grants, donors, events and newsletter",
   "purpose": "For a nonprofit, school or community group. The Development Director sets the fundraising plan; the team finds and writes grants, thanks and updates donors, plans events and writes the supporter newsletter.",
   "project": {
@@ -14,85 +14,102 @@
       "slot": "lead",
       "role": "devdir",
       "title": "Development Director",
-      "name": "Beatrice",
+      "name": "Rodel",
       "focus": [
-        "Keep the fundraising plan and the deadline calendar."
+        "Sets fundraising goals, coordinates the work, and adapts the plan to the organization's needs."
       ],
       "avatar": {
-        "apparentAge": "50s",
+        "apparentAge": "Mid 30s",
+        "presentation": "man",
+        "heritage": "Tagalog Filipino",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Funding Researcher",
+      "name": "Aylin",
+      "focus": [
+        "Finds suitable grants and donors, and summarizes eligibility and fit."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 30s",
         "presentation": "woman",
-        "heritage": "Kenyan",
-        "hair": "short natural grey hair",
-        "attire": "emerald blouse",
-        "expression": "warm, confident smile"
+        "heritage": "Turkish",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     },
     {
       "slot": "grants",
       "role": "grants",
       "title": "Grant Writer",
-      "name": "Julian",
+      "name": "Dawit",
       "focus": [
-        "Find fitting grants and draft applications."
+        "Drafts grant narratives using documented organizational evidence."
       ],
       "avatar": {
-        "apparentAge": "40s",
+        "apparentAge": "Early 30s",
         "presentation": "man",
-        "heritage": "White Canadian",
-        "hair": "brown hair, beard",
-        "attire": "tweed jacket",
-        "expression": "warm, confident smile"
+        "heritage": "Amhara Ethiopian",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "fitted dark merino crewneck sweater over a button-down",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
       }
     },
     {
       "slot": "donors",
       "role": "donors",
-      "title": "Donor Relations",
-      "name": "Mariam",
+      "title": "Donor Relations Specialist",
+      "name": "Taiane",
       "focus": [
-        "Draft thank-yous within a day and keep donors updated."
+        "Organizes relationship records, stewardship updates, and follow-up drafts."
       ],
       "avatar": {
-        "apparentAge": "30s",
+        "apparentAge": "Late 30s",
         "presentation": "woman",
-        "heritage": "Egyptian",
-        "hair": "hijab in navy",
-        "attire": "cream top",
-        "expression": "warm, confident smile"
+        "heritage": "Afro-Brazilian",
+        "hair": "neat braided hair gathered neatly at the crown",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
       }
     },
     {
       "slot": "events",
       "role": "events",
-      "title": "Events Coordinator",
-      "name": "Tyler",
+      "title": "Fundraising Events Coordinator",
+      "name": "Ming",
       "focus": [
-        "Plan the fundraising events from budget to run sheet."
+        "Plans campaign events, outreach calendars, and supporting logistics."
       ],
       "avatar": {
-        "apparentAge": "20s",
+        "apparentAge": "Mid 30s",
         "presentation": "man",
-        "heritage": "African American",
-        "hair": "short fade",
-        "attire": "burgundy sweater",
-        "expression": "warm, confident smile"
+        "heritage": "Han Chinese",
+        "hair": "tidy modern crew cut and observant eyes",
+        "attire": "casual chambray workshirt with rolled-up sleeves",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
       }
     },
     {
       "slot": "newsletter",
       "role": "newsletter",
-      "title": "Supporter Newsletter",
-      "name": "Keiko",
+      "title": "Newsletter and Impact Writer",
+      "name": "Azadeh",
       "focus": [
-        "Write the supporter newsletter with real stories."
+        "Creates supporter newsletters and evidence-based impact or progress updates."
       ],
       "avatar": {
-        "apparentAge": "40s",
+        "apparentAge": "Mid 20s",
         "presentation": "woman",
-        "heritage": "Japanese American",
-        "hair": "shoulder-length black hair",
-        "attire": "soft grey cardigan",
-        "expression": "warm, confident smile"
+        "heritage": "Persian Iranian",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
       }
     }
   ]
