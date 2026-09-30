@@ -90,10 +90,12 @@ function build(src = {}) {
   // Kosmos's own roles: a team member may name one, and a catalogue role must not reuse a key.
   const builtin = new Set(readBuiltin(root, problems));
   const groups = rs.GROUP_ORDER;
+  if (emDashIn(groups)) problems.push('groups.json: em dash in a group name');
   const roles = [];
   const seen = new Set();
   for (const r of rs.roles) {
     const k = r.key;
+    if (!KEY_RE.test(String(k))) problems.push(`role key ${JSON.stringify(k)} must be lowercase words joined by hyphens`);
     if (seen.has(k)) problems.push('duplicate role key ' + k);
     if (builtin.has(k)) problems.push(`${k}: Kosmos already has a built-in role with this key`);
     seen.add(k);
@@ -114,7 +116,20 @@ function build(src = {}) {
   const teams = [];
   const seenNames = new Map();
   const seenRanks = new Map();
+  const avatarIds = new Map();
   for (const t of ts.teams) {
+    // Keys and slots name files (avatars/<key>-<slot>.webp), so they are checked before any use.
+    if (!KEY_RE.test(String(t.key))) { problems.push(`team key ${JSON.stringify(t.key)} must be lowercase words joined by hyphens`); continue; }
+    if (!Array.isArray(t.members) || !t.members.every((m) => m && typeof m === 'object')) { problems.push(`${t.key}: members must be a list of people`); continue; }
+    const badSlot = t.members.find((m) => !KEY_RE.test(String(m.slot)));
+    if (badSlot) { problems.push(`${t.key}: slot ${JSON.stringify(badSlot.slot)} must be lowercase words joined by hyphens`); continue; }
+    const unnamed = t.members.find((m) => typeof m.name !== 'string' || !m.name);
+    if (unnamed) { problems.push(`${t.key}/${unnamed.slot}: needs a suggested name`); continue; }
+    for (const m of t.members) {
+      const id = `${t.key}-${m.slot}`;
+      if (avatarIds.has(id)) problems.push(`portrait id ${id} is used by ${avatarIds.get(id)} and ${t.key}`);
+      avatarIds.set(id, t.key);
+    }
     for (const m of t.members) {
       const lower = m.name.toLowerCase();
       if (seenNames.has(lower)) problems.push(`suggested name ${m.name} is used by ${seenNames.get(lower)} and ${t.key}`);
@@ -159,6 +174,11 @@ function build(src = {}) {
   return { catalogue, text: JSON.stringify(catalogue, null, 2) + '\n', problems };
 }
 
+const KEY_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+// A commit time this far past the clock is a wrong clock, not a build: signed as the serial, it
+// would make Kosmos refuse every real catalogue until the clock caught up.
+const FUTURE_SKEW_S = 3600;
+
 function sha256(bytes) { return crypto.createHash('sha256').update(bytes).digest('hex'); }
 
 function readBuiltin(root, problems) {
@@ -193,10 +213,24 @@ function commitTime(root) {
   } catch { return 0; }
 }
 
-function main(argv) {
-  const serial = commitTime(source.ROOT);
-  const { catalogue, text, problems } = build({ serial });
-  if (!serial) problems.push('no serial: build.js must run in a git checkout with a commit');
+/** Why a serial cannot be signed, or null. */
+function serialProblem(serial, nowS = Math.floor(Date.now() / 1000)) {
+  if (!Number.isInteger(serial) || serial < 1) return 'no serial: build.js must run in a git checkout with a commit';
+  if (serial > nowS + FUTURE_SKEW_S) return `the commit time ${serial} is later than now (${nowS}); a wrong clock made that commit`;
+  return null;
+}
+
+/**
+ * @param {string[]} argv
+ * @param {{root?: string, out?: string, nowS?: number}} [opts] a repo copy and output folder (tests)
+ */
+function main(argv, opts = {}) {
+  const root = opts.root || source.ROOT;
+  const out = opts.out || OUT;
+  const serial = commitTime(root);
+  const { catalogue, text, problems } = build({ root, serial });
+  const sp = serialProblem(serial, opts.nowS);
+  if (sp) problems.push(sp);
   if (problems.length) {
     process.stderr.write('refused:\n  ' + problems.join('\n  ') + '\n');
     return 1;
@@ -204,17 +238,17 @@ function main(argv) {
   const members = catalogue.teams.reduce((s, t) => s + t.members.length, 0);
   const summary = `${catalogue.roles.length} roles and ${catalogue.teams.length} teams (${members} members)`;
   if (argv.includes('--check')) { process.stdout.write(`ok: ${summary}\n`); return 0; }
-  fs.mkdirSync(OUT, { recursive: true });
-  fs.writeFileSync(path.join(OUT, 'catalogue.json'), text);
+  fs.mkdirSync(out, { recursive: true });
+  fs.writeFileSync(path.join(out, 'catalogue.json'), text);
   // The portraits the catalogue names, published beside it under the same relative paths.
   const images = catalogue.teams.flatMap((t) => t.members.map((m) => m.avatar.image)).filter(Boolean);
   for (const rel of images) {
-    fs.mkdirSync(path.dirname(path.join(OUT, rel)), { recursive: true });
-    fs.copyFileSync(path.join(source.ROOT, rel), path.join(OUT, rel));
+    fs.mkdirSync(path.dirname(path.join(out, rel)), { recursive: true });
+    fs.copyFileSync(path.join(root, rel), path.join(out, rel));
   }
-  process.stdout.write(`wrote dist/catalogue.json: ${summary}\n`);
+  process.stdout.write(`wrote catalogue.json: ${summary}\n`);
   return 0;
 }
 
-module.exports = { build, sha256, EM_DASHES };
+module.exports = { build, main, sha256, serialProblem, EM_DASHES };
 if (require.main === module) process.exitCode = main(process.argv.slice(2));

@@ -73,7 +73,9 @@ test('teams: unique keys and ranks, a lead plus 4 or 5 reports, every member com
       }
       assert.ok(!ids.has(m.avatar.id), `avatar id ${m.avatar.id} repeats`);
       ids.add(m.avatar.id);
-      if (m.avatar.image !== null) assert.ok(fs.existsSync(path.join(REPO, m.avatar.image)), `${m.avatar.image} is named but missing`);
+      if (m.avatar.image !== null) {
+        assert.equal(build.sha256(fs.readFileSync(path.join(REPO, m.avatar.image))), m.avatar.imageSha256, `${m.avatar.image}: hash`);
+      } else assert.equal(m.avatar.imageSha256, null);
     }
     assert.ok(t.label && t.blurb && t.purpose && t.project && t.project.name && t.project.goal, `${t.key}: missing text`);
     assert.match(t.caution, /lead briefs the rest of the team/);
@@ -237,4 +239,59 @@ test('a portrait is published with its sha256 inside the signed catalogue, and a
 test('the serial is written into the catalogue as given', () => {
   assert.equal(build.build({ serial: 1759190400 }).catalogue.serial, 1759190400);
   assert.equal(build.build().catalogue.serial, 0);
+});
+
+test('a key or slot that is not lowercase words and hyphens is refused before it names a file', () => {
+  const t = source.read().teamsSource;
+  t.teams[0].members[1].slot = '../../x';
+  assert.ok(build.build({ teamsSource: t }).problems.some((p) => /slot "\.\.\/\.\.\/x" must be lowercase/.test(p)));
+  const k = source.read().teamsSource;
+  k.teams[0].key = 'Bad Key';
+  assert.ok(build.build({ teamsSource: k }).problems.some((p) => /team key "Bad Key"/.test(p)));
+  const r = source.read().rolesSource;
+  r.roles[0].key = 'a/b';
+  assert.ok(build.build({ rolesSource: r }).problems.some((p) => /role key "a\/b"/.test(p)));
+  // Two teams whose key and slot join to the same portrait id.
+  const j = source.read().teamsSource;
+  j.teams[0].key = 'x-y'; j.teams[0].members[1].slot = 'z';
+  j.teams[1].key = 'x'; j.teams[1].members[1].slot = 'y-z';
+  assert.ok(build.build({ teamsSource: j }).problems.some((p) => /portrait id x-y-z is used by/.test(p)));
+  const dir = copyRepo();
+  try {
+    fs.writeFileSync(path.join(dir, 'groups.json'), JSON.stringify([{ group: 'G', roles: ['../escape'] }]));
+    assert.ok(build.build({ root: dir }).problems.some((p) => /role key "\.\.\/escape"/.test(p)));
+    fs.writeFileSync(path.join(dir, 'groups.json'), '{"not": "a list"}');
+    assert.ok(build.build({ root: dir }).problems.some((p) => /groups\.json: must be a list/.test(p)));
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('a serial is refused when there is none or when the commit clock was ahead of now', () => {
+  const now = 1759190400;
+  assert.equal(build.serialProblem(now - 60, now), null, 'CONTROL: a past commit time is fine');
+  assert.equal(build.serialProblem(now + 600, now), null, 'a small skew is allowed');
+  assert.match(build.serialProblem(now + 7200, now), /later than now/);
+  assert.match(build.serialProblem(0, now), /no serial/);
+});
+
+test('main: refuses outside a git checkout, and in one writes the catalogue with its serial and portraits', () => {
+  const { execFileSync } = require('node:child_process');
+  const dir = copyRepo();
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-out-'));
+  const quiet = (fn) => { const w = process.stdout.write; const e = process.stderr.write; process.stdout.write = () => true; process.stderr.write = () => true; try { return fn(); } finally { process.stdout.write = w; process.stderr.write = e; } };
+  try {
+    assert.equal(quiet(() => build.main(['--check'], { root: dir, out })), 1, 'no git, no serial: refused');
+    const id = build.build().catalogue.teams[0].members[0].avatar.id;
+    fs.mkdirSync(path.join(dir, 'avatars'));
+    fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), 'portrait');
+    const git = (...a) => execFileSync('git', ['-C', dir, ...a], { stdio: 'ignore', env: { ...process.env, GIT_AUTHOR_NAME: 't', GIT_AUTHOR_EMAIL: 't@t', GIT_COMMITTER_NAME: 't', GIT_COMMITTER_EMAIL: 't@t' } });
+    git('init', '-q'); git('add', '-A'); git('commit', '-q', '-m', 'x');
+    assert.equal(quiet(() => build.main(['--check'], { root: dir, out })), 0);
+    assert.equal(fs.readdirSync(out).length, 0, '--check wrote something');
+    assert.equal(quiet(() => build.main([], { root: dir, out })), 0);
+    const c = JSON.parse(fs.readFileSync(path.join(out, 'catalogue.json'), 'utf8'));
+    assert.ok(c.serial > 1700000000, `serial ${c.serial} is not a commit time`);
+    assert.equal(fs.readFileSync(path.join(out, 'avatars', id + '.webp'), 'utf8'), 'portrait');
+    // A clock that says the commit is from the past means the same checkout is from the future.
+    assert.equal(quiet(() => build.main(['--check'], { root: dir, out, nowS: c.serial - 7200 })), 1);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); fs.rmSync(out, { recursive: true, force: true }); }
 });

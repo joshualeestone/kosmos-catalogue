@@ -89,6 +89,8 @@ What the signed file carries for Kosmos to check:
   person's computer is refused.
 - **`serial`**, the commit time of the build, so Kosmos can refuse a catalogue older than the one it
   already holds. An old file replayed later still has a valid signature; the serial is what stops it.
+  A copy of Kosmos that holds no catalogue yet has nothing to compare against, so Kosmos also
+  refuses any serial older than the one it was released with.
 - **`avatar.imageSha256`** for every portrait, so an image fetched beside the catalogue can be
   checked too.
 

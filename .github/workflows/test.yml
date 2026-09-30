@@ -21,5 +21,6 @@ jobs:
       - run: node build.js
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: catalogue
+          # UNSIGNED: for looking at, never for publishing (publish.yml signs what it deploys).
+          name: catalogue-unsigned
           path: dist/
