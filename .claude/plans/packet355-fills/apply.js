@@ -133,6 +133,38 @@ for (const [pk, pubKey] of Object.entries(fixed.rekey)) {
   t.key = pubKey;
 }
 
+// A new role renamed so it does not read like its neighbour in the picker (review 4).
+for (const r of roles) {
+  const to = (fixed.roleName || {})[r.key];
+  if (!to) continue;
+  const was = r.name;
+  r.name = to;
+  r.instructions = r.instructions.map((l) => l.replace(`You are the **${was}**.`, `You are the **${to}**.`));
+}
+// Team text (review 4). The packet's purpose and goal are one template for all 77 ("Designed for ...
+// executing on <name>", "Deliver a comprehensive initial <name> plan"), with names lower-cased (hr, seo).
+// A team that replaces a published one keeps the published purpose and goal, which were written for it,
+// and its blurb where the members are the same. Every other team keeps the packet's one specific sentence.
+const plainCase = (label) => label.replace(/ Team$/, '').split(' ').map((w, i) => (/^[A-Z0-9&]{2,}$/.test(w) ? w : (i === 0 ? w : w.toLowerCase()))).join(' ');
+for (const t of teams) {
+  let pub = null;
+  try { pub = JSON.parse(fs.readFileSync(path.join(CAT, 'teams', `${t.key}.json`), 'utf8')); } catch { /* a new team */ }
+  if (pub) {
+    t.purpose = pub.purpose;
+    t.goal = pub.project.goal;
+    if (!(fixed.publishedBlurbExcept || []).includes(t.key)) t.blurb = pub.blurb;
+    continue;
+  }
+  const m = /^(?:Designed for business owners, leaders, and teams executing on|Created for individuals, families, and organizers looking for dedicated support with) [^.]+\. (.+?\.) The team (?:coordinates|takes care of) [^.]+\.$/.exec(t.purpose);
+  if (!m) { problems.push(`${t.key}: purpose is not the packet template, left as it is: ${t.purpose}`); continue; }
+  const doing = (m[1].charAt(0).toLowerCase() + m[1].slice(1)).replace(/the user[’']s/g, 'your');
+  t.purpose = t.kind === 'business' ? `For a business that wants to ${doing}` : `For anyone who wants to ${doing}`;
+  const name = plainCase(t.label);
+  const lead = /^[A-Z0-9&]{2,}$/.test(name.split(' ')[0]) ? name : name.charAt(0).toLowerCase() + name.slice(1);
+  t.goal = `A clear first plan for ${lead}, with milestones, an owner for each, and what done looks like.`;
+}
+for (const t of teams) t.blurb = t.blurb.replace(/the user[’']s/g, 'your');
+
 // "A Automation Lead" and the like.
 for (const t of teams) t.blurb = t.blurb.replace(/^A (?=[AEIOU])/, 'An ');
 

@@ -167,7 +167,7 @@
   [
    "Send reports."
   ],
-  null
+  "It prepares reports; you send them to the board and investors."
  ],
  "financial-reporting-analyst": [
   "Prepares financial reports and explains the numbers",
@@ -284,7 +284,7 @@
    "The price, the deposit, and the loan terms."
   ],
   [
-   "Apply for loans or commit money."
+   "Give financial advice, apply for loans, or commit money."
   ],
   "It estimates costs; it is not a financial advisor."
  ],
@@ -301,7 +301,8 @@
    "The key dates and who is involved."
   ],
   [
-   "Sign, pay, or waive any condition."
+   "Sign, pay, or waive any condition.",
+   "Give legal or inspection advice."
   ],
   "It organizes the purchase; it is not a lawyer or an inspector."
  ],
@@ -320,7 +321,7 @@
   [
    "Accept offers, sign, or change the price."
   ],
-  null
+  "It coordinates the sale; you accept offers and sign."
  ],
  "home-preparation-planner": [
   "Plans repairs, staging, and cleaning before a sale",
@@ -455,7 +456,8 @@
    "Interests, where the person wants to live, and the budget."
   ],
   [
-   "Book or buy anything."
+   "Book or buy anything.",
+   "Give financial advice."
   ],
   "It plans; it is not a financial advisor."
  ],

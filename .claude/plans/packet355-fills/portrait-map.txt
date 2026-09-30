@@ -103,7 +103,7 @@ customer-support-feedback-analyst.png -> support-voc
 fundraising-and-grants-development-director.png -> fundraising-lead
 fundraising-and-grants-funding-researcher.png -> fundraising-researcher
 fundraising-and-grants-grant-and-pitch-writer.png -> fundraising-grants
-fundraising-and-grants-donor-and-investor-relations-specialist.png -> fundraising-investor
+fundraising-and-grants-donor-and-investor-relations-specialist.png -> fundraising-donors
 fundraising-and-grants-fundraising-events-coordinator.png -> fundraising-events
 fundraising-and-grants-newsletter-and-impact-writer.png -> fundraising-newsletter
 logistics-logistics-manager.png -> logistics-lead
@@ -189,7 +189,7 @@ personal-assistant-personal-chief-of-staff.png -> life-lead
 personal-assistant-inbox-and-calendar-assistant.png -> life-personal
 personal-assistant-health-administration-assistant.png -> life-health
 personal-assistant-personal-finance-organizer.png -> life-personal-finance-organizer
-personal-assistant-travel-and-errands-planner.png -> life-shopper
+personal-assistant-travel-and-errands-planner.png -> life-travel
 household-management-household-manager.png -> home-lead
 household-management-maintenance-coordinator.png -> home-maintenance
 household-management-meal-and-grocery-planner.png -> home-meals
@@ -202,7 +202,7 @@ shopping-and-product-research-shopping-research-lead.png -> shopping-and-product
 shopping-and-product-research-product-researcher.png -> shopping-and-product-research-researcher
 shopping-and-product-research-price-and-purchase-analyst.png -> shopping-and-product-research-shopper
 family-care-coordination-family-care-coordinator.png -> family-care-coordination-lead
-family-care-coordination-appointments-and-records-organizer.png -> family-care-coordination-appointments-records-organizer
+family-care-coordination-appointments-and-records-organizer.png -> family-care-coordination-healthadmin
 family-care-coordination-care-schedule-planner.png -> family-care-coordination-care-schedule-planner
 family-care-coordination-family-updates-specialist.png -> family-care-coordination-family
 personal-finance-personal-finance-manager.png -> money-lead
@@ -221,7 +221,7 @@ learning-and-tutoring-practice-and-assessment-designer.png -> learning-and-tutor
 college-and-scholarship-applications-college-planning-lead.png -> college-and-scholarship-applications-lead
 college-and-scholarship-applications-school-and-program-researcher.png -> college-and-scholarship-applications-researcher
 college-and-scholarship-applications-scholarship-and-cost-researcher.png -> college-and-scholarship-applications-researcher-2
-college-and-scholarship-applications-application-writing-coach.png -> college-and-scholarship-applications-personal-coach
+college-and-scholarship-applications-application-writing-coach.png -> college-and-scholarship-applications-tutor
 college-and-scholarship-applications-deadline-and-documents-coordinator.png -> college-and-scholarship-applications-deadline-documents-coordinator
 health-and-wellness-wellness-coach.png -> health-lead
 health-and-wellness-fitness-planner.png -> health-fitness
@@ -255,13 +255,13 @@ cybersecurity-security-lead.png -> cybersecurity-lead
 cybersecurity-security-configuration-analyst.png -> cybersecurity-security
 cybersecurity-identity-and-access-specialist.png -> cybersecurity-identity-access-specialist
 cybersecurity-incident-preparedness-specialist.png -> cybersecurity-security-2
-cybersecurity-security-awareness-writer.png -> cybersecurity-security-3
+cybersecurity-security-awareness-writer.png -> cybersecurity-training
 quality-assurance-and-testing-qa-lead.png -> quality-assurance-and-testing-lead
 quality-assurance-and-testing-functional-test-specialist.png -> quality-assurance-and-testing-qa
 quality-assurance-and-testing-accessibility-and-usability-tester.png -> quality-assurance-and-testing-qa-2
 quality-assurance-and-testing-test-automation-engineer.png -> quality-assurance-and-testing-qa-3
 business-automation-automation-lead.png -> business-automation-lead
-business-automation-workflow-analyst.png -> business-automation-ops
+business-automation-workflow-analyst.png -> business-automation-process
 business-automation-integration-builder.png -> business-automation-engineer
 business-automation-automation-qa-specialist.png -> business-automation-qa
 board-and-investor-reporting-reporting-director.png -> board-and-investor-reporting-lead
@@ -352,4 +352,4 @@ family-occasions-and-activities-planner.png -> family-occasions
 translation-and-localization-localization-lead.png -> translation-and-localization-lead
 translation-and-localization-translator.png -> translation-and-localization-translator
 translation-and-localization-cultural-adaptation-specialist.png -> translation-and-localization-cultural-adaptation-specialist
-translation-and-localization-localization-qa-specialist.png -> translation-and-localization-qa
+translation-and-localization-localization-qa-specialist.png -> translation-and-localization-translator-2

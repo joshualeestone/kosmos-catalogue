@@ -1,0 +1,99 @@
+{
+  "key": "home-renovation",
+  "kind": "personal",
+  "rank": 11,
+  "label": "Home Renovation Team",
+  "blurb": "A Renovation Project Manager and 4 specialists who turn renovation goals into a coordinated scope, budget, and project plan",
+  "purpose": "For anyone who wants to turn renovation goals into a coordinated scope, budget, and project plan.",
+  "project": {
+    "name": "Home Renovation",
+    "goal": "A clear first plan for home renovation, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "renovation-planner",
+      "title": "Renovation Project Manager",
+      "name": "Folake",
+      "focus": [
+        "Defines scope, coordinates research and schedules, and reviews changes with the homeowner."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Yoruba Nigerian",
+        "hair": "straight hair cut into a polished modern bob",
+        "attire": "polished dark wrap top with simple silver jewelry",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Design and Materials Researcher",
+      "name": "Arif",
+      "focus": [
+        "Develops design options and compares finishes, fixtures, and materials."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "man",
+        "heritage": "Bengali Bangladeshi",
+        "hair": "short neat dark hair parted on the side",
+        "attire": "tailored unstructured navy blazer over a crisp linen shirt",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    },
+    {
+      "slot": "researcher-2",
+      "role": "researcher",
+      "title": "Contractor Researcher",
+      "name": "Nils",
+      "focus": [
+        "Builds contractor shortlists and compares quotes, references, and stated qualifications."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "man",
+        "heritage": "Swedish",
+        "hair": "trimmed dark hair with a neatly maintained short beard",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "budget",
+      "role": "budget",
+      "title": "Budget and Schedule Analyst",
+      "name": "Alessia",
+      "focus": [
+        "Models costs, contingencies, dependencies, and project milestones."
+      ],
+      "avatar": {
+        "apparentAge": "Late 20s",
+        "presentation": "woman",
+        "heritage": "Italian",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "smart knit cardigan over a crisp collared blouse",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "project-documentation-coordinator",
+      "role": "project-documentation-coordinator",
+      "title": "Project Documentation Coordinator",
+      "name": "Saira",
+      "focus": [
+        "Tracks decisions, specifications, progress records, and permit questions for local professionals."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Punjabi Pakistani",
+        "hair": "sleek dark hair tied in a professional ponytail",
+        "attire": "structured linen shirt in an earthy neutral tone",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    }
+  ]
+}

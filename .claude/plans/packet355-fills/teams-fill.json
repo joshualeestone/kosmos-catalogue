@@ -481,7 +481,8 @@
   "procedure-writer": "process",
   "packaging-experiment-specialist": "pricing",
   "knowledge-escalation-specialist": "kb",
-  "renewal-growth-coordinator": "csm"
+  "renewal-growth-coordinator": "csm",
+  "appointments-records-organizer": "healthadmin"
  },
  "seat": {
   "wedding-planning/Budget and Booking Coordinator": "events",
@@ -533,7 +534,14 @@
   "meal-planning/Dietary Needs Planner": "nutrition",
   "campaign-and-product-launch/Campaign Producer": "marketing",
   "real-estate-investment-research/Property Diligence Coordinator": "purchase-diligence-organizer",
-  "personal-assistant/Personal Chief of Staff": "cos"
+  "personal-assistant/Personal Chief of Staff": "cos",
+  "fundraising-and-grants/Donor and Investor Relations Specialist": "donors",
+  "side-business/Side Business Coach": "startup-planning-lead",
+  "cybersecurity/Security Awareness Writer": "training",
+  "translation-and-localization/Localization QA Specialist": "translator",
+  "college-and-scholarship-applications/Application Writing Coach": "tutor",
+  "personal-assistant/Travel and Errands Planner": "travel",
+  "business-automation/Workflow Analyst": "process"
  },
  "positional": [
   "content",
@@ -648,5 +656,11 @@
   "planning-questions-coordinator": "Personal and family",
   "home-baby-supplies-planner": "Personal and family",
   "pet-care-coordinator": "Personal and family"
- }
+ },
+ "roleName": {
+  "personal-finance-organizer": "Bills and Paperwork Organizer"
+ },
+ "publishedBlurbExcept": [
+  "life"
+ ]
 }
