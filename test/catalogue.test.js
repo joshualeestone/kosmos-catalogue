@@ -658,6 +658,16 @@ test('a role written for a team lead is refused in a seat that reports to the le
     `premise or check: a report on the lead role ${leadRole} was not refused`);
 });
 
+test('a built-in role written for a lead (pm) is refused on a report seat too (#4555)', () => {
+  const b = JSON.parse(fs.readFileSync(path.join(REPO, 'kosmos-builtin-roles.json'), 'utf8'));
+  assert.deepEqual(b.leadOnly, ['pm'], 'premise: pm is listed as lead-only');
+  const t = source.read().teamsSource;
+  assert.deepEqual(build.build({ teamsSource: t }).problems.filter((p) => /role pm is written/.test(p)), [], 'CONTROL: no report sits on pm');
+  const seat = t.teams[0].members.find((m) => m.slot !== 'lead');
+  seat.role = 'pm';
+  assert.ok(build.build({ teamsSource: t }).problems.includes(`${t.teams[0].key}/${seat.slot}: role pm is written for a team's lead, and this seat reports to the lead`));
+});
+
 test('two teams with one name are refused, whatever the case (#4555)', () => {
   const t = source.read().teamsSource;
   assert.deepEqual(build.build({ teamsSource: t }).problems.filter((p) => /is already the team/.test(p)), [], 'CONTROL: no two published teams share a name');

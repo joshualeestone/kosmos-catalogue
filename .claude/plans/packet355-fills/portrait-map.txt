@@ -182,7 +182,7 @@ home-renovation-contractor-researcher.png -> home-renovation-researcher-2
 home-renovation-budget-and-schedule-analyst.png -> home-renovation-budget
 home-renovation-project-documentation-coordinator.png -> home-renovation-project-documentation-coordinator
 community-and-volunteer-coordination-community-program-lead.png -> community-and-volunteer-coordination-lead
-community-and-volunteer-coordination-volunteer-coordinator.png -> community-and-volunteer-coordination-pm
+community-and-volunteer-coordination-volunteer-coordinator.png -> community-and-volunteer-coordination-onboarding
 community-and-volunteer-coordination-activities-and-logistics-planner.png -> community-and-volunteer-coordination-events
 community-and-volunteer-coordination-community-communications-specialist.png -> community-and-volunteer-coordination-pr
 personal-assistant-personal-chief-of-staff.png -> life-lead

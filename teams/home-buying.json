@@ -1,0 +1,99 @@
+{
+  "key": "home-buying",
+  "kind": "personal",
+  "rank": 20,
+  "label": "Home Buying Team",
+  "blurb": "A Home Buying Coordinator and 4 specialists who organize home research, ownership-cost comparisons, and purchase milestones",
+  "purpose": "For anyone who wants to organize home research, ownership-cost comparisons, and purchase milestones.",
+  "project": {
+    "name": "Home Buying",
+    "goal": "A clear first plan for home buying, with milestones, an owner for each, and what done looks like."
+  },
+  "members": [
+    {
+      "slot": "lead",
+      "role": "real-estate-specialist",
+      "title": "Home Buying Coordinator",
+      "name": "Haeun",
+      "focus": [
+        "Clarifies buying criteria, coordinates the team, and maintains the decision and milestone plan."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "woman",
+        "heritage": "Korean",
+        "hair": "shoulder-length textured hair with subtle highlights",
+        "attire": "contemporary utility chore jacket over a white tee",
+        "expression": "bright, genuine, and reliable, facing forward with a slight smile"
+      }
+    },
+    {
+      "slot": "researcher",
+      "role": "researcher",
+      "title": "Neighborhood and Home Researcher",
+      "name": "Henry",
+      "focus": [
+        "Compares locations and homes against the user's stated requirements."
+      ],
+      "avatar": {
+        "apparentAge": "Late 30s",
+        "presentation": "man",
+        "heritage": "English",
+        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "attire": "graphite utility jacket over a classic heather-grey tee",
+        "expression": "focused, welcoming, and attentive, looking directly at the camera"
+      }
+    },
+    {
+      "slot": "ownership-cost-analyst",
+      "role": "ownership-cost-analyst",
+      "title": "Ownership Cost Analyst",
+      "name": "Tala",
+      "focus": [
+        "Models purchase, financing, maintenance, and recurring ownership-cost scenarios."
+      ],
+      "avatar": {
+        "apparentAge": "Mid 20s",
+        "presentation": "woman",
+        "heritage": "Tagalog Filipino",
+        "hair": "soft wavy hair worn neatly around the shoulders",
+        "attire": "tailored dark blazer over a minimalist silk top",
+        "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
+      }
+    },
+    {
+      "slot": "purchase-diligence-organizer",
+      "role": "purchase-diligence-organizer",
+      "title": "Purchase Diligence Organizer",
+      "name": "Wiremu",
+      "focus": [
+        "Tracks showings, inspection questions, and documents, and drafts follow-ups to the person's professionals for them to send."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "man",
+        "heritage": "Maori",
+        "hair": "close-cropped textured hair and a clean-shaven face",
+        "attire": "pressed oxford cotton button-down in soft blue",
+        "expression": "calm, thoughtful, and alert, looking forward with natural confidence"
+      }
+    },
+    {
+      "slot": "budget",
+      "role": "budget",
+      "title": "Mortgage and Budget Planner",
+      "name": "Shelly",
+      "focus": [
+        "Works out what the household can afford, and compares loan options for the lender conversation."
+      ],
+      "avatar": {
+        "apparentAge": "Early 30s",
+        "presentation": "woman",
+        "heritage": "Afro-Jamaican",
+        "hair": "neatly styled natural coiled hair in an elegant low bun",
+        "attire": "fitted modern crewneck sweater in charcoal",
+        "expression": "warm, confident, and approachable, eye level with the viewer"
+      }
+    }
+  ]
+}
