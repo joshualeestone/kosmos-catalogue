@@ -167,8 +167,17 @@ function emDashIn(value) {
  *   copy); serial is written into the catalogue (0 when not given; main() passes the commit time)
  * @returns {{catalogue: object, text: string, problems: string[]}}
  */
+// kosmos#4720: no Kosmos that is served yet reads /api/catalogue/portrait. A served build that sees
+// avatar.image fetches that path from its own board, which does not serve it, so every member of a
+// made team got no picture and a "portrait could not be set" row. Until the release with tcPortrait's
+// fix is served, the portraits stay in avatars/ (still checked) but the catalogue names none, which
+// is what the served builds handled before: the generated mark for each member's name. Turn this back
+// to true in the commit that follows that release.
+const PUBLISH_PORTRAITS = false;
+
 function build(src = {}) {
   const root = src.root || source.ROOT;
+  const publishPortraits = src.portraits === undefined ? PUBLISH_PORTRAITS : Boolean(src.portraits);
   const read = source.read(root);
   const rs = src.rolesSource || read.rolesSource;
   const ts = src.teamsSource || read.teamsSource;
@@ -307,7 +316,8 @@ function build(src = {}) {
     const members = t.members.map((m) => {
       const id = `${t.key}-${m.slot}`;
       // The portrait, when one has been made: avatars/<id>.webp, published beside catalogue.json.
-      const image = portrait(root, id, problems);
+      const checked = portrait(root, id, problems);
+      const image = publishPortraits ? checked : null;
       const a = { ...m.avatar, id, image: image && image.path, imageSha256: image && image.sha256 };
       const title = lowerLabel(m.title);
       const pronoun = { woman: 'her', man: 'his' }[a.presentation] || 'their';
@@ -450,7 +460,7 @@ function main(argv, opts = {}) {
   }
   const commit = commitTime(root);
   const serial = commit ? Math.max(commit, previous + 1) : 0;
-  const { catalogue, text, problems } = build({ root, serial });
+  const { catalogue, text, problems } = build({ root, serial, portraits: opts.portraits });
   const sp = serialProblem(serial, opts.nowS);
   if (sp) problems.push(sp);
   if (problems.length) {
@@ -474,5 +484,5 @@ function main(argv, opts = {}) {
   return 0;
 }
 
-module.exports = { build, main, withoutGitDir, sha256, serialProblem, nameProblem, slugFor, EM_DASHES };
+module.exports = { PUBLISH_PORTRAITS, build, main, withoutGitDir, sha256, serialProblem, nameProblem, slugFor, EM_DASHES };
 if (require.main === module) process.exitCode = main(process.argv.slice(2));

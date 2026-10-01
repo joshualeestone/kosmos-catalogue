@@ -257,7 +257,7 @@ test('a portrait is published with its sha256 inside the signed catalogue, and a
     const id = build.build().catalogue.teams[0].members[0].avatar.id;
     fs.mkdirSync(path.join(dir, 'avatars'));
     fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), webp('image bytes'));
-    const a = build.build({ root: dir }).catalogue.teams.flatMap((t) => t.members).find((m) => m.avatar.id === id).avatar;
+    const a = build.build({ root: dir, portraits: true }).catalogue.teams.flatMap((t) => t.members).find((m) => m.avatar.id === id).avatar;
     assert.equal(a.image, `avatars/${id}.webp`);
     assert.equal(a.imageSha256, build.sha256(webp('image bytes')));
     fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), 'not an image');
@@ -267,6 +267,25 @@ test('a portrait is published with its sha256 inside the signed catalogue, and a
     fs.rmSync(path.join(dir, 'avatars', id + '.webp'));
     fs.symlinkSync(path.join(REPO, 'README.md'), path.join(dir, 'avatars', id + '.webp'));
     assert.ok(build.build({ root: dir }).problems.some((p) => /must be a regular file/.test(p)));
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('kosmos#4720: while PUBLISH_PORTRAITS is off, no member names a portrait and none is copied, but bad ones are still refused', () => {
+  assert.equal(build.PUBLISH_PORTRAITS, false);
+  const dir = copyRepo();
+  try {
+    const id = build.build().catalogue.teams[0].members[0].avatar.id;
+    fs.mkdirSync(path.join(dir, 'avatars'), { recursive: true });
+    fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), webp('image bytes'));
+    const c = build.build({ root: dir }).catalogue;
+    const all = c.teams.flatMap((t) => t.members);
+    assert.ok(all.length > 0);
+    assert.deepEqual(all.filter((m) => m.avatar.image !== null || m.avatar.imageSha256 !== null).map((m) => m.avatar.id), []);
+    // CONTROL: the same tree with portraits on names this one, so the check above can see a portrait.
+    const on = build.build({ root: dir, portraits: true }).catalogue.teams.flatMap((t) => t.members).find((m) => m.avatar.id === id);
+    assert.equal(on.avatar.image, `avatars/${id}.webp`);
+    fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), 'not an image');
+    assert.ok(build.build({ root: dir }).problems.some((p) => /is not a WebP image/.test(p)));
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
@@ -328,6 +347,9 @@ test('main: refuses outside a git checkout, and in one writes the catalogue with
     assert.equal(quiet(() => build.main([], { root: dir, out })), 0);
     const c = JSON.parse(fs.readFileSync(path.join(out, 'catalogue.json'), 'utf8'));
     assert.ok(c.serial > 1700000000, `serial ${c.serial} is not a commit time`);
+    // kosmos#4720: with portraits off (the default for now) none is written; on, it is copied.
+    assert.equal(fs.existsSync(path.join(out, 'avatars')), build.PUBLISH_PORTRAITS, 'portraits written while off');
+    assert.equal(quiet(() => build.main([], { root: dir, out, portraits: true })), 0);
     assert.deepEqual(fs.readFileSync(path.join(out, 'avatars', id + '.webp')), webp('portrait'));
     // A clock that says the commit is from the past means the same checkout is from the future.
     assert.equal(quiet(() => build.main(['--check'], { root: dir, out, nowS: c.serial - 7200 })), 1);
