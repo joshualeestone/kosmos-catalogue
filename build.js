@@ -5,7 +5,7 @@
  * (joshualeestone/kosmos#4632); the roles and teams it writes are the shape Kosmos's
  * engine/catalogue.js reads.
  *
- *     node build.js            check everything, then write dist/catalogue.json and the portraits
+ *     node build.js            check everything, then write dist/catalogue.json and the portraits it names (none while PUBLISH_PORTRAITS is off)
  *     node build.js --check    check everything, write nothing (exit 1 on any problem)
  *
  * It refuses to write anything while a single problem remains. test/catalogue.test.js checks the

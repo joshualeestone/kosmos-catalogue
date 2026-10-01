@@ -72,7 +72,7 @@ later, and compares) and a git clone (the build's serial is the commit time). No
 ```sh
 node build.js --check   # check everything, write nothing
 node --test test/       # the catalogue's rules
-node build.js           # write dist/catalogue.json and copy the portraits into dist/
+node build.js           # write dist/catalogue.json and (while PUBLISH_PORTRAITS is on) copy the portraits into dist/
 ```
 
 **For now (kosmos#4720), `PUBLISH_PORTRAITS` in build.js is off:** the portraits in `avatars/` are still
