@@ -5,7 +5,7 @@
  * (joshualeestone/kosmos#4632); the roles and teams it writes are the shape Kosmos's
  * engine/catalogue.js reads.
  *
- *     node build.js            check everything, then write dist/catalogue.json and the portraits
+ *     node build.js            check everything, then write dist/catalogue.json and the portraits it names (none while PUBLISH_PORTRAITS is off)
  *     node build.js --check    check everything, write nothing (exit 1 on any problem)
  *
  * It refuses to write anything while a single problem remains. test/catalogue.test.js checks the
@@ -160,15 +160,26 @@ function emDashIn(value) {
   return EM_DASHES.some((s) => blob.includes(s)) || /&#0*8212;|&#x0*2014;/i.test(blob);
 }
 
+// kosmos#4720: no Kosmos that is served yet reads /api/catalogue/portrait. A served build that sees
+// avatar.image fetches that path from its own board, which does not serve it, so every member of a
+// made team got no picture and a "portrait could not be set" row. Until a PRODUCTION Kosmos carrying
+// kosmos#4720 is served (installkosmos.com/dist/latest.json; staging is not enough, because every install
+// on an older build still reads a named portrait as a path), the portraits stay in avatars/ (still
+// checked) but the catalogue names none, which is what the served builds handled before: the generated
+// mark for each member's name. Turning it back on is this one line (true); the tests follow the switch.
+const PUBLISH_PORTRAITS = false;
+
 /**
  * Compose the catalogue from the sources.
- * @param {{root?: string, rolesSource?: object, teamsSource?: object, serial?: number}} [src] a
+ * @param {{root?: string, rolesSource?: object, teamsSource?: object, serial?: number, portraits?: boolean}} [src] a
  *   repo copy to read, or source objects to use instead of reading one (a test passes an edited
- *   copy); serial is written into the catalogue (0 when not given; main() passes the commit time)
+ *   copy); serial is written into the catalogue (0 when not given; main() passes the commit time);
+ *   portraits overrides PUBLISH_PORTRAITS
  * @returns {{catalogue: object, text: string, problems: string[]}}
  */
 function build(src = {}) {
   const root = src.root || source.ROOT;
+  const publishPortraits = src.portraits === undefined ? PUBLISH_PORTRAITS : Boolean(src.portraits);
   const read = source.read(root);
   const rs = src.rolesSource || read.rolesSource;
   const ts = src.teamsSource || read.teamsSource;
@@ -307,7 +318,8 @@ function build(src = {}) {
     const members = t.members.map((m) => {
       const id = `${t.key}-${m.slot}`;
       // The portrait, when one has been made: avatars/<id>.webp, published beside catalogue.json.
-      const image = portrait(root, id, problems);
+      const checked = portrait(root, id, problems);
+      const image = publishPortraits ? checked : null;
       const a = { ...m.avatar, id, image: image && image.path, imageSha256: image && image.sha256 };
       const title = lowerLabel(m.title);
       const pronoun = { woman: 'her', man: 'his' }[a.presentation] || 'their';
@@ -434,8 +446,8 @@ function serialProblem(serial, nowS = Math.floor(Date.now() / 1000)) {
 
 /**
  * @param {string[]} argv
- * @param {{root?: string, out?: string, nowS?: number, previousSerial?: number}} [opts] a repo copy and
- *   output folder (tests), and the published serial the new one must exceed
+ * @param {{root?: string, out?: string, nowS?: number, previousSerial?: number, portraits?: boolean}} [opts] a repo copy and
+ *   output folder (tests), the published serial the new one must exceed, and portraits (see build())
  */
 function main(argv, opts = {}) {
   const root = opts.root || source.ROOT;
@@ -450,7 +462,7 @@ function main(argv, opts = {}) {
   }
   const commit = commitTime(root);
   const serial = commit ? Math.max(commit, previous + 1) : 0;
-  const { catalogue, text, problems } = build({ root, serial });
+  const { catalogue, text, problems } = build({ root, serial, portraits: opts.portraits });
   const sp = serialProblem(serial, opts.nowS);
   if (sp) problems.push(sp);
   if (problems.length) {
@@ -474,5 +486,5 @@ function main(argv, opts = {}) {
   return 0;
 }
 
-module.exports = { build, main, withoutGitDir, sha256, serialProblem, nameProblem, slugFor, EM_DASHES };
+module.exports = { PUBLISH_PORTRAITS, build, main, withoutGitDir, sha256, serialProblem, nameProblem, slugFor, EM_DASHES };
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
