@@ -164,9 +164,9 @@ function emDashIn(value) {
 // avatar.image fetches that path from its own board, which does not serve it, so every member of a
 // made team got no picture and a "portrait could not be set" row. Until a PRODUCTION Kosmos carrying
 // kosmos#4720 is served (installkosmos.com/dist/latest.json; staging is not enough, because every install
-// on an older build still reads a named portrait as a path), the portraits stay in avatars/ (still checked) but the catalogue names none, which
-// is what the served builds handled before: the generated mark for each member's name. Turning it back
-// on is this one line (true); the tests follow the switch.
+// on an older build still reads a named portrait as a path), the portraits stay in avatars/ (still
+// checked) but the catalogue names none, which is what the served builds handled before: the generated
+// mark for each member's name. Turning it back on is this one line (true); the tests follow the switch.
 const PUBLISH_PORTRAITS = false;
 
 /**
