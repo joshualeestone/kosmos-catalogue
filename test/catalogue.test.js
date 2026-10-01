@@ -270,22 +270,24 @@ test('a portrait is published with its sha256 inside the signed catalogue, and a
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
-test('kosmos#4720: while PUBLISH_PORTRAITS is off, no member names a portrait and none is copied, but bad ones are still refused', () => {
-  assert.equal(build.PUBLISH_PORTRAITS, false);
+test('kosmos#4720: with portraits off no member names one, the default follows PUBLISH_PORTRAITS, and bad ones are still refused', () => {
   const dir = copyRepo();
   try {
     const id = build.build().catalogue.teams[0].members[0].avatar.id;
     fs.mkdirSync(path.join(dir, 'avatars'), { recursive: true });
     fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), webp('image bytes'));
-    const c = build.build({ root: dir }).catalogue;
+    const c = build.build({ root: dir, portraits: false }).catalogue;
     const all = c.teams.flatMap((t) => t.members);
     assert.ok(all.length > 0);
     assert.deepEqual(all.filter((m) => m.avatar.image !== null || m.avatar.imageSha256 !== null).map((m) => m.avatar.id), []);
     // CONTROL: the same tree with portraits on names this one, so the check above can see a portrait.
     const on = build.build({ root: dir, portraits: true }).catalogue.teams.flatMap((t) => t.members).find((m) => m.avatar.id === id);
     assert.equal(on.avatar.image, `avatars/${id}.webp`);
+    // The default is the switch: named exactly when PUBLISH_PORTRAITS is on.
+    const dflt = build.build({ root: dir }).catalogue.teams.flatMap((t) => t.members).find((m) => m.avatar.id === id);
+    assert.equal(dflt.avatar.image, build.PUBLISH_PORTRAITS ? `avatars/${id}.webp` : null);
     fs.writeFileSync(path.join(dir, 'avatars', id + '.webp'), 'not an image');
-    assert.ok(build.build({ root: dir }).problems.some((p) => /is not a WebP image/.test(p)));
+    assert.ok(build.build({ root: dir, portraits: false }).problems.some((p) => /is not a WebP image/.test(p)));
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 

@@ -160,21 +160,22 @@ function emDashIn(value) {
   return EM_DASHES.some((s) => blob.includes(s)) || /&#0*8212;|&#x0*2014;/i.test(blob);
 }
 
-/**
- * Compose the catalogue from the sources.
- * @param {{root?: string, rolesSource?: object, teamsSource?: object, serial?: number}} [src] a
- *   repo copy to read, or source objects to use instead of reading one (a test passes an edited
- *   copy); serial is written into the catalogue (0 when not given; main() passes the commit time)
- * @returns {{catalogue: object, text: string, problems: string[]}}
- */
 // kosmos#4720: no Kosmos that is served yet reads /api/catalogue/portrait. A served build that sees
 // avatar.image fetches that path from its own board, which does not serve it, so every member of a
 // made team got no picture and a "portrait could not be set" row. Until the release with tcPortrait's
 // fix is served, the portraits stay in avatars/ (still checked) but the catalogue names none, which
-// is what the served builds handled before: the generated mark for each member's name. Turn this back
-// to true in the commit that follows that release.
+// is what the served builds handled before: the generated mark for each member's name. Turning it back
+// on is this one line (true); the tests follow the switch.
 const PUBLISH_PORTRAITS = false;
 
+/**
+ * Compose the catalogue from the sources.
+ * @param {{root?: string, rolesSource?: object, teamsSource?: object, serial?: number, portraits?: boolean}} [src] a
+ *   repo copy to read, or source objects to use instead of reading one (a test passes an edited
+ *   copy); serial is written into the catalogue (0 when not given; main() passes the commit time);
+ *   portraits overrides PUBLISH_PORTRAITS
+ * @returns {{catalogue: object, text: string, problems: string[]}}
+ */
 function build(src = {}) {
   const root = src.root || source.ROOT;
   const publishPortraits = src.portraits === undefined ? PUBLISH_PORTRAITS : Boolean(src.portraits);
@@ -444,8 +445,8 @@ function serialProblem(serial, nowS = Math.floor(Date.now() / 1000)) {
 
 /**
  * @param {string[]} argv
- * @param {{root?: string, out?: string, nowS?: number, previousSerial?: number}} [opts] a repo copy and
- *   output folder (tests), and the published serial the new one must exceed
+ * @param {{root?: string, out?: string, nowS?: number, previousSerial?: number, portraits?: boolean}} [opts] a repo copy and
+ *   output folder (tests), the published serial the new one must exceed, and portraits (see build())
  */
 function main(argv, opts = {}) {
   const root = opts.root || source.ROOT;
