@@ -1,6 +1,7 @@
 {
   "key": "frontdesk",
   "kind": "business",
+  "group": "Customers",
   "rank": 13,
   "label": "Front Office Team",
   "blurb": "An Office Manager with bookings, reviews, support and bookkeeping",

@@ -1,6 +1,7 @@
 {
   "key": "software",
   "kind": "business",
+  "group": "Technology",
   "rank": 14,
   "label": "Software Development Team",
   "blurb": "A Product Director with product, engineering, testing, security and design",

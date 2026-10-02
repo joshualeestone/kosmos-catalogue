@@ -1,6 +1,7 @@
 {
   "key": "project-management",
   "kind": "business",
+  "group": "Operations and people",
   "rank": 35,
   "label": "Project Management Team",
   "blurb": "A Project Manager and 4 specialists who coordinate a project from scope and milestones through delivery",

@@ -1,6 +1,7 @@
 {
   "key": "sales",
   "kind": "business",
+  "group": "Marketing and sales",
   "rank": 2,
   "label": "Sales Team",
   "blurb": "A Head of Sales with prospecting, proposals, accounts and CRM",

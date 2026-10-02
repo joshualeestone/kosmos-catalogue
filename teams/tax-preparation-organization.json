@@ -1,6 +1,7 @@
 {
   "key": "tax-preparation-organization",
   "kind": "personal",
+  "group": "Money and paperwork",
   "rank": 24,
   "label": "Tax Preparation Organization Team",
   "blurb": "A Tax Organization Lead and 2 specialists who prepare organized records and questions for your tax preparer",

@@ -1,6 +1,7 @@
 {
   "key": "health",
   "kind": "personal",
+  "group": "Health, learning and work",
   "rank": 4,
   "label": "Health and Wellness Team",
   "blurb": "A Wellness Coach with fitness, nutrition, sleep and health admin",

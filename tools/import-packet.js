@@ -12,7 +12,8 @@
  *   its members use the existing role.
  * - Each member's slot is "lead" for the lead, else its role key (-2, -3 when a role repeats).
  * - A team's project name is its label without a trailing " Team"; ranks follow the published
- *   teams of the same kind, in packet order.
+ *   teams of the same kind, in packet order. A team's menu group (team-groups.json) is the packet's `group`, or
+ *   for a replaced team its published one; a new team with neither is refused by the build, by name (kosmos#5021).
  */
 const fs = require('node:fs');
 const os = require('node:os');
@@ -82,7 +83,10 @@ function teamFrom(p, rank, published) {
     };
   });
   return {
-    key: p.key, kind: p.kind, rank: published && published.kind === p.kind ? published.rank : rank, label: p.label, blurb: p.blurb, purpose: p.purpose,
+    // kosmos#5021: the packet's own `group` when it gives one (as a role's category); otherwise a replaced team keeps
+    // its heading (as its rank), and a new team has none, which the build names rather than guessing a heading.
+    key: p.key, kind: p.kind, group: p.group !== undefined ? p.group : (published && published.kind === p.kind ? published.group : undefined),
+    rank: published && published.kind === p.kind ? published.rank : rank, label: p.label, blurb: p.blurb, purpose: p.purpose,
     // A published team keeps its project name (several are not its label, e.g. exec's "My Office").
     project: { name: published ? published.project.name : String(p.label).replace(/ Team$/, ''), goal: p.goal },
     members,
@@ -134,7 +138,7 @@ function shapeProblems(packet) {
 function copyRepo(root) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-import-'));
   try {
-    for (const f of ['groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams', 'avatars']) {
+    for (const f of ['groups.json', 'team-groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams', 'avatars']) {
       if (!fs.existsSync(path.join(root, f))) continue;
       /* A link would be copied as a link, and writing the candidate into the copy would then write
          through it, outside the copy. The builder refuses links anyway; refuse them here first. */
@@ -246,7 +250,7 @@ function summarise(problems) {
  *  checkout at all (a copy made by a test: nothing to undo with). Any other failure (git missing,
  *  a repo git refuses) throws: the guard must not pass because it could not look. */
 function uncommitted(root) {
-  const r = require('node:child_process').spawnSync('git', ['-C', root, 'status', '--porcelain', '--', 'groups.json', 'settings.json', 'roles', 'teams'], { encoding: 'utf8' });
+  const r = require('node:child_process').spawnSync('git', ['-C', root, 'status', '--porcelain', '--', 'groups.json', 'team-groups.json', 'settings.json', 'roles', 'teams'], { encoding: 'utf8' });
   if (r.status === 0) return r.stdout.split('\n').filter(Boolean).map((l) => l.slice(3));
   if (r.status === 128 && /not a git repository/i.test(r.stderr || '')) return [];
   throw new Error(`could not check the sources for uncommitted changes: ${(r.error && r.error.message) || (r.stderr || '').trim() || `git exited ${r.status}`}`);
@@ -287,7 +291,7 @@ function main(argv, root = source.ROOT, out = process.stdout) {
         ...r.teamsSource.teams.map((x) => path.join('teams', `${x.key}.json`)),
       ].filter((rel) => !fs.existsSync(path.join(root, rel)));
       try { source.write(r.rolesSource, r.teamsSource, root); } catch (err) {
-        const undo = [`git -C ${JSON.stringify(root)} checkout -- groups.json settings.json roles teams`];
+        const undo = [`git -C ${JSON.stringify(root)} checkout -- groups.json team-groups.json settings.json roles teams`];
         if (created.length) undo.push(`rm -r ${created.map((rel) => JSON.stringify(path.join(root, rel))).join(' ')}`);
         process.stderr.write(`import-packet: writing stopped partway (${err.message}); the sources may be half written. To undo:\n  ${undo.join('\n  ')}\n`);
         return 2;

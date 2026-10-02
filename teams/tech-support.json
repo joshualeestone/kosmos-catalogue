@@ -1,6 +1,7 @@
 {
   "key": "tech-support",
   "kind": "business",
+  "group": "Customers",
   "rank": 34,
   "label": "Tech Support Team",
   "blurb": "A Technical Support Lead and 3 specialists who diagnose technical issues and guide users toward workable solutions",

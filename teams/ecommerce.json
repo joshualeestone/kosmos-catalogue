@@ -1,6 +1,7 @@
 {
   "key": "ecommerce",
   "kind": "business",
+  "group": "Operations and people",
   "rank": 10,
   "label": "E-commerce Operations Team",
   "blurb": "An E-commerce Manager with listings, orders, stock, ads and support",

@@ -1,6 +1,7 @@
 {
   "key": "operations",
   "kind": "business",
+  "group": "Operations and people",
   "rank": 8,
   "label": "Operations Team",
   "blurb": "A COO with processes, suppliers, stock, scheduling and reporting",

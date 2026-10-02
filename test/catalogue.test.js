@@ -32,7 +32,7 @@ delete process.env.CATALOGUE_PREVIOUS_SERIAL;
 /** A throwaway copy of the source files, for tests that break one. */
 function copyRepo() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-copy-'));
-  for (const f of ['groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams']) fs.cpSync(path.join(REPO, f), path.join(dir, f), { recursive: true });
+  for (const f of ['groups.json', 'team-groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams']) fs.cpSync(path.join(REPO, f), path.join(dir, f), { recursive: true });
   return dir;
 }
 
@@ -602,7 +602,7 @@ test('a role missing its name is reported and left out, and a team file that is 
 test('a CRLF role file gets its own message, and a top-level file or folder that is a link is refused', () => {
   const base = fs.readFileSync(path.join(REPO, 'roles', 'cos', 'role.md'), 'utf8');
   assert.match(source.parseRole('cos', base.replace(/\n/g, '\r\n')).problems[0], /Windows line endings/);
-  for (const name of ['groups.json', 'teams']) {
+  for (const name of ['groups.json', 'team-groups.json', 'teams']) {
     const dir = copyRepo();
     try {
       fs.rmSync(path.join(dir, name), { recursive: true });
@@ -1005,5 +1005,85 @@ test('main() uses the marker beside the script: a 404 is the first publish witho
     process.stderr.write = w; process.stdout.write = o;
     delete require.cache[path.join(dir, 'published-serial.js')];
     fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+/* kosmos#5021: the Choose a team menu is grouped like the role picker, from a group on each team. */
+test('#5021: every team carries one of its kind\'s team groups, and the catalogue publishes the headings in order', () => {
+  const { catalogue, problems } = build.build();
+  assert.deepEqual(problems, []);
+  const tg = JSON.parse(fs.readFileSync(path.join(REPO, 'team-groups.json'), 'utf8'));
+  assert.deepEqual(catalogue.teamGroups, tg);
+  for (const t of catalogue.teams) assert.ok(tg[t.kind].includes(t.group), `${t.key}: ${t.group} is not a ${t.kind} group`);
+  for (const k of ['business', 'personal']) for (const g of tg[k]) assert.ok(catalogue.teams.some((t) => t.group === g), `no team under ${g}`);
+});
+
+test('#5021: a team with no group, a group of the other kind, a heading no team uses, and a malformed list are refused (CONTROL: the copy passes)', () => {
+  const dir = copyRepo();
+  try {
+    assert.deepEqual(build.build({ root: dir }).problems, [], 'CONTROL: the untouched copy passes');
+    const tg = JSON.parse(fs.readFileSync(path.join(dir, 'team-groups.json'), 'utf8'));
+    const files = fs.readdirSync(path.join(dir, 'teams')).filter((n) => n.endsWith('.json'));
+    const read = (f) => JSON.parse(fs.readFileSync(path.join(dir, 'teams', f), 'utf8'));
+    const biz = files.find((f) => read(f).kind === 'business');
+    const pers = files.find((f) => read(f).kind === 'personal');
+    const a = read(biz); delete a.group; fs.writeFileSync(path.join(dir, 'teams', biz), JSON.stringify(a, null, 2) + '\n');
+    const b = read(pers); b.group = tg.business[0]; fs.writeFileSync(path.join(dir, 'teams', pers), JSON.stringify(b, null, 2) + '\n');
+    tg.personal.push('Nobody here');
+    fs.writeFileSync(path.join(dir, 'team-groups.json'), JSON.stringify(tg));
+    const p = build.build({ root: dir }).problems.join('\n');
+    assert.match(p, new RegExp(a.key + ": group must be one of team-groups\\.json's business groups \\(got undefined\\)"));
+    assert.match(p, new RegExp(b.key + ": group must be one of team-groups\\.json's personal groups"));
+    assert.match(p, /no team is in the personal group "Nobody here"/);
+    fs.writeFileSync(path.join(dir, 'team-groups.json'), JSON.stringify({ business: tg.business }));
+    assert.match(build.build({ root: dir }).problems.join('\n'), /team-groups\.json: must be \{ "business": \[names\], "personal": \[names\] \}/);
+    fs.writeFileSync(path.join(dir, 'team-groups.json'), JSON.stringify({ business: [...tg.business, 'Money ' + build.EM_DASHES[0] + ' more'], personal: tg.personal }));
+    assert.match(build.build({ root: dir }).problems.join('\n'), /team-groups\.json: plain text only/);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('#5021 (the only guard: the board heads a bad group by its kind rather than refusing): a blank, padded, non-string or list group is refused, each alone (CONTROL: the real group passes)', () => {
+  const { teamsSource } = source.read();
+  assert.deepEqual(build.build({ teamsSource }).problems, [], 'CONTROL');
+  const real = teamsSource.teams[0].group;
+  for (const bad of ['', '   ', ' ' + real, real + ' ', real.toUpperCase(), 7, null, [real], { g: real }]) {
+    const ts = source.read().teamsSource;
+    ts.teams[0].group = bad;
+    const p = build.build({ teamsSource: ts }).problems;
+    assert.ok(p.some((x) => x.startsWith(ts.teams[0].key + ': group must be one of')), `${JSON.stringify(bad)} got through: ${p.join(' | ')}`);
+  }
+  const ts = source.read().teamsSource;
+  delete ts.teams[0].group;
+  assert.ok(build.build({ teamsSource: ts }).problems.some((x) => /group must be one of .*\(got undefined\)/.test(x)), 'a missing group got through');
+});
+
+test('#5021: a heading in team-groups.json with a space before or after, or two inside, is refused', () => {
+  const { teamsSource } = source.read();
+  for (const bad of [' Money', 'Money ', 'Money  and']) {
+    const tg = JSON.parse(JSON.stringify(teamsSource.TEAM_GROUPS));
+    tg.business.push(bad);
+    assert.ok(build.build({ teamsSource, teamGroups: tg }).problems.some((x) => /team-groups\.json: a group name must have no space/.test(x)), JSON.stringify(bad));
+  }
+});
+
+test('#5021 review 1: a missing team-groups.json is ONE clear problem, not one per team; a duplicate heading across kinds is refused', () => {
+  const dir = copyRepo();
+  try {
+    fs.rmSync(path.join(dir, 'team-groups.json'));
+    assert.deepEqual(build.build({ root: dir }).problems, ['team-groups.json: missing']);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+  const { teamsSource } = source.read();
+  const tg = JSON.parse(JSON.stringify(teamsSource.TEAM_GROUPS));
+  tg.personal.push(tg.business[0]);
+  assert.ok(build.build({ teamsSource, teamGroups: tg }).problems.includes('team-groups.json: every group name once, across both kinds'));
+});
+
+test('#5021 review 2: a team kind that names an inherited property ("__proto__", "constructor") is reported, not thrown', () => {
+  for (const kind of ['__proto__', 'constructor', 'toString']) {
+    const { teamsSource } = source.read();
+    teamsSource.teams[0].kind = kind;
+    let p;
+    assert.doesNotThrow(() => { p = build.build({ teamsSource }).problems; }, kind);
+    assert.ok(p.includes(teamsSource.teams[0].key + ': kind must be business or personal'), kind + ': ' + p.join(' | '));
   }
 });
