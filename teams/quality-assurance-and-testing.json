@@ -1,6 +1,7 @@
 {
   "key": "quality-assurance-and-testing",
   "kind": "business",
+  "group": "Technology",
   "rank": 42,
   "label": "Quality Assurance and Testing Team",
   "blurb": "A QA Lead and 3 specialists who independently test a product or website and document verified defects",

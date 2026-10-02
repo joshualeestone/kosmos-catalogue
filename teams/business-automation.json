@@ -1,6 +1,7 @@
 {
   "key": "business-automation",
   "kind": "business",
+  "group": "Operations and people",
   "rank": 43,
   "label": "Business Automation Team",
   "blurb": "An Automation Lead and 3 specialists who identify repetitive tasks and design, implement, and verify automated workflows",

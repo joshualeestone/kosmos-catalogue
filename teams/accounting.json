@@ -1,6 +1,7 @@
 {
   "key": "accounting",
   "kind": "business",
+  "group": "Money",
   "rank": 4,
   "label": "Accounting and Bookkeeping Team",
   "blurb": "A Controller with bookkeeping, bills, payroll and tax paperwork",

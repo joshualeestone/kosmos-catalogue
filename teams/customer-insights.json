@@ -1,6 +1,7 @@
 {
   "key": "customer-insights",
   "kind": "business",
+  "group": "Customers",
   "rank": 19,
   "label": "Customer Insights Team",
   "blurb": "A Customer Insights Lead and 3 specialists who turn customer feedback into clear needs and improvement priorities",

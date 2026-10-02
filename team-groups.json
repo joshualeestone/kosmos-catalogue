@@ -1,0 +1,16 @@
+{
+  "business": [
+    "Marketing and sales",
+    "Customers",
+    "Money",
+    "Strategy and research",
+    "Operations and people",
+    "Technology"
+  ],
+  "personal": [
+    "Home and family",
+    "Money and paperwork",
+    "Health, learning and work",
+    "Plans and projects"
+  ]
+}

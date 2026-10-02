@@ -1,6 +1,7 @@
 {
   "key": "logistics",
   "kind": "business",
+  "group": "Operations and people",
   "rank": 33,
   "label": "Logistics Team",
   "blurb": "A Logistics Manager and 4 specialists who coordinate shipment planning, carrier options, tracking, and delivery exceptions",

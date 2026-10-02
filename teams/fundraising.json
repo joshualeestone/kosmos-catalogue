@@ -1,6 +1,7 @@
 {
   "key": "fundraising",
   "kind": "business",
+  "group": "Money",
   "rank": 15,
   "label": "Fundraising and Grants Team",
   "blurb": "A Development Director with grants, donors, events and newsletter",

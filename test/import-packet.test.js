@@ -104,7 +104,7 @@ const FULL = { first: 'Tell me which grant you are applying for and I will draft
 /** A throwaway copy of the repo's sources, for tests that write. */
 function copyRepo() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'import-packet-test-'));
-  for (const f of ['groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams', 'avatars']) fs.cpSync(path.join(REPO, f), path.join(dir, f), { recursive: true });
+  for (const f of ['groups.json', 'team-groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams', 'avatars']) fs.cpSync(path.join(REPO, f), path.join(dir, f), { recursive: true });
   return dir;
 }
 

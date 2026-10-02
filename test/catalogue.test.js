@@ -32,7 +32,7 @@ delete process.env.CATALOGUE_PREVIOUS_SERIAL;
 /** A throwaway copy of the source files, for tests that break one. */
 function copyRepo() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-copy-'));
-  for (const f of ['groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams']) fs.cpSync(path.join(REPO, f), path.join(dir, f), { recursive: true });
+  for (const f of ['groups.json', 'team-groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams']) fs.cpSync(path.join(REPO, f), path.join(dir, f), { recursive: true });
   return dir;
 }
 
@@ -1006,4 +1006,38 @@ test('main() uses the marker beside the script: a 404 is the first publish witho
     delete require.cache[path.join(dir, 'published-serial.js')];
     fs.rmSync(dir, { recursive: true, force: true });
   }
+});
+
+/* kosmos#5021: the Choose a team menu is grouped like the role picker, from a group on each team. */
+test('#5021: every team carries one of its kind\'s team groups, and the catalogue publishes the headings in order', () => {
+  const { catalogue, problems } = build.build();
+  assert.deepEqual(problems, []);
+  const tg = JSON.parse(fs.readFileSync(path.join(REPO, 'team-groups.json'), 'utf8'));
+  assert.deepEqual(catalogue.teamGroups, tg);
+  for (const t of catalogue.teams) assert.ok(tg[t.kind].includes(t.group), `${t.key}: ${t.group} is not a ${t.kind} group`);
+  for (const k of ['business', 'personal']) for (const g of tg[k]) assert.ok(catalogue.teams.some((t) => t.group === g), `no team under ${g}`);
+});
+
+test('#5021: a team with no group, a group of the other kind, a heading no team uses, and a malformed list are refused (CONTROL: the copy passes)', () => {
+  const dir = copyRepo();
+  try {
+    assert.deepEqual(build.build({ root: dir }).problems, [], 'CONTROL: the untouched copy passes');
+    const tg = JSON.parse(fs.readFileSync(path.join(dir, 'team-groups.json'), 'utf8'));
+    const files = fs.readdirSync(path.join(dir, 'teams')).filter((n) => n.endsWith('.json'));
+    const read = (f) => JSON.parse(fs.readFileSync(path.join(dir, 'teams', f), 'utf8'));
+    const biz = files.find((f) => read(f).kind === 'business');
+    const pers = files.find((f) => read(f).kind === 'personal');
+    const a = read(biz); delete a.group; fs.writeFileSync(path.join(dir, 'teams', biz), JSON.stringify(a, null, 2) + '\n');
+    const b = read(pers); b.group = tg.business[0]; fs.writeFileSync(path.join(dir, 'teams', pers), JSON.stringify(b, null, 2) + '\n');
+    tg.personal.push('Nobody here');
+    fs.writeFileSync(path.join(dir, 'team-groups.json'), JSON.stringify(tg));
+    const p = build.build({ root: dir }).problems.join('\n');
+    assert.match(p, new RegExp(a.key + ": group must be one of team-groups\\.json's business groups \\(got undefined\\)"));
+    assert.match(p, new RegExp(b.key + ": group must be one of team-groups\\.json's personal groups"));
+    assert.match(p, /no team is in the personal group "Nobody here"/);
+    fs.writeFileSync(path.join(dir, 'team-groups.json'), JSON.stringify({ business: tg.business }));
+    assert.match(build.build({ root: dir }).problems.join('\n'), /team-groups\.json: must be \{ "business": \[names\], "personal": \[names\] \}/);
+    fs.writeFileSync(path.join(dir, 'team-groups.json'), JSON.stringify({ business: [...tg.business, 'Money ' + build.EM_DASHES[0] + ' more'], personal: tg.personal }));
+    assert.match(build.build({ root: dir }).problems.join('\n'), /team-groups\.json: plain text only/);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });

@@ -1,6 +1,7 @@
 {
   "key": "finance",
   "kind": "business",
+  "group": "Money",
   "rank": 12,
   "label": "Finance Team",
   "blurb": "A CFO with analysis, pricing, cash and investor updates",

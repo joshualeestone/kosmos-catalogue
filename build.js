@@ -257,6 +257,21 @@ function build(src = {}) {
     { const hit = outwardIn([r, entry]); if (hit) problems.push(`${k}: a web address, link, HTML, angle bracket or download command (${JSON.stringify(hit)})`); }
     roles.push(entry);
   }
+  /* kosmos#5021 (Josh's live test: group the Choose a team menu like the role picker): team-groups.json names the
+     headings, in order, for each kind; every team names one of its kind's, and the board shows them (falling back to
+     the kind on a catalogue without them). */
+  const KINDS = ['business', 'personal'];
+  let teamGroups = src.teamGroups || ts.TEAM_GROUPS;   // read by lib/source.js, which refuses a link
+  if (teamGroups === undefined) { problems.push('team-groups.json: missing'); teamGroups = { business: [], personal: [] }; }
+  if (!teamGroups || typeof teamGroups !== 'object' || Array.isArray(teamGroups)
+    || Object.keys(teamGroups).sort().join() !== KINDS.join() || !KINDS.every((k) => Array.isArray(teamGroups[k]) && teamGroups[k].length && teamGroups[k].every(isText))) {
+    problems.push('team-groups.json: must be { "business": [names], "personal": [names] }, each a non-empty list of plain names');
+    teamGroups = { business: [], personal: [] };
+  }
+  { const all = KINDS.flatMap((k) => teamGroups[k]);
+    if (new Set(all).size !== all.length) problems.push('team-groups.json: every group name once, across both kinds');
+    if (emDashIn(all) || hiddenIn(all) || outwardIn(all) || markerIn(all, false)) problems.push('team-groups.json: plain text only (no em dash, hidden character, link or marker)'); }
+  const teamGroupUsed = new Set();
   const teams = [];
   // Joined, because the instructions are wrapped and the sentence can fall across two lines.
   const leadOnly = new Set([...kosmos.leadOnly, ...roles.filter((r) => r.instructions.join(' ').replace(/\s+/g, ' ').includes(LEAD_LINE)).map((r) => r.key)]);
@@ -294,6 +309,8 @@ function build(src = {}) {
     }
     if (!['business', 'personal'].includes(t.kind)) problems.push(`${t.key}: kind must be business or personal`);
     if (!Number.isInteger(t.rank) || t.rank < 1) problems.push(`${t.key}: rank must be a whole number from 1`);
+    if (!isText(t.group) || !(teamGroups[t.kind] || []).includes(t.group)) problems.push(`${t.key}: group must be one of team-groups.json's ${t.kind} groups (got ${JSON.stringify(t.group)})`);
+    else teamGroupUsed.add(t.group);
     const rk = t.kind + '#' + t.rank;
     if (seenRanks.has(rk)) problems.push(`${seenRanks.get(rk)} and ${t.key} share ${t.kind} rank ${t.rank}`);
     seenRanks.set(rk, t.key);
@@ -333,7 +350,7 @@ function build(src = {}) {
       || !isText(t.project.name) || !isText(t.project.goal) || Object.keys(t.project).some((f) => f !== 'name' && f !== 'goal')) {
       problems.push(`${t.key}: needs a label, blurb, purpose, and a project with exactly a name and goal`);
     }
-    const entry = { key: t.key, kind: t.kind, rank: t.rank, label: t.label, blurb: t.blurb,
+    const entry = { key: t.key, kind: t.kind, group: t.group, rank: t.rank, label: t.label, blurb: t.blurb,
       purpose: t.purpose, caution: ts.TEAM_CAUTION, project: t.project, members };
     // Team text is what the Team screen shows (#4556, #4557), so it gets the same guard.
     if (emDashIn(entry)) problems.push(`${t.key}: em dash`);
@@ -342,6 +359,7 @@ function build(src = {}) {
     { const hit = outwardIn([t, entry]); if (hit) problems.push(`${t.key}: a web address, link, HTML, angle bracket or download command (${JSON.stringify(hit)})`); }
     teams.push(entry);
   }
+  for (const k of KINDS) for (const g of teamGroups[k]) if (!teamGroupUsed.has(g)) problems.push(`team-groups.json: no team is in the ${k} group ${JSON.stringify(g)}, so the menu would show an empty heading`);
   // A portrait no member names is a misspelt file name (and on a case-insensitive disk it would
   // match locally and not in CI), so it is reported rather than quietly left out.
   try {
@@ -359,7 +377,7 @@ function build(src = {}) {
   // serial: which build this is, inside the signed bytes, so Kosmos can refuse an older catalogue
   // than the one it already holds (a replayed old file carries a valid signature too).
   const catalogue = { generated: NOTE, version: 2, serial: src.serial || 0, kosmosRoles: kosmos.all.slice().sort(),
-    groups, roles, avatarStyle: ts.AVATAR_STYLE, teams };
+    groups, teamGroups, roles, avatarStyle: ts.AVATAR_STYLE, teams };
   return { catalogue, text: JSON.stringify(catalogue, null, 2) + '\n', problems };
 }
 

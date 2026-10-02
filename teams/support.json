@@ -1,6 +1,7 @@
 {
   "key": "support",
   "kind": "business",
+  "group": "Customers",
   "rank": 3,
   "label": "Customer Support Team",
   "blurb": "A Head of Customer Experience with support, help center, success and feedback",

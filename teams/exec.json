@@ -1,6 +1,7 @@
 {
   "key": "exec",
   "kind": "business",
+  "group": "Operations and people",
   "rank": 7,
   "label": "Executive Assistant Team",
   "blurb": "A Chief of Staff with inbox, calendar, meetings, travel and research",

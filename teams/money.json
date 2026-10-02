@@ -1,6 +1,7 @@
 {
   "key": "money",
   "kind": "personal",
+  "group": "Money and paperwork",
   "rank": 5,
   "label": "Personal Finance Team",
   "blurb": "A Personal Finance Manager with budget, bills, tax paperwork and research",

@@ -12,7 +12,8 @@
  *   its members use the existing role.
  * - Each member's slot is "lead" for the lead, else its role key (-2, -3 when a role repeats).
  * - A team's project name is its label without a trailing " Team"; ranks follow the published
- *   teams of the same kind, in packet order.
+ *   teams of the same kind, in packet order. A replaced team keeps its menu group (team-groups.json); a new one
+ *   has none, and the build names it (kosmos#5021).
  */
 const fs = require('node:fs');
 const os = require('node:os');
@@ -82,7 +83,10 @@ function teamFrom(p, rank, published) {
     };
   });
   return {
-    key: p.key, kind: p.kind, rank: published && published.kind === p.kind ? published.rank : rank, label: p.label, blurb: p.blurb, purpose: p.purpose,
+    // kosmos#5021: a replaced team keeps its menu heading (as its rank); a NEW team has none until a person names one in
+    // team-groups.json's list, and the build then says which team needs one rather than guessing a heading.
+    key: p.key, kind: p.kind, group: published && published.kind === p.kind ? published.group : undefined,
+    rank: published && published.kind === p.kind ? published.rank : rank, label: p.label, blurb: p.blurb, purpose: p.purpose,
     // A published team keeps its project name (several are not its label, e.g. exec's "My Office").
     project: { name: published ? published.project.name : String(p.label).replace(/ Team$/, ''), goal: p.goal },
     members,
@@ -134,7 +138,7 @@ function shapeProblems(packet) {
 function copyRepo(root) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'catalogue-import-'));
   try {
-    for (const f of ['groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams', 'avatars']) {
+    for (const f of ['groups.json', 'team-groups.json', 'settings.json', 'kosmos-builtin-roles.json', 'roles', 'teams', 'avatars']) {
       if (!fs.existsSync(path.join(root, f))) continue;
       /* A link would be copied as a link, and writing the candidate into the copy would then write
          through it, outside the copy. The builder refuses links anyway; refuse them here first. */

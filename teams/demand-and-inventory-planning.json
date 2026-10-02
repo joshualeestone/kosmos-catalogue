@@ -1,6 +1,7 @@
 {
   "key": "demand-and-inventory-planning",
   "kind": "business",
+  "group": "Operations and people",
   "rank": 47,
   "label": "Demand and Inventory Planning Team",
   "blurb": "An Inventory Planning Lead and 3 specialists who translate demand signals into stock and replenishment recommendations",
