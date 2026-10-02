@@ -1041,3 +1041,27 @@ test('#5021: a team with no group, a group of the other kind, a heading no team 
     assert.match(build.build({ root: dir }).problems.join('\n'), /team-groups\.json: plain text only/);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
+
+test('#5021 (the only guard: the board heads a bad group by its kind rather than refusing): a blank, padded, non-string or list group is refused, each alone (CONTROL: the real group passes)', () => {
+  const { teamsSource } = source.read();
+  assert.deepEqual(build.build({ teamsSource }).problems, [], 'CONTROL');
+  const real = teamsSource.teams[0].group;
+  for (const bad of ['', '   ', ' ' + real, real + ' ', real.toUpperCase(), 7, null, [real], { g: real }]) {
+    const ts = source.read().teamsSource;
+    ts.teams[0].group = bad;
+    const p = build.build({ teamsSource: ts }).problems;
+    assert.ok(p.some((x) => x.startsWith(ts.teams[0].key + ': group must be one of')), `${JSON.stringify(bad)} got through: ${p.join(' | ')}`);
+  }
+  const ts = source.read().teamsSource;
+  delete ts.teams[0].group;
+  assert.ok(build.build({ teamsSource: ts }).problems.some((x) => /group must be one of .*\(got undefined\)/.test(x)), 'a missing group got through');
+});
+
+test('#5021: a heading in team-groups.json with a space before or after, or two inside, is refused', () => {
+  const { teamsSource } = source.read();
+  for (const bad of [' Money', 'Money ', 'Money  and']) {
+    const tg = JSON.parse(JSON.stringify(teamsSource.TEAM_GROUPS));
+    tg.business.push(bad);
+    assert.ok(build.build({ teamsSource, teamGroups: tg }).problems.some((x) => /team-groups\.json: a group name must have no space/.test(x)), JSON.stringify(bad));
+  }
+});
