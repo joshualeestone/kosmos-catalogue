@@ -1077,3 +1077,13 @@ test('#5021 review 1: a missing team-groups.json is ONE clear problem, not one p
   tg.personal.push(tg.business[0]);
   assert.ok(build.build({ teamsSource, teamGroups: tg }).problems.includes('team-groups.json: every group name once, across both kinds'));
 });
+
+test('#5021 review 2: a team kind that names an inherited property ("__proto__", "constructor") is reported, not thrown', () => {
+  for (const kind of ['__proto__', 'constructor', 'toString']) {
+    const { teamsSource } = source.read();
+    teamsSource.teams[0].kind = kind;
+    let p;
+    assert.doesNotThrow(() => { p = build.build({ teamsSource }).problems; }, kind);
+    assert.ok(p.includes(teamsSource.teams[0].key + ': kind must be business or personal'), kind + ': ' + p.join(' | '));
+  }
+});

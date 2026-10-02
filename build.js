@@ -274,7 +274,7 @@ function build(src = {}) {
   }
   { const all = KINDS.flatMap((k) => teamGroups[k]);
     if (new Set(all).size !== all.length) problems.push('team-groups.json: every group name once, across both kinds');
-    if (!all.every((g) => typeof g === 'string' && g === g.trim() && !/\s{2}/.test(g))) problems.push('team-groups.json: a group name must have no space before or after it, and single spaces inside');
+    if (!all.every((g) => typeof g === 'string' && g === g.trim() && !/\s{2}/.test(g))) problems.push('team-groups.json: a group name must have no space before or after it, and never two in a row');
     if (emDashIn(all) || hiddenIn(all) || outwardIn(all) || markerIn(all, false)) problems.push('team-groups.json: plain text only (no em dash, hidden character, link or marker)'); }
   const teamGroupUsed = new Set();
   const teams = [];
@@ -317,7 +317,8 @@ function build(src = {}) {
     /* kosmos#5021 (Mona, 08:07): the board does NOT refuse a malformed group (refusing would drop the whole
        catalogue on new boards), it just heads that team by its kind, so THIS check is the only guard: a team's group
        is a non-blank string, exactly one of its kind's names in team-groups.json. */
-    if (teamGroupsOk && (!isText(t.group) || !(teamGroups[t.kind] || []).includes(t.group))) problems.push(`${t.key}: group must be one of team-groups.json's ${t.kind} groups (got ${JSON.stringify(t.group)})`);
+    // KINDS first (review 2): a kind such as "__proto__" would otherwise look up an inherited property and throw.
+    if (teamGroupsOk && KINDS.includes(t.kind) && (!isText(t.group) || !teamGroups[t.kind].includes(t.group))) problems.push(`${t.key}: group must be one of team-groups.json's ${t.kind} groups (got ${JSON.stringify(t.group)})`);
     else if (teamGroupsOk) teamGroupUsed.add(t.group);
     const rk = t.kind + '#' + t.rank;
     if (seenRanks.has(rk)) problems.push(`${seenRanks.get(rk)} and ${t.key} share ${t.kind} rank ${t.rank}`);
