@@ -358,3 +358,21 @@ test('a packet role with an archetype and the ask-first and never-alone sections
   assert.equal(got.archetype, 'patient, deadline-minded writer');
   assert.deepEqual([got.ask, got.never], [['Which grant, and by when.'], ['Never submit an application.']]);
 });
+
+test('#5021: a NEW team takes the packet\'s group; without one the build names it; a replaced team keeps its own (CONTROL: an unchanged packet has no group problem)', () => {
+  const fresh = (group) => {
+    const p = execAsPacket();
+    p.key = 'probe-new-team'; p.label = 'Probe Team';
+    p.members = p.members.map((m, i) => ({ ...m, name: 'Probe' + String.fromCharCode(65 + i) + 'ix' }));
+    if (group !== undefined) p.group = group;
+    return p;
+  };
+  const groupProblems = (r) => r.problems.filter((x) => /group must be one of/.test(x));
+  assert.deepEqual(groupProblems(importPacket({ teams: [execAsPacket()], roles: [] })), [], 'CONTROL: a replaced team keeps its group');
+  const without = importPacket({ teams: [fresh()], roles: [] });
+  assert.deepEqual(groupProblems(without), ["probe-new-team: group must be one of team-groups.json's " + EXEC.kind + ' groups (got undefined)']);
+  const tg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'team-groups.json'), 'utf8'));
+  const withIt = importPacket({ teams: [fresh(tg[EXEC.kind][0])], roles: [] });
+  assert.deepEqual(groupProblems(withIt), []);
+  assert.equal(withIt.teamsSource.teams.find((t) => t.key === 'probe-new-team').group, tg[EXEC.kind][0]);
+});

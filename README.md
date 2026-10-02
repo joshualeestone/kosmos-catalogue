@@ -15,6 +15,7 @@ Team screen, so someone who only makes their own agents never downloads any of i
 | `roles/<key>/role.md` | One role: its job description and working rules |
 | `teams/<key>.json` | One team: a lead and 1 to 5 people who report to the lead (2 to 6 people) |
 | `groups.json` | The groups the role picker shows, in order, and the roles in each |
+| `team-groups.json` | The headings the team picker shows, in order, for `business` and for `personal` (kosmos#5021) |
 | `settings.json` | Text every team shares |
 | `kosmos-builtin-roles.json` | The roles and groups Kosmos has built in: a team member may use a menu role, a catalogue role may not reuse any key. Kept by hand; Kosmos's tests will compare it with its own roles through `kosmosRoles` |
 | `build.js`, `lib/` | The builder and its source reader |
@@ -62,7 +63,10 @@ A new role also needs its key added to a group in `groups.json`.
 
 A team file names each member's role key, the title of their seat, a suggested first name
 (unique across the whole catalogue), what they focus on in this team, and a portrait
-description. `rank` orders teams within `business` or `personal`.
+description. `rank` orders teams within `business` or `personal`. `group` is the team's heading in the
+team picker, exactly one of its kind's names in `team-groups.json`; the build refuses any other value, and it is
+the only check (Kosmos heads a team with a bad group by its kind rather than refusing the catalogue). A new
+heading goes in `team-groups.json` first, and every heading there needs at least one team.
 
 ## Building and checking
 

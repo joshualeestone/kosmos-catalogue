@@ -171,10 +171,10 @@ const PUBLISH_PORTRAITS = false;
 
 /**
  * Compose the catalogue from the sources.
- * @param {{root?: string, rolesSource?: object, teamsSource?: object, serial?: number, portraits?: boolean}} [src] a
+ * @param {{root?: string, rolesSource?: object, teamsSource?: object, teamGroups?: object, serial?: number, portraits?: boolean}} [src] a
  *   repo copy to read, or source objects to use instead of reading one (a test passes an edited
  *   copy); serial is written into the catalogue (0 when not given; main() passes the commit time);
- *   portraits overrides PUBLISH_PORTRAITS
+ *   portraits overrides PUBLISH_PORTRAITS; teamGroups replaces team-groups.json (a test passes an edited copy)
  * @returns {{catalogue: object, text: string, problems: string[]}}
  */
 function build(src = {}) {
@@ -262,11 +262,15 @@ function build(src = {}) {
      the kind on a catalogue without them). */
   const KINDS = ['business', 'personal'];
   let teamGroups = src.teamGroups || ts.TEAM_GROUPS;   // read by lib/source.js, which refuses a link
-  if (teamGroups === undefined) { problems.push('team-groups.json: missing'); teamGroups = { business: [], personal: [] }; }
-  if (!teamGroups || typeof teamGroups !== 'object' || Array.isArray(teamGroups)
+  /* One clear message for a missing or malformed file: the per-team and unused-heading checks below are skipped then,
+     rather than adding one line for each of 77 teams (review 1). */
+  let teamGroupsOk = true;
+  if (teamGroups === undefined) { problems.push('team-groups.json: missing'); teamGroups = { business: [], personal: [] }; teamGroupsOk = false; }
+  else if (!teamGroups || typeof teamGroups !== 'object' || Array.isArray(teamGroups)
     || Object.keys(teamGroups).sort().join() !== KINDS.join() || !KINDS.every((k) => Array.isArray(teamGroups[k]) && teamGroups[k].length && teamGroups[k].every(isText))) {
     problems.push('team-groups.json: must be { "business": [names], "personal": [names] }, each a non-empty list of plain names');
     teamGroups = { business: [], personal: [] };
+    teamGroupsOk = false;
   }
   { const all = KINDS.flatMap((k) => teamGroups[k]);
     if (new Set(all).size !== all.length) problems.push('team-groups.json: every group name once, across both kinds');
@@ -313,8 +317,8 @@ function build(src = {}) {
     /* kosmos#5021 (Mona, 08:07): the board does NOT refuse a malformed group (refusing would drop the whole
        catalogue on new boards), it just heads that team by its kind, so THIS check is the only guard: a team's group
        is a non-blank string, exactly one of its kind's names in team-groups.json. */
-    if (!isText(t.group) || !(teamGroups[t.kind] || []).includes(t.group)) problems.push(`${t.key}: group must be one of team-groups.json's ${t.kind} groups (got ${JSON.stringify(t.group)})`);
-    else teamGroupUsed.add(t.group);
+    if (teamGroupsOk && (!isText(t.group) || !(teamGroups[t.kind] || []).includes(t.group))) problems.push(`${t.key}: group must be one of team-groups.json's ${t.kind} groups (got ${JSON.stringify(t.group)})`);
+    else if (teamGroupsOk) teamGroupUsed.add(t.group);
     const rk = t.kind + '#' + t.rank;
     if (seenRanks.has(rk)) problems.push(`${seenRanks.get(rk)} and ${t.key} share ${t.kind} rank ${t.rank}`);
     seenRanks.set(rk, t.key);
@@ -363,7 +367,7 @@ function build(src = {}) {
     { const hit = outwardIn([t, entry]); if (hit) problems.push(`${t.key}: a web address, link, HTML, angle bracket or download command (${JSON.stringify(hit)})`); }
     teams.push(entry);
   }
-  for (const k of KINDS) for (const g of teamGroups[k]) if (!teamGroupUsed.has(g)) problems.push(`team-groups.json: no team is in the ${k} group ${JSON.stringify(g)}, so the menu would show an empty heading`);
+  if (teamGroupsOk) for (const k of KINDS) for (const g of teamGroups[k]) if (!teamGroupUsed.has(g)) problems.push(`team-groups.json: no team is in the ${k} group ${JSON.stringify(g)}, so the menu would show an empty heading`);
   // A portrait no member names is a misspelt file name (and on a case-insensitive disk it would
   // match locally and not in CI), so it is reported rather than quietly left out.
   try {

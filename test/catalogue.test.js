@@ -602,7 +602,7 @@ test('a role missing its name is reported and left out, and a team file that is 
 test('a CRLF role file gets its own message, and a top-level file or folder that is a link is refused', () => {
   const base = fs.readFileSync(path.join(REPO, 'roles', 'cos', 'role.md'), 'utf8');
   assert.match(source.parseRole('cos', base.replace(/\n/g, '\r\n')).problems[0], /Windows line endings/);
-  for (const name of ['groups.json', 'teams']) {
+  for (const name of ['groups.json', 'team-groups.json', 'teams']) {
     const dir = copyRepo();
     try {
       fs.rmSync(path.join(dir, name), { recursive: true });
@@ -1064,4 +1064,16 @@ test('#5021: a heading in team-groups.json with a space before or after, or two 
     tg.business.push(bad);
     assert.ok(build.build({ teamsSource, teamGroups: tg }).problems.some((x) => /team-groups\.json: a group name must have no space/.test(x)), JSON.stringify(bad));
   }
+});
+
+test('#5021 review 1: a missing team-groups.json is ONE clear problem, not one per team; a duplicate heading across kinds is refused', () => {
+  const dir = copyRepo();
+  try {
+    fs.rmSync(path.join(dir, 'team-groups.json'));
+    assert.deepEqual(build.build({ root: dir }).problems, ['team-groups.json: missing']);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+  const { teamsSource } = source.read();
+  const tg = JSON.parse(JSON.stringify(teamsSource.TEAM_GROUPS));
+  tg.personal.push(tg.business[0]);
+  assert.ok(build.build({ teamsSource, teamGroups: tg }).problems.includes('team-groups.json: every group name once, across both kinds'));
 });
