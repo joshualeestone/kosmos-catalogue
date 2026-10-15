@@ -270,7 +270,7 @@ test('a portrait is published with its sha256 inside the signed catalogue, and a
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
-test('kosmos#4720: with portraits off no member names one, the default follows PUBLISH_PORTRAITS, and bad ones are still refused', () => {
+test('kosmos#4720: portraits: false names none, the default follows PUBLISH_PORTRAITS, and bad ones are still refused', () => {
   const dir = copyRepo();
   try {
     const id = build.build().catalogue.teams[0].members[0].avatar.id;
@@ -349,7 +349,7 @@ test('main: refuses outside a git checkout, and in one writes the catalogue with
     assert.equal(quiet(() => build.main([], { root: dir, out })), 0);
     const c = JSON.parse(fs.readFileSync(path.join(out, 'catalogue.json'), 'utf8'));
     assert.ok(c.serial > 1700000000, `serial ${c.serial} is not a commit time`);
-    // kosmos#4720: the default follows PUBLISH_PORTRAITS (portraits copied when on, none when off); on, it is copied.
+    // kosmos#4720: the default follows PUBLISH_PORTRAITS; then an explicit portraits: true copies it.
     assert.equal(fs.existsSync(path.join(out, 'avatars')), build.PUBLISH_PORTRAITS, 'avatars/ written does not follow PUBLISH_PORTRAITS');
     assert.equal(quiet(() => build.main([], { root: dir, out, portraits: true })), 0);
     assert.deepEqual(fs.readFileSync(path.join(out, 'avatars', id + '.webp')), webp('portrait'));

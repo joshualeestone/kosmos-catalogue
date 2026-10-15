@@ -11,9 +11,11 @@ catalogue names none (measured 15:58: 355 of 355 `avatar.image` null).
 1. **Turn `PUBLISH_PORTRAITS` on.** Its own condition is a production Kosmos that reads the portrait
    route. Production is `0.7.50` (installkosmos.com/dist/latest.json). The commit that bumped the version
    to 0.7.50 (`be1e10d736`) has kosmos `4be38170c6` (the Team screen reading `/api/catalogue/portrait`, #4905)
-   as an ancestor, measured with `git merge-base --is-ancestor`. That the served artifact was built from
-   that commit is reasoned, not measured. The reader is older than 0.7.50: review 1 measured it as an
-   ancestor of the 0.7.17 version commit too. Publishing uses only the existing #4720 download path
+   as an ancestor, measured with `git merge-base --is-ancestor`. The served artifact was then measured
+   directly: `kosmos-0.7.50-arm64.tar.gz` downloaded, its sha256 equal to latest.json's, and its
+   `app/server.js` has the `/api/catalogue/portrait` route, `app/web/index.html` reads it and
+   `app/engine/catalogue.js` has `PORTRAIT_RE` (control: a made-up string counts 0). The reader is older
+   than 0.7.50: review 1 measured it as an ancestor of the 0.7.17 version commit too. Publishing uses only the existing #4720 download path
    (installkosmos.com/catalogue/avatars/), never the app bundle (Josh 16:01: "we are not going to embed
    those in the app since they are dead weight").
 2. **Correct 14 members whose spec says man while Josh's portrait shows a woman.** Each becomes
