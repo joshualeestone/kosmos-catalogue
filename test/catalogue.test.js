@@ -270,6 +270,20 @@ test('a portrait is published with its sha256 inside the signed catalogue, and a
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
+test('kosmos#6257: portraits are published, and every member of this catalogue names its own', () => {
+  // Turning PUBLISH_PORTRAITS off again is a decision to change this test, not a silent flip.
+  assert.equal(build.PUBLISH_PORTRAITS, true);
+  const crypto = require('node:crypto');
+  const members = built().teams.flatMap((t) => t.members);
+  assert.ok(members.length > 0);
+  for (const m of members) {
+    const a = m.avatar;
+    assert.equal(a.image, `avatars/${a.id}.webp`, `${a.id} names no portrait`);
+    const bytes = fs.readFileSync(path.join(REPO, a.image));
+    assert.equal(a.imageSha256, crypto.createHash('sha256').update(bytes).digest('hex'), `${a.id} hash`);
+  }
+});
+
 test('kosmos#4720: portraits: false names none, the default follows PUBLISH_PORTRAITS, and bad ones are still refused', () => {
   const dir = copyRepo();
   try {
