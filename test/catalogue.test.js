@@ -270,7 +270,21 @@ test('a portrait is published with its sha256 inside the signed catalogue, and a
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
 
-test('kosmos#4720: with portraits off no member names one, the default follows PUBLISH_PORTRAITS, and bad ones are still refused', () => {
+test('kosmos#6257: portraits are published, and every member of this catalogue names its own', () => {
+  // Turning PUBLISH_PORTRAITS off again is a decision to change this test, not a silent flip.
+  assert.equal(build.PUBLISH_PORTRAITS, true);
+  const crypto = require('node:crypto');
+  const members = built().teams.flatMap((t) => t.members);
+  assert.ok(members.length > 0);
+  for (const m of members) {
+    const a = m.avatar;
+    assert.equal(a.image, `avatars/${a.id}.webp`, `${a.id} names no portrait`);
+    const bytes = fs.readFileSync(path.join(REPO, a.image));
+    assert.equal(a.imageSha256, crypto.createHash('sha256').update(bytes).digest('hex'), `${a.id} hash`);
+  }
+});
+
+test('kosmos#4720: portraits: false names none, the default follows PUBLISH_PORTRAITS, and bad ones are still refused', () => {
   const dir = copyRepo();
   try {
     const id = build.build().catalogue.teams[0].members[0].avatar.id;
@@ -349,8 +363,8 @@ test('main: refuses outside a git checkout, and in one writes the catalogue with
     assert.equal(quiet(() => build.main([], { root: dir, out })), 0);
     const c = JSON.parse(fs.readFileSync(path.join(out, 'catalogue.json'), 'utf8'));
     assert.ok(c.serial > 1700000000, `serial ${c.serial} is not a commit time`);
-    // kosmos#4720: with portraits off (the default for now) none is written; on, it is copied.
-    assert.equal(fs.existsSync(path.join(out, 'avatars')), build.PUBLISH_PORTRAITS, 'portraits written while off');
+    // kosmos#4720: the default follows PUBLISH_PORTRAITS; then an explicit portraits: true copies it.
+    assert.equal(fs.existsSync(path.join(out, 'avatars')), build.PUBLISH_PORTRAITS, 'avatars/ written does not follow PUBLISH_PORTRAITS');
     assert.equal(quiet(() => build.main([], { root: dir, out, portraits: true })), 0);
     assert.deepEqual(fs.readFileSync(path.join(out, 'avatars', id + '.webp')), webp('portrait'));
     // A clock that says the commit is from the past means the same checkout is from the future.

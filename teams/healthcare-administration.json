@@ -15,15 +15,15 @@
       "slot": "lead",
       "role": "healthadmin",
       "title": "Healthcare Administration Lead",
-      "name": "Ryota",
+      "name": "Yuki",
       "focus": [
         "Coordinates administrative priorities and maintains the person's outstanding-task list."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
-        "presentation": "man",
+        "apparentAge": "Mid 40s",
+        "presentation": "woman",
         "heritage": "Japanese",
-        "hair": "short neat dark hair parted on the side",
+        "hair": "short dark hair in a side-swept crop",
         "attire": "modern minimalist dark overshirt with clean lines",
         "expression": "steady, engaged, and perceptive, with a friendly professional gaze"
       }
@@ -49,15 +49,15 @@
       "slot": "healthadmin-2",
       "role": "healthadmin",
       "title": "Health Records Organizer",
-      "name": "Zhihao",
+      "name": "Meilin",
       "focus": [
         "Organizes supplied records and prepares visit summaries and questions for clinicians."
       ],
       "avatar": {
-        "apparentAge": "Mid 30s",
-        "presentation": "man",
+        "apparentAge": "Mid 40s",
+        "presentation": "woman",
         "heritage": "Han Chinese",
-        "hair": "short wavy hair with subtle salt-and-pepper temples",
+        "hair": "chin-length wavy dark hair with a few grey strands",
         "attire": "graphite utility jacket over a classic heather-grey tee",
         "expression": "warm, confident, and approachable, eye level with the viewer"
       }

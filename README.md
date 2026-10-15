@@ -79,9 +79,8 @@ node --test test/       # the catalogue's rules
 node build.js           # write dist/catalogue.json and (while PUBLISH_PORTRAITS is on) copy the portraits into dist/
 ```
 
-**For now (kosmos#4720), `PUBLISH_PORTRAITS` in build.js is off:** the portraits in `avatars/` are still
-checked, but the catalogue names none and none is copied, because no served Kosmos can use them yet. The
-lines below describe the catalogue with it on. Turning it back on is that one line.
+**`PUBLISH_PORTRAITS` in build.js is on (kosmos#6257).** Turned off, the portraits in `avatars/` are still
+checked, but the catalogue names none and none is copied.
 
 The builder refuses to write anything while a single problem remains: a duplicate key or first
 name, a team without exactly one lead and 1 to 5 reports, a role whose rules are not three, an
