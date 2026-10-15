@@ -83,13 +83,13 @@
       "slot": "admin",
       "role": "healthadmin",
       "title": "Health Administration Coordinator",
-      "name": "Bongani",
+      "name": "Nomvula",
       "focus": [
         "Organizes appointments, records, and questions for the person's healthcare professionals."
       ],
       "avatar": {
         "apparentAge": "Mid 20s",
-        "presentation": "man",
+        "presentation": "woman",
         "heritage": "Zulu South African",
         "hair": "short neat dark hair parted on the side",
         "attire": "casual chambray workshirt with rolled-up sleeves",

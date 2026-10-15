@@ -5,7 +5,7 @@
  * (joshualeestone/kosmos#4632); the roles and teams it writes are the shape Kosmos's
  * engine/catalogue.js reads.
  *
- *     node build.js            check everything, then write dist/catalogue.json and the portraits it names (none while PUBLISH_PORTRAITS is off)
+ *     node build.js            check everything, then write dist/catalogue.json and the portraits it names (none when PUBLISH_PORTRAITS is off)
  *     node build.js --check    check everything, write nothing (exit 1 on any problem)
  *
  * It refuses to write anything while a single problem remains. test/catalogue.test.js checks the
@@ -160,14 +160,13 @@ function emDashIn(value) {
   return EM_DASHES.some((s) => blob.includes(s)) || /&#0*8212;|&#x0*2014;/i.test(blob);
 }
 
-// kosmos#4720: no Kosmos that is served yet reads /api/catalogue/portrait. A served build that sees
-// avatar.image fetches that path from its own board, which does not serve it, so every member of a
-// made team got no picture and a "portrait could not be set" row. Until a PRODUCTION Kosmos carrying
-// kosmos#4720 is served (installkosmos.com/dist/latest.json; staging is not enough, because every install
-// on an older build still reads a named portrait as a path), the portraits stay in avatars/ (still
-// checked) but the catalogue names none, which is what the served builds handled before: the generated
-// mark for each member's name. Turning it back on is this one line (true); the tests follow the switch.
-const PUBLISH_PORTRAITS = false;
+// kosmos#4720: a Kosmos older than the one that reads /api/catalogue/portrait fetches avatar.image from its
+// own board, which does not serve it, so a made team's members get no picture and a "portrait could not be
+// set" row. This was off until a PRODUCTION Kosmos carrying kosmos#4720 was served; 0.7.50 is (served at
+// installkosmos.com/dist/latest.json on 2026-10-15), so it is on (kosmos#6257). An install still on a
+// build before 0.7.50 shows that row until it updates. Off (false), the portraits stay in avatars/ (still
+// checked) and the catalogue names none. The tests follow the switch.
+const PUBLISH_PORTRAITS = true;
 
 /**
  * Compose the catalogue from the sources.

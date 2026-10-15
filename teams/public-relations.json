@@ -32,13 +32,13 @@
       "slot": "researcher",
       "role": "researcher",
       "title": "Media Researcher",
-      "name": "Kojo",
+      "name": "Efua",
       "focus": [
         "Identifies relevant outlets, reporters, coverage patterns, and story opportunities."
       ],
       "avatar": {
         "apparentAge": "Late 30s",
-        "presentation": "man",
+        "presentation": "woman",
         "heritage": "Akan Ghanaian",
         "hair": "short neat dark hair parted on the side",
         "attire": "pressed oxford cotton button-down in soft blue",
@@ -66,13 +66,13 @@
       "slot": "reviews",
       "role": "reviews",
       "title": "Reputation Analyst",
-      "name": "Seamus",
+      "name": "Siobhan",
       "focus": [
         "Monitors coverage and sentiment and prepares issue briefs and response options."
       ],
       "avatar": {
         "apparentAge": "Early 30s",
-        "presentation": "man",
+        "presentation": "woman",
         "heritage": "Irish",
         "hair": "short wavy hair with subtle salt-and-pepper temples",
         "attire": "pressed oxford cotton button-down in soft blue",
