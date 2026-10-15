@@ -29,7 +29,7 @@ catalogue names none (measured 15:58: 355 of 355 `avatar.image` null).
    - event-planning-guest-experience-coordinator Ronan -> Aoife
    - healthcare-administration-lead Ryota -> Yuki
    - healthcare-administration-healthadmin-2 Zhihao -> Meilin
-   - operations-ops Anan -> Ploy
+   - operations-ops Anan -> Nattaya
    - fundraising-lead Rodel -> Maricel
    - logistics-transport-planner Kayode -> Funmilayo
    - moving-and-relocation-relocation-coordinator Saravanan -> Meenakshi
@@ -40,6 +40,10 @@ catalogue names none (measured 15:58: 355 of 355 `avatar.image` null).
    strings the 9 share, at full size. All 14 are women with short hair. After that, every remaining
    man-spec portrait (164) and every woman-spec portrait (177) was checked again at 230 to 280 px. They
    all match their spec, so there is no case the other way round (a woman spec with a man pictured).
+
+Each of the 14 also gets an `apparentAge` and `hair` written from its portrait, using only the age
+range the catalogue already uses, so the published `avatar.prompt` describes the picture rather than the
+man it was meant to be (review 3). Attire already matched all 14 and is unchanged.
 
 Rejected:
 - Generating new portraits for the 14 (Splinter's hold, no image-API spend).

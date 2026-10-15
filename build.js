@@ -161,7 +161,8 @@ function emDashIn(value) {
 }
 
 // kosmos#4720: on, the catalogue names each member's portrait and the build copies it beside catalogue.json;
-// off, the portraits stay in avatars/ (still checked) and the catalogue names none. Why it is on:
+// off, the portraits stay in avatars/ (still checked) and the catalogue names none. Off is for a served
+// Kosmos that cannot read /api/catalogue/portrait: it shows a "portrait could not be set" row. Why it is on:
 // kosmos#6257 (.claude/plans/portraits-6257.md). The tests follow the switch.
 const PUBLISH_PORTRAITS = true;
 
