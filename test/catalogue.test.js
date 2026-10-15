@@ -349,8 +349,8 @@ test('main: refuses outside a git checkout, and in one writes the catalogue with
     assert.equal(quiet(() => build.main([], { root: dir, out })), 0);
     const c = JSON.parse(fs.readFileSync(path.join(out, 'catalogue.json'), 'utf8'));
     assert.ok(c.serial > 1700000000, `serial ${c.serial} is not a commit time`);
-    // kosmos#4720: with portraits off (the default for now) none is written; on, it is copied.
-    assert.equal(fs.existsSync(path.join(out, 'avatars')), build.PUBLISH_PORTRAITS, 'portraits written while off');
+    // kosmos#4720: the default follows PUBLISH_PORTRAITS (portraits copied when on, none when off); on, it is copied.
+    assert.equal(fs.existsSync(path.join(out, 'avatars')), build.PUBLISH_PORTRAITS, 'avatars/ written does not follow PUBLISH_PORTRAITS');
     assert.equal(quiet(() => build.main([], { root: dir, out, portraits: true })), 0);
     assert.deepEqual(fs.readFileSync(path.join(out, 'avatars', id + '.webp')), webp('portrait'));
     // A clock that says the commit is from the past means the same checkout is from the future.

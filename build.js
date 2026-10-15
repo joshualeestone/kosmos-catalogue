@@ -160,12 +160,9 @@ function emDashIn(value) {
   return EM_DASHES.some((s) => blob.includes(s)) || /&#0*8212;|&#x0*2014;/i.test(blob);
 }
 
-// kosmos#4720: a Kosmos older than the one that reads /api/catalogue/portrait fetches avatar.image from its
-// own board, which does not serve it, so a made team's members get no picture and a "portrait could not be
-// set" row. This was off until a PRODUCTION Kosmos carrying kosmos#4720 was served; 0.7.50 is (served at
-// installkosmos.com/dist/latest.json on 2026-10-15), so it is on (kosmos#6257). An install still on a
-// build before 0.7.50 shows that row until it updates. Off (false), the portraits stay in avatars/ (still
-// checked) and the catalogue names none. The tests follow the switch.
+// kosmos#4720: on, the catalogue names each member's portrait and the build copies it beside catalogue.json;
+// off, the portraits stay in avatars/ (still checked) and the catalogue names none. Why it is on:
+// kosmos#6257 (.claude/plans/portraits-6257.md). The tests follow the switch.
 const PUBLISH_PORTRAITS = true;
 
 /**
